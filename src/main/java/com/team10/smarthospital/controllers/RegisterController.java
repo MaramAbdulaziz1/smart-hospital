@@ -4,11 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomeController {
+public class RegisterController {
 
-    @GetMapping("/")
-    public String home() {
-        return "homePage"; // to load homePage.html from templates folder
+    @GetMapping("/register")
+    public String registerPage() {
+        return "register";  // loads register.html
     }
 }
-
