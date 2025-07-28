@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Patient Vitals</title>
+    <link rel="stylesheet" href="/vitals.css">
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <a href="/">
+        <img src="/VitalsPageImages/LogoCircle.png" alt="Logo" />
+    </a>
+    <a href="/" class="nav-item with-icon home">Home</a>
+    <a href="#" class="nav-item with-icon calendar">Calendar</a>
+    <a href="#" class="nav-item with-icon profile">Patient Profile</a>
+    <a href="#" class="nav-item with-icon intake">Patient Intake</a>
+    <a href="/vitals" class="nav-item with-icon vitals active">Vitals</a>
+    <a href="#" class="nav-item with-icon prescription">Prescription</a>
+</div>
+
+<!-- Main Content -->
+<div class="main">
+    <div class="header">
+        Patient Vitals
+        <div class="header-icons">
+            <!-- Notification Bell Icon -->
+            <svg class="notification-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+            </svg>
+            <div class="top-right-avatar">👤</div>
+        </div>
+    </div>
+
+    <div class="content">
+        <!-- Patient Info -->
+        <div class="patient-info">
+            <div class="patient-avatar">👤</div>
+            <div class="patient-details">
+                <h2>Harry Potter</h2>
+            </div>
+            <div class="patient-info-grid">
+                <div class="info-item">
+                    <div class="info-label">Sex</div>
+                    <div class="info-value">Male</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Age</div>
+                    <div class="info-value">30</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Date of Birth</div>
+                    <div class="info-value">23/08/1999</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vitals Form -->
+        <div class="vitals-form">
+            <div class="vitals-grid">
+                <!-- First Row -->
+                <div class="vital-group">
+                    <label for="heart-rate">
+                        <svg class="vital-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                        </svg>
+                        Heart Rate
+                    </label>
+                    <input type="text" id="heart-rate" name="heart-rate" placeholder="Enter heart rate">
+                </div>
+                <div class="vital-group">
+                    <label for="blood-pressure">
+                        <svg class="vital-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Blood Pressure
+                    </label>
+                    <input type="text" id="blood-pressure" name="blood-pressure" placeholder="Enter blood pressure">
+                </div>
+                <div class="vital-group">
+                    <label for="temperature">
+                        <svg class="vital-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                        Temperature
+                    </label>
+                    <input type="text" id="temperature" name="temperature" placeholder="Enter temperature">
+                </div>
+
+                <!-- Second Row -->
+                <div class="vital-group">
+                    <label for="weight">Weight</label>
+                    <input type="text" id="weight" name="weight" placeholder="Enter weight">
+                </div>
+                <div class="vital-group">
+                    <label for="height">Height</label>
+                    <input type="text" id="height" name="height" placeholder="Enter height">
+                </div>
+                <div class="vital-group">
+                    <label for="bmi">BMI</label>
+                    <input type="text" id="bmi" name="bmi" placeholder="Enter BMI">
+                </div>
+
+                <!-- Third Row -->
+                <div class="vital-group">
+                    <label for="blood-glucose">Blood Glucose</label>
+                    <input type="text" id="blood-glucose" name="blood-glucose" placeholder="Enter blood glucose">
+                </div>
+                <div class="vital-group">
+                    <label for="oxygen-saturation">Blood Oxygen Saturation</label>
+                    <input type="text" id="oxygen-saturation" name="oxygen-saturation" placeholder="Enter oxygen saturation">
+                </div>
+                <div class="vital-group">
+                    <label for="respiratory-rate">Respiratory Rate</label>
+                    <input type="text" id="respiratory-rate" name="respiratory-rate" placeholder="Enter respiratory rate">
+                </div>
+            </div>
+
+            <!-- Form Footer -->
+            <div class="form-footer">
+                <div class="record-time">Recorded at: 15 July 2025, 12:35</div>
+                <button type="submit" class="save-btn">Save</button>
+            </div>
+        </div>
+
+        <!-- Vitals History -->
+        <div class="vital-history">
+            <div class="history-header">
+                <h3>Vitals History (View All)</h3>
+                <a href="#" class="view-all-btn">(View All)</a>
+            </div>
+            <table class="history-table">
+              <!-- todo might need to link to backends -->
+                <!-- <thead>
+                    <tr>
+                        <th>Date Of Visit</th>
+                        <th>BP (mmHg)</th>
+                        <th>HR (bpm)</th>
+                        <th>Temp (°C)</th>
+                        <th>Recorded By</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>10 Jul 2025</td>
+                        <td>120/78</td>
+                        <td>82</td>
+                        <td>37.1</td>
+                        <td>Dr. Sarah Moyo</td>
+                    </tr>
+                    <tr>
+                        <td>18 Jun 2024</td>
+                        <td>130/85</td>
+                        <td>90</td>
+                        <td>37.8</td>
+                        <td>Dr. Samuel Chen</td>
+                    </tr>
+                    <tr>
+                        <td>02 May 2024</td>
+                        <td>118/75</td>
+                        <td>76</td>
+                        <td>36.9</td>
+                        <td>Dr. Linda Patel</td>
+                    </tr>
+                </tbody> -->
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
