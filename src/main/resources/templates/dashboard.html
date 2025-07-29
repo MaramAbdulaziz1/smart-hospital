@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Hospital</title>
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+<div class="sidebar">
+  <img src="DashboardPageImages/LogoCircle.png" alt="Logo" />
+  <a href="#" class="nav-item with-icon home">Home</a>
+  <a href="#" class="nav-item with-icon calendar">Calendar</a>
+  <a href="#" class="nav-item with-icon profile">Patient Profile</a>
+  <a href="#" class="nav-item with-icon intake">Patient Intake</a>
+  <a href="#" class="nav-item with-icon vitals">Vitals</a>
+  <a href="#" class="nav-item with-icon prescription active">Prescription</a>
+  <a href="/login" class="nav-item with-icon logout">Log Out</a>
+</div>
+
+<div class="main">
+  <div class="header">
+    <div class="title">Smart Hospital</div>
+    <div class="header-icons">
+      <!-- Notification Bell Icon -->
+      <svg class="notification-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+      </svg>
+      <div class="top-right-avatar">👤</div>
+    </div>
+  </div>
+
+  <div class="content">
+    <input class="search" type="text" placeholder="Search by name or ID" />
+    <h3 class="section-title">Patient with appointments</h3>
+    <div class="patient-table">
+      <div class="table-header">
+        <div>Patient</div>
+        <div>Appointment time</div>
+        <div></div>
+      </div>
+
+      <div class="patient-row">
+        <div>
+          <strong>Harry Potter</strong><br />
+          <span class="id">ID: HAT17653D</span>
+        </div>
+        <div>9:00</div>
+        <div class="button-group">
+          <button class="btn filled">Profile</button>
+          <button class="btn">Intake</button>
+        </div>
+      </div>
+
+      <div class="patient-row">
+        <div>
+          <strong>Mary Johnson</strong><br />
+          <span class="id">ID: HAT17653E</span>
+        </div>
+        <div>12:00</div>
+        <div class="button-group">
+          <button class="btn filled">Profile</button>
+          <button class="btn">Intake</button>
+        </div>
+      </div>
+
+      <div class="patient-row">
+        <div>
+          <strong>James Brown</strong><br />
+          <span class="id">ID: HAT17653F</span>
+        </div>
+        <div>15:00</div>
+        <div class="button-group">
+          <button class="btn filled">Profile</button>
+          <button class="btn">Intake</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-buttons">
+      <button class="btn">Editor</button>
+      <button class="btn filled">Save</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>
