@@ -16,48 +16,31 @@ body {
 .sidebar {
   width: 200px;
   background-color: #ffffff;
-  border-right: 1px solid #e0e0e0;
-  padding: 20px 0;
-  height: 100vh;
-  overflow-y: auto;
+  border-right: 1px solid #ddd;
+  padding-top: 30px;
 }
 
-/* logo */
 .sidebar img {
   display: block;
-  /* margin: 0 auto 20px auto; */
-  width: 170px;
-  height: 170px;
-  border-radius: 50%;
-  /* transition: transform 0.3s ease; */
-  transform: scale(1.2);
-  position: relative;
-  z-index: 1;
-}
-
-.sidebar a:first-child:hover img {
-  transform: scale(1.1);
+  margin: -60px auto -20px auto;
+  width: 200px;
 }
 
 .nav-item {
   display: block;
   padding: 12px 20px;
-  color: #666;
+  color: #333;
   text-decoration: none;
-  font-size: 14px;
-  transition: all 0.3s ease;
-  margin-bottom: 5px;
+  font-weight: 400;
 }
 
 .nav-item.active {
-  background-color: #f0f8ff;
-  color: #333;
-  border-right: 3px solid #A5DFEF;
+  background-color: #f2f2f2;
+  /*border-left: 4px solid #a5dfef;*/
 }
 
 .nav-item:hover {
-  background-color: #f0f8ff;
-  color: #333;
+  background-color: #f0f0f0;
 }
 
 .nav-item.with-icon {
@@ -75,6 +58,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
 }
+
 
 /* Navigation Icons */
 .nav-item.home::before {
@@ -279,21 +263,29 @@ body {
   color: #666;
 }
 
+
 .save-btn {
-  background-color: #A5DFEF;
-  color: white;
-  border: none;
-  padding: 12px 30px;
-  border-radius: 25px;
-  font-size: 14px;
-  font-weight: 500;
+  padding: 10px 20px;
+  border: 2px solid #a5dfef;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  background-color: white;
+  color: #333;
 }
 
-.save-btn:hover {
-  background-color: #8fd1e8;
+.save-btn.filled {
+  background: #6DA2B1;
+  border: 2px solid #6DA2B1;
+  color: white;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  gap: 10px;
 }
+
+/* .save-btn:hover {
+  background-color: #8fd1e8;
+} */
 
 /* Vitals History Section */
 .vital-history {
@@ -358,21 +350,21 @@ body {
   body {
       flex-direction: column;
   }
-  
+
   .sidebar {
       width: 100%;
       height: auto;
   }
-  
+
   .vitals-grid {
       grid-template-columns: 1fr;
   }
-  
+
   .patient-info {
       flex-direction: column;
       text-align: center;
   }
-  
+
   .patient-info-grid {
       margin-left: 0;
       margin-top: 20px;
