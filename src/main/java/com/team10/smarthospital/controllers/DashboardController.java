@@ -5,20 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class PrescriptionController {
+public class DashboardController {
 
-    @GetMapping("/prescription")
-    public String prescriptionPage() {
-        return "prescription";
-    }
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "redirect:/login";
-    }
-
-    @GetMapping("/login")
-    public String loginPage() {
-        return "homePage";
-    }
+  @GetMapping("/dashboard")
+  public String registerPage() {
+    return "dashboard";  // loads register.html
+  }
 }

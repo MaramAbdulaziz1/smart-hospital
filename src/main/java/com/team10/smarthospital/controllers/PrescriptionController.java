@@ -9,16 +9,16 @@ public class PrescriptionController {
 
     @GetMapping("/prescription")
     public String prescriptionPage() {
-        return "prescription"; // 返回 prescription.html 模板
+        return "prescription";
     }
     @GetMapping("/logout")
     public String logout(HttpSession session) {
-        session.invalidate(); // 清除 session
-        return "redirect:/login"; // 重導向到登入頁面
+        session.invalidate();
+        return "redirect:/login";
     }
 
     @GetMapping("/login")
     public String loginPage() {
-        return "homePage"; // 返回 homePage.html 模板
+        return "homePage";
     }
 }
