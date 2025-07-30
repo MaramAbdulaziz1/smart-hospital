@@ -11,6 +11,7 @@ public class PrescriptionController {
     public String prescriptionPage() {
         return "prescription";
     }
+
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
