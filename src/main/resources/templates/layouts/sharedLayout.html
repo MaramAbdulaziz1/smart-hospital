@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shared Layout</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/sharedLayout.css">
+</head>
+
+<body>
+<div class="layout-container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <img src="../SharedLayoutImages/LogoCircle.png" alt="Logo" class="logo">
+
+    <nav class="sidebar-nav">
+      <div class="tab">
+        <img src="../SharedLayoutImages/homeIcon.svg" alt="Home Icon" class="tab-icon">
+        <span>Home</span>
+      </div>
+      <div class="tab">
+        <img src="../SharedLayoutImages/calendarIcon.svg" alt="Calendar Icon" class="tab-icon">
+        <span>Calendar</span>
+      </div>
+      <div class="tab">
+        <img src="../SharedLayoutImages/profileIcon.svg" alt="Profile Icon" class="tab-icon">
+        <span>Patient Profile</span>
+      </div>
+      <div class="tab">
+        <img src="../SharedLayoutImages/intakeIcon.svg" alt="Intake Icon" class="tab-icon">
+        <span>Patient Intake</span>
+      </div>
+      <div class="tab active-tab">
+        <img src="../SharedLayoutImages/vitalsIcon.svg" alt="Vitals Icon" class="tab-icon">
+        <span>Vitals</span>
+      </div>
+      <div class="tab" data-page="prescription">
+        <div class="icon-group">
+          <img src="../SharedLayoutImages/prescriptionIcon1.svg" alt="Prescription Icon 1" class="tab-icon">
+        </div>
+        <span>Prescription</span>
+      </div>
+      <div class="tab" data-page="logout">
+        <img src="../SharedLayoutImages/logoutIcon.svg" alt="Logout Icon" class="tab-icon">
+        <span>Log Out</span>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="content">
+    <header class="top-nav">
+      <h1 class="page-title" th:text="${pageTitle} ?: 'Page Title'">Page Title</h1>
+      <!-- Right-side icons -->
+      <img src="../SharedLayoutImages/notificationIcon.svg" alt="Notifications" class="notification-icon">
+      <img src="../SharedLayoutImages/doctorProfileImage.png" alt="Doctor Profile" class="doctor-profile">
+    </header>
+    <!-- Patient Card -->
+    <section class="patient-card">
+      <!-- Profile Image -->
+      <img src="../SharedLayoutImages/patientProfileImage.png" alt="Patient" class="patient-photo">
+
+      <!-- Patient Name -->
+      <h2 class="patient-name">Harry Potter</h2>
+
+      <!-- Divider Line -->
+      <div class="divider-line"></div>
+
+      <!-- Sex Box -->
+      <div class="info-box gender-box">
+        <span class="info-label">Sex:</span>
+        <span class="info-value">Male</span>
+      </div>
+
+      <!-- Age Box -->
+      <div class="info-box age-box">
+        <span class="info-label">Age:</span>
+        <span class="info-value">30</span>
+      </div>
+
+      <!-- Date of Birth Box -->
+      <div class="info-box dob-box">
+        <span class="info-label">Date of Birth:</span>
+        <span class="info-value">23/08/1999</span>
+      </div>
+
+      <!-- Placeholder for call buttons -->
+      <div class="call-placeholder">
+        Call buttons should be added here
+      </div>
+    </section>
+  </main>
+</div>
+</body>
+</html>

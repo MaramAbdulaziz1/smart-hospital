@@ -1,0 +1,250 @@
+/* General page reset */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Prevent scrollbars */
+  font-family: 'Inter', sans-serif; /* Apply correct font */
+}
+
+/* Container */
+.layout-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background: #F5F5F5;
+}
+
+/* Sidebar container */
+.sidebar {
+  width: 210px;                /* Matches top nav offset */
+  height: 100vh;
+  background-color: #FFFFFF;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Logo */
+.logo {
+  position: absolute;
+  width: 264px;
+  height: 264px;
+  top: -36px;
+  left: -35px;
+}
+
+/* Tabs container */
+.sidebar-nav {
+  position: absolute;
+  width: 100%;
+  top: 193px;       /* Per Figma */
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Each tab */
+.tab {
+  width: 170px;         /* Figma width */
+  height: 50px;         /* Figma height */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 20px;
+
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  color: #000;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.tab:hover {
+  background-color: #F5F5F5;
+}
+
+/* Active (highlighted) tab */
+.active-tab {
+  background-color: #F5F5F5;
+  border-radius: 16px;
+}
+/* Icons */
+.tab-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Fix Prescription icons side by side */
+.icon-group {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+/* Top nav bar */
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 210px; /* Start after sidebar */
+  width: calc(100% - 210px);
+  height: 80px;
+  background-color: #A5DFEF;
+  display: flex;
+  align-items: center;
+  padding-left: 26px;
+}
+
+/* Page title */
+.page-title {
+  position: absolute;
+  left: 32px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  color: #000000;
+}
+
+/* Notification Icon (right of top nav) */
+.notification-icon {
+  position: absolute;
+  width: 35px;
+  height: 31px;
+  top: 24px;
+  left: 1200px;
+  cursor: pointer;
+}
+
+/* Doctor Profile Image (right corner) */
+.doctor-profile {
+  position: absolute;
+  width: 61px;
+  height: 58px;
+  top: 11px;
+  left: 1250px;
+  border-radius: 50%;  /* Makes it circular if image isn't */
+  cursor: pointer;
+}
+
+/* Patient card container */
+.patient-card {
+  position: absolute;
+  width: 1275px;
+  height: 170px;
+  top: 95px;
+  left: 235px;
+  background: #FFFFFF;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 80px;
+  box-sizing: border-box;
+}
+
+/* Patient profile photo */
+.patient-photo {
+  position: absolute;
+  width: 108.5px;
+  height: 112.4px;
+  top: 15px;
+  left: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Patient name */
+.patient-name {
+  position: absolute;
+  width: 188px;
+  height: 40px;
+  top: 115px;
+  left: 95px;
+  font-family: 'Inter', sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1;
+  color: #000000;
+  transform: rotate(-0.16deg); /* Matches Figma's slight tilt */
+}
+
+/* Divider line (between left and right sections) */
+.divider-line {
+  position: absolute;
+  width: 329.98px;
+  height: 110px;
+  top: 147px;
+  left: 210px;
+  border-top: 5px solid #F5F5F5;
+  transform: rotate(-90.52deg);
+}
+
+/* Generic info box styling (for Sex, Age, DOB) */
+.info-box {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 5px;
+  gap: 10px;
+  height: auto;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Specific positions per Figma */
+.gender-box {
+  width: 65.7px;
+  top: 58px;
+  left: 400px;
+}
+
+.age-box {
+  width: 65.7px;
+  top: 58px;
+  left: 580px;
+}
+
+.dob-box {
+  width: 211.4px;
+  top: 58px;
+  left: 740px;
+}
+
+/* Label (Sex, Age, Date of Birth) */
+.info-label {
+  font-size: 16px;
+  color: #53535D;
+  line-height: 100%;
+}
+
+/* Values (Male, 30, 23/08/1999) */
+.info-value {
+  font-size: 20px;
+  color: #000000;
+  line-height: 100%;
+}
+
+/* Placeholder for call buttons (to be replaced later) */
+.call-placeholder {
+  position: absolute;
+  top: 58px;
+  right: 50px;
+  width: 220px;
+  height: 68px;
+  background-color: #F5F5F5;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  color: #53535D;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
