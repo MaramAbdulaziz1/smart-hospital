@@ -206,13 +206,13 @@ body {
 }
 
 .info-label {
-  font-size: 14px;
+  font-size: 17px;
   color: #666;
   margin-bottom: 5px;
 }
 
 .info-value {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 500;
   color: #333;
 }
