@@ -39,8 +39,11 @@ Using the Shared Layout
 To maintain a consistent design across all pages, we use a shared layout that includes:
 
 ✅ Sidebar navigation
+
 ✅ Top navigation bar
+
 ✅ Patient info card
+
 ✅ Dynamic page title
 
 How to Use It in Your Page?
@@ -48,8 +51,7 @@ How to Use It in Your Page?
 Make sure to include the shared layout styles and your page-specific styles at the top of your HTML:
 
 html
-نسخ
-تحرير
+
 <link rel="stylesheet" th:href="@{/css/sharedLayout.css}">
 <link rel="stylesheet" th:href="@{/css/yourPageStyles.css}">
 
@@ -59,8 +61,7 @@ html
 Use this structure in your HTML file to reuse the shared components:
 
 html
-نسخ
-تحرير
+
 <div class="layout-container">
   <!-- Sidebar -->
   <div th:replace="~{layouts/sharedLayout :: sidebar}"></div>
@@ -85,8 +86,7 @@ If you want to change the page title dynamically, just pass it from the controll
 
 Example Controller:
 java
-نسخ
-تحرير
+
 package com.team10.smarthospital.controllers;
 
 import org.springframework.stereotype.Controller;
