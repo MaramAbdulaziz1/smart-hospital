@@ -47,6 +47,7 @@ To maintain a consistent design across all pages, we use a shared layout that in
 
 ✅ Dynamic page title
 
+
 How to Use It in Your Page?
 
 1-Add the Shared CSS
