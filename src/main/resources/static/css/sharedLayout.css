@@ -128,7 +128,7 @@ html, body {
   height: 58px;
   top: 11px;
   left: 1250px;
-  border-radius: 50%;  /* Makes it circular if image isn't */
+  border-radius: 50%;
   cursor: pointer;
 }
 
