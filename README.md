@@ -33,4 +33,3 @@ To ensure consistent development practices across the team, please follow the ru
 
 - Write **clear commit messages** that explain the changes made
 
-}
