@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.7.31)  31 JUL 2025 11:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.7.31)  31 JUL 2025 15:21
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1004,22 +1004,13 @@ LaTeX Warning: Label `subsec:subsec01' multiply defined.
 LaTeX Warning: Label `sec:sec01' multiply defined.
 
 
-LaTeX Warning: Label `sec:sec01' multiply defined.
-
-
 LaTeX Warning: Label `subsec:subsec01' multiply defined.
-
-
-LaTeX Warning: Label `sec:sec02' multiply defined.
 
 
 LaTeX Warning: Label `subsec:subsec01' multiply defined.
 
 
 LaTeX Warning: Label `subsec:subsec02' multiply defined.
-
-
-LaTeX Warning: Label `sec:sec03' multiply defined.
 
 )
 \openout1 = `memoirthesis.aux'.
@@ -1097,7 +1088,7 @@ Package nag Info: Command \captionbelow not defined, skipping amendment on input
 Package nag Info: Command \hc@caption not defined, skipping amendment on input line 177.
 Package nag Info: Command \topcaption not defined, skipping amendment on input line 177.
  (./frontmatter/title.tex
-<logos/bristolcrest_colour.pdf, id=115, 114.4275pt x 137.51375pt>
+<logos/bristolcrest_colour.pdf, id=119, 114.4275pt x 137.51375pt>
 File: logos/bristolcrest_colour.pdf Graphic file (type pdf)
 <use logos/bristolcrest_colour.pdf>
 Package pdftex.def Info: logos/bristolcrest_colour.pdf  used on input line 34.
@@ -1150,7 +1141,10 @@ l.202 \clearemptydoublepage
 ]) [6
 
 
-] (./memoirthesis.toc [7]) [8] (./memoirthesis.lot
+] (./memoirthesis.toc
+Underfull \vbox (badness 1057) has occurred while \output is active []
+
+ [7]) [8] (./memoirthesis.lot
 
 LaTeX Font Warning: Font shape `OT1/cmr/bx/sc' undefined
 (Font)              using `OT1/cmr/bx/n' instead on input line 2.
@@ -1162,7 +1156,7 @@ LaTeX Font Warning: Font shape `OT1/cmr/bx/sc' undefined
 ] (./memoirthesis.lof) [11] [12
 
 ] (./chapters/chapter01/chap01.tex
-<chapters/chapter01/fig01/Nswellings.jpeg, id=218, 282.30469pt x 472.76625pt>
+<chapters/chapter01/fig01/Nswellings.jpeg, id=223, 282.30469pt x 472.76625pt>
 File: chapters/chapter01/fig01/Nswellings.jpeg Graphic file (type jpg)
 <use chapters/chapter01/fig01/Nswellings.jpeg>
 Package pdftex.def Info: chapters/chapter01/fig01/Nswellings.jpeg  used on input line 27.
@@ -1172,7 +1166,7 @@ Overfull \hbox (12.54272pt too wide) in paragraph at lines 27--28
  [][] 
  []
 
-<chapters/chapter01/fig01/Mswellings.jpeg, id=219, 117.43875pt x 154.32657pt>
+<chapters/chapter01/fig01/Mswellings.jpeg, id=224, 117.43875pt x 154.32657pt>
 File: chapters/chapter01/fig01/Mswellings.jpeg Graphic file (type jpg)
 <use chapters/chapter01/fig01/Mswellings.jpeg>
 Package pdftex.def Info: chapters/chapter01/fig01/Mswellings.jpeg  used on input line 33.
@@ -1182,7 +1176,7 @@ Overfull \hbox (36.91592pt too wide) in paragraph at lines 33--34
  [][] 
  []
 
-<chapters/chapter01/fig01/rhd1.jpeg, id=220, 164.86594pt x 246.1697pt>
+<chapters/chapter01/fig01/rhd1.jpeg, id=225, 164.86594pt x 246.1697pt>
 File: chapters/chapter01/fig01/rhd1.jpeg Graphic file (type jpg)
 <use chapters/chapter01/fig01/rhd1.jpeg>
 Package pdftex.def Info: chapters/chapter01/fig01/rhd1.jpeg  used on input line 39.
@@ -1192,7 +1186,7 @@ Overfull \hbox (21.2269pt too wide) in paragraph at lines 39--40
  [][] 
  []
 
-<chapters/chapter01/fig01/mutantrhd6.jpeg, id=221, 894.34125pt x 240.9pt>
+<chapters/chapter01/fig01/mutantrhd6.jpeg, id=226, 894.34125pt x 240.9pt>
 File: chapters/chapter01/fig01/mutantrhd6.jpeg Graphic file (type jpg)
 <use chapters/chapter01/fig01/mutantrhd6.jpeg>
 Package pdftex.def Info: chapters/chapter01/fig01/mutantrhd6.jpeg  used on input line 45.
@@ -1202,7 +1196,7 @@ Overfull \hbox (58.16412pt too wide) in paragraph at lines 45--46
  [][] 
  []
 
-<chapters/chapter01/fig01/auxab.jpeg, id=222, 315.42844pt x 93.34875pt>
+<chapters/chapter01/fig01/auxab.jpeg, id=227, 315.42844pt x 93.34875pt>
 File: chapters/chapter01/fig01/auxab.jpeg Graphic file (type jpg)
 <use chapters/chapter01/fig01/auxab.jpeg>
 Package pdftex.def Info: chapters/chapter01/fig01/auxab.jpeg  used on input line 51.
@@ -1212,7 +1206,7 @@ Overfull \hbox (59.67247pt too wide) in paragraph at lines 51--52
  [][] 
  []
 
-<chapters/chapter01/fig01/devepzones.jpeg, id=233, 317.68687pt x 481.8pt>
+<chapters/chapter01/fig01/devepzones.jpeg, id=238, 317.68687pt x 481.8pt>
 File: chapters/chapter01/fig01/devepzones.jpeg Graphic file (type jpg)
 <use chapters/chapter01/fig01/devepzones.jpeg>
 Package pdftex.def Info: chapters/chapter01/fig01/devepzones.jpeg  used on input line 61.
@@ -1265,21 +1259,21 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `memoirthesis.out' has not changed.
-(rerunfilecheck)             Checksum: B81CEF60D801EE2CFDDE4EE8FE48D970;3583.
+(rerunfilecheck)             Checksum: E36D24A87D98E7DB53898A0E56B27F62;3720.
  ) 
 Here is how much of TeX's memory you used:
- 28622 strings out of 474222
- 494578 string characters out of 5748733
+ 28630 strings out of 474222
+ 494715 string characters out of 5748733
  1935975 words of memory out of 5000000
- 50166 multiletter control sequences out of 15000+600000
- 571523 words of font info for 129 fonts, out of 8000000 for 9000
+ 50171 multiletter control sequences out of 15000+600000
+ 571574 words of font info for 130 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  85i,12n,131p,1076b,655s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on memoirthesis.pdf (32 pages, 922300 bytes).
+Output written on memoirthesis.pdf (32 pages, 923004 bytes).
 PDF statistics:
- 373 PDF objects out of 1000 (max. 8388607)
- 305 compressed objects within 4 object streams
- 70 named destinations out of 1000 (max. 500000)
- 37128 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 378 PDF objects out of 1000 (max. 8388607)
+ 310 compressed objects within 4 object streams
+ 71 named destinations out of 1000 (max. 500000)
+ 37136 words of extra memory for PDF output out of 42996 (max. 10000000)
 
