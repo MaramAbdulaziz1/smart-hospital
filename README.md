@@ -36,6 +36,7 @@ To ensure consistent development practices across the team, please follow the ru
 ---
 
 Using the Shared Layout
+
 To maintain a consistent design across all pages, we use a shared layout that includes:
 
 ✅ Sidebar navigation
@@ -47,7 +48,9 @@ To maintain a consistent design across all pages, we use a shared layout that in
 ✅ Dynamic page title
 
 How to Use It in Your Page?
+
 1-Add the Shared CSS
+
 Make sure to include the shared layout styles and your page-specific styles at the top of your HTML:
 
 html
@@ -82,9 +85,11 @@ html
 </div>
 
 3-Add a Dynamic Title
+
 If you want to change the page title dynamically, just pass it from the controller using a model attribute.
 
 Example Controller:
+
 java
 
 package com.team10.smarthospital.controllers;
