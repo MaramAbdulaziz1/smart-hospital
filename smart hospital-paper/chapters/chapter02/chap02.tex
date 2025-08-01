@@ -21,10 +21,49 @@
 
 % write soultion
 
+
+\clearpage
 \section{Requirements}
 \label{sec:requirements}
+% requirements here
 
 The system is primarily designed as a web-based platform for general hospital staff, specifically doctors and nurses, to facilitate interaction with patients. The core aim is to enable healthcare professionals to manage patient information, conduct remote consultations, and reduce the need for patients to visit the hospital in person.
 While patients are also considered stakeholders of the system, the focus of the design and development process was placed on the needs of doctors and nurses. The decision was driven by the goal of reducing the administrative and operational workload for hospital staff, thereby improving efficiency within clinical workflows.
 
-% requirements here
+To ensure a functional and effective experience for hospital staff and patients, the system was designed to support a core set of features. These include secure user login and authentication for doctors and nurses, the ability to record patient vitals and view historical data trends, and an interface for remote consultation to minimise unnecessary hospital visits.
+As the project was developed from scratch and targeted doctors, nurses, and patients, it required the collection of foundational requirements to support the intended clinical workflow. Based on input from our original client, Virtual Hospital Africa, we analysed their existing system and designed a new solution aligned with the vision of building a smart hospital.
+
+Non-functional requirements were also considered throughout the development process. These included ensuring a responsive and mobile-friendly user interface, main-
+taining data privacy through secure authentication and role-based access control, and optimising
+performance for minimal load times to support real-time clinical usage. These system capabilities are closely aligned with the user stories
+presented blew.
+
+\vspace{1em}
+% Adds vertical space before the table
+\begin{table}[H]
+% [H] makes the table stay exactly where it's written in the document
+\centering
+% Centers the table on the page
+\renewcommand{\arraystretch}{1.4}
+% Increases row height for better readability
+\begin{tabular}{|p{2cm}|p{5.2cm}|p{5.2cm}|p{2cm}|}
+% Defines a table with 4 columns of fixed widths
+\hline
+\textbf{As a...} & \textbf{I want...} & \textbf{So that...} & \textbf{Technical ability} \\
+\hline
+Doctor & To record and view patient vitals history & I can make more accurate clinical decisions based on patient trends & 3--5 \\
+\hline
+Doctor & To view patient contact information & I can conduct online or follow-up appointments to discuss test results or treatments & 3--5 \\
+\hline
+Nurse & To input vitals data easily through a form interface & I can reduce manual paperwork and save time during rounds & 2--4 \\
+\hline
+Patient & To view my previous visits and vitals data online & I can better understand my health condition over time & 2--3 \\
+\hline
+\end{tabular}
+\caption{Smart Hospital User Stories Table} % Adds a caption under the table
+\label{tab:user-stories}% Allows referencing the table elsewhere in the document
+\end{table}
+
+\vspace{1em}
+% Adds space after the table
+
