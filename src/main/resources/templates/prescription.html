@@ -77,29 +77,111 @@
             </div>
         </div>
 
-        <!-- Prescription Four Section -->
-        <div class="grid-container">
-            <div class="grid-item diagnosis">
-                <div class="section-title">Diagnosis:</div>
-                <textarea id="diagnosis" placeholder="Enter diagnosis..."></textarea>
+        <!-- Prescription Two Section -->
+        <div class="prescription-layout">
+            <!-- left -->
+            <div class="left-section">
+                <div class="fixed-section">
+                    <div class="section-title">Diagnosis</div>
+                    <textarea placeholder="Add diagnosis results..."></textarea>
+                </div>
+                
+                <div class="fixed-section">
+                    <div class="section-title">Drug Allergy</div>
+                    <textarea placeholder="Add drug allergy..."></textarea>
+                </div>
+                
+                <div class="fixed-section">
+                    <div class="section-title">Medication Card Record</div>
+                    <select class="dropdown">
+                        <option>Select Medication Card</option>
+                    </select>
+                </div>
             </div>
-            <div class="grid-item medication">
-                <div class="section-title">Medication(s) Prescribed:</div>
-                <textarea id="medication" placeholder="Enter medication..."></textarea>
-            </div>
-            <div class="grid-item instructions">
-                <div class="section-title">Instructions for patient:</div>
-                <textarea id="instructions" placeholder="Enter instructions..."></textarea>
-            </div>
-            <div class="grid-item advise">
-                <div class="section-title">Advise:</div>
-                <textarea id="advise" placeholder="Enter advise..."></textarea>
-            </div>
-        </div>
 
-        <div class="button-group">
+        <!-- right -->
+        <div class="right-section">
+            <div class="medication-section">
+                <div class="medication-card">
+                    <div class="medication-card-header">Medication Card #1</div>
+                    
+                    <div class="medication-form">
+                        <!-- Medication Name -->
+                        <div class="form-group">
+                            <label>Medication Name</label>
+                            <input type="text" placeholder="Add medicine name...">
+                        </div>
+
+                        <!-- Dosage and Frequency Row -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Dosage</label>
+                                <input type="text" placeholder="e.g., 500mg">
+                            </div>
+                            <div class="form-group">
+                                <label>Frequency</label>
+                                <input type="text" placeholder="e.g., Twice a day">
+                            </div>
+                        </div>
+
+                        <!-- Note -->
+                        <div class="form-group">
+                            <label>Note</label>
+                            <textarea rows="3" placeholder="e.g., Take before meals"></textarea>
+                        </div>
+
+                        <!-- Route and Duration Row -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Route</label>
+                                <input type="text" placeholder="e.g., Oral or IV">
+                            </div>
+                            <div class="form-group">
+                                <label>Duration</label>
+                                <input type="text" placeholder="e.g., For 7 days">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="button-bar">
+            <button class="action-btn">
+                <!-- ✚ Add Card SVG -->
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 9V12M12 12V15M12 12H15M12 12H9M21 12C21 13.1819 20.7672 14.3522 
+                20.3149 15.4442C19.8626 16.5361 19.1997 17.5282 18.364 18.364C17.5282 
+                19.1997 16.5361 19.8626 15.4442 20.3149C14.3522 20.7672 13.1819 21 12 
+                21C10.8181 21 9.64778 20.7672 8.55585 20.3149C7.46392 19.8626 6.47177 
+                19.1997 5.63604 18.364C4.80031 17.5282 4.13738 16.5361 3.68508 
+                15.4442C3.23279 14.3522 3 13.1819 3 12C3 9.61305 3.94821 7.32387 
+                5.63604 5.63604C7.32387 3.94821 9.61305 3 12 3C14.3869 3 16.6761 
+                3.94821 18.364 5.63604C20.0518 7.32387 21 9.61305 21 12Z" 
+                stroke="#3F3F46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Add Card
+            </button>
+
+            <button class="action-btn">
+                <!-- 🗑️ Delete Card SVG -->
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 12H9M21 12C21 13.1819 20.7672 14.3522 20.3149 15.4442C19.8626 
+                16.5361 19.1997 17.5282 18.364 18.364C17.5282 19.1997 16.5361 19.8626 
+                15.4442 20.3149C14.3522 20.7672 13.1819 21 12 21C10.8181 21 9.64778 
+                20.7672 8.55585 20.3149C7.46392 19.8626 6.47177 19.1997 5.63604 
+                18.364C4.80031 17.5282 4.13738 16.5361 3.68508 15.4442C3.23279 
+                14.3522 3 13.1819 3 12C3 9.61305 3.94821 7.32387 5.63604 5.63604C7.32387 
+                3.94821 9.61305 3 12 3C14.3869 3 16.6761 3.94821 18.364 5.63604C20.0518 
+                7.32387 21 9.61305 21 12Z" 
+                stroke="#3F3F46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Delete Card
+            </button>
+            </div>
+    
+            <div class="floating-buttons">
             <button class="editor-btn">Editor</button>
             <button class="save-btn">Save</button>
+            </div>
+            </div>
         </div>
     </div>
 </div>
