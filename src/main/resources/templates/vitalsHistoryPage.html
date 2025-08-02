@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <!-- Meta and fonts -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
+
+  <!-- Global and page-specific CSS -->
+  <link rel="stylesheet" th:href="@{/css/sharedLayout.css}">
+  <link rel="stylesheet" th:href="@{/css/vitalsHistoryPage.css}">
+</head>
+
+<body>
+<div class="layout-container">
+
+  <!-- 🔹 Sidebar (Navigation menu on the left) -->
+  <div th:replace="~{layouts/sharedLayout :: sidebar}"></div>
+
+  <!-- 🔸 Main content area -->
+  <main class="content">
+
+    <!-- 🔹 Top navigation bar -->
+    <div th:replace="~{layouts/sharedLayout :: topNav}"></div>
+
+    <!-- 🔹 Patient details card (name, gender, etc.) -->
+    <div th:replace="~{layouts/sharedLayout :: patientCard}"></div>
+
+    <!-- 🔸 Page-specific content for vitals history -->
+    <section class="page-content">
+
+      <!-- Back arrow and page title (static, for now) -->
+      <div class="vitals-header">
+        <img th:src="@{/VitalsPageImages/backArrow.svg}" alt="Back" class="back-arrow" onclick="history.back()">
+        <h2 class="vitals-title">Vitals History</h2>
+      </div>
+
+      <!-- Optional: white block under header for layout clarity -->
+      <div class="white-blocker-box"></div>
+
+      <!-- Vitals table container (scrollable) -->
+      <div class="vitals-table-container">
+
+        <!-- 🔹 Table column headers -->
+        <div class="table-row header-row">
+          <span>Date Of Visit</span>
+          <span>BP (mmHg)</span>
+          <span>HR (bpm)</span>
+          <span>Temp (°C)</span>
+          <span>Weight (kg)</span>
+          <span>Height (cm)</span>
+          <span>BMI</span>
+          <span>Glucose (mg/dl)</span>
+          <span>O₂ Saturation (%)</span>
+          <span>Recorded By</span>
+        </div>
+
+        <!-- 🔹 Table content (dynamically repeated rows) -->
+        <div class="table-row data-row" th:each="i : ${#numbers.sequence(1, 12)}">
+          <span>15 Jul 2025</span>
+          <span>120/78</span>
+          <span>82</span>
+          <span>37.1</span>
+          <span>72</span>
+          <span>165</span>
+          <span>26.4</span>
+          <span>5.6</span>
+          <span>97</span>
+          <span>Dr. Sarah Moyo</span>
+        </div>
+
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- 🔹 Optional JS for navigation or logout -->
+<script>
+  function navigateTo(url) {
+    window.location.href = url;
+  }
+
+  function handleLogout() {
+    if (confirm('Are you sure you want to log out?')) {
+      window.location.href = '/login';
+    }
+  }
+</script>
+</body>
+</html>

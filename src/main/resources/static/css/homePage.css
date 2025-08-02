@@ -1,0 +1,232 @@
+/* Reset default margins and paddings for all elements */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Full-page background */
+body {
+  background-color: rgba(177, 238, 255, 0.84);
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Main landing page wrapper (entire frame) */
+.landing-page {
+  width: 100%;
+  height: 100%;
+  background: rgba(177, 238, 255, 0.84);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top navigation bar (white bar at top) */
+.top-nav {
+  width: 100%;
+  height: 14vh; /* Proportional to 164px of 1024px height */
+  background: #FFF;
+}
+
+/* Central content area (blue section with logo, text, and buttons) */
+.main-content {
+  width: 100%;
+  height: 72vh; /* Proportional to 678px of 1024px height */
+  background: #A5DFEF;
+  position: relative;
+}
+
+/* Blue background layer with semi-transparent image */
+.background-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../HomePageImages/background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.8;
+  z-index: 1;
+}
+
+/* Bottom navigation bar (white footer area) */
+.bottom-nav {
+  width: 100%;
+  height: 14vh; /* Proportional to 182px of 1024px height */
+  background: #FFF;
+}
+
+/* White rectangle background behind logo */
+.logo-background {
+  position: absolute;
+  top: 50px;
+  left: 181px;
+  width: 345px;
+  height: 118px;
+  background: rgba(250, 253, 255, 0.84);
+  z-index: 2;
+}
+
+/* Logo image positioned above rectangle */
+.logo-image {
+  position: absolute;
+  top: 50px;
+  left: 193px;
+  width: 314px;
+  height: 140px;
+  z-index: 3;
+}
+
+/* Description paragraph text below logo */
+.description-text {
+  position: absolute;
+  top: 220px;
+  left: 107px;
+  width: 600px;
+  height: 113px;
+  color: #3F3F46;
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: normal;
+  z-index: 2;
+}
+
+/* Decorative shadow layers behind the Login button */
+.login-behind-2 {
+  position: absolute;
+  top: 350px;
+  left: 185px;
+  width: 34px;
+  height: 58px;
+  background: #1DA5DF29;
+  border-radius: 16px;
+}
+.login-behind-1 {
+  position: absolute;
+  top: 350px;
+  left: 191px;
+  width: 35px;
+  height: 58px;
+  background: #1DA5DF33;
+  border-radius: 16px;
+}
+
+/* Decorative shadow layers behind the Register button */
+.register-behind-2 {
+  position: absolute;
+  top: 350px;
+  left: 354px;
+  width: 34px;
+  height: 58px;
+  background: #1DA5DF29;
+  border-radius: 16px;
+}
+.register-behind-1 {
+  position: absolute;
+  top: 350px;
+  left: 360px;
+  width: 35px;
+  height: 58px;
+  background: #1DA5DF33;
+  border-radius: 16px;
+}
+
+/* Login button styling */
+.login-btn {
+  position: absolute;
+  top: 350px;
+  left: 198px;
+  width: 135px;
+  height: 58px;
+  background: #1DA5DF;
+  border-radius: 16px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 34px;
+  gap: 10px;
+  cursor: pointer;
+  z-index: 3;
+}
+
+/* Register button styling */
+.register-btn {
+  position: absolute;
+  top: 350px;
+  left: 367px;
+  width: 135px;
+  height: 58px;
+  background: #1DA5DF;
+  border-radius: 16px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 34px;
+  gap: 10px;
+  cursor: pointer;
+  z-index: 3;
+
+  text-decoration: none;  /* Removes underline when used as <a> */
+  color: inherit;         /* Keep text color same */
+}
+.register-btn:hover {
+  text-decoration: none;
+}
+
+/* Text inside buttons */
+.button-text {
+  color: #FFFFFF;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: -1%;
+}
+
+/* Two small arrows (» effect) inside buttons */
+.double-arrow {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.arrow-icon {
+  width: 5px;
+  height: 12px;
+  color: #FFFFFF;
+}
+
+/* Container holding the diamond-shaped medical images */
+.diamond-container {
+  position: absolute;
+  top: 46.5%;
+  right: 250px;
+  transform: translateY(-50%) rotate(45deg);
+  display: grid;
+  grid-template-columns: repeat(3, 140px);
+  grid-template-rows: repeat(3, 140px);
+  gap: -20px; /* Overlaps the diamonds slightly */
+}
+
+/* Each diamond image */
+.diamond {
+  width: 200px;
+  height: 200px;
+  transform: rotate(-45deg);
+  object-fit: cover;
+  z-index: 2;
+}
+
+/* Positioning for the six images inside the diamond grid */
+.diamond:nth-child(1) { grid-column: 2; grid-row: 1; }
+.diamond:nth-child(2) { grid-column: 1; grid-row: 2; }
+.diamond:nth-child(3) { grid-column: 2; grid-row: 2; }
+.diamond:nth-child(4) { grid-column: 3; grid-row: 2; }
+.diamond:nth-child(5) { grid-column: 1; grid-row: 3; }
+.diamond:nth-child(6) { grid-column: 2; grid-row: 3; }

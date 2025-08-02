@@ -1,0 +1,30 @@
+<svg width="15" height="17" viewBox="0 0 15 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="15" height="17" fill="#322D2D"/>
+<g id="patient profile">
+<g clip-path="url(#clip0_8_5)">
+<rect x="-41" y="-539" width="1440" height="1024" fill="#F5F5F5"/>
+<g id="Group 7">
+<rect id="Rectangle 2" x="-42" y="-575" width="240" height="1060" fill="white"/>
+<g id="Group 18">
+<g id="Frame 35">
+<g id="Group">
+<path id="Vector" d="M8.6875 1.375L13.8333 6.125M8.697 1.375V6.15746H13.8333" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="Group 12">
+<g id="Group 16">
+<path id="Vector_2" d="M1.1665 2.16667C1.1665 1.9567 1.24991 1.75534 1.39838 1.60687C1.54684 1.45841 1.74821 1.375 1.95817 1.375H8.68734V6.125H13.8332V14.8333C13.8332 15.0433 13.7498 15.2447 13.6013 15.3931C13.4528 15.5416 13.2515 15.625 13.0415 15.625H1.95817C1.74821 15.625 1.54684 15.5416 1.39838 15.3931C1.24991 15.2447 1.1665 15.0433 1.1665 14.8333V2.16667Z" stroke="black" stroke-width="2" stroke-linejoin="round"/>
+<path id="Vector_3" d="M3.5415 10.875H8.2915M5.9165 8.5V13.25" stroke="black" stroke-width="2" stroke-linecap="round"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+<rect x="-40.5" y="-538.5" width="1439" height="1023" stroke="black" stroke-opacity="0.5"/>
+</g>
+<defs>
+<clipPath id="clip0_8_5">
+<rect x="-41" y="-539" width="1440" height="1024" fill="white"/>
+</clipPath>
+</defs>
+</svg>
