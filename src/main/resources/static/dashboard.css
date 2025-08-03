@@ -166,11 +166,12 @@ body {
 }
 
 .table-header {
-  background-color: #d9f2f9;
+  background-color: #A5DFEF;
+  /*background-color: #d9f2f9;*/
   display: grid;
-  grid-template-columns: 2fr 1fr auto;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
-  padding: 15px 20px;
+  padding: 15px 50px;
   font-weight: bold;
   border-radius: 10px;
   margin-bottom: 10px;
@@ -186,11 +187,24 @@ body {
   margin-left: 0;
 }
 
-.table-header > div,
+/*.table-header > div,
 .patient-row > div {
-  text-align: left;
-  padding-left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;   
+  flex-direction: row;
+}*/
+
+.patient-row > div {
+  text-align: center;
 }
+
+/* 保留 header 的置中 
+.table-header > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}*/
 
 .table-header > div:first-child,
 .patient-row > div:first-child {
@@ -199,9 +213,9 @@ body {
 
 .patient-row {
   display: grid;
-  grid-template-columns: 2fr 1fr auto;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
-  padding: 15px 20px;
+  padding: 15px 35px;
   border-bottom: 1px solid #eee;
 }
 
@@ -211,7 +225,7 @@ body {
 
 .patient-info {
   display: flex;
-  flex-direction: column;
+  flex-direction: columns;
   padding-left: 0;
   text-align: left;
 }
@@ -236,12 +250,14 @@ body {
 
 .button-group {
   display: flex;
+  flex-direction: row;
   gap: 10px;
-  padding-right: 0;
-  justify-self: end;
+  justify-content: center;
+  align-items: center; 
 }
 
 .btn {
+  /*display: inline-flex;*/
   padding: 10px 20px;
   border: 2px solid #a5dfef;
   border-radius: 8px;
@@ -250,18 +266,15 @@ body {
   color: #333;
 }
 
-
 .btn.filled {
   background: #6DA2B1;
   border: 2px solid #6DA2B1;
   color: white;
 }
 
-
 .btn:hover{
   background-color: #e8f7fb;
 }
-
 
 .bottom-buttons {
   display: flex;
