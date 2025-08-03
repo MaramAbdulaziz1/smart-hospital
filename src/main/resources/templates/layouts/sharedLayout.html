@@ -219,9 +219,11 @@
 <!-- 🔹 Patient Card Fragment: Displays patient info -->
 <section th:fragment="patientCard" class="patient-card">
 
-  <!-- Profile image and name -->
-  <img th:src="@{/SharedLayoutImages/patientProfileImage.png}" alt="Patient" class="patient-photo">
-  <h2 class="patient-name">Harry Potter</h2>
+  <!-- Profile image and name section -->
+  <div class="profile-section">
+    <img th:src="@{/SharedLayoutImages/patientProfileImage.png}" alt="Patient" class="patient-photo">
+    <h2 class="patient-name">Harry Potter</h2>
+  </div>
 
   <!-- Divider line between photo and details -->
   <div class="divider-line"></div>
