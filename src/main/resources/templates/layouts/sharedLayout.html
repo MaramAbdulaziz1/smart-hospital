@@ -2,32 +2,35 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 
-<!-- 🔹 Sidebar Fragment (Left Navigation) -->
+<!-- 🔹 Sidebar Fragment: Left vertical navigation -->
 <aside th:fragment="sidebar" class="sidebar">
+
   <!-- Logo at the top of the sidebar -->
   <img th:src="@{/SharedLayoutImages/LogoCircle.png}" alt="Logo" class="logo">
 
-  <!-- Navigation Tabs -->
+  <!-- 🔸 Navigation Links -->
   <nav class="sidebar-nav">
-    <!-- Each tab represents a section of the application -->
     <div class="tab" data-page="home">
       <img th:src="@{/SharedLayoutImages/homeIcon.svg}" alt="Home Icon" class="tab-icon">
       <span>Home</span>
     </div>
+
     <div class="tab" data-page="calendar">
       <img th:src="@{/SharedLayoutImages/calendarIcon.svg}" alt="Calendar Icon" class="tab-icon">
       <span>Calendar</span>
     </div>
+
     <div class="tab">
       <img th:src="@{/SharedLayoutImages/profileIcon.svg}" alt="Profile Icon" class="tab-icon">
       <span>Patient Profile</span>
     </div>
+
     <div class="tab">
       <img th:src="@{/SharedLayoutImages/intakeIcon.svg}" alt="Intake Icon" class="tab-icon">
       <span>Patient Intake</span>
     </div>
 
-    <!-- Active tab styling is applied here -->
+    <!-- Active tab styling applied here -->
     <div class="tab active-tab">
       <img th:src="@{/SharedLayoutImages/vitalsIcon.svg}" alt="Vitals Icon" class="tab-icon">
       <span>Vitals</span>
@@ -35,53 +38,86 @@
 
     <div class="tab" data-page="prescription">
       <div class="icon-group">
-        <img th:src="@{/SharedLayoutImages/prescriptionIcon1.svg}" alt="Prescription Icon 1" class="tab-icon">
+        <img th:src="@{/SharedLayoutImages/prescriptionIcon1.svg}" alt="Prescription Icon" class="tab-icon">
       </div>
       <span>Prescription</span>
     </div>
-    <div class="tab">
-      <img th:src="@{/SharedLayoutImages/logoutIcon.svg}" alt="Logout Icon" class="tab-icon">
-      <span>Log Out</span>
-    </div>
   </nav>
+
+  <!-- 🔸 Logout Button at the bottom -->
+  <div class="tab logout-tab">
+    <img th:src="@{/SharedLayoutImages/logoutIcon.svg}" alt="Logout Icon" class="tab-icon">
+    <span>Log Out</span>
+  </div>
+
 </aside>
 
-<!-- 🔸 Top Navigation Fragment -->
+<!-- 🔹 Top Navigation Fragment -->
 <header th:fragment="topNav" class="top-nav">
-  <!-- Page title (dynamically set via controller) -->
+  <!-- Dynamic page title (defaults to "Page Title") -->
   <h1 class="page-title" th:text="${pageTitle} ?: 'Page Title'">Page Title</h1>
 
-  <!-- Icons on the right: notifications + profile -->
+  <!-- Icons on the right -->
   <img th:src="@{/SharedLayoutImages/notificationIcon.svg}" alt="Notifications" class="notification-icon">
   <img th:src="@{/SharedLayoutImages/doctorProfileImage.png}" alt="Doctor Profile" class="doctor-profile">
 </header>
 
-<!-- 🔹 Patient Card Fragment (Displays patient info on the page) -->
+<!-- 🔹 Patient Card Fragment: Displays patient info -->
 <section th:fragment="patientCard" class="patient-card">
-  <img th:src="@{/SharedLayoutImages/patientProfileImage.png}" alt="Patient" class="patient-photo">
 
+  <!-- Profile image and name -->
+  <img th:src="@{/SharedLayoutImages/patientProfileImage.png}" alt="Patient" class="patient-photo">
   <h2 class="patient-name">Harry Potter</h2>
 
+  <!-- Divider line between photo and details -->
   <div class="divider-line"></div>
 
-  <!-- Patient Details -->
+  <!-- 🔸 Patient Info Fields -->
+  <div class="info-box id-box">
+    <span class="info-label">Patient ID:</span>
+    <span class="info-value">HAT17653D</span>
+  </div>
+
+  <div class="info-box dob-box">
+    <span class="info-label">Date of Birth:</span>
+    <span class="info-value">23/08/1999</span>
+    <span class="info-age">(30 yrs)</span>
+  </div>
+
   <div class="info-box gender-box">
     <span class="info-label">Sex:</span>
     <span class="info-value">Male</span>
   </div>
-  <div class="info-box age-box">
-    <span class="info-label">Age:</span>
-    <span class="info-value">30</span>
-  </div>
-  <div class="info-box dob-box">
-    <span class="info-label">Date of Birth:</span>
-    <span class="info-value">23/08/1999</span>
+
+  <div class="info-box address-box">
+    <span class="info-label">Address:</span>
+    <span class="info-value">
+        Marborough house,<br>
+        Bristol.<br>
+        BS1 3NX
+      </span>
   </div>
 
-  <!-- Placeholder for future call buttons or actions -->
-  <div class="call-placeholder">
-    Call buttons should be added here
+  <!-- 🔸 Call Buttons (Phone & Video) -->
+  <div class="contact-buttons">
+    <button class="contact-btn">
+      <!-- Phone Icon -->
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M2.98816..." stroke="#3F3F46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Phone
+    </button>
+
+    <button class="contact-btn">
+      <!-- Video Icon -->
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M15 10L19.553..." stroke="#3F3F46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Video
+    </button>
   </div>
+
 </section>
+
 </body>
 </html>

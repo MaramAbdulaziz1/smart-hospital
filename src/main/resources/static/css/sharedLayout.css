@@ -1,14 +1,14 @@
-/* General page reset */
+/* 🔹 Reset styles for full-page control */
 html, body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden; /* Prevent scrollbars */
-  font-family: 'Inter', sans-serif; /* Apply correct font */
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
 }
 
-/* Container */
+/* 🔹 Main layout container */
 .layout-container {
   display: flex;
   width: 100%;
@@ -16,9 +16,9 @@ html, body {
   background: #F5F5F5;
 }
 
-/* Sidebar container */
+/* 🔹 Sidebar (Left navigation) */
 .sidebar {
-  width: 210px;                /* Matches top nav offset */
+  width: 210px;
   height: 100vh;
   background-color: #FFFFFF;
   position: fixed;
@@ -27,9 +27,10 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between; /* Separates nav tabs from logout */
 }
 
-/* Logo */
+/* 🔹 Sidebar logo */
 .logo {
   position: absolute;
   width: 264px;
@@ -38,28 +39,23 @@ html, body {
   left: -35px;
 }
 
-/* Tabs container */
+/* 🔹 Sidebar navigation links */
 .sidebar-nav {
-  position: absolute;
-  width: 100%;
-  top: 193px;       /* Per Figma */
-  left: 0;
   display: flex;
   flex-direction: column;
   gap: 10px;
   align-items: center;
+  padding-top: 193px;
 }
 
-/* Each tab */
+/* 🔹 Sidebar tab styling */
 .tab {
-  width: 170px;         /* Figma width */
-  height: 50px;         /* Figma height */
+  width: 170px;
+  height: 50px;
   display: flex;
   align-items: center;
   gap: 10px;
   padding-left: 20px;
-
-  font-family: 'Inter', sans-serif;
   font-size: 18px;
   color: #000;
   border-radius: 16px;
@@ -70,29 +66,36 @@ html, body {
   background-color: #F5F5F5;
 }
 
-/* Active (highlighted) tab */
 .active-tab {
   background-color: #F5F5F5;
   border-radius: 16px;
 }
-/* Icons */
+
+/* 🔹 Tab icon */
 .tab-icon {
   width: 16px;
   height: 16px;
 }
 
-/* Fix Prescription icons side by side */
+/* 🔹 Group multiple icons */
 .icon-group {
   display: flex;
   gap: 6px;
   align-items: center;
 }
 
-/* Top nav bar */
+/* 🔹 Logout tab positioned at bottom of sidebar */
+.logout-tab {
+  margin-top: auto;
+  margin-bottom: 30px;
+  align-self: center;
+}
+
+/* 🔹 Top navigation bar */
 .top-nav {
   position: fixed;
   top: 0;
-  left: 210px; /* Start after sidebar */
+  left: 210px;
   width: calc(100% - 210px);
   height: 80px;
   background-color: #A5DFEF;
@@ -101,17 +104,16 @@ html, body {
   padding-left: 26px;
 }
 
-/* Page title */
+/* 🔹 Page title (set dynamically per page) */
 .page-title {
   position: absolute;
   left: 32px;
-  font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 24px;
   color: #000000;
 }
 
-/* Notification Icon (right of top nav) */
+/* 🔹 Top-right icons */
 .notification-icon {
   position: absolute;
   width: 35px;
@@ -121,7 +123,6 @@ html, body {
   cursor: pointer;
 }
 
-/* Doctor Profile Image (right corner) */
 .doctor-profile {
   position: absolute;
   width: 61px;
@@ -132,7 +133,7 @@ html, body {
   cursor: pointer;
 }
 
-/* Patient card container */
+/* 🔹 Patient Card Container */
 .patient-card {
   position: absolute;
   width: 1275px;
@@ -148,7 +149,7 @@ html, body {
   box-sizing: border-box;
 }
 
-/* Patient profile photo */
+/* 🔹 Patient profile image */
 .patient-photo {
   position: absolute;
   width: 108.5px;
@@ -159,22 +160,20 @@ html, body {
   object-fit: cover;
 }
 
-/* Patient name */
+/* 🔹 Patient name */
 .patient-name {
   position: absolute;
   width: 188px;
   height: 40px;
   top: 115px;
   left: 95px;
-  font-family: 'Inter', sans-serif;
   font-size: 22px;
   font-weight: 400;
-  line-height: 1;
   color: #000000;
-  transform: rotate(-0.16deg); /* Matches Figma's slight tilt */
+  transform: rotate(-0.16deg);
 }
 
-/* Divider line (between left and right sections) */
+/* 🔹 Divider line in patient card */
 .divider-line {
   position: absolute;
   width: 329.98px;
@@ -185,7 +184,7 @@ html, body {
   transform: rotate(-90.52deg);
 }
 
-/* Generic info box styling (for Sex, Age, DOB) */
+/* 🔹 Shared styles for all info boxes */
 .info-box {
   position: absolute;
   display: flex;
@@ -193,58 +192,73 @@ html, body {
   justify-content: center;
   padding: 0 5px;
   gap: 10px;
-  height: auto;
+  top: 58px;
   font-family: 'Inter', sans-serif;
 }
 
-/* Specific positions per Figma */
-.gender-box {
-  width: 65.7px;
-  top: 58px;
-  left: 400px;
-}
-
-.age-box {
-  width: 65.7px;
-  top: 58px;
-  left: 580px;
+/* 🟩 Individual Info Boxes  */
+.id-box {
+  width: 150px;
+  left: 370px;
 }
 
 .dob-box {
-  width: 211.4px;
-  top: 58px;
-  left: 740px;
+  width: 211px;
+  left: 550px;
 }
 
-/* Label (Sex, Age, Date of Birth) */
+.gender-box {
+  width: 70px;
+  left: 770px;
+}
+
+.address-box {
+  width: 240px;
+  left: 890px;
+}
+
+/* 🔹 DOB's extra line for age */
+.info-age {
+  font-size: 16px;
+  color: #53535D;
+  margin-top: 4px;
+  padding-left: 24px;
+}
+
+/* 🔹 Label and Value styles */
 .info-label {
   font-size: 16px;
   color: #53535D;
-  line-height: 100%;
 }
 
-/* Values (Male, 30, 23/08/1999) */
 .info-value {
   font-size: 20px;
   color: #000000;
-  line-height: 100%;
 }
 
-/* Placeholder for call buttons (to be replaced later) */
-.call-placeholder {
+/* 🔹 Phone & Video Call Buttons */
+.contact-buttons {
   position: absolute;
-  top: 58px;
+  top: 43.5px;
   right: 50px;
-  width: 220px;
-  height: 68px;
-  background-color: #F5F5F5;
-  border-radius: 8px;
-  font-size: 14px;
-  font-family: 'Inter', sans-serif;
-  color: #53535D;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  gap: 10px;
 }
 
+.contact-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 14px;
+  border: 1px solid #A5DFEF;
+  background-color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
+.contact-btn:hover {
+  background-color: #e8f7fb;
+}
