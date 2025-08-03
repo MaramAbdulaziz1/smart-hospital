@@ -12,7 +12,7 @@ import java.util.List;
 @Controller
 public class PatientController {
 
-  @GetMapping("/patient-profile")
+  @GetMapping("/patientProfile")
   public String patientProfilePage(Model model) {
     // 建立假病人資料
     Patient patient = new Patient();

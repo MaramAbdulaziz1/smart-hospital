@@ -5,11 +5,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class DashboardController {
+public class CalendarController {
 
-  @GetMapping("/dashboard")
-  public String dashboardPage(Model model) {
-    model.addAttribute("pageTitle", "Home");
-    return "dashboard";
-  }
-}
+    @GetMapping("/calendar")
+    public String calendarPage(Model model) {
+        model.addAttribute("pageTitle", "Calendar");
+        return "calendar";
+    }
+} 

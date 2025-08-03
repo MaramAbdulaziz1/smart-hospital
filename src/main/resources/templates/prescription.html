@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Patient Prescription</title>
-    <link rel="stylesheet" href="prescription.css" />
+    <link rel="stylesheet" href="/css/prescription.css" />
 </head>
 <body>
 
@@ -15,8 +15,8 @@
     </a>
     <a href="/dashboard" class="nav-item with-icon home">Home</a>
     <a href="#" class="nav-item with-icon calendar">Calendar</a>
-    <a href="#" class="nav-item with-icon profile">Patient Profile</a>
-    <a href="#" class="nav-item with-icon intake">Patient Intake</a>
+    <a href="/patientProfile" class="nav-item with-icon profile">Patient Profile</a>
+    <a href="/patientintake" class="nav-item with-icon intake">Patient Intake</a>
     <a href="/vitals" class="nav-item with-icon vitals">Vitals</a>
     <a href="#" class="nav-item with-icon prescription active">Prescription</a>
     <a href="/login" class="nav-item with-icon logout">Log Out</a>
@@ -185,5 +185,8 @@
         </div>
     </div>
 </div>
+
+<!-- Scripts -->
+<script th:src="@{/js/sharedLayout.js}"></script>
 </body>
 </html>

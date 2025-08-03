@@ -11,36 +11,48 @@
   <!-- 🔸 Navigation Links -->
   <nav class="sidebar-nav">
     <div class="tab" data-page="home">
+      <a href="/dashboard">
       <img th:src="@{/SharedLayoutImages/homeIcon.svg}" alt="Home Icon" class="tab-icon">
       <span>Home</span>
+      </a>
     </div>
 
     <div class="tab" data-page="calendar">
+      <a href="/calendar">
       <img th:src="@{/SharedLayoutImages/calendarIcon.svg}" alt="Calendar Icon" class="tab-icon">
       <span>Calendar</span>
+      </a>
     </div>
 
     <div class="tab">
+      <a href="/patientProfile">
       <img th:src="@{/SharedLayoutImages/profileIcon.svg}" alt="Profile Icon" class="tab-icon">
       <span>Patient Profile</span>
+      </a>
     </div>
 
     <div class="tab">
+      <a href="/patientintake">
       <img th:src="@{/SharedLayoutImages/intakeIcon.svg}" alt="Intake Icon" class="tab-icon">
       <span>Patient Intake</span>
+      </a>
     </div>
 
     <!-- Active tab styling applied here -->
-    <div class="tab active-tab">
-      <img th:src="@{/SharedLayoutImages/vitalsIcon.svg}" alt="Vitals Icon" class="tab-icon">
-      <span>Vitals</span>
+    <div class="tab">
+      <a href="/vitals">
+        <img th:src="@{/SharedLayoutImages/vitalsIcon.svg}" alt="Vitals Icon" class="tab-icon">
+        <span>Vitals</span>
+      </a>
     </div>
 
     <div class="tab" data-page="prescription">
-      <div class="icon-group">
-        <img th:src="@{/SharedLayoutImages/prescriptionIcon1.svg}" alt="Prescription Icon" class="tab-icon">
-      </div>
-      <span>Prescription</span>
+      <a href="/prescription">
+        <div class="icon-group">
+          <img th:src="@{/SharedLayoutImages/prescriptionIcon1.svg}" alt="Prescription Icon" class="tab-icon">
+        </div>
+        <span>Prescription</span>
+      </a>
     </div>
   </nav>
 
@@ -52,14 +64,156 @@
 
 </aside>
 
+<!-- 🔹 Vitals Sidebar Fragment: Left vertical navigation with vitals active -->
+<aside th:fragment="vitalsSidebar" class="sidebar">
+
+  <!-- Logo at the top of the sidebar -->
+  <img th:src="@{/SharedLayoutImages/LogoCircle.png}" alt="Logo" class="logo">
+
+  <!-- 🔸 Navigation Links -->
+  <nav class="sidebar-nav">
+    <div class="tab" data-page="home">
+      <a href="/dashboard">
+        <img th:src="@{/SharedLayoutImages/homeIcon.svg}" alt="Home Icon" class="tab-icon">
+        <span>Home</span>
+      </a>
+    </div>
+
+    <div class="tab" data-page="calendar">
+      <a href="/calendar">
+        <img th:src="@{/SharedLayoutImages/calendarIcon.svg}" alt="Calendar Icon" class="tab-icon">
+        <span>Calendar</span>
+      </a>
+    </div>
+
+    <div class="tab">
+      <a href="/patientProfile">
+        <img th:src="@{/SharedLayoutImages/profileIcon.svg}" alt="Profile Icon" class="tab-icon">
+        <span>Patient Profile</span>
+      </a>
+    </div>
+
+    <div class="tab">
+      <a href="/patientintake">
+        <img th:src="@{/SharedLayoutImages/intakeIcon.svg}" alt="Intake Icon" class="tab-icon">
+        <span>Patient Intake</span>
+      </a>
+    </div>
+
+    <!-- Active tab styling applied here -->
+    <div class="tab active-tab">
+      <a href="/vitals">
+        <img th:src="@{/SharedLayoutImages/vitalsIcon.svg}" alt="Vitals Icon" class="tab-icon">
+        <span>Vitals</span>
+      </a>
+    </div>
+
+    <div class="tab" data-page="prescription">
+      <a href="/prescription">
+        <div class="icon-group">
+          <img th:src="@{/SharedLayoutImages/prescriptionIcon1.svg}" alt="Prescription Icon" class="tab-icon">
+        </div>
+        <span>Prescription</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- 🔸 Logout Button at the bottom -->
+  <div class="tab logout-tab">
+    <img th:src="@{/SharedLayoutImages/logoutIcon.svg}" alt="Logout Icon" class="tab-icon">
+    <span>Log Out</span>
+  </div>
+
+</aside>
+
+
+
 <!-- 🔹 Top Navigation Fragment -->
 <header th:fragment="topNav" class="top-nav">
   <!-- Dynamic page title (defaults to "Page Title") -->
   <h1 class="page-title" th:text="${pageTitle} ?: 'Page Title'">Page Title</h1>
 
-  <!-- Icons on the right -->
-  <img th:src="@{/SharedLayoutImages/notificationIcon.svg}" alt="Notifications" class="notification-icon">
-  <img th:src="@{/SharedLayoutImages/doctorProfileImage.png}" alt="Doctor Profile" class="doctor-profile">
+  <!-- Icons on the right: notifications + profile -->
+  <div class="header-icons-container">
+    <div class="notification-container">
+      <img th:src="@{/SharedLayoutImages/notificationIcon.svg}" alt="Notifications" class="notification-icon" id="notificationIcon">
+      
+      <!-- Notification Popup -->
+      <div class="notification-popup" id="notificationPopup">
+        <div class="notification-header">
+          <h3>Notifications</h3>
+          <button class="close-btn" id="closeNotifications">&times;</button>
+        </div>
+        <div class="notification-list">
+          <div class="notification-item unread">
+            <div class="notification-content">
+              <div class="notification-title">Patient Harry Potter's vitals updated</div>
+              <div class="notification-time">2 minutes ago</div>
+            </div>
+            <div class="notification-dot"></div>
+          </div>
+          <div class="notification-item unread">
+            <div class="notification-content">
+              <div class="notification-title">New appointment scheduled for 3:00 PM</div>
+              <div class="notification-time">15 minutes ago</div>
+            </div>
+            <div class="notification-dot"></div>
+          </div>
+          <div class="notification-item">
+            <div class="notification-content">
+              <div class="notification-title">Patient Mary Johnson's prescription ready</div>
+              <div class="notification-time">1 hour ago</div>
+            </div>
+          </div>
+          <div class="notification-item">
+            <div class="notification-content">
+              <div class="notification-title">System maintenance completed</div>
+              <div class="notification-time">2 hours ago</div>
+            </div>
+          </div>
+        </div>
+        <div class="notification-footer">
+          <button class="mark-all-read">Mark all as read</button>
+          <button class="view-all">View all notifications</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-container">
+      <img th:src="@{/SharedLayoutImages/doctorProfileImage.png}" alt="Doctor Profile" class="doctor-profile" id="doctorProfileIcon">
+      
+      <!-- Doctor Profile Popup -->
+      <div class="profile-popup" id="profilePopup">
+        <div class="profile-header">
+          <img th:src="@{/SharedLayoutImages/doctorProfileImage.png}" alt="Doctor Profile" class="profile-avatar">
+          <div class="profile-info">
+            <h3>Dr. Sarah Johnson</h3>
+            <p>Cardiologist</p>
+          </div>
+          <button class="close-btn" id="closeProfile">&times;</button>
+        </div>
+        <div class="profile-menu">
+          <div class="profile-menu-item" data-action="profile">
+            <img th:src="@{/SharedLayoutImages/profileIcon.svg}" alt="Profile" class="menu-icon">
+            <span>My Profile</span>
+          </div>
+          <div class="profile-menu-item" data-action="settings">
+            <img th:src="@{/SharedLayoutImages/settingsIcon.svg}" alt="Settings" class="menu-icon">
+            <span>Settings</span>
+          </div>
+          <div class="profile-menu-item" data-action="help">
+            <img th:src="@{/SharedLayoutImages/helpIcon.svg}" alt="Help" class="menu-icon">
+            <span>Help & Support</span>
+          </div>
+          <div class="profile-divider"></div>
+          <div class="profile-menu-item logout" data-action="logout">
+            <img th:src="@{/SharedLayoutImages/logoutIcon.svg}" alt="Logout" class="menu-icon">
+            <span>Log Out</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </header>
 
 <!-- 🔹 Patient Card Fragment: Displays patient info -->

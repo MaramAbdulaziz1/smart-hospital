@@ -1,84 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Patient Vitals</title>
-    <link rel="stylesheet" href="/vitals.css">
+    <link rel="stylesheet" th:href="@{/css/sharedLayout.css}">
+    <link rel="stylesheet" th:href="@{/css/vitals.css}">
 </head>
 <body>
 
-<!-- Sidebar -->
-<div class="sidebar">
-    <a href="/dashboard">
-        <img src="/VitalsPageImages/LogoCircle.png" alt="Logo" />
-    </a>
-    <a href="/dashboard" class="nav-item with-icon home">Home</a>
-    <a href="#" class="nav-item with-icon calendar">Calendar</a>
-    <a href="#" class="nav-item with-icon profile">Patient Profile</a>
-    <a href="#" class="nav-item with-icon intake">Patient Intake</a>
-    <a href="/vitals" class="nav-item with-icon vitals active">Vitals</a>
-    <a href="/prescription" class="nav-item with-icon prescription">Prescription</a>
-    <a href="/login" class="nav-item with-icon logout">Log Out</a>
-</div>
+<div class="layout-container">
+  <!-- Sidebar -->
+  <aside th:replace="layouts/sharedLayout :: sidebar"></aside>
 
-<!-- Main Content -->
-<div class="main">
-    <div class="header">
-        Patient Vitals
-        <div class="header-icons">
-            <!-- Notification Bell Icon -->
-            <svg class="notification-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
-            </svg>
-            <div class="top-right-avatar">👤</div>
-        </div>
-    </div>
+  <!-- Main Content Area -->
+  <div class="main-content">
+    <!-- Top Navigation -->
+    <header th:replace="layouts/sharedLayout :: topNav"></header>
 
-    <div class="content">
-        <!-- Patient Info -->
-        <div class="patient-info">
-            <div class="patient-left">
-                <div class="patient-avatar">👤</div>
-                <h3 class="patient-name">Harry Potter</h3>
-                <div class="contact-buttons">
-                    <button class="contact-btn">
-                        <!-- Phone SVG -->
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2.98816 2.98816C2.67559 3.30072 2.5 3.72464 2.5 4.16667V5C2.5 11.9033 8.09667 17.5 15 17.5H15.8333C16.2754 17.5 16.6993 17.3244 17.0118 17.0118C17.3244 16.6993 17.5 16.2754 17.5 15.8333V13.1008C17.5 12.9259 17.445 12.7553 17.3427 12.6134C17.2404 12.4714 17.096 12.3653 16.93 12.31L13.1858 11.0617C12.9956 10.9984 12.7888 11.0059 12.6036 11.0827C12.4184 11.1596 12.2671 11.3006 12.1775 11.48L11.2358 13.3608C9.19538 12.4389 7.5611 10.8046 6.63917 8.76417L8.52 7.8225C8.69938 7.73288 8.84042 7.58158 8.91726 7.39637C8.9941 7.21116 9.00158 7.00445 8.93833 6.81417L7.69 3.07C7.63475 2.90413 7.52874 2.75984 7.38696 2.65754C7.24519 2.55525 7.07483 2.50013 6.9 2.5H4.16667C3.72464 2.5 3.30072 2.67559 2.98816 2.98816Z" stroke="#3F3F46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        Phone
-                    </button>
-
-                    <button class="contact-btn">
-                        <!-- Video SVG -->
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15 10L19.553 7.724C19.7054 7.64784 19.8748 7.61188 20.045 7.61955C20.2152 7.62721 20.3806 7.67825 20.5256 7.76781C20.6706 7.85736 20.7902 7.98248 20.8733 8.13127C20.9563 8.28007 20.9999 8.44761 21 8.618V15.382C20.9999 15.5524 20.9563 15.7199 20.8733 15.8687C20.7902 16.0175 20.6706 16.1426 20.5256 16.2322C20.3806 16.3218 20.2152 16.3728 20.045 16.3805C19.8748 16.3881 19.7054 16.3522 19.553 16.276L15 14V10ZM5 18H13C13.5304 18 14.0391 17.7893 14.4142 17.4142C14.7893 17.0391 15 16.5304 15 16V8C15 7.46957 14.7893 6.96086 14.4142 6.58579C14.0391 6.21071 13.5304 6 13 6H5C4.46957 6 3.96086 6.21071 3.58579 6.58579C3.21071 6.96086 3 7.46957 3 8V16C3 16.5304 3.21071 17.0391 3.58579 17.4142C3.96086 17.7893 4.46957 18 5 18Z" stroke="#3F3F46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        Video
-                    </button>
-                </div>
-            </div>
-            <div class="patient-right">
-                <div class="info-table">
-                    <div class="info-column">
-                        <div class="info-label">Sex</div>
-                        <div class="info-value">Male</div>
-                    </div>
-                    <div class="info-column">
-                        <div class="info-label">Age</div>
-                        <div class="info-value">30</div>
-                    </div>
-                    <div class="info-column">
-                        <div class="info-label">Date of Birth</div>
-                        <div class="info-value">23/08/1999</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- Vitals Content -->
+    <div class="vitals-content">
+        <!-- Patient Info Card -->
+        <section th:replace="layouts/sharedLayout :: patientCard"></section>
 
         <!-- Vitals Form -->
         <div class="vitals-form">
+            <h2>Patient Vitals Record</h2>
             <div class="vitals-grid">
                 <!-- First Row -->
                 <div class="vital-group">
@@ -102,7 +49,7 @@
                 <div class="vital-group">
                     <label for="temperature">
                         <svg class="vital-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2zm0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
                         </svg>
                         Temperature
                     </label>
@@ -188,7 +135,11 @@
             </table>
         </div>
     </div>
+  </div>
 </div>
+
+<!-- Scripts -->
+<script th:src="@{/js/sharedLayout.js}"></script>
 
 </body>
 </html>
