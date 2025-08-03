@@ -276,7 +276,7 @@ html, body {
   border-color: #0056CC;
 }
 
-/* 🔹 Patient Card Container */
+/* 🔹 Patient Card Fragment: Displays patient info */
 .patient-card {
   position: absolute;
   width: calc(100vw - 210px - 100px); 
@@ -294,6 +294,27 @@ html, body {
   z-index: 1; 
 }
 
+/* 🔹 Modern Patient Card Layout (for vitals and history pages) */
+.vitals-content .patient-card,
+.content .patient-card {
+  position: relative;
+  width: calc(100% - 60px); 
+  max-width: 1200px;
+  height: 170px;
+  top: auto;
+  left: auto;
+  background: #FFFFFF;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 80px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  z-index: 10; 
+  margin-bottom: 20px; 
+}
+
 /* 🔹 Patient profile image */
 .patient-photo {
   position: absolute;
@@ -303,6 +324,19 @@ html, body {
   left: 100px;
   border-radius: 50%;
   object-fit: cover;
+}
+
+/* 🔹 Modern Patient Photo Layout */
+.vitals-content .patient-card .patient-photo,
+.content .patient-card .patient-photo {
+  position: relative;
+  width: 108.5px;
+  height: 112.4px;
+  top: auto;
+  left: auto;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 30px;
 }
 
 /* 🔹 Patient name */
@@ -318,6 +352,21 @@ html, body {
   transform: rotate(-0.16deg);
 }
 
+/* 🔹 Modern Patient Name Layout */
+.vitals-content .patient-card .patient-name,
+.content .patient-card .patient-name {
+  position: relative;
+  width: auto;
+  height: auto;
+  font-size: 22px;
+  font-weight: 400;
+  color: #000000;
+  margin-bottom: 10px;
+  top: auto;
+  left: auto;
+  transform: none;
+}
+
 /* 🔹 Divider line in patient card */
 .divider-line {
   position: absolute;
@@ -327,6 +376,20 @@ html, body {
   left: 200px;
   border-top: 5px solid #F5F5F5;
   transform: rotate(-90.52deg);
+}
+
+/* 🔹 Modern Divider Line Layout */
+.vitals-content .patient-card .divider-line,
+.content .patient-card .divider-line {
+  position: relative;
+  width: 2px;
+  height: 110px;
+  background: #F5F5F5;
+  margin: 0 30px;
+  top: auto;
+  left: auto;
+  transform: none;
+  border-top: none;
 }
 
 /* 🔹 Shared styles for all info boxes */
@@ -341,10 +404,31 @@ html, body {
   font-family: 'Inter', sans-serif;
 }
 
+/* 🔹 Modern Info Box Layout */
+.vitals-content .patient-card .info-box,
+.content .patient-card .info-box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 15px;
+  gap: 8px;
+  top: auto;
+  left: auto;
+  font-family: 'Inter', sans-serif;
+  margin-right: 20px;
+}
+
 /* 🟩 Individual Info Boxes  */
 .id-box {
   width: 150px;
   left: 280px; 
+}
+
+.vitals-content .patient-card .id-box,
+.content .patient-card .id-box {
+  width: 150px;
+  left: auto;
 }
 
 .dob-box {
@@ -352,14 +436,32 @@ html, body {
   left: 450px; 
 }
 
+.vitals-content .patient-card .dob-box,
+.content .patient-card .dob-box {
+  width: 180px;
+  left: auto;
+}
+
 .gender-box {
   width: 70px;
   left: 680px; 
 }
 
+.vitals-content .patient-card .gender-box,
+.content .patient-card .gender-box {
+  width: 80px;
+  left: auto;
+}
+
 .address-box {
   width: 240px;
   left: 770px;
+}
+
+.vitals-content .patient-card .address-box,
+.content .patient-card .address-box {
+  width: 200px;
+  left: auto;
 }
 
 /* 🔹 DOB's extra line for age */
@@ -368,6 +470,14 @@ html, body {
   color: #53535D;
   margin-top: 4px;
   padding-left: 24px;
+}
+
+.vitals-content .patient-card .info-age,
+.content .patient-card .info-age {
+  font-size: 16px;
+  color: #53535D;
+  margin-top: 4px;
+  padding-left: 0;
 }
 
 /* 🔹 Label and Value styles */
@@ -389,6 +499,18 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+/* 🔹 Modern Contact Buttons Layout */
+.vitals-content .patient-card .contact-buttons,
+.content .patient-card .contact-buttons {
+  position: relative;
+  top: auto;
+  right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-left: auto;
 }
 
 .contact-btn {
