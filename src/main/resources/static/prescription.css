@@ -305,7 +305,7 @@ body {
   background-color: #ffffff;
   font-size: 14px;
   font-weight: 500;
-  resize: none;
+  resize: vertical;
 }
 
 /* form label */
