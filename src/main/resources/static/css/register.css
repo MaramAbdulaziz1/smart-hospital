@@ -51,23 +51,22 @@ body {
 /* First form section box */
 .details-box {
   position: absolute;
-  top: 106px;
+  top: 130px;
   left: 50%;
   transform: translateX(-50%);
   width: 900px;
-  height: 266px;
+  height: 246px;
   background-color: #F2F2F299;
   border: 1px solid #F2F2F2;
   border-radius: 16px;
   box-sizing: border-box;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 /* Label for section title */
 .details-title {
   position: absolute;
-  top: 7px;
-  left: 35px;
+  top: 100px;
+  left: 330px;
   font-family: 'Inter', sans-serif;
   font-weight: 500;
   font-size: 20px;
@@ -104,24 +103,24 @@ body {
 }
 
 /* Field positioning: Left column */
-.full-name-label { top: 37px; left: 35px; }
-.full-name-input { top: 61px; left: 35px; width: 420px; height: 33px; }
+.full-name-label { top: 20px; left: 35px; }
+.full-name-input { top: 44px; left: 35px; width: 420px; height: 33px; }
 
-.employee-label { top: 110px; left: 35px; }
-.employee-input { top: 132px; left: 35px; width: 280px; height: 35px; }
+.employee-label { top: 93px; left: 35px; }
+.employee-input { top: 115px; left: 35px; width: 280px; height: 35px; }
 
-.gender-label { top: 185px; left: 35px; }
-.gender-input { top: 206px; left: 35px; width: 280px; height: 35px; }
+.gender-label { top: 168px; left: 35px; }
+.gender-input { top: 189px; left: 35px; width: 280px; height: 35px; }
 
 /* Field positioning: Right column */
-.department-label { top: 37px; left: 490px; }
-.department-input { top: 61px; left: 490px; width: 280px; height: 35px; }
+.department-label { top: 20px; left: 490px; }
+.department-input { top: 44px; left: 490px; width: 280px; height: 35px; }
 
-.position-label { top: 110px; left: 490px; }
-.position-input { top: 132px; left: 490px; width: 280px; height: 35px; }
+.position-label { top: 93px; left: 490px; }
+.position-input { top: 115px; left: 490px; width: 280px; height: 35px; }
 
-.location-label { top: 185px; left: 490px; }
-.location-input { top: 206px; left: 490px; width: 280px; height: 35px; }
+.location-label { top: 168px; left: 490px; }
+.location-input { top: 189px; left: 490px; width: 280px; height: 35px; }
 
 /* Second form section box */
 .account-box {
@@ -135,7 +134,6 @@ body {
   border: 1px solid #F2F2F2;
   border-radius: 16px;
   box-sizing: border-box;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 /* Label styling for second box */
