@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Patient Prescription</title>
+    <link rel="stylesheet" href="/css/patientintake.css" />
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <a href="/">
+        <img src="/PrescriptionPageImages/LogoCircle.png" alt="Logo" />
+    </a>
+    <a href="/homepage" class="nav-item with-icon home">Home</a>
+    <a href="#" class="nav-item with-icon calendar">Calendar</a>
+    <a href="/patientProfile" class="nav-item with-icon profile">Patient Profile</a>
+    <a href="/patientintake" class="nav-item with-icon intake active">Patient Intake</a>
+    <a href="/vitals" class="nav-item with-icon vitals">Vitals</a>
+    <a href="/prescription" class="nav-item with-icon prescription">Prescription</a>
+    <a href="/login" class="nav-item with-icon logout">Log Out</a>
+</div>
+
+<!-- Main Content -->
+<div class="main">
+    <div class="header">
+        Patient Intake
+        <div class="header-icons">
+            <!-- Notification Bell Icon -->
+            <svg class="notification-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+            </svg>
+            <div class="top-right-avatar">👤</div>
+        </div>
+    </div>
+
+    <div class="content">
+        <!-- Patient Info -->
+        <div class="patient-info">
+            <div class="patient-left">
+                <div class="patient-avatar">👤</div>
+                <h3 class="patient-name">Harry Potter</h3>
+            </div>
+            <div class="patient-right">
+                <div class="info-table">
+                    <div class="info-column">
+                        <div class="info-label">Sex</div>
+                        <div class="info-value">Male</div>
+                    </div>
+                    <div class="info-column">
+                        <div class="info-label">Age</div>
+                        <div class="info-value">30</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-table">
+                        <div class="info-column">
+                            <div class="info-label">Visit type</div>
+                            <!--要跟backend連結-->
+                            <div class="info-value">First</div>
+                        </div>
+                        <div class="info-column">
+                            <div class="info-label">Date of Birth</div>
+                            <div class="info-value">23/08/1999</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--intake section-->
+        <div class="form-column">
+            <div>
+                <div class="tabs active">Patient Complaint</div>
+                <textarea class="intake-card complaint" disabled></textarea>
+            </div>
+            <div class="form-row">
+                <div>
+                    <div>
+                        <div class="tabs sub-tabs active">Diagnosis</div>
+                        <div class="tabs sub-tabs">Medical History</div>
+                    </div>
+                    <textarea class="intake-card diagnosis" disabled placeholder = 'Click "Edit" to enter diagnosis...'></textarea>
+                </div>
+                <div class="button-group">
+                    <button class="edit-btn" onclick="enableSection()">Edit</button>
+                    <button class="save-btn">Save</button>
+                    <button class="submit-btn">Submit</button>
+                </div>
+            </div>
+        </div>
+</div>
+
+<!--button function(should be refractor later)-->
+<script>
+    //edit button
+    function enableSection() {
+        const diagnosisTextarea = document.querySelector('.intake-card.diagnosis');
+        if (diagnosisTextarea) {
+            diagnosisTextarea.removeAttribute('disabled');
+            diagnosisTextarea.focus(); // 可選：自動跳進輸入框
+        }
+    }
+    // 找到所有 .sub-tabs 元素
+    document.querySelectorAll('.sub-tabs').forEach(tab => {
+        tab.addEventListener('click', () => {
+        // 1. 移除所有 tab 的 active
+        document.querySelectorAll('.sub-tabs').forEach(t => t.classList.remove('active'));
+
+        // 2. 加上目前點的那一個 tab 為 active
+        tab.classList.add('active');
+
+        // 3. (可選) 改變 textarea 的 placeholder 內容（或未來切換 textarea）
+        const textarea = document.querySelector('.intake-card.diagnosis');
+        if (textarea) {
+            if (tab.textContent.includes('Diagnosis')) {
+            textarea.placeholder = 'Click "Edit" to enter diagnosis...';
+            } else if (tab.textContent.includes('Medical History')) {
+            textarea.placeholder = 'Click "Edit" to enter medical history...';
+            }
+        }
+        });
+    });
+
+</script>
+
+<!-- Scripts -->
+<script th:src="@{/js/sharedLayout.js}"></script>
+</body>
+</html>

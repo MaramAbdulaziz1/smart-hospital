@@ -230,3 +230,15 @@ body {
 .diamond:nth-child(4) { grid-column: 3; grid-row: 2; }
 .diamond:nth-child(5) { grid-column: 1; grid-row: 3; }
 .diamond:nth-child(6) { grid-column: 2; grid-row: 3; }
+
+.forgot-link {
+  text-decoration: none;
+  color: #000;
+  font-family: 'Neuton', serif;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}

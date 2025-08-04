@@ -4,45 +4,81 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registration</title>
-
-  <!-- External CSS file -->
   <link rel="stylesheet" href="../css/register.css">
 </head>
 <body>
+
+<!-- Full Page Wrapper -->
 <div class="container">
-  <!-- Header Section -->
+
+  <!-- Top Navigation Header -->
   <div class="header">
     <img src="RegisterPageImages/LogoCircle.png" alt="Logo" class="logo">
     <div class="header-title">Registration</div>
   </div>
 
-  <!-- First Box: Enter Details -->
+  <!-- User Information Section (Box 1) -->
   <div class="details-box">
     <div class="details-title">Enter Details</div>
+
+    <!-- Left Side Inputs -->
     <label class="details-label full-name-label">Full Name (as shown on employee ID)</label>
     <input type="text" class="details-input full-name-input">
+
     <label class="details-label employee-label">Employee ID</label>
     <input type="text" class="details-input employee-input">
+
+    <label class="details-label gender-label">Gender</label>
+    <select class="details-input gender-input">
+      <option value="">Select</option>
+      <option value="female">Female</option>
+      <option value="male">Male</option>
+      <option value="other">Other</option>
+    </select>
+
+    <!-- Right Side Inputs -->
+    <label class="details-label department-label">
+      Department <span class="helper-text">Which department you will be working in?</span>
+    </label>
+    <input type="text" class="details-input department-input">
+
+    <label class="details-label position-label">
+      Position <span class="helper-text">Doctor/Nurse/Etc. Please specify</span>
+    </label>
+    <input type="text" class="details-input position-input">
+
+    <label class="details-label location-label">
+      Location <span class="helper-text">Where will you be working from?</span>
+    </label>
+    <input type="text" class="details-input location-input">
   </div>
 
-  <!-- Second Box: Account Information -->
+  <!-- Account Credentials Section (Box 2) -->
   <div class="account-box">
     <label class="account-label email-label">Work Email</label>
     <input type="email" class="account-input email-input">
+
+    <label class="account-label mobile-label">Mobile Number</label>
+    <input type="text" class="account-input mobile-input">
+
+    <label class="account-label work-label">Work Number</label>
+    <input type="text" class="account-input work-input">
+
     <label class="account-label password-label">New Password</label>
     <input type="password" class="account-input password-input">
+
     <label class="account-label confirm-label">Confirm New Password</label>
     <input type="password" class="account-input confirm-input">
   </div>
 
-  <!-- Buttons Section -->
+  <!-- Submit & Cancel Buttons -->
   <div class="button-wrapper">
     <button class="action-btn">REGISTER</button>
     <button class="action-btn cancel-btn" onclick="cancelRegistration()">CANCEL</button>
   </div>
+
 </div>
 
-<!-- External JavaScript file -->
 <script src="../js/register.js"></script>
 </body>
 </html>

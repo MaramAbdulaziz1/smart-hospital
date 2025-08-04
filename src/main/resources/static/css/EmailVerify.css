@@ -1,0 +1,88 @@
+/* Base page layout */
+body {
+   margin: 0;
+   padding: 0;
+   background: #ffffff;
+   width: 100vw;
+   height: 100vh;
+   overflow: hidden;
+   
+}
+
+/* Page container */
+.container {
+   width: 100vw;
+   height: 100vh;
+   background-color: #ffffff;
+   position: relative;
+   display: flex;
+   justify-content: center; /* 水平置中 */
+   align-items: center;     /* 垂直置中 */
+}
+
+/* Top bar containing logo and title */
+.header {
+  width: 100%;
+  height: 89px;
+  background-color: #A5DFEF;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Logo image inside header */
+.logo {
+  position: absolute;
+  width: 165px;
+  height: 165px;
+  top: -38px;
+  left: -15px;
+  transform: rotate(0.16deg);
+}
+
+/* "Registration" title in header */
+.header-title {
+  position: absolute;
+  top: 24px;
+  left: 135px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 37px;
+  line-height: 1;
+  color: #000000;
+}
+
+.messagebox{
+   display: flex;
+   flex-direction: column;
+   width: 1051px;
+   height: 347px;
+   padding: 151px 221px 102px 221px;
+   justify-content: center;
+   align-items: center;
+
+   border-radius: 16px;
+   border: 1px solid #F2F2F2;
+   background: rgba(242, 242, 242, 0.60);
+}
+
+.message{
+   flex-shrink: 0;
+
+   color: #000;
+   text-align: center;
+   font-family: Inter;
+   font-size: 24px;
+   font-style: normal;
+   font-weight: 700;
+   line-height: normal;
+}
+
+.smallmessage{
+   color: #000;
+   font-family: Inter;
+   font-size: 20px;
+   font-style: normal;
+   font-weight: 400;
+   line-height: normal;
+}

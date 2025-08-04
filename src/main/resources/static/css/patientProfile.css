@@ -1,3 +1,4 @@
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -92,7 +93,7 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg width='17' height='15' viewBox='0 0 17 15' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.4584 3.54167L11.3421 4.65792L13.3846 6.70833H5.33337V8.29167H13.3846L11.3421 10.3342L12.4584 11.4583L16.4167 7.5M2.16671 1.95833H8.50004V0.375H2.16671C1.29587 0.375 0.583374 1.0875 0.583374 1.95833V13.0417C0.583374 13.9125 1.29587 14.625 2.16671 14.625H8.50004V13.0417H2.16671V1.95833Z' fill='black'/%3E%3C/svg%3E");
 }
 
-/*Main Content*/
+/* Main Content */
 .main {
   flex: 1;
   display: flex;
@@ -139,30 +140,35 @@ body {
 }
 
 .content {
-  flex: 1;
   padding: 30px;
-  overflow-y: auto;
 }
 
-/*patient card*/
-.patient-info {
-  background-color: #fff;
-  padding: 15px;
-  padding-left: 70px;
-  margin-bottom: 15px;
-  border-radius: 10px;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+
+/* Patient card */
+.patient-info-wrapper {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-start; /* 讓左邊 patient-left 對齊左邊 */
+  align-items: flex-start;
+  width: 100%;
+  gap: 80px;
 }
+
+
 
 .patient-left {
-  width: 180px;
+  width: 220px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
+.patient-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
 
 .patient-avatar {
   width: 100px;
@@ -184,20 +190,13 @@ body {
   margin: 0;
 }
 
-.patient-right {
-  display: flex;
-  width: 640px;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-}
+
 
 .info-table {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 200px 200px 200px;
   gap: 20px;
   margin-bottom: 15px;
-  min-width: 700px;
 }
 
 .info-column {
@@ -206,136 +205,50 @@ body {
 }
 
 .info-label {
-  font-size: 17px;
-  color: #666;
+  font-size: 13px;
+  color: #777;
   margin-bottom: 5px;
 }
 
 .info-value {
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: bold;
   color: #333;
 }
 
-.section-title {
-  font-weight: normal;
-  margin-bottom: 10px;
-}
 
-/*two sections*/
-.prescription-layout {
-  display: flex;
+/* Four sections */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
   margin-bottom: 20px;
 }
 
-.left-section {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.right-section {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-/* left-section content */
-.fixed-section {
-  background-color: #DCEFF4;
-  padding: 16px;
-  margin-bottom: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.fixed-section .section-title {
-  font-size: 16px;
-  font-weight: 500;
-  color: #2f2f2f;
-  margin-bottom: 8px;
-}
-
-.fixed-section textarea,
-.fixed-section select {
-  width: 100%;
-  padding: 12px;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  font-size: 14px;
-  resize: vertical;
-  background-color: #fff;
-  box-sizing: border-box;
-}
-
-.dropdown {
-  appearance: none;
-  background-image: url('data:image/svg+xml;utf8,<svg fill="%233F3F46" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  background-size: 16px 16px;
-}
-
-/* medication card content */
-.medication-card {
-  background-color: #DCEFF4;
+.grid-item {
+  background-color: #ecebeb;
+  padding: 10px;
   border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 15px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
 }
 
-.medication-card-header {
-  text-align: center;
-  font-size: 18px;
-  font-weight: 500;
-  margin-bottom: 15px;
-  color: #333;
-}
-
-/* medication card input box */
-.form-group input,
-.form-group textarea {
+.grid-item textarea {
   width: 100%;
-  padding: 12px 15px;
-  border: 2px solid #ccc;
-  border-radius: 8px;
+  height: 80px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+  resize: none;
   background-color: #ffffff;
+}
+
+.grid-item .refill {
+  text-align: right;
   font-size: 14px;
-  font-weight: 500;
-  resize: vertical;
+  margin-top: 5px;
 }
 
-/* form label */
-.form-group label {
-  font-size: 14px;
-  color: #333;
-  margin-bottom: 5px;
-  font-weight: 500;
-}
-
-/* form */
-.medication-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.form-row {
-  display: flex;
-  gap: 15px;
-  align-items: flex-end;
-}
-
-.form-group {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-/*button*/
+/* Buttons */
 .editor-btn, .save-btn {
   padding: 10px 20px;
   border: 2px solid #a5dfef;
@@ -345,20 +258,8 @@ body {
   color: #333;
 }
 
-.editor-btn:hover{
+.editor-btn:hover, .save-btn:hover {
   background-color: #e8f7fb;
-}
-
-.save-btn:hover{
-  background-color: #e8f7fb;
-}
-
-.floating-buttons {
-  display: flex;
-  justify-content: flex-end;
-  gap: 15px;
-  margin-top: 5px;
-  margin-right: 5px;
 }
 
 .contact-btn {
@@ -367,7 +268,7 @@ body {
   gap: 6px;
   padding: 6px 12px;
   font-size: 14px;
-  border: 2px solid #A5DFEF;
+  border: 1px solid #A5DFEF;
   background-color: #fff;
   border-radius: 8px;
   cursor: pointer;
@@ -387,62 +288,131 @@ body {
 .button-group {
   display: flex;
   gap: 15px;
-  justify-content: flex-start;;
+  justify-content: flex-end;
   margin-top: -8px;
 }
-
-/*Add Card & Delete Card Buttons*/
-.button-bar {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 5px;
-  margin-bottom: 0;
-  width: 100%;
-}
-
-.button-bar button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 3px 12px;
-  border: 2px solid #F9F9F9;
-  background-color: #F9F9F9;
+.edit-profile-btn {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  border: 1px solid #A5DFEF;
+  color: #3399cc;
+  background-color: #fff;
   border-radius: 8px;
-  cursor: pointer;
-  font-size: 13px;
-  line-height: 1.2;
-  transition: background-color 0.3s;
-  height: 20px;
-  box-sizing: border-box;
-}
-
-.button-bar button:hover {
-  background-color: #e8f7fb;
-}
-
-/* Editor & Save Buttons*/
-.floating-buttons {
-  display: flex;
-  justify-content: flex-end;
-  gap: 15px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding-right: 40px; 
-}
-
-.floating-buttons button {
-  padding: 10px 20px;
-  border: 2px solid #A5DFEF;
-  background-color: white;
-  color: #333;
-  border-radius: 8px;
-  cursor: pointer;
+  padding: 6px 14px;
   font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
   transition: background-color 0.3s;
 }
 
-.floating-buttons button:hover {
+.edit-profile-btn:hover {
   background-color: #e8f7fb;
+}
+
+
+/* 記得讓 patient-info 有 relative 才能讓絕對定位生效 */
+.patient-info {
+  position: relative;
+  padding: 24px;
+  margin-bottom: 40px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.vertical-line {
+  width: 1px;
+  background-color: #e5e5e5; /* 淺灰色 */
+  height: 80%; /* 根據你內容調整長度 */
+  margin: auto 30px;
+}
+
+
+
+.patient-left {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.vertical-line {
+  width: 1px;
+  background-color: #e5e5e5;
+  height: auto;
+  align-self: stretch;
+  margin: 0;
+}
+
+.patient-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+
+.patient-history-section {
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px 30px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  max-height: 300px;  /* 調整你想要的高度 */
+  overflow-y: auto;   /* 當超過時出現垂直捲軸 */
+}
+
+
+.section-title {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  /* 加這行統一字體 */
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.patient-history-section .section-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.patient-history-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.patient-history-table th, .patient-history-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.patient-history-table th {
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+.patient-history-table td a {
+  color: #0284c7;
+  text-decoration: none;
+}
+
+.patient-history-table td a:hover {
+  text-decoration: underline;
+}
+.report-link {
+  color: #0284c7;
+  text-decoration: none;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.report-link:hover {
+  text-decoration: underline;
 }

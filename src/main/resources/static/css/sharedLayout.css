@@ -1,14 +1,15 @@
-/* General page reset */
+/* 🔹 Reset styles for full-page control */
 html, body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden; /* Prevent scrollbars */
-  font-family: 'Inter', sans-serif; /* Apply correct font */
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-family: 'Inter', sans-serif;
 }
 
-/* Container */
+/* 🔹 Main layout container */
 .layout-container {
   display: flex;
   width: 100%;
@@ -16,9 +17,9 @@ html, body {
   background: #F5F5F5;
 }
 
-/* Sidebar container */
+/* 🔹 Sidebar (Left navigation) */
 .sidebar {
-  width: 210px;                /* Matches top nav offset */
+  width: 210px;
   height: 100vh;
   background-color: #FFFFFF;
   position: fixed;
@@ -27,9 +28,10 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between; /* Separates nav tabs from logout */
 }
 
-/* Logo */
+/* 🔹 Sidebar logo */
 .logo {
   position: absolute;
   width: 264px;
@@ -38,28 +40,23 @@ html, body {
   left: -35px;
 }
 
-/* Tabs container */
+/* 🔹 Sidebar navigation links */
 .sidebar-nav {
-  position: absolute;
-  width: 100%;
-  top: 193px;       /* Per Figma */
-  left: 0;
   display: flex;
   flex-direction: column;
   gap: 10px;
   align-items: center;
+  padding-top: 193px;
 }
 
-/* Each tab */
+/* 🔹 Sidebar tab styling */
 .tab {
-  width: 170px;         /* Figma width */
-  height: 50px;         /* Figma height */
+  width: 170px;
+  height: 50px;
   display: flex;
   align-items: center;
   gap: 10px;
   padding-left: 20px;
-
-  font-family: 'Inter', sans-serif;
   font-size: 18px;
   color: #000;
   border-radius: 16px;
@@ -70,72 +67,220 @@ html, body {
   background-color: #F5F5F5;
 }
 
-/* Active (highlighted) tab */
 .active-tab {
   background-color: #F5F5F5;
   border-radius: 16px;
 }
-/* Icons */
+
+/* 🔹 Tab icon */
 .tab-icon {
   width: 16px;
   height: 16px;
 }
 
-/* Fix Prescription icons side by side */
+/* 🔹 Tab link styling */
+.tab a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+/* 🔹 Group multiple icons */
 .icon-group {
   display: flex;
   gap: 6px;
   align-items: center;
 }
 
-/* Top nav bar */
+/* 🔹 Logout tab positioned at bottom of sidebar */
+.logout-tab {
+  margin-top: auto;
+  margin-bottom: 30px;
+  align-self: center;
+}
+
+/* 🔹 Top navigation bar */
 .top-nav {
   position: fixed;
   top: 0;
-  left: 210px; /* Start after sidebar */
+  left: 210px;
   width: calc(100% - 210px);
   height: 80px;
   background-color: #A5DFEF;
   display: flex;
   align-items: center;
   padding-left: 26px;
+  z-index: 1000; 
 }
 
-/* Page title */
+/* 🔹 Page title (set dynamically per page) */
 .page-title {
   position: absolute;
   left: 32px;
-  font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 24px;
   color: #000000;
 }
 
+/* Notification Container */
+.notification-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  z-index: 10000;
+}
+
 /* Notification Icon (right of top nav) */
 .notification-icon {
-  position: absolute;
   width: 35px;
-  height: 31px;
-  top: 24px;
-  left: 1200px;
+  height: 35px;
   cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
-/* Doctor Profile Image (right corner) */
-.doctor-profile {
+.notification-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Notification Popup */
+.notification-popup {
   position: absolute;
-  width: 61px;
-  height: 58px;
-  top: 11px;
-  left: 1250px;
-  border-radius: 50%;  /* Makes it circular if image isn't */
-  cursor: pointer;
+  top: 45px;
+  right: 0;
+  width: 350px;
+  background: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  border: 1px solid #E5E5E5;
+  z-index: 10001; 
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
 }
 
-/* Patient card container */
+.notification-popup.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  display: block;
+  pointer-events: auto;
+}
+
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #F0F0F0;
+}
+
+.notification-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Removed duplicate doctor-profile style that was causing positioning issues */
+
+.notification-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.notification-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 12px 20px;
+  border-bottom: 1px solid #F8F8F8;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.notification-item:hover {
+  background-color: #F8F8F8;
+}
+
+.notification-item.unread {
+  background-color: #F0F8FF;
+}
+
+.notification-item.unread:hover {
+  background-color: #E6F3FF;
+}
+
+.notification-content {
+  flex: 1;
+  margin-right: 12px;
+}
+
+.notification-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+.notification-time {
+  font-size: 12px;
+  color: #666;
+}
+
+.notification-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #007AFF;
+  border-radius: 50%;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+.notification-footer {
+  padding: 12px 20px;
+  border-top: 1px solid #F0F0F0;
+  display: flex;
+  gap: 8px;
+}
+
+.notification-footer button {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #E0E0E0;
+  background: #FFFFFF;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.notification-footer button:hover {
+  background-color: #F5F5F5;
+  border-color: #D0D0D0;
+}
+
+.notification-footer .view-all {
+  background-color: #007AFF;
+  color: white;
+  border-color: #007AFF;
+}
+
+.notification-footer .view-all:hover {
+  background-color: #0056CC;
+  border-color: #0056CC;
+}
+
+/* 🔹 Patient Card Fragment: Displays patient info */
 .patient-card {
   position: absolute;
-  width: 1275px;
+  width: calc(100vw - 210px - 100px); 
+  max-width: 1200px; 
   height: 170px;
   top: 95px;
   left: 235px;
@@ -144,107 +289,499 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding-left: 80px;
+  padding: 20px 30px;
   box-sizing: border-box;
+  z-index: 1; 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #E5E5E5;
 }
 
-/* Patient profile photo */
+/* 🔹 Modern Patient Card Layout (for vitals and history pages) */
+.vitals-content .patient-card,
+.content .patient-card {
+  position: relative;
+  width: 100%; 
+  max-width: none;
+  height: 170px;
+  top: auto;
+  left: auto;
+  background: #FFFFFF;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px 30px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  z-index: 10; 
+  margin-bottom: 20px; 
+  border: 1px solid #E5E5E5;
+}
+
+/* 🔹 Profile section (photo + name) */
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+  flex-shrink: 0;
+}
+
+/* 🔹 Patient profile image */
 .patient-photo {
-  position: absolute;
-  width: 108.5px;
-  height: 112.4px;
-  top: 15px;
-  left: 100px;
+  position: relative;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   object-fit: cover;
+  margin-right: 0;
+  margin-bottom: 10px;
+  flex-shrink: 0;
 }
 
-/* Patient name */
+/* 🔹 Modern Patient Photo Layout */
+.vitals-content .patient-card .patient-photo,
+.content .patient-card .patient-photo {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 20px;
+  flex-shrink: 0;
+}
+
+/* 🔹 Patient name */
 .patient-name {
-  position: absolute;
-  width: 188px;
-  height: 40px;
-  top: 115px;
-  left: 95px;
-  font-family: 'Inter', sans-serif;
-  font-size: 22px;
-  font-weight: 400;
-  line-height: 1;
+  position: relative;
+  width: auto;
+  height: auto;
+  font-size: 18px;
+  font-weight: 600;
   color: #000000;
-  transform: rotate(-0.16deg); /* Matches Figma's slight tilt */
+  margin: 0;
+  text-align: center;
+  transform: none;
 }
 
-/* Divider line (between left and right sections) */
+/* 🔹 Modern Patient Name Layout */
+.vitals-content .patient-card .patient-name,
+.content .patient-card .patient-name {
+  position: relative;
+  width: auto;
+  height: auto;
+  font-size: 20px;
+  font-weight: 600;
+  color: #000000;
+  margin-bottom: 5px;
+  transform: none;
+}
+
+/* 🔹 Divider line in patient card */
 .divider-line {
-  position: absolute;
-  width: 329.98px;
+  position: relative;
+  width: 2px;
   height: 110px;
-  top: 147px;
-  left: 210px;
-  border-top: 5px solid #F5F5F5;
-  transform: rotate(-90.52deg);
+  background: #F5F5F5;
+  margin: 0 30px;
+  transform: none;
+  border-top: none;
 }
 
-/* Generic info box styling (for Sex, Age, DOB) */
+/* 🔹 Modern Divider Line Layout */
+.vitals-content .patient-card .divider-line,
+.content .patient-card .divider-line {
+  position: relative;
+  width: 2px;
+  height: 110px;
+  background: #F5F5F5;
+  margin: 0 30px;
+  transform: none;
+  border-top: none;
+}
+
+/* 🔹 Shared styles for all info boxes */
 .info-box {
-  position: absolute;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 5px;
-  gap: 10px;
-  height: auto;
+  padding: 0 15px;
+  gap: 8px;
   font-family: 'Inter', sans-serif;
+  margin-right: 20px;
 }
 
-/* Specific positions per Figma */
-.gender-box {
-  width: 65.7px;
-  top: 58px;
-  left: 400px;
+/* 🔹 Modern Info Box Layout */
+.vitals-content .patient-card .info-box,
+.content .patient-card .info-box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 15px;
+  gap: 8px;
+  font-family: 'Inter', sans-serif;
+  margin-right: 20px;
 }
 
-.age-box {
-  width: 65.7px;
-  top: 58px;
-  left: 580px;
+/* 🟩 Individual Info Boxes  */
+.id-box {
+  width: 150px;
+}
+
+.vitals-content .patient-card .id-box,
+.content .patient-card .id-box {
+  width: 150px;
 }
 
 .dob-box {
-  width: 211.4px;
-  top: 58px;
-  left: 740px;
+  width: 180px;
 }
 
-/* Label (Sex, Age, Date of Birth) */
+.vitals-content .patient-card .dob-box,
+.content .patient-card .dob-box {
+  width: 180px;
+}
+
+.gender-box {
+  width: 80px;
+}
+
+.vitals-content .patient-card .gender-box,
+.content .patient-card .gender-box {
+  width: 80px;
+}
+
+.address-box {
+  width: 200px;
+}
+
+.vitals-content .patient-card .address-box,
+.content .patient-card .address-box {
+  width: 200px;
+}
+
+/* 🔹 DOB's extra line for age */
+.info-age {
+  font-size: 16px;
+  color: #53535D;
+  margin-top: 4px;
+  padding-left: 24px;
+}
+
+.vitals-content .patient-card .info-age,
+.content .patient-card .info-age {
+  font-size: 16px;
+  color: #53535D;
+  margin-top: 4px;
+  padding-left: 0;
+}
+
+/* 🔹 Label and Value styles */
 .info-label {
   font-size: 16px;
   color: #53535D;
-  line-height: 100%;
 }
 
-/* Values (Male, 30, 23/08/1999) */
 .info-value {
   font-size: 20px;
   color: #000000;
-  line-height: 100%;
 }
 
-/* Placeholder for call buttons (to be replaced later) */
-.call-placeholder {
-  position: absolute;
-  top: 58px;
-  right: 50px;
-  width: 220px;
-  height: 68px;
-  background-color: #F5F5F5;
-  border-radius: 8px;
-  font-size: 14px;
-  font-family: 'Inter', sans-serif;
-  color: #53535D;
+/* 🔹 Phone & Video Call Buttons */
+.contact-buttons {
+  position: relative;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  margin-left: auto;
 }
 
+/* 🔹 Modern Contact Buttons Layout */
+.vitals-content .patient-card .contact-buttons,
+.content .patient-card .contact-buttons {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-left: auto;
+}
 
+.contact-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  font-size: 14px;
+  border: 2px solid #a5dfef;
+  background-color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #333;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.contact-btn:hover {
+  background-color: #e8f7fb;
+}
+
+/* 🔹 Profile Container and Menu Styles */
+.profile-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+  z-index: 10000;
+}
+
+.doctor-profile {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.doctor-profile:hover {
+  transform: scale(1.05);
+}
+
+/* Profile Popup */
+.profile-popup {
+  position: absolute;
+  top: 55px;
+  right: 0;
+  width: 280px;
+  background: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  border: 1px solid #E5E5E5;
+  z-index: 10002; 
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.profile-popup.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  display: block;
+  pointer-events: auto;
+}
+
+/* Profile Header */
+.profile-header {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #F0F0F0;
+  position: relative;
+}
+
+.profile-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-right: 12px;
+  border: 2px solid #E5E5E5;
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.profile-info h3 {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.profile-info p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Profile Menu */
+.profile-menu {
+  padding: 8px 0;
+}
+
+.profile-menu-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 14px;
+  color: #333;
+}
+
+.profile-menu-item:hover {
+  background-color: #F8F8F8;
+}
+
+.profile-menu-item.logout:hover {
+  background-color: #FFF5F5;
+  color: #DC2626;
+}
+
+.menu-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 12px;
+  opacity: 0.7;
+}
+
+.profile-menu-item span {
+  flex: 1;
+}
+
+.profile-divider {
+  height: 1px;
+  background-color: #F0F0F0;
+  margin: 8px 0;
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #666;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.close-btn:hover {
+  background-color: #F0F0F0;
+  color: #333;
+}
+
+/* Header Icons Container */
+.header-icons-container {
+  position: absolute;
+  right: 26px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  z-index: 10000;
+}
+
+/* Responsive Design for Header Icons */
+@media (max-width: 768px) {
+  .header-icons-container {
+    right: 15px;
+    gap: 10px;
+  }
+  
+  .notification-popup {
+    width: 300px;
+    right: -25px;
+    max-width: calc(100vw - 30px);
+  }
+  
+  .profile-popup {
+    width: 250px;
+    right: -15px;
+    max-width: calc(100vw - 30px);
+  }
+  
+  .doctor-profile {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .patient-card {
+    width: calc(100vw - 210px - 30px);
+    left: 15px;
+  }
+  
+  .id-box {
+    left: 200px;
+  }
+  
+  .dob-box {
+    left: 350px;
+  }
+  
+  .gender-box {
+    left: 550px;
+  }
+  
+  .address-box {
+    left: 640px;
+  }
+  
+  .divider-line {
+    left: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-icons-container {
+    right: 10px;
+    gap: 8px;
+  }
+  
+  .notification-popup {
+    width: 280px;
+    right: -40px;
+    max-width: calc(100vw - 20px);
+  }
+  
+  .profile-popup {
+    width: 220px;
+    right: -30px;
+    max-width: calc(100vw - 20px);
+  }
+  
+  .doctor-profile {
+    width: 35px;
+    height: 35px;
+  }
+
+  .patient-card {
+    width: calc(100vw - 210px - 20px);
+    left: 10px;
+    padding-left: 40px;
+  }
+  
+  .id-box {
+    left: 150px;
+  }
+  
+  .dob-box {
+    left: 280px;
+  }
+  
+  .gender-box {
+    left: 450px;
+  }
+  
+  .address-box {
+    left: 520px;
+  }
+  
+  .divider-line {
+    left: 130px;
+  }
+}
