@@ -12,8 +12,13 @@ public class RegisterController {
     }
 
     @GetMapping("/EmailVerify")
-    public String VerifyPage() {
+    public String EmailPage() {
         return "EmailVerify";  // loads register.html
+    }
+
+    @GetMapping("/PasswordVerify")
+    public String PasswordPage() {
+        return "PasswordVerify";  // loads register.html
     }
 
 }
