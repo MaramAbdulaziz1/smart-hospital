@@ -1,3 +1,4 @@
+//This is the package name that all classes are in 
 package com.team10.smarthospital.model;
 
 public class VisitRecord {
