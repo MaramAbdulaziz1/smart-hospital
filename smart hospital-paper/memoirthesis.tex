@@ -23,7 +23,8 @@
 % The hard copies of the dissertation required for the examination process must be printed on A4 white paper. Paper up to A3 may be used for maps, plans, diagrams and illustrative material. Pages (apart from the preliminary pages) should normally be double-sided.
 %
 % Memoir class loads useful packages by default (see manual).
-\documentclass[a4paper,11pt,leqno,openbib,oldfontcommands]{memoir} %add 'draft' to turn draft option on (see below)
+\documentclass[a4paper,11pt,oneside,leqno,openbib,oldfontcommands]{memoir}
+ %add 'draft' to turn draft option on (see below)
 %
 %
 % Adding metadata:
@@ -151,6 +152,8 @@
 %
 \usepackage{subcaption}
 %
+\usepackage{caption}
+
 \usepackage{xcolor}
 %Creates coloured text and background
 \definecolor{UniversityRed}{RGB}{171,31,45}
