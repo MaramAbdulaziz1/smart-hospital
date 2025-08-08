@@ -14,21 +14,19 @@ textarea{
 }
 
 /*Main Content*/
-.patientITP{
+.page-content{
   position: relative;                                 
   margin-top: 100px;
-  margin-left: 210px;        
-}
-.patientITP .main {
+  margin-left: 210px;
   flex: 1;
   display: flex;
   flex-direction: column;
   height: 100vh;
-  overflow: hidden;
+  overflow: hidden;        
 }
 
 /*content style*/
-.patientITP .content {
+.page-content .content {
   margin: 10px 10px;
   display: flex;
   flex-direction: column;
@@ -79,13 +77,13 @@ textarea{
 }
 
 .intake-card.complaint {
-  width: 1150px;
-  height: 120px;
+  width: 80vw;
+  height: 15vh;
 }
 
 .intake-card.diagnosis {
-  width: 1000px;
-  height: 140px;
+  width: 70vw;
+  height: 18vh;
 }
 
 /*button setting*/
@@ -97,7 +95,7 @@ textarea{
 }
 
 .edit-btn,.save-btn,.submit-btn {
-  width: 150px;
+  width: 100px;
   padding: 10px 20px;
   border: 2px solid #a5dfef;
   border-radius: 8px;
