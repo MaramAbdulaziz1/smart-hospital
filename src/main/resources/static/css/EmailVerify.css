@@ -16,8 +16,8 @@ body {
    background-color: #ffffff;
    position: relative;
    display: flex;
-   justify-content: center; /* 水平置中 */
-   align-items: center;     /* 垂直置中 */
+   justify-content: center; 
+   align-items: center;     
 }
 
 /* Top bar containing logo and title */

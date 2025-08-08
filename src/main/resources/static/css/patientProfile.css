@@ -147,7 +147,7 @@ body {
 /* Patient card */
 .patient-info-wrapper {
   display: flex;
-  justify-content: flex-start; /* 讓左邊 patient-left 對齊左邊 */
+  justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
   gap: 80px;
@@ -311,7 +311,6 @@ body {
 }
 
 
-/* 記得讓 patient-info 有 relative 才能讓絕對定位生效 */
 .patient-info {
   position: relative;
   padding: 24px;
@@ -323,8 +322,8 @@ body {
 
 .vertical-line {
   width: 1px;
-  background-color: #e5e5e5; /* 淺灰色 */
-  height: 80%; /* 根據你內容調整長度 */
+  background-color: #e5e5e5;
+  height: 80%;
   margin: auto 30px;
 }
 
@@ -359,13 +358,13 @@ body {
   border-radius: 12px;
   padding: 20px 30px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  max-height: 300px;  /* 調整你想要的高度 */
-  overflow-y: auto;   /* 當超過時出現垂直捲軸 */
+  max-height: 300px; 
+  overflow-y: auto;   
 }
 
 
 .section-title {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  /* 加這行統一字體 */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
   font-size: 18px;
   font-weight: bold;
   color: #333;

@@ -57,7 +57,6 @@
                     <div class="info-table">
                         <div class="info-column">
                             <div class="info-label">Visit type</div>
-                            <!--要跟backend連結-->
                             <div class="info-value">First</div>
                         </div>
                         <div class="info-column">
@@ -99,19 +98,19 @@
         const diagnosisTextarea = document.querySelector('.intake-card.diagnosis');
         if (diagnosisTextarea) {
             diagnosisTextarea.removeAttribute('disabled');
-            diagnosisTextarea.focus(); // 可選：自動跳進輸入框
+            diagnosisTextarea.focus();
         }
     }
-    // 找到所有 .sub-tabs 元素
+    // find all .sub-tabs elements
     document.querySelectorAll('.sub-tabs').forEach(tab => {
         tab.addEventListener('click', () => {
-        // 1. 移除所有 tab 的 active
+        // 1. delete all active from .tabs
         document.querySelectorAll('.sub-tabs').forEach(t => t.classList.remove('active'));
 
-        // 2. 加上目前點的那一個 tab 為 active
+        // 2. activ current .tabs
         tab.classList.add('active');
 
-        // 3. (可選) 改變 textarea 的 placeholder 內容（或未來切換 textarea）
+        // 3. adjust placeholder conten
         const textarea = document.querySelector('.intake-card.diagnosis');
         if (textarea) {
             if (tab.textContent.includes('Diagnosis')) {
