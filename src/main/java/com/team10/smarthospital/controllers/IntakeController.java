@@ -2,6 +2,7 @@ package com.team10.smarthospital.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -14,7 +15,8 @@ public class IntakeController {
    }*/
 
    @GetMapping("/patientintake")
-   public String IntakePage(){
+   public String IntakePage(Model model){
+      model.addAttribute("pageTitle", "Patient Intake");
       return "patientintake";
    }
 

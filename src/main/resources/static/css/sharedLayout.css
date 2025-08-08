@@ -278,7 +278,8 @@ html, body {
 
 /* 🔹 Patient Card Fragment: Displays patient info */
 .patient-card {
-  position: absolute;
+  /*TODO: absolute->relative*/
+  position: relative;
   width: calc(100vw - 210px - 100px); 
   max-width: 1200px; 
   height: 170px;
