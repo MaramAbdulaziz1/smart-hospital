@@ -136,6 +136,11 @@ public class Patient extends BaseEntity {
         this.address = address;
     }
 
+    // For template use (formatted date of birth)
+  public String getDob() {
+    return dateOfBirth != null ? dateOfBirth.toString() : "";
+  }
+
     @Override
     public String toString() {
         return "Patient{" +
