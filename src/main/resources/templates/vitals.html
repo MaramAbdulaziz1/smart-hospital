@@ -14,15 +14,15 @@
   <aside th:replace="layouts/sharedLayout :: sidebar"></aside>
 
   <!-- Main Content Area -->
-  <div class="main-content">
+  <main class="main-content">
     <!-- Top Navigation -->
-    <header th:replace="layouts/sharedLayout :: topNav"></header>
+    <div th:replace="layouts/sharedLayout :: topNav"></div>
+
+    <!-- Patient Info Card -->
+    <div th:replace="layouts/sharedLayout :: patientCard"></div>
 
     <!-- Vitals Content -->
-    <div class="vitals-content">
-        <!-- Patient Info Card -->
-        <section th:replace="layouts/sharedLayout :: patientCard"></section>
-
+    <div class="page-content">
         <!-- Vitals Form -->
         <div class="vitals-form">
             <h2>Patient Vitals Record</h2>
@@ -135,7 +135,7 @@
             </table>
         </div>
     </div>
-  </div>
+  </main>
 </div>
 
 <!-- Scripts -->
