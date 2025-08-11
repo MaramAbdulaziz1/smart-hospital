@@ -88,8 +88,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Logout button actions (for all logout buttons)
-    const logoutButtons = document.querySelectorAll('[data-action="logout"]');
+    // Logout button actions (for all logout buttons except profile menu items)
+    const logoutButtons = document.querySelectorAll('[data-action="logout"]:not(.profile-menu-item)');
     logoutButtons.forEach(button => {
         button.addEventListener('click', function(e) {
             e.preventDefault();
