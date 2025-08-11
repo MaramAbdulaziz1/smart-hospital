@@ -88,6 +88,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Logout button actions (for all logout buttons)
+    const logoutButtons = document.querySelectorAll('[data-action="logout"]');
+    logoutButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const action = this.getAttribute('data-action');
+            handleProfileAction(action);
+        });
+    });
+
     // Close popups when clicking outside
     document.addEventListener('click', function(e) {
         if (!notificationPopup?.contains(e.target) && !notificationIcon?.contains(e.target)) {
