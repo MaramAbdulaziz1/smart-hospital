@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -84,105 +84,41 @@
               </div>
             </div>
         </div>
-      </div>
+      </div><!-- /.patient-info-wrapper -->
+    </div><!-- /.patient-info -->
 
-      <!-- Page-specific content -->
-      <section class="page-content">
-        <!-- Main Content -->
-        <div class="main">
-          <div class="content">
-            <!-- Patient History Section -->
-            <h2 class="section-title">Patient History</h2>
-            <div class="patient-history-section">
-              <table class="patient-history-table">
-                <thead>
-                  <tr>
-                    <th>Date Of Visit</th>
-                    <th>Department</th>
-                    <th>Diagnosis</th>
-                    <th>Doctor</th>
-                    <th>Report</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>10 Jul 2025</td>
-                    <td>General Medicine</td>
-                    <td>Viral Flu</td>
-                    <td>Dr. Sarah Moyo</td>
-                    <td>
-                      <a href="#" class="report-link">View</a>
-                      &nbsp;&nbsp;
-                      <a href="#" class="report-link">Download</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>18 Jun 2024</td>
-                    <td>Dermatology</td>
-                    <td>Eczema</td>
-                    <td>Dr. Samuel Chen</td>
-                    <td>
-                      <a href="#" class="report-link">View</a>
-                      &nbsp;&nbsp;
-                      <a href="#" class="report-link">Download</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>02 May 2024</td>
-                    <td>Cardiology</td>
-                    <td>Hypertension</td>
-                    <td>Dr. Linda Patel</td>
-                    <td>
-                      <a href="#" class="report-link">View</a>
-                      &nbsp;&nbsp;
-                      <a href="#" class="report-link">Download</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>27 Apr 2023</td>
-                    <td>Neurology</td>
-                    <td>Migraine</td>
-                    <td>Dr. Emily Zhou</td>
-                    <td>
-                      <a href="#" class="report-link">View</a>
-                      &nbsp;&nbsp;
-                      <a href="#" class="report-link">Download</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>15 Jan 2023</td>
-                    <td>Ophthalmology</td>
-                    <td>Dry Eyes</td>
-                    <td>Dr. Jason Wu</td>
-                    <td>
-                      <a href="#" class="report-link">View</a>
-                      &nbsp;&nbsp;
-                      <a href="#" class="report-link">Download</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>10 Dec 2022</td>
-                    <td>ENT</td>
-                    <td>Sinusitis</td>
-                    <td>Dr. Claire Wang</td>
-                    <td>
-                      <a href="#" class="report-link">View</a>
-                      &nbsp;&nbsp;
-                      <a href="#" class="report-link">Download</a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>  
-      </section>
-    </main>
-</div>
+    <!-- Patient History Section -->
+    <h2 class="section-title">Patient History</h2>
+    <div class="patient-history-section">
+      <table class="patient-history-table">
+        <thead>
+        <tr>
+          <th>Date Of Visit</th>
+          <th>Department</th>
+          <th>Diagnosis</th>
+          <th>Doctor</th>
+          <th>Report</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="visit : ${history}">
+          <td th:text="${visit.date}">10 Jul 2025</td>
+          <td th:text="${visit.department}">General Medicine</td>
+          <td th:text="${visit.diagnosis}">Viral Flu</td>
+          <td th:text="${visit.doctor}">Dr. Sarah Moyo</td>
+          <td>
+            <a href="#" class="report-link">View</a>&nbsp;&nbsp;
+            <a href="#" class="report-link">Download</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div><!-- /.content -->
+</div><!-- /.main -->
 
 <!-- Scripts -->
 <script th:src="@{/js/sharedLayout.js}"></script>
 
-</div>
 </body>
 </html>
