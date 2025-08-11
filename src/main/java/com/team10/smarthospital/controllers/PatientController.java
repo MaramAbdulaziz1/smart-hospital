@@ -27,6 +27,7 @@ public class PatientController {
     //add patient and history into model, send to HTML
     model.addAttribute("patient", patient);
     model.addAttribute("history", history);
+    model.addAttribute("pageTitle", "Patient Profile");
 
     return "patientProfile";
   }
