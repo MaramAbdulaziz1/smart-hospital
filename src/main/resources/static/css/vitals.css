@@ -1,21 +1,31 @@
 /* Vitals Page Specific Styles */
 /* This file contains styles specific to the vitals page that work with the shared layout */
+body {
+  background: transparent;
+  min-height: 100vh;
+}
 
 /* Vitals specific styles - compatible with sharedLayout */
 .page-content {
   display: flex;
   position: relative;
   width: 100%;
-  height: 100%;
+  min-height: calc(100vh - 120px);
   margin-top: 120px;
   margin-left: 250px;
-  background: #F5F5F5;
+  background: transparent;
   flex-direction: column;
   gap: 30px;
+  padding-bottom: 30px;
 }
 
 /* Vitals specific sidebar styling - activate Vitals tab */
 .layout-container .sidebar .tab:nth-child(5) {
+  background-color: transparent;
+  border-radius: 16px;
+}
+.layout-container .sidebar .tab:nth-child(5).active-tab,
+.layout-container .sidebar .tab:nth-child(5):hover {
   background-color: #F5F5F5;
   border-radius: 16px;
 }
@@ -70,6 +80,35 @@
   border-radius: 8px;
   font-size: 14px;
   transition: border-color 0.3s ease;
+}
+
+.vital-group {
+  position: relative;
+}
+
+.vital-group[data-unit]::after {
+  content: attr(data-unit);
+  position: absolute;
+  right: 12px;
+  top: 70%;
+  transform: translateY(-50%);
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+  pointer-events: none;
+  z-index: 2;
+}
+
+#heart-rate,
+#blood-pressure,
+#temperature,
+#weight,
+#height,
+#bmi,
+#blood-glucose,
+#oxygen-saturation,
+#respiratory-rate {
+  padding-right: 40px;
 }
 
 .vital-group input:focus {
