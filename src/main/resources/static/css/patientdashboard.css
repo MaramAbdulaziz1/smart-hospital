@@ -1,0 +1,201 @@
+/* Patient Dashboard (align with shared layout pattern) */
+:root{
+  --border:#E5E5E5;
+  --bg:#F5F5F5;
+  --card:#FFFFFF;
+  --accent:#A5DFEF;
+  --accent-2:#e4f6fb;
+  --ink:#000;
+  --muted:#53535D;
+  --blue-500:#7bd1e7;
+
+  /* follow your working page numbers */
+  --sidebar-width:250px;
+  --topbar-height:120px;
+}
+
+/* Use page-content offsets (like your working page) */
+.main-content{
+  margin-left: 0;
+  background: var(--bg);
+  min-height: 100vh;
+  place-items: center;
+}
+
+.page-content{
+  position: relative;
+  margin-top: 100px; /*var(--topbar-height);*/
+  margin-left: var(--sidebar-width);
+  width: calc(100vw - var(--sidebar-width));
+  box-sizing: border-box;
+  padding: 0 24px;              
+  overflow: visible;                  
+}
+
+.page-content .main{
+  display: block;
+  height: auto;
+  overflow: visible;
+  flex: none;
+}
+
+.top-nav .page-title{ font-size:28px; font-weight:500; }
+.header-icons-container{ right:28px; gap:10px; }
+
+/* notifcation
+.bell-wrap{ position:relative; }
+.notif-dot{
+  position:absolute; top:-2px; right:-2px;
+  width:10px;height:10px;border-radius:50%;
+  background:#1e90ff;border:2px solid #fff;
+}*/
+
+/* header */
+.page-heading{
+  font-size:20px; 
+  font-weight:600; 
+  margin: 10px auto; 
+  color:var(--ink);
+}
+
+/* Upcoming */
+.upcoming-wrap{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap:24px;
+  width:100%;
+  max-width: 1165px;
+}
+
+/*.upcoming-wrap h2 {
+  margin-top: 5px;
+  }*/
+
+.upcoming-card{
+  background:var(--card);
+  border:2px solid var(--blue-500);
+  border-radius:10px;
+  padding:18px 20px;
+  width:100%
+  min-height:80px;
+  display:flex; flex-direction:column; justify-content:center;
+  line-height:1.6; box-shadow:0 2px 6px rgba(0,0,0,.04);
+}
+.upcoming-card .line-1{ font-size:18px; }
+.upcoming-card .line-2{ font-size:18px; }
+.upcoming-card .line-3{ font-size:18px; }
+
+/* Panels */
+.panel{
+  width:100%;
+  max-width: 1130px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:18px 18px 16px;
+  margin-top:8px;
+  box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+.panel h3{ margin:0 0 12px; font-size:18px; font-weight:700; color:var(--ink); }
+
+.form-grid{
+  display:grid;
+  grid-template-columns: 1.1fr 0.9fr; 
+  gap:20px; align-items:end;
+}
+.form-row{
+  display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:6px;
+}
+.field{ display:flex; flex-direction:column; gap:6px; }
+.label{ font-size:14px; color:var(--muted); }
+
+select, input[type="date"], input[type="time"]{
+  height:40px; border-radius:8px; border:1px solid var(--border);
+  background:#fff; padding:0 10px; font-size:14px;
+}
+.date-like{ letter-spacing:.2px; }
+
+.btn{
+  height:40px; 
+  padding:0 22px; 
+  border:none; 
+  background:#5a8a97; 
+  color:#fff; 
+  font-weight:600; 
+  cursor:pointer;
+  border-radius: 8px;
+  font-size: 14px;
+}
+.btn:active{ transform:translateY(1px); }
+.book-col{ display:flex; justify-content:flex-end; align-items:flex-end; }
+
+/* Adjusted */
+.profile-info small{ color:#888; }
+.doctor-profile{ object-fit:cover; }
+
+/* RWD */
+@media (max-width: 980px){
+  .page-content{
+    margin-left: 0;
+    width: 100vw;
+    padding: 0 16px 32px;
+  }
+  .upcoming-wrap{ grid-template-columns:1fr; }
+  .form-grid{ grid-template-columns:1fr; }
+  .book-col{ justify-content:flex-start; }
+}
+
+/* === Limit scope to the two panels after .upcoming-wrap === */
+:is(.upcoming-wrap + .panel, .upcoming-wrap + .panel + .panel) select,
+:is(.upcoming-wrap + .panel, .upcoming-wrap + .panel + .panel) input[type="text"],
+:is(.upcoming-wrap + .panel, .upcoming-wrap + .panel + .panel) input[type="date"],
+:is(.upcoming-wrap + .panel, .upcoming-wrap + .panel + .panel) input[type="time"]{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 380px;
+  height: 38px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  margin: 5px 56px;
+  font-size: 14px;
+  line-height: 1.2;
+  color: #111;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+/* Custom arrow for <select> in BOTH panels */
+:is(.upcoming-wrap + .panel, .upcoming-wrap + .panel + .panel) select{
+  background-image: url("data:image/svg+xml;utf8,\
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' fill='none'>\
+    <path d='M7 10l5 5 5-5' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/>\
+  </svg>");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 18px 18px;
+}
+:is(.upcoming-wrap + .panel, .upcoming-wrap + .panel + .panel) select::-ms-expand{ display:none; }
+
+/* Hover / Focus for BOTH panels */
+:is(.upcoming-wrap + .panel, .upcoming-wrap + .panel + .panel) select:hover,
+:is(.upcoming-wrap + .panel, .upcoming-wrap + .panel + .panel) input[type="text"]:hover,
+:is(.upcoming-wrap + .panel, .upcoming-wrap + .panel + .panel) input[type="date"]:hover,
+:is(.upcoming-wrap + .panel, .upcoming-wrap + .panel + .panel) input[type="time"]:hover{
+  border-color: #999;
+}
+:is(.upcoming-wrap + .panel, .upcoming-wrap + .panel + .panel) select:focus,
+:is(.upcoming-wrap + .panel, .upcoming-wrap + .panel + .panel) input[type="text"]:focus,
+:is(.upcoming-wrap + .panel, .upcoming-wrap + .panel + .panel) input[type="date"]:focus,
+:is(.upcoming-wrap + .panel, .upcoming-wrap + .panel + .panel) input[type="time"]:focus{
+  outline: none;
+  border-color: #4cc3e0;                       
+  box-shadow: 0 0 0 4px rgba(76,195,224,0.28);
+}
+
+/* Date/Time don’t need the dropdown arrow — tighten right padding */
+:is(.upcoming-wrap + .panel, .upcoming-wrap + .panel + .panel) input[type="date"],
+:is(.upcoming-wrap + .panel, .upcoming-wrap + .panel + .panel) input[type="time"]{
+  padding-right: 18px;
+}
