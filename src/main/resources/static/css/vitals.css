@@ -1,7 +1,7 @@
 /* Vitals Page Specific Styles */
 /* This file contains styles specific to the vitals page that work with the shared layout */
 body {
-  background: #F5F5F5;
+  background: transparent;
   min-height: 100vh;
 }
 
@@ -13,7 +13,7 @@ body {
   min-height: calc(100vh - 120px);
   margin-top: 120px;
   margin-left: 250px;
-  background: #F5F5F5;
+  background: transparent;
   flex-direction: column;
   gap: 30px;
   padding-bottom: 30px;
@@ -21,6 +21,11 @@ body {
 
 /* Vitals specific sidebar styling - activate Vitals tab */
 .layout-container .sidebar .tab:nth-child(5) {
+  background-color: transparent;
+  border-radius: 16px;
+}
+.layout-container .sidebar .tab:nth-child(5).active-tab,
+.layout-container .sidebar .tab:nth-child(5):hover {
   background-color: #F5F5F5;
   border-radius: 16px;
 }
