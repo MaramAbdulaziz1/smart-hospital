@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Clinical Notes</title>
+    <link rel="stylesheet" th:href="@{/css/sharedLayout.css}">
+    <link rel="stylesheet" href="/css/clinicalNotes.css" />
+</head>
+
+<body>
+<div class="layout-container">
+    <!-- Sidebar -->
+    <div th:replace="~{layouts/sharedLayout :: sidebar}"></div>
+    <!--main content-->
+    <main class="main-content">
+        <!-- Top Navigation -->
+        <div th:replace="~{layouts/sharedLayout :: topNav}"></div>
+        <!-- Patient Info Card -->
+        <div th:replace="~{layouts/sharedLayout :: patientCard}"></div>
+        <section class="page-content">
+            <!--intake section-->
+            <div class="form-column">
+                <div>
+                    <div class="tabs active">Patient Complaint</div>
+                    <textarea class="intake-card complaint" disabled></textarea>
+                </div>
+                <div class="form-row">
+                    <div>
+                        <div>
+                            <div class="tabs sub-tabs active">Note</div>
+                            <div class="tabs sub-tabs">Diagnosis</div>
+                            <div class="tabs sub-tabs">Medical History</div>
+                            <div class="tabs sub-tabs">Follow-up Plan</div>
+                        </div>
+                        <textarea class="intake-card diagnosis" disabled placeholder = 'Click "Edit" to enter note...'></textarea>
+                    </div>
+                    <div class="button-group">
+                        <button class="edit-btn" onclick="enableSection()">Edit</button>
+                        <button class="save-btn">Save</button>
+                        <button class="submit-btn">Submit</button>
+                    </div>
+                </div>
+            </div>   
+        </section>
+    </main>
+</div>
+
+<!--button function(should be refractor later)-->
+<script>
+    //edit button
+    function enableSection() {
+        const diagnosisTextarea = document.querySelector('.intake-card.diagnosis');
+        if (diagnosisTextarea) {
+            diagnosisTextarea.removeAttribute('disabled');
+            diagnosisTextarea.focus();
+        }
+    }
+    // find all .sub-tabs elements
+    document.querySelectorAll('.sub-tabs').forEach(tab => {
+        tab.addEventListener('click', () => {
+        // 1. delete all active from .tabs
+        document.querySelectorAll('.sub-tabs').forEach(t => t.classList.remove('active'));
+
+        // 2. activ current .tabs
+        tab.classList.add('active');
+
+        // 3. adjust placeholder content based on the active tab
+        const textarea = document.querySelector('.intake-card.diagnosis');
+        const tabText = tab.textContent.trim();
+
+        if (tabText === 'Note') {
+            textarea.placeholder = 'Click "Edit" to enter a note...';
+        } else if (tabText === 'Diagnosis') {
+            textarea.placeholder = 'Click "Edit" to enter diagnosis...';
+        } else if (tabText === 'Medical History') {
+            textarea.placeholder = 'Click "Edit" to enter medical history...';
+        } else if (tabText === 'Follow-up Plan') {
+            textarea.placeholder = 'Click "Edit" to enter a follow-up plan...';
+        }
+        });
+    });
+
+</script>
+
+<!-- Scripts -->
+<script th:src="@{/js/sharedLayout.js}"></script>
+</body>
+</html>
+
+    
+        
+    

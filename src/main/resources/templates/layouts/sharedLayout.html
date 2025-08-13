@@ -32,9 +32,9 @@
     </div>
 
     <div class="tab">
-      <a href="/patientintake">
+      <a href="/clinicalNotes">
       <img th:src="@{/SharedLayoutImages/intakeIcon.svg}" alt="Intake Icon" class="tab-icon">
-      <span>Patient Intake</span>
+      <span>Clinical Notes</span>
       </a>
     </div>
 
@@ -57,7 +57,7 @@
   </nav>
 
   <!-- 🔸 Logout Button at the bottom -->
-  <div class="tab logout-tab">
+  <div class="tab logout-tab" data-action="logout">
     <img th:src="@{/SharedLayoutImages/logoutIcon.svg}" alt="Logout Icon" class="tab-icon">
     <span>Log Out</span>
   </div>
@@ -119,7 +119,7 @@
   </nav>
 
   <!-- 🔸 Logout Button at the bottom -->
-  <div class="tab logout-tab">
+  <div class="tab logout-tab" data-action="logout">
     <img th:src="@{/SharedLayoutImages/logoutIcon.svg}" alt="Logout Icon" class="tab-icon">
     <span>Log Out</span>
   </div>
@@ -196,14 +196,6 @@
           <div class="profile-menu-item" data-action="profile">
             <img th:src="@{/SharedLayoutImages/profileIcon.svg}" alt="Profile" class="menu-icon">
             <span>My Profile</span>
-          </div>
-          <div class="profile-menu-item" data-action="settings">
-            <img th:src="@{/SharedLayoutImages/settingsIcon.svg}" alt="Settings" class="menu-icon">
-            <span>Settings</span>
-          </div>
-          <div class="profile-menu-item" data-action="help">
-            <img th:src="@{/SharedLayoutImages/helpIcon.svg}" alt="Help" class="menu-icon">
-            <span>Help & Support</span>
           </div>
           <div class="profile-divider"></div>
           <div class="profile-menu-item logout" data-action="logout">
