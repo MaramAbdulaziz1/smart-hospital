@@ -12,7 +12,7 @@
 <div class="layout-container">
   <!-- Sidebar -->
   <div th:replace="~{layouts/sharedLayout :: sidebar}"></div>
-  
+
 
   <!-- Main Content -->
   <main class="main-content">
@@ -21,7 +21,6 @@
     <!-- patient info -->
     <section class="patient-info">
       <div class="wrapper">
-        <button class="edit-profile-btn">Edit</button>
         <div class="leftside">
           <img class="avatar" src="/SharedLayoutImages/patientProfileImage.png" alt="Patient Photo" />
           <h3 class="info" th:text="${patient.name}">Harry Potter</h3>

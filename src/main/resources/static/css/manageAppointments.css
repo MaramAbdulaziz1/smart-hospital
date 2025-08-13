@@ -1,0 +1,220 @@
+/* manageAppointments.css */
+
+/* Page content section */
+.page-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-top: 120px;
+  margin-left: 250px;
+  height: 100vh;
+  width: calc(100vw - 210px - 100px);
+  max-width: 1200px;
+  overflow: hidden;
+}
+
+/* Section title styling */
+.section-title {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 16px;
+  margin-top: 20px;
+}
+
+.section-title:first-child {
+  margin-top: 0;
+}
+
+/* Appointments management section */
+.appointments-management-section,
+.appointments-history-section {
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px 30px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+  border: 1px solid #E5E5E5;
+}
+
+/* Table styling to match your project style */
+.appointments-table,
+.appointments-history-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Table header styling */
+.appointments-table th,
+.appointments-history-table th {
+  padding: 12px 16px;
+  text-align: left;
+  background-color: #A5DFEF;
+  color: #2C5F7A;
+  font-weight: 600;
+  font-size: 14px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Table cell styling */
+.appointments-table td,
+.appointments-history-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+  color: #333;
+  font-size: 14px;
+}
+
+/* Table row hover effect */
+.appointments-table tbody tr:hover,
+.appointments-history-table tbody tr:hover {
+  background-color: #f8fbfb;
+}
+
+/* Cancel button styling to match your project */
+.cancel-btn {
+  border: 1px solid #A5DFEF;
+  color: #3399cc;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-family: 'Inter', sans-serif;
+}
+
+.cancel-btn:hover:not(.disabled) {
+  background-color: #e8f7fb;
+}
+
+.cancel-btn.disabled {
+  background-color: #f2f2f2;
+  border-color: #d0d0d0;
+  color: #999;
+  cursor: not-allowed;
+}
+
+/* Status badge styling */
+.status {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+  display: inline-block;
+  min-width: 70px;
+  text-align: center;
+}
+
+.status.upcoming {
+  background-color: #e8f5e8;
+  color: #2d5a2d;
+  border: 1px solid #a5d6a7;
+}
+
+.status.completed {
+  background-color: #e3f2fd;
+  color: #1565c0;
+  border: 1px solid #90caf9;
+}
+
+.status.cancelled {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+}
+
+/* Success message styling */
+.success-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #4caf50, #45a049);
+  color: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 300px;
+  animation: slideIn 0.3s ease-out;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+.success-message.error {
+  background: linear-gradient(135deg, #f44336, #d32f2f);
+}
+
+.success-message .close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.success-message .close-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .page-content {
+    margin-left: 20px;
+    width: calc(100vw - 40px);
+  }
+
+  .appointments-management-section,
+  .appointments-history-section {
+    padding: 15px 20px;
+  }
+
+  .appointments-table th,
+  .appointments-history-table th,
+  .appointments-table td,
+  .appointments-history-table td {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .cancel-btn {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+
+  .success-message {
+    right: 10px;
+    left: 10px;
+    min-width: auto;
+  }
+}
