@@ -4,19 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Manage Appointments</title>
-  <link rel="stylesheet" th:href="@{/css/sharedLayout.css}">
   <link rel="stylesheet" href="/css/manageAppointments.css" />
+  <!-- Web font: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
 
 <div class="layout-container">
-
-  <!-- 🔹 Patient Sidebar: Left vertical navigation -->
+  <!-- Patient Sidebar: Left vertical navigation -->
   <aside class="sidebar">
     <!-- Logo at the top of the sidebar -->
     <img th:src="@{/SharedLayoutImages/LogoCircle.png}" alt="Logo" class="logo">
 
-    <!-- 🔸 Patient Navigation Links -->
+    <!-- Patient Navigation Links -->
     <nav class="sidebar-nav">
       <div class="tab" data-page="home">
         <a href="/patient/patientDashboard">
@@ -48,18 +48,93 @@
       </div>
     </nav>
 
-    <!-- 🔸 Logout Button at the bottom -->
+    <!-- Logout Button at the bottom -->
     <div class="tab logout-tab" data-action="logout">
       <img th:src="@{/SharedLayoutImages/logoutIcon.svg}" alt="Logout Icon" class="tab-icon">
       <span>Log Out</span>
     </div>
   </aside>
 
+  <!-- Patient-side Top Navigation (Custom, like your teammate's) -->
+  <header class="top-nav">
+    <h1 class="page-title">Manage Appointments</h1>
+
+    <div class="header-icons-container">
+      <!-- Notifications -->
+      <div class="notification-container">
+        <img th:src="@{/SharedLayoutImages/notificationIcon.svg}" alt="Notifications" class="notification-icon" id="notificationIcon" />
+        <div class="notification-popup" id="notificationPopup">
+          <div class="notification-header">
+            <h3>Notifications</h3>
+            <button class="close-btn" id="closeNotifications" aria-label="Close notifications">&times;</button>
+          </div>
+          <div class="notification-list">
+            <div class="notification-item unread">
+              <div class="notification-content">
+                <div class="notification-title">Your appointment is confirmed for tomorrow at 2:00 PM</div>
+                <div class="notification-time">5 minutes ago</div>
+              </div>
+              <div class="notification-dot"></div>
+            </div>
+            <div class="notification-item unread">
+              <div class="notification-content">
+                <div class="notification-title">New test results are available</div>
+                <div class="notification-time">1 hour ago</div>
+              </div>
+              <div class="notification-dot"></div>
+            </div>
+            <div class="notification-item">
+              <div class="notification-content">
+                <div class="notification-title">Prescription refill reminder</div>
+                <div class="notification-time">2 hours ago</div>
+              </div>
+            </div>
+            <div class="notification-item">
+              <div class="notification-content">
+                <div class="notification-title">Health tip: Stay hydrated during winter</div>
+                <div class="notification-time">1 day ago</div>
+              </div>
+            </div>
+          </div>
+          <div class="notification-footer">
+            <button class="mark-all-read" type="button">Mark all as read</button>
+            <button class="view-all" type="button">View all notifications</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile -->
+      <div class="profile-container">
+        <img th:src="@{/PatientProfile-PatientSide/patientProfilePic.png}" alt="Patient Profile" class="patient-profile" id="patientProfileIcon" />
+        <div class="profile-popup" id="profilePopup">
+          <div class="profile-header">
+            <img th:src="@{/PatientProfile-PatientSide/patientProfilePic.png}" alt="Patient Profile" class="profile-avatar" />
+            <div class="profile-info">
+              <h3>Harry Potter</h3>
+              <p>Patient ID: HAT17653D</p>
+            </div>
+            <button class="close-btn" id="closeProfile" aria-label="Close profile">&times;</button>
+          </div>
+          <div class="profile-menu">
+            <!-- Key link - points to patient-side profile -->
+            <a th:href="@{/patientProfile-patientSide}" class="profile-menu-item" data-action="profile">
+              <img th:src="@{/SharedLayoutImages/profileIcon.svg}" alt="Profile" class="menu-icon" />
+              <span>My Profile</span>
+            </a>
+
+            <div class="profile-divider"></div>
+            <div class="profile-menu-item logout" data-action="logout">
+              <img th:src="@{/PatientProfile-PatientSide/logoutIcon.svg}" alt="Logout" class="menu-icon" />
+              <span>Log Out</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
   <!-- Main Content -->
   <main class="main-content">
-    <!-- Top Navigation -->
-    <div th:replace="~{layouts/sharedLayout :: topNav}"></div>
-
     <!-- Page Content -->
     <section class="page-content">
       <!-- Manage Your Appointments Section -->
@@ -159,8 +234,8 @@
         </table>
       </div>
     </section>
-  </main><!-- /.main-content -->
-</div><!-- /.layout-container -->
+  </main>
+</div>
 
 <!-- Success Message (Hidden by default) -->
 <div id="successMessage" class="success-message" style="display: none;">
@@ -169,8 +244,89 @@
 </div>
 
 <!-- Scripts -->
-<script th:src="@{/js/sharedLayout.js}"></script>
 <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    /* Notifications */
+    const notificationIcon = document.getElementById('notificationIcon');
+    const notificationPopup = document.getElementById('notificationPopup');
+    const closeNotifications = document.getElementById('closeNotifications');
+
+    if (notificationIcon && notificationPopup) {
+      notificationIcon.addEventListener('click', (e) => {
+        e.stopPropagation();
+        notificationPopup.classList.toggle('show');
+        const profilePopup = document.getElementById('profilePopup');
+        if (profilePopup) profilePopup.classList.remove('show');
+      });
+      closeNotifications.addEventListener('click', () => notificationPopup.classList.remove('show'));
+    }
+
+    /* Profile popup */
+    const patientProfileIcon = document.getElementById('patientProfileIcon');
+    const profilePopup = document.getElementById('profilePopup');
+    const closeProfile = document.getElementById('closeProfile');
+
+    if (patientProfileIcon && profilePopup) {
+      patientProfileIcon.addEventListener('click', (e) => {
+        e.stopPropagation();
+        profilePopup.classList.toggle('show');
+        if (notificationPopup) notificationPopup.classList.remove('show');
+      });
+      closeProfile.addEventListener('click', () => profilePopup.classList.remove('show'));
+    }
+
+    /* Close popups when clicking outside */
+    document.addEventListener('click', (e) => {
+      if (notificationPopup && !notificationPopup.contains(e.target) && e.target !== notificationIcon) {
+        notificationPopup.classList.remove('show');
+      }
+      if (profilePopup && !profilePopup.contains(e.target) && e.target !== patientProfileIcon) {
+        profilePopup.classList.remove('show');
+      }
+    });
+
+    /* Mark all notifications as read */
+    const markAllReadBtn = document.querySelector('.mark-all-read');
+    if (markAllReadBtn) {
+      markAllReadBtn.addEventListener('click', () => {
+        document.querySelectorAll('.notification-item.unread').forEach(item => {
+          item.classList.remove('unread');
+          const dot = item.querySelector('.notification-dot');
+          if (dot) dot.remove();
+        });
+      });
+    }
+
+    /* Logout */
+    const logoutBtns = document.querySelectorAll('[data-action="logout"]');
+    logoutBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (confirm('Are you sure you want to log out?')) {
+          window.location.href = '/patient-login';
+        }
+      });
+    });
+
+    /* Active tab */
+    const tabs = document.querySelectorAll('.tab[data-page]');
+    const currentPage = window.location.pathname;
+    tabs.forEach(tab => {
+      const link = tab.querySelector('a');
+      if (link && link.getAttribute('href') === currentPage) tab.classList.add('active-tab');
+    });
+
+    /* Add table row hover effects */
+    const tableRows = document.querySelectorAll('tbody tr');
+    tableRows.forEach(row => {
+      row.addEventListener('mouseenter', function() {
+        this.style.backgroundColor = '#f8fbfb';
+      });
+      row.addEventListener('mouseleave', function() {
+        this.style.backgroundColor = '';
+      });
+    });
+  });
+
   // Cancel appointment function
   function cancelAppointment(appointmentId, buttonElement) {
     if (confirm('Are you sure you want to cancel this appointment?')) {
@@ -232,19 +388,6 @@
     const messageElement = document.getElementById('successMessage');
     messageElement.style.display = 'none';
   }
-
-  // Add table row hover effects
-  document.addEventListener('DOMContentLoaded', function() {
-    const tableRows = document.querySelectorAll('tbody tr');
-    tableRows.forEach(row => {
-      row.addEventListener('mouseenter', function() {
-        this.style.backgroundColor = '#f8fbfb';
-      });
-      row.addEventListener('mouseleave', function() {
-        this.style.backgroundColor = '';
-      });
-    });
-  });
 </script>
 
 </body>
