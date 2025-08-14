@@ -1,48 +1,50 @@
 
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Shared Layout</title>
+</head>
 <body>
 
 <!-- 🔹 Sidebar Fragment: Left vertical navigation -->
-<aside th:fragment="sidebar" class="sidebar">
+<aside th:fragment="sidebar (activePage)" class="sidebar">
 
   <!-- Logo at the top of the sidebar -->
   <img th:src="@{/SharedLayoutImages/LogoCircle.png}" alt="Logo" class="logo">
 
   <!-- 🔸 Navigation Links -->
   <nav class="sidebar-nav">
-    <div class="tab" data-page="home">
-      <a href="/dashboard">
+    <div class="tab">
+      <a th:href="@{/dashboard}">
         <img th:src="@{/SharedLayoutImages/homeIcon.svg}" alt="Home Icon" class="tab-icon">
         <span>Home</span>
       </a>
     </div>
 
-
-    <div class="tab">
-      <a href="/patientProfile">
+    <div class="tab" th:classappend="${activePage == 'patientProfile'} ? 'active'">
+      <a th:href="@{/patientProfile}">
         <img th:src="@{/SharedLayoutImages/profileIcon.svg}" alt="Profile Icon" class="tab-icon">
         <span>Patient Profile</span>
       </a>
     </div>
 
-    <div class="tab">
-      <a href="/clinicalNotes">
+    <div class="tab" th:classappend="${activePage == 'clinicalNotes'} ? 'active'">
+      <a th:href="@{/clinicalNotes}">
         <img th:src="@{/SharedLayoutImages/intakeIcon.svg}" alt="Intake Icon" class="tab-icon">
         <span>Clinical Notes</span>
       </a>
     </div>
 
-    <!-- Active tab styling applied here -->
-    <div class="tab">
-      <a href="/vitals">
+    <div class="tab" th:classappend="${activePage == 'vitals'} ? 'active'">
+      <a th:href="@{/vitals}">
         <img th:src="@{/SharedLayoutImages/vitalsIcon.svg}" alt="Vitals Icon" class="tab-icon">
         <span>Vitals</span>
       </a>
     </div>
 
-    <div class="tab" data-page="prescription">
-      <a href="/prescription">
+    <div class="tab" th:classappend="${activePage == 'prescription'} ? 'active'" data-page="prescription">
+      <a th:href="@{/prescription}">
         <div class="icon-group">
           <img th:src="@{/SharedLayoutImages/prescriptionIcon1.svg}" alt="Prescription Icon" class="tab-icon">
         </div>

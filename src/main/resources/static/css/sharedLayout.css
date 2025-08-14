@@ -64,6 +64,11 @@ html, body {
   cursor: pointer;
 }
 
+.tab.active{
+  background-color: #F5F5F5;
+  border-radius: 16px;
+}
+
 .tab:hover {
   background-color: #F5F5F5;
 }
