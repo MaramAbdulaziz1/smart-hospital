@@ -9,7 +9,7 @@ public class PatientIntake extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_id", nullable = false)
-    private Patient patient;
+    private PatientProfile patient;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "visit_type", nullable = false)
@@ -40,7 +40,7 @@ public class PatientIntake extends BaseEntity {
     }
 
     // Constructor with required fields
-    public PatientIntake(Patient patient, VisitType visitType, String complaints) {
+    public PatientIntake(PatientProfile patient, VisitType visitType, String complaints) {
         this.patient = patient;
         this.visitType = visitType;
         this.complaints = complaints;
@@ -48,11 +48,11 @@ public class PatientIntake extends BaseEntity {
     }
 
     // Getters and Setters
-    public Patient getPatient() {
+    public PatientProfile getPatient() {
         return patient;
     }
 
-    public void setPatient(Patient patient) {
+    public void setPatient(PatientProfile patient) {
         this.patient = patient;
     }
 

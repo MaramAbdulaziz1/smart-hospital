@@ -1,23 +1,24 @@
 package com.team10.smarthospital.controllers;
 
 import com.team10.smarthospital.model.Gender;
-import com.team10.smarthospital.model.Patient;
+import com.team10.smarthospital.model.PatientProfile;
 import com.team10.smarthospital.model.VisitRecord;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import java.lang.reflect.Field;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class PatientController {
+public class PatientProfileController {
 
   @GetMapping("/patientProfile")
   public String patientProfilePage(Model model) {
-    // create mock patient data
-    Patient patient = new Patient();
+    // Create mock patient data
+    PatientProfile patient = new PatientProfile();
     patient.setName("Harry Potter");
     patient.setEmail("harrypotter2000@gmail.com");
     patient.setPhone("+44 07458545663");
@@ -29,18 +30,41 @@ public class PatientController {
     patient.setBloodType("A");
     patient.setAddress("Marlborough House, Bristol, BS1 3NX");
 
-    // create mock visit history
+    // Fix: Set mock ID for testing (simulate database-generated ID)
+    setMockId(patient, 17653L);
+
+    // Create mock visit history
     List<VisitRecord> history = new ArrayList<>();
     history.add(new VisitRecord("10 Jul 2025", "General Medicine", "Viral Flu", "Dr. Sarah Moyo"));
     history.add(new VisitRecord("18 Jun 2024", "Dermatology", "Eczema", "Dr. Samuel Chen"));
     history.add(new VisitRecord("02 May 2024", "Cardiology", "Hypertension", "Dr. Linda Patel"));
     history.add(new VisitRecord("27 Apr 2023", "Neurology", "Migraine", "Dr. Emily Zhou"));
 
-    // add patient and history into model
+    // Add patient and history to model
     model.addAttribute("patient", patient);
     model.addAttribute("history", history);
     model.addAttribute("pageTitle", "Patient Profile");
 
     return "patientProfile";
+  }
+
+  // Helper method to set mock ID for testing
+  private void setMockId(PatientProfile patient, Long id) {
+    try {
+      // Use reflection to set the ID field in BaseEntity
+      Class<?> baseClass = patient.getClass();
+      while (baseClass != null && !baseClass.getSimpleName().equals("BaseEntity")) {
+        baseClass = baseClass.getSuperclass();
+      }
+
+      if (baseClass != null) {
+        Field idField = baseClass.getDeclaredField("id");
+        idField.setAccessible(true);
+        idField.set(patient, id);
+      }
+    } catch (Exception e) {
+      System.err.println("Could not set mock ID: " + e.getMessage());
+      // Fallback: you can manually create a simple getter
+    }
   }
 }
