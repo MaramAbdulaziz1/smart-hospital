@@ -1,0 +1,84 @@
+1. How your team collaborated in Figma
+
+Figma Team Collaboration
+Figma was our central platform for team interface design during this project. 
+Its cloud-based capabilities made it possible for us to collaborate synchronously and asynchronously as a team of seven regardless of individual schedules or locations. 
+Below are the key ways that our team effectively used Figma for collaboration during the design phase of the Smart Hospital project.
+
+Shared Workspace and File Management
+We worked within a single shared Figma file, which was accessible to all team members with editing rights. 
+This approach was intentionally chosen to streamline coordination and avoid fragmentation across multiple design files. 
+Each team member was assigned a specific set of pages aligned with our proposed user flow: for instance, the Patient Profile Page was handled by Cindy, the Prescription Page by Leona, and the Patient intake by Liam.
+
+Working within a single file simplified cross-reviewing and allowed for seamless handoffs. 
+Instead of manually sending assets or screenshots, we could directly inspect each other’s work and build upon it. 
+This method also supported consistency across layouts, typography, spacing, and colour schemes as shared styles and components could be reused effortlessly.
+
+2. Use of comments
+Real-time Feedback through Comments
+One of the most useful features we employed was Figma's commenting system. 
+Throughout the development of each screen, we actively left comments for one another, either suggesting improvements or pointing out issues to be addressed. 
+These comments were visible directly on the relevant design elements, helping us avoid miscommunication and track suggested changes efficiently.
+
+We often initiated discussions either directly within Figma or first during our meetings and then documented the agreed-upon feedback using the comment feature to ensure accountability. 
+This helped prevent any feedback from being forgotten and gave each designer a clear to-do list for updates.
+
+Supervisor Link Sharing and Feedback
+We shared links to Figma with our academic supervisor during our weekly review sessions so that they could view the prototype live. 
+During these review sessions, we made use of the "Follow" feature so that we were all concentrated on the same element of the design so that it was simpler for the supervisor to provide targeted, contextual feedback on specific areas.
+
+This direct communication also allowed us to quickly clarify and allowed us to reduce uncertainty about comments such as "this needs to be more visible" or "consider redesigning this layout."
+
+Benefits of Collaborative Design in Figma
+Consistency: Elements, colors, and font styles shared allowed us to maintain a consistent visual language in the entire interface.
+
+Efficiency: Live editing and immediate feedback enabled faster iteration, less going back and forth.
+
+Transparency: All team members were able to see ongoing changes in real-time, which made it easier to tweak and organize their own section.
+
+Accountability: Tagging team members and labeling comments enabled us to stay on the same track with the assigned sections.
+
+Working in Figma not only reduced confusion and latency but also developed a very strong conviction of collaborative ownership of the design. It ensured that even when we all worked on various pages, our decisions always helped to support a common system of design, as required by large-scale, multi-user applications like Smart Hospital.
+
+Version History and Iterative Design
+Figma’s version history feature allowed us to continuously improve our design by reflecting on what worked and what didn’t. 
+Although we didn’t manually take snapshots, Figma automatically saved our progress, which made it easy to revisit previous versions at any point. 
+This proved especially helpful when comparing earlier designs with more refined iterations, as it allowed us to clearly see what had improved and what needed further adjustment.
+
+A great example of this is the evolution of the Vitals page (see Figures 8-13), which went through at least six major visual and functional changes. 
+In the earliest version, the layout lacked structure, had no sidebar for navigation, and missed key interactive elements such as the "Save Vitals" button. 
+As feedback was gathered through team discussions and supervisor input, we iteratively refined the page. By the sixth version, the design included:
+
+An aligned, visually consistent layout that matches the rest of the system
+
+A patient card was added at the top to remind clinicians whose record they were updating
+
+A "Save Vitals" button to improve usability
+
+And a vitals history table, allowing easy access to previously recorded data
+
+These changes not only enhanced the interface visually, but also made the page much more usable in a real clinical workflow. 
+Since healthcare professionals often move quickly between patient records, having the patient card consistently displayed at the top of all patient-specific pages helps reduce confusion, reminding them of whose data they are viewing or editing.
+
+Design Iterations and Supervisor Feedback
+We made multiple adjustments to several pages based on weekly feedback from our supervisor and internal team reviews. This ensured a more user-friendly and functional design across the platform.
+
+One of the most significant design iterations in our project involved the Prescription Page. 
+During a weekly meeting with our supervisor, we received feedback that the initial layout appeared empty and lacked the essential clinical details typically expected in a real-world healthcare system. 
+Based on this feedback, we conducted research into existing healthcare system standards to understand what prescription interfaces should contain, with a particular focus on NHS guidelines and clinical UX principles.
+
+We referred to the /Medication and Allergy Standards for structured records/, published by the Royal College of Physicians in collaboration with the Health and Social Care Information Centre (HSCIC) in 2013. 
+These standards recommend that digital prescriptions should include key information such as medication name, dosage, frequency, route, duration, and notes, all of which are fields we implemented in our updated interface [1].
+
+In terms of user interface design, we followed the NHS Design System’s guidance on card components, which recommends grouping related form fields into visually distinct blocks. 
+This improves usability and reduces cognitive load by allowing clinicians to focus on one section at a time. Inspired by this, we introduced structured “Medication Cards” in our interface, each containing fields for medication name, dosage (e.g., 500mg), frequency (e.g., twice a day), route (e.g., oral or IV), duration (e.g., for 7 days), and clinical notes (e.g., take before meals). 
+We also added a dropdown for selecting saved medication records, improving both usability and completeness of the page [2].
+
+These changes transformed the original sparse interface into a more complete, user-friendly, and clinically appropriate design. 
+They also align our application with industry standards for both content structure and interface design. (See Figure 4 and Figure 5 for before-and-after screenshots.)
+
+Similarly, during one of our internal design review meetings, we identified a gap in the Patient Profile Page. 
+Initially, the Patient Profile Page featured the doctor’s profile picture, but it lacked interactivity. In a later iteration, we enhanced the design by implementing a functional popup menu. 
+This allowed doctors to either access their account settings or securely log out, improving both usability and navigation consistency. (See Figures 6 and 7 for screenshots.).
+
+These feedback-driven design iterations not only improved usability but also aligned the interface with real-world clinical workflows and recognized healthcare UI standards.
