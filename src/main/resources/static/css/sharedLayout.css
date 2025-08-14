@@ -1,3 +1,4 @@
+
 /* 🔹 Reset styles for full-page control */
 html, body {
   margin: 0;
@@ -114,7 +115,7 @@ html, body {
   display: flex;
   align-items: center;
   padding-left: 26px;
-  z-index: 1000; 
+  z-index: 1000;
 }
 
 /* 🔹 Page title (set dynamically per page) */
@@ -156,7 +157,7 @@ html, body {
   border-radius: 12px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
   border: 1px solid #E5E5E5;
-  z-index: 10001; 
+  z-index: 10001;
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px);
@@ -280,8 +281,8 @@ html, body {
 .patient-card {
   /*TODO: absolute->relative*/
   position: relative;
-  width: calc(100vw - 210px - 100px); 
-  max-width: 1200px; 
+  width: calc(100vw - 210px - 100px);
+  max-width: 1200px;
   height: 170px;
   top: 95px;
   left: 235px;
@@ -292,7 +293,7 @@ html, body {
   justify-content: flex-start;
   padding: 20px 30px;
   box-sizing: border-box;
-  z-index: 1; 
+  z-index: 1;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   border: 1px solid #E5E5E5;
 }
@@ -301,7 +302,7 @@ html, body {
 .vitals-content .patient-card,
 .content .patient-card {
   position: relative;
-  width: 100%; 
+  width: 100%;
   max-width: none;
   height: 170px;
   top: auto;
@@ -314,8 +315,8 @@ html, body {
   padding: 20px 30px;
   box-sizing: border-box;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  z-index: 10; 
-  margin-bottom: 20px; 
+  z-index: 10;
+  margin-bottom: 20px;
   border: 1px solid #E5E5E5;
 }
 
@@ -561,7 +562,7 @@ html, body {
   border-radius: 12px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
   border: 1px solid #E5E5E5;
-  z-index: 10002; 
+  z-index: 10002;
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px);
@@ -693,45 +694,45 @@ html, body {
     right: 25px;
     gap: 3px;
   }
-  
+
   .notification-popup {
     width: 300px;
     right: -25px;
     max-width: calc(100vw - 30px);
   }
-  
+
   .profile-popup {
     width: 250px;
     right: -15px;
     max-width: calc(100vw - 30px);
   }
-  
+
   .doctor-profile {
     width: 45px;
     height: 45px;
   }
-  
+
   .patient-card {
     width: calc(100vw - 210px - 30px);
     left: 15px;
   }
-  
+
   .id-box {
     left: 200px;
   }
-  
+
   .dob-box {
     left: 350px;
   }
-  
+
   .gender-box {
     left: 550px;
   }
-  
+
   .address-box {
     left: 640px;
   }
-  
+
   .divider-line {
     left: 180px;
   }
@@ -742,19 +743,19 @@ html, body {
     right: 20px;
     gap: 1px;
   }
-  
+
   .notification-popup {
     width: 280px;
     right: -40px;
     max-width: calc(100vw - 20px);
   }
-  
+
   .profile-popup {
     width: 220px;
     right: -30px;
     max-width: calc(100vw - 20px);
   }
-  
+
   .doctor-profile {
     width: 40px;
     height: 40px;
@@ -765,24 +766,25 @@ html, body {
     left: 10px;
     padding-left: 40px;
   }
-  
+
   .id-box {
     left: 150px;
   }
-  
+
   .dob-box {
     left: 280px;
   }
-  
+
   .gender-box {
     left: 450px;
   }
-  
+
   .address-box {
     left: 520px;
   }
-  
+
   .divider-line {
     left: 130px;
   }
 }
+

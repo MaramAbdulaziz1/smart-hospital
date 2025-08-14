@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
@@ -12,29 +13,23 @@
   <nav class="sidebar-nav">
     <div class="tab" data-page="home">
       <a href="/dashboard">
-      <img th:src="@{/SharedLayoutImages/homeIcon.svg}" alt="Home Icon" class="tab-icon">
-      <span>Home</span>
+        <img th:src="@{/SharedLayoutImages/homeIcon.svg}" alt="Home Icon" class="tab-icon">
+        <span>Home</span>
       </a>
     </div>
 
-    <div class="tab" data-page="calendar">
-      <a href="/calendar">
-      <img th:src="@{/SharedLayoutImages/calendarIcon.svg}" alt="Calendar Icon" class="tab-icon">
-      <span>Calendar</span>
-      </a>
-    </div>
 
     <div class="tab">
       <a href="/patientProfile">
-      <img th:src="@{/SharedLayoutImages/profileIcon.svg}" alt="Profile Icon" class="tab-icon">
-      <span>Patient Profile</span>
+        <img th:src="@{/SharedLayoutImages/profileIcon.svg}" alt="Profile Icon" class="tab-icon">
+        <span>Patient Profile</span>
       </a>
     </div>
 
     <div class="tab">
       <a href="/clinicalNotes">
-      <img th:src="@{/SharedLayoutImages/intakeIcon.svg}" alt="Intake Icon" class="tab-icon">
-      <span>Clinical Notes</span>
+        <img th:src="@{/SharedLayoutImages/intakeIcon.svg}" alt="Intake Icon" class="tab-icon">
+        <span>Clinical Notes</span>
       </a>
     </div>
 
@@ -79,12 +74,6 @@
       </a>
     </div>
 
-    <div class="tab" data-page="calendar">
-      <a href="/calendar">
-        <img th:src="@{/SharedLayoutImages/calendarIcon.svg}" alt="Calendar Icon" class="tab-icon">
-        <span>Calendar</span>
-      </a>
-    </div>
 
     <div class="tab">
       <a href="/patientProfile">
@@ -137,7 +126,7 @@
   <div class="header-icons-container">
     <div class="notification-container">
       <img th:src="@{/SharedLayoutImages/notificationIcon.svg}" alt="Notifications" class="notification-icon" id="notificationIcon">
-      
+
       <!-- Notification Popup -->
       <div class="notification-popup" id="notificationPopup">
         <div class="notification-header">
@@ -181,7 +170,7 @@
 
     <div class="profile-container">
       <img th:src="@{/SharedLayoutImages/doctorProfileImage.png}" alt="Doctor Profile" class="doctor-profile" id="doctorProfileIcon">
-      
+
       <!-- Doctor Profile Popup -->
       <div class="profile-popup" id="profilePopup">
         <div class="profile-header">
@@ -233,7 +222,7 @@
   </div>
 
   <div class="info-box gender-box">
-    <span class="info-label">Sex:</span>
+    <span class="info-label">Gender:</span>
     <span class="info-value">Male</span>
   </div>
 
