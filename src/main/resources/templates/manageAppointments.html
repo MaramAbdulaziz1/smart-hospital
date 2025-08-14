@@ -26,14 +26,14 @@
       </div>
 
       <div class="tab" data-page="calendar">
-        <a href="/patient/calendar">
+        <a th:href="@{/comingSoon}">
           <img th:src="@{/SharedLayoutImages/calendarIcon.svg}" alt="Calendar Icon" class="tab-icon">
           <span>Calendar</span>
         </a>
       </div>
 
       <div class="tab" data-page="health-qa">
-        <a href="/patient/health-qa">
+        <a th:href="@{/comingSoon}">
           <img th:src="@{/PatientSideImages/healthQA.svg}" alt="Health Q&A Icon" class="tab-icon">
           <span>Health Q&A</span>
         </a>
@@ -41,7 +41,7 @@
 
       <!-- Active tab styling applied here for manage appointments page -->
       <div class="tab active-tab" data-page="manage-appointments">
-        <a href="/patient/manage-appointments">
+        <a href="/patient/manageAppointments">
           <img th:src="@{/PatientSideImages/ManageAppointment.svg}" alt="Manage Appointments Icon" class="tab-icon">
           <span>Manage Appointments</span>
         </a>
