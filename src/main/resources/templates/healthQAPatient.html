@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Manage Appointments</title>
-  <link rel="stylesheet" href="/css/manageAppointments.css" />
+  <title>Health Q&A - Coming Soon</title>
+  <link rel="stylesheet" href="/css/comingSoon.css" />
   <!-- Web font: Inter -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 </head>
@@ -32,15 +32,15 @@
         </a>
       </div>
 
-      <div class="tab" data-page="health-qa">
-        <a th:href="@{/healthQAPatient}">
+      <!-- Active tab styling applied here for Health Q&A page -->
+      <div class="tab active-tab" data-page="health-qa">
+        <a th:href="@{/healthQA}">
           <img th:src="@{/PatientSideImages/healthQA.svg}" alt="Health Q&A Icon" class="tab-icon">
           <span>Health Q&A</span>
         </a>
       </div>
 
-      <!-- Active tab styling applied here for manage appointments page -->
-      <div class="tab active-tab" data-page="manage-appointments">
+      <div class="tab" data-page="manage-appointments">
         <a href="/patient/manageAppointments">
           <img th:src="@{/PatientSideImages/ManageAppointment.svg}" alt="Manage Appointments Icon" class="tab-icon">
           <span>Manage Appointments</span>
@@ -55,9 +55,9 @@
     </div>
   </aside>
 
-  <!-- Patient-side Top Navigation (Custom, like your teammate's) -->
+  <!-- Patient-side Top Navigation -->
   <header class="top-nav">
-    <h1 class="page-title">Manage Appointments</h1>
+    <h1 class="page-title">Health Q&A</h1>
 
     <div class="header-icons-container">
       <!-- Notifications -->
@@ -87,12 +87,6 @@
               <div class="notification-content">
                 <div class="notification-title">Prescription refill reminder</div>
                 <div class="notification-time">2 hours ago</div>
-              </div>
-            </div>
-            <div class="notification-item">
-              <div class="notification-content">
-                <div class="notification-title">Health tip: Stay hydrated during winter</div>
-                <div class="notification-time">1 day ago</div>
               </div>
             </div>
           </div>
@@ -135,112 +129,37 @@
 
   <!-- Main Content -->
   <main class="main-content">
-    <!-- Page Content -->
-    <section class="page-content">
-      <!-- Manage Your Appointments Section -->
-      <h2 class="section-title">Manage Your Appointments</h2>
-      <div class="appointments-management-section">
-        <table class="appointments-table">
-          <thead>
-          <tr>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Doctor/Nurse</th>
-            <th>Manage</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr th:each="appointment : ${upcomingAppointments}">
-            <td th:text="${appointment.formattedDate}">05 09 2025</td>
-            <td th:text="${appointment.formattedTime}">10:00</td>
-            <td th:text="${appointment.doctorName}">Oral Nurse</td>
-            <td>
-              <button class="cancel-btn"
-                      th:onclick="'cancelAppointment(' + ${appointment.id} + ', this)'">
-                Cancel
-              </button>
-            </td>
-          </tr>
-          <!-- Static data for demonstration if no appointments -->
-          <tr th:if="${#lists.isEmpty(upcomingAppointments)}">
-            <td>05 09 2025</td>
-            <td>10:00</td>
-            <td>Oral Nurse</td>
-            <td>
-              <button class="cancel-btn" onclick="cancelAppointment(1, this)">
-                Cancel
-              </button>
-            </td>
-          </tr>
-          <tr th:if="${#lists.isEmpty(upcomingAppointments)}">
-            <td>27 08 2025</td>
-            <td>10:00</td>
-            <td>Dr. Weasley</td>
-            <td>
-              <button class="cancel-btn" onclick="cancelAppointment(2, this)">
-                Cancel
-              </button>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+    <!-- Coming Soon Content -->
+    <section class="coming-soon-content">
+      <div class="coming-soon-container">
+        <!-- Coming Soon Icon -->
+        <div class="coming-soon-icon">
+          <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="60" fill="#7C3AED"/>
+            <path d="M40 45L50 35L70 55L80 45" stroke="#FCD34D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M40 65L50 55L70 75L80 65" stroke="#FCD34D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M40 85L50 75L70 95L80 85" stroke="#FCD34D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
 
-      <!-- Appointment History Section -->
-      <h2 class="section-title">Your Appointments Record</h2>
-      <div class="appointments-history-section">
-        <table class="appointments-history-table">
-          <thead>
-          <tr>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Doctor/Nurse</th>
-            <th>Status</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr th:each="appointment : ${appointmentHistory}">
-            <td th:text="${appointment.formattedDate}">05 09 2025</td>
-            <td th:text="${appointment.formattedTime}">10:00</td>
-            <td th:text="${appointment.doctorName}">Oral Nurse</td>
-            <td>
-              <span class="status"
-                    th:classappend="${appointment.statusLowerCase}"
-                    th:text="${appointment.statusDisplayName}">
-                Upcoming
-              </span>
-            </td>
-          </tr>
-          <!-- Static data for demonstration if no history -->
-          <tr th:if="${#lists.isEmpty(appointmentHistory)}">
-            <td>05 09 2025</td>
-            <td>10:00</td>
-            <td>Oral Nurse</td>
-            <td><span class="status upcoming">Upcoming</span></td>
-          </tr>
-          <tr th:if="${#lists.isEmpty(appointmentHistory)}">
-            <td>27 08 2025</td>
-            <td>10:00</td>
-            <td>Dr. Weasley</td>
-            <td><span class="status upcoming">Upcoming</span></td>
-          </tr>
-          <tr th:if="${#lists.isEmpty(appointmentHistory)}">
-            <td>05 06 2025</td>
-            <td>09:00</td>
-            <td>Oral Nurse</td>
-            <td><span class="status completed">Completed</span></td>
-          </tr>
-          </tbody>
-        </table>
+        <!-- Coming Soon Text -->
+        <h1 class="coming-soon-title">Coming Soon</h1>
+        <p class="coming-soon-subtitle">This feature is currently under development.</p>
+        <p class="coming-soon-description">Looking forward to serving you soon!</p>
+
+        <!-- Optional: Back to Home Button -->
+        <div class="coming-soon-actions">
+          <a href="/patient/patientDashboard" class="back-to-home-btn">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.5 15L2.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2.5 10H17.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Back to Home
+          </a>
+        </div>
       </div>
     </section>
   </main>
-</div>
-
-<!-- Success Message (Hidden by default) -->
-<div id="successMessage" class="success-message" style="display: none;">
-  <span id="messageText">Appointment cancelled successfully!</span>
-  <button onclick="closeMessage()" class="close-btn">&times;</button>
 </div>
 
 <!-- Scripts -->
@@ -307,87 +226,29 @@
       });
     });
 
-    /* Active tab */
+    /* Active tab highlighting - Health Q&A specific */
     const tabs = document.querySelectorAll('.tab[data-page]');
     const currentPage = window.location.pathname;
-    tabs.forEach(tab => {
-      const link = tab.querySelector('a');
-      if (link && link.getAttribute('href') === currentPage) tab.classList.add('active-tab');
-    });
 
-    /* Add table row hover effects */
-    const tableRows = document.querySelectorAll('tbody tr');
-    tableRows.forEach(row => {
-      row.addEventListener('mouseenter', function() {
-        this.style.backgroundColor = '#f8fbfb';
-      });
-      row.addEventListener('mouseleave', function() {
-        this.style.backgroundColor = '';
-      });
-    });
-  });
-
-  // Cancel appointment function
-  function cancelAppointment(appointmentId, buttonElement) {
-    if (confirm('Are you sure you want to cancel this appointment?')) {
-      // Send AJAX request to cancel appointment
-      fetch('/patient/appointments/cancel/' + appointmentId, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Requested-With': 'XMLHttpRequest'
+    // Handle Health Q&A pages - highlight the Health Q&A tab
+    if (currentPage === '/healthQA') {
+      tabs.forEach(tab => {
+        const tabPage = tab.getAttribute('data-page');
+        if (tabPage === 'health-qa') {
+          tab.classList.add('active-tab');
+        } else {
+          tab.classList.remove('active-tab');
         }
-      })
-              .then(response => response.json())
-              .then(data => {
-                if (data.success) {
-                  // Update UI on success
-                  const row = buttonElement.closest('tr');
-                  row.style.opacity = '0.5';
-                  buttonElement.textContent = 'Cancelled';
-                  buttonElement.disabled = true;
-                  buttonElement.classList.add('disabled');
-
-                  // Show success message
-                  showSuccessMessage('Appointment cancelled successfully!');
-
-                  // Optionally remove row after animation
-                  setTimeout(() => {
-                    row.style.transition = 'all 0.5s ease';
-                    row.style.transform = 'translateX(-100%)';
-                    setTimeout(() => row.remove(), 500);
-                  }, 2000);
-                } else {
-                  throw new Error(data.message || 'Failed to cancel appointment');
-                }
-              })
-              .catch(error => {
-                console.error('Error:', error);
-                showSuccessMessage('Error cancelling appointment. Please try again.', 'error');
-              });
+      });
+    } else {
+      tabs.forEach(tab => {
+        const link = tab.querySelector('a');
+        if (link && link.getAttribute('href') === currentPage) {
+          tab.classList.add('active-tab');
+        }
+      });
     }
-  }
-
-  // Show success message
-  function showSuccessMessage(message, type = 'success') {
-    const messageElement = document.getElementById('successMessage');
-    const messageText = document.getElementById('messageText');
-
-    messageText.textContent = message;
-    messageElement.className = 'success-message ' + type;
-    messageElement.style.display = 'flex';
-
-    // Auto hide after 5 seconds
-    setTimeout(() => {
-      closeMessage();
-    }, 5000);
-  }
-
-  // Close message
-  function closeMessage() {
-    const messageElement = document.getElementById('successMessage');
-    messageElement.style.display = 'none';
-  }
+  });
 </script>
 
 </body>

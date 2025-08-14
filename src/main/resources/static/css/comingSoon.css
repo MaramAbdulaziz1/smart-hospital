@@ -1,4 +1,4 @@
-/* manageAppointments.css - Updated for patient-side navigation */
+/* comingSoon.css - Patient-side Coming Soon page */
 
 /* Base styles */
 html, body {
@@ -15,7 +15,7 @@ html, body {
 .layout-container {
   display: flex;
   width: 100%;
-  min-height: 100%;
+  min-height: 100vh;
 }
 
 /* Sidebar styles */
@@ -439,231 +439,113 @@ html, body {
 .main-content {
   margin-left: 210px;
   padding-top: 80px;
-  padding-left: 20px;
-  padding-right: 20px;
-  background: #F5F5F5;
-  min-height: 100vh;
   width: calc(100% - 210px);
-}
-
-.page-content {
-  width: 100%;
-  max-width: 1200px;
-  margin: 20px auto 0 auto;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Section title styling */
-.section-title {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 20px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 20px;
-  margin-top: 20px;
-}
-
-.section-title:first-child {
-  margin-top: 0;
-}
-
-/* Appointments sections */
-.appointments-management-section,
-.appointments-history-section {
-  background-color: white;
-  border-radius: 12px;
-  padding: 20px 30px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  margin-bottom: 20px;
-  border: 1px solid #E5E5E5;
-}
-
-/* Table styling */
-.appointments-table,
-.appointments-history-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0 8px;
-  background-color: transparent;
-  border-radius: 8px;
-  overflow: hidden;
-  font-family: 'Inter', sans-serif;
-}
-
-/* Table header styling */
-.appointments-table th,
-.appointments-history-table th {
-  padding: 16px 20px;
-  text-align: left;
-  background-color: #A5DFEF;
-  color: #2C5F7A;
-  font-weight: 600;
-  font-size: 14px;
-  border: none;
-  border-radius: 0;
-  border-bottom: 2px solid #8BCEE0;
-}
-
-/* Table cell styling - card effect */
-.appointments-table td,
-.appointments-history-table td {
-  padding: 16px 20px;
-  text-align: left;
-  border: none;
-  background-color: white;
-  color: #333;
-  font-size: 14px;
-  vertical-align: middle;
-}
-
-/* Table rows - card effect */
-.appointments-table tbody tr,
-.appointments-history-table tbody tr {
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  transition: all 0.2s ease;
-}
-
-.appointments-table tbody tr:hover,
-.appointments-history-table tbody tr:hover {
-  background-color: #f8f9fa;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transform: translateY(-1px);
-}
-
-/* Card corners for table rows */
-.appointments-table tbody tr td:first-child,
-.appointments-history-table tbody tr td:first-child {
-  border-radius: 8px 0 0 8px;
-}
-
-.appointments-table tbody tr td:last-child,
-.appointments-history-table tbody tr td:last-child {
-  border-radius: 0 8px 8px 0;
-}
-
-/* Cancel button styling */
-.cancel-btn {
-  border: 1px solid #A5DFEF;
-  color: #3399cc;
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 8px 16px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: 'Inter', sans-serif;
-}
-
-.cancel-btn:hover:not(.disabled) {
-  background-color: #e8f7fb;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.cancel-btn.disabled {
-  background-color: #f2f2f2;
-  border-color: #d0d0d0;
-  color: #999;
-  cursor: not-allowed;
-  transform: none;
-}
-
-/* Status badge styling */
-.status {
-  padding: 6px 14px;
-  border-radius: 16px;
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: capitalize;
-  display: inline-block;
-  min-width: 80px;
-  text-align: center;
-  font-family: 'Inter', sans-serif;
-}
-
-.status.upcoming {
-  background-color: #e8f5e8;
-  color: #2d5a2d;
-  border: 1px solid #a5d6a7;
-}
-
-.status.completed {
-  background-color: #e3f2fd;
-  color: #1565c0;
-  border: 1px solid #90caf9;
-}
-
-.status.cancelled {
-  background-color: #ffebee;
-  color: #c62828;
-  border: 1px solid #ef9a9a;
-}
-
-/* Success message styling */
-.success-message {
-  position: fixed;
-  top: 100px;
-  right: 20px;
-  background: linear-gradient(135deg, #4caf50, #45a049);
-  color: white;
-  padding: 15px 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 1001;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-width: 300px;
-  animation: slideIn 0.3s ease-out;
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-}
-
-.success-message.error {
-  background: linear-gradient(135deg, #f44336, #d32f2f);
-}
-
-.success-message .close-btn {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  padding: 0;
-  width: 20px;
-  height: 20px;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  transition: background-color 0.2s;
+  background: #F5F5F5;
 }
 
-.success-message .close-btn:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+/* Coming Soon Content */
+.coming-soon-content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
 }
 
-@keyframes slideIn {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
+.coming-soon-container {
+  max-width: 600px;
+  text-align: center;
+  background: white;
+  border-radius: 24px;
+  padding: 60px 40px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid #E5E5E5;
+}
+
+.coming-soon-icon {
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.coming-soon-icon svg {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
   }
-  to {
-    transform: translateX(0);
-    opacity: 1;
+  50% {
+    transform: translateY(-10px);
   }
+}
+
+.coming-soon-title {
+  font-size: 48px;
+  font-weight: 700;
+  color: #1F2937;
+  margin: 0 0 16px 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.coming-soon-subtitle {
+  font-size: 20px;
+  color: #6B7280;
+  margin: 0 0 8px 0;
+  font-weight: 500;
+}
+
+.coming-soon-description {
+  font-size: 18px;
+  color: #9CA3AF;
+  margin: 0 0 40px 0;
+  font-weight: 400;
+}
+
+.coming-soon-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.back-to-home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: #007AFF;
+  color: white;
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+}
+
+.back-to-home-btn:hover {
+  background: #0056CC;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 122, 255, 0.4);
+}
+
+.back-to-home-btn svg {
+  transition: transform 0.2s ease;
+}
+
+.back-to-home-btn:hover svg {
+  transform: translateX(-2px);
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
   .main-content {
     margin-left: 0;
-    padding-left: 10px;
-    padding-right: 10px;
     width: 100%;
   }
 
@@ -676,33 +558,40 @@ html, body {
     width: 100%;
   }
 
-  .page-content {
-    margin: 10px auto 0 auto;
-    padding: 0 10px;
+  .coming-soon-container {
+    margin: 20px;
+    padding: 40px 30px;
   }
 
-  .appointments-management-section,
-  .appointments-history-section {
-    padding: 15px 20px;
+  .coming-soon-title {
+    font-size: 36px;
   }
 
-  .appointments-table th,
-  .appointments-history-table th,
-  .appointments-table td,
-  .appointments-history-table td {
-    padding: 12px 16px;
-    font-size: 12px;
+  .coming-soon-subtitle {
+    font-size: 18px;
   }
 
-  .cancel-btn {
-    padding: 6px 12px;
-    font-size: 12px;
+  .coming-soon-description {
+    font-size: 16px;
   }
 
-  .success-message {
-    top: 90px;
-    right: 10px;
-    left: 10px;
-    min-width: auto;
+  .back-to-home-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .coming-soon-container {
+    padding: 30px 20px;
+  }
+
+  .coming-soon-title {
+    font-size: 28px;
+  }
+
+  .coming-soon-icon svg {
+    width: 80px;
+    height: 80px;
   }
 }
