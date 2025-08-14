@@ -11,6 +11,7 @@ import java.util.List;
 @Controller
 public class PatientdashboardController {
 
+
     @Autowired
     private HospitalDataService hospitalDataService;
 

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Hospital - Patient Registration</title>
+  <link rel="stylesheet" th:href="@{/css/patientRegistration.css}">
+
+  <!-- 仅保留logo定位的关键CSS -->
+  <style>
+    /* Logo部分强制定位 - 覆盖shared layout */
+    .simple-header .header-container .logo-section {
+      position: absolute !important;
+      left: -300px !important;
+      top: -60px !important;
+      z-index: 10 !important;
+      transform: none !important;
+    }
+
+    .simple-header .header-container .hospital-logo-img {
+      width: 200px !important;
+      height: 200px !important;
+      object-fit: contain !important;
+    }
+  </style>
+</head>
+<body>
+<!-- Blue Header with Logo -->
+<header class="simple-header">
+  <div class="header-container">
+    <div class="logo-section">
+      <img th:src="@{/SharedLayoutImages/LogoCircle.png}" alt="Smart Hospital Logo" class="hospital-logo-img">
+    </div>
+    <div class="registration-section">
+      <h1>Registration</h1>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content Container -->
+<div class="content-container">
+  <form id="patientRegistrationForm" method="post" action="/patientRegistration">
+
+    <!-- Main Form Section -->
+    <div class="form-section">
+      <div class="form-grid">
+        <div class="form-field">
+          <label>First Name</label>
+          <input type="text" name="firstName" id="firstName">
+          <div class="error-message" id="firstName-error"></div>
+        </div>
+
+        <div class="form-field">
+          <label>Last Name</label>
+          <input type="text" name="lastName" id="lastName">
+          <div class="error-message" id="lastName-error"></div>
+        </div>
+
+        <div class="form-field">
+          <label>Date of Birth</label>
+          <input type="date" name="dateOfBirth" id="dateOfBirth">
+          <div class="error-message" id="dateOfBirth-error"></div>
+        </div>
+
+        <div class="form-field">
+          <label>Gender</label>
+          <select name="gender" id="gender">
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+          <div class="error-message" id="gender-error"></div>
+        </div>
+
+        <div class="form-field">
+          <label>Blood Type</label>
+          <input type="text" name="bloodType" id="bloodType" placeholder="Enter your blood type">
+          <div class="error-message" id="bloodType-error"></div>
+        </div>
+
+        <div class="form-field">
+          <label>Height</label>
+          <div class="input-with-unit">
+            <input type="text" name="height" id="height">
+            <span class="unit">cm</span>
+          </div>
+          <div class="error-message" id="height-error"></div>
+        </div>
+
+        <div class="form-field">
+          <label>Weight</label>
+          <div class="input-with-unit">
+            <input type="text" name="weight" id="weight">
+            <span class="unit">kg</span>
+          </div>
+          <div class="error-message" id="weight-error"></div>
+        </div>
+
+        <div class="form-field full-width">
+          <label>Home Address</label>
+          <textarea name="homeAddress" id="homeAddress" rows="3" placeholder="Enter your full address"></textarea>
+          <div class="error-message" id="homeAddress-error"></div>
+        </div>
+
+        <div class="form-field">
+          <label>National ID</label>
+          <input type="text" name="nationalId" id="nationalId" placeholder="13-digit National ID">
+          <div class="error-message" id="nationalId-error"></div>
+        </div>
+
+        <div class="form-field">
+          <label>Email</label>
+          <input type="email" name="email" id="email">
+          <div class="error-message" id="email-error"></div>
+        </div>
+
+        <div class="form-field">
+          <label>Mobile Number</label>
+          <input type="tel" name="mobileNumber" id="mobileNumber" placeholder="9-digit number">
+          <div class="error-message" id="mobileNumber-error"></div>
+        </div>
+
+        <div class="form-field">
+          <label>Nearest Clinic</label>
+          <input type="text" name="nearestClinic" id="nearestClinic" placeholder="Enter your nearest clinic">
+          <div class="error-message" id="nearestClinic-error"></div>
+        </div>
+
+        <div class="form-field">
+          <label>Password</label>
+          <input type="password" name="password" id="password">
+          <div class="error-message" id="password-error"></div>
+        </div>
+
+        <div class="form-field">
+          <label>Confirm Password</label>
+          <input type="password" name="confirmPassword" id="confirmPassword">
+          <div class="error-message" id="confirmPassword-error"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Emergency Contact Section -->
+    <div class="form-section">
+      <div class="section-header">
+        <h3>Emergency Contact</h3>
+      </div>
+
+      <div class="form-grid-emergency">
+        <div class="form-field">
+          <label>First Name</label>
+          <input type="text" name="emergencyFirstName" id="emergencyFirstName">
+          <div class="error-message" id="emergencyFirstName-error"></div>
+        </div>
+
+        <div class="form-field">
+          <label>Last Name</label>
+          <input type="text" name="emergencyLastName" id="emergencyLastName">
+          <div class="error-message" id="emergencyLastName-error"></div>
+        </div>
+
+        <div class="form-field">
+          <label>Relationship to Patient</label>
+          <input type="text" name="emergencyRelationship" id="emergencyRelationship" placeholder="Enter relationship">
+          <div class="error-message" id="emergencyRelationship-error"></div>
+        </div>
+
+        <div class="form-field full-width">
+          <label>Phone Number</label>
+          <input type="tel" name="emergencyPhone" id="emergencyPhone">
+          <div class="error-message" id="emergencyPhone-error"></div>
+        </div>
+      </div>
+
+      <!-- Medical History -->
+      <div class="medical-section">
+        <div class="section-header">
+          <h3>Medical History</h3>
+        </div>
+
+        <div class="medical-grid">
+          <div class="form-field">
+            <label>Current Condition</label>
+            <textarea name="currentConditionDetails" id="currentConditionDetails"
+                      placeholder="Blurred vision for two days" rows="2"></textarea>
+            <div class="error-message" id="currentConditionDetails-error"></div>
+          </div>
+
+          <div class="form-field">
+            <label>Allergies</label>
+            <textarea name="allergies" id="allergies"
+                      placeholder="List any known allergies (medications, foods, etc.)" rows="3"></textarea>
+            <div class="error-message" id="allergies-error"></div>
+          </div>
+
+          <div class="form-field">
+            <label>Current Medications</label>
+            <textarea name="currentMedications" id="currentMedications"
+                      placeholder="List all medications you are currently taking" rows="3"></textarea>
+            <div class="error-message" id="currentMedications-error"></div>
+          </div>
+
+          <div class="form-field">
+            <label>Past Medical Conditions</label>
+            <textarea name="pastMedicalConditions" id="pastMedicalConditions"
+                      placeholder="Including chronic conditions (e.g., Type 2 Diabetes Mellitus)" rows="3"></textarea>
+            <div class="error-message" id="pastMedicalConditions-error"></div>
+          </div>
+
+          <div class="form-field">
+            <label>Past Surgical History</label>
+            <textarea name="pastSurgicalHistory" id="pastSurgicalHistory"
+                      placeholder="Previous surgeries and dates" rows="2"></textarea>
+            <div class="error-message" id="pastSurgicalHistory-error"></div>
+          </div>
+
+          <div class="form-field">
+            <label>Past Medications</label>
+            <textarea name="pastMedications" id="pastMedications"
+                      placeholder="Previous medications and reasons for discontinuation" rows="2"></textarea>
+            <div class="error-message" id="pastMedications-error"></div>
+          </div>
+
+          <div class="form-field">
+            <label>Family History</label>
+            <textarea name="familyHistory" id="familyHistory"
+                      placeholder="e.g., Father with Type 2 Diabetes" rows="2"></textarea>
+            <div class="error-message" id="familyHistory-error"></div>
+          </div>
+
+          <div class="form-field">
+            <label>Social History</label>
+            <textarea name="socialHistory" id="socialHistory"
+                      placeholder="e.g., Non-smoker, no alcohol" rows="2"></textarea>
+            <div class="error-message" id="socialHistory-error"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile Picture Section with Buttons -->
+    <div class="form-section">
+      <div class="section-header">
+        <h3>Profile Picture</h3>
+      </div>
+
+      <div class="profile-upload">
+        <div class="profile-preview">
+          <div class="profile-placeholder" id="profilePlaceholder">
+            <div class="placeholder-icon">👤</div>
+            <div class="placeholder-text">No photo selected</div>
+          </div>
+          <img id="profilePreview" style="display: none;">
+        </div>
+
+        <input type="file" id="profilePictureInput" name="profilePicture"
+               accept="image/*" style="display: none;">
+        <input type="file" id="cameraInput" name="cameraInput"
+               accept="image/*" capture="user" style="display: none;">
+        <div class="upload-buttons">
+          <button type="button" class="upload-btn" onclick="document.getElementById('cameraInput').click()">
+            Take a picture
+          </button>
+          <button type="button" class="upload-btn secondary" onclick="document.getElementById('profilePictureInput').click()">
+            Upload a photo
+          </button>
+        </div>
+      </div>
+
+      <!-- Form Buttons moved inside Profile Picture section -->
+      <div class="form-buttons-integrated">
+        <button type="button" class="btn-back" onclick="window.history.back()">Back</button>
+        <button type="submit" class="btn-register">Register</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Profile picture upload handlers
+    document.getElementById('profilePictureInput').addEventListener('change', handleProfilePictureUpload);
+    document.getElementById('cameraInput').addEventListener('change', handleProfilePictureUpload);
+
+    // Form validation
+    setupFormValidation();
+  });
+
+  function handleProfilePictureUpload(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const preview = document.getElementById('profilePreview');
+        const placeholder = document.getElementById('profilePlaceholder');
+
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+        placeholder.style.display = 'none';
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  function setupFormValidation() {
+    const form = document.getElementById('patientRegistrationForm');
+
+    // Real-time validation for password confirmation
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirmPassword');
+
+    confirmPassword.addEventListener('input', function() {
+      if (password.value !== confirmPassword.value) {
+        showError('confirmPassword', 'Passwords do not match');
+      } else {
+        clearError('confirmPassword');
+      }
+    });
+
+    // National ID validation
+    const nationalId = document.getElementById('nationalId');
+    nationalId.addEventListener('input', function() {
+      const value = this.value.replace(/\D/g, '');
+      this.value = value.length > 13 ? value.substr(0, 13) : value;
+      if (value.length !== 13 && value.length > 0) {
+        showError('nationalId', 'National ID must be 13 digits');
+      } else {
+        clearError('nationalId');
+      }
+    });
+
+    // Mobile number validation
+    const mobileNumber = document.getElementById('mobileNumber');
+    mobileNumber.addEventListener('input', function() {
+      const value = this.value.replace(/\D/g, '');
+      this.value = value.length > 9 ? value.substr(0, 9) : value;
+      if (value.length !== 9 && value.length > 0) {
+        showError('mobileNumber', 'Mobile number must be 9 digits');
+      } else {
+        clearError('mobileNumber');
+      }
+    });
+
+    // Emergency phone validation
+    const emergencyPhone = document.getElementById('emergencyPhone');
+    emergencyPhone.addEventListener('input', function() {
+      const value = this.value.replace(/\D/g, '');
+      this.value = value.length > 9 ? value.substr(0, 9) : value;
+      if (value.length !== 9 && value.length > 0) {
+        showError('emergencyPhone', 'Phone number must be 9 digits');
+      } else {
+        clearError('emergencyPhone');
+      }
+    });
+
+    // Form submission
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      if (validateForm()) {
+        alert('Registration successful! Please check your email for verification.');
+        // Here you would normally submit the form data
+        // form.submit();
+      }
+    });
+  }
+
+  function validateForm() {
+    let isValid = true;
+
+    // Get all required form fields
+    const requiredFields = [
+      'firstName', 'lastName', 'dateOfBirth', 'gender', 'bloodType', 'height', 'weight',
+      'homeAddress', 'nationalId', 'email', 'mobileNumber', 'nearestClinic',
+      'password', 'confirmPassword', 'emergencyFirstName', 'emergencyLastName',
+      'emergencyRelationship', 'emergencyPhone'
+    ];
+
+    // Check each required field
+    requiredFields.forEach(fieldName => {
+      const field = document.getElementById(fieldName);
+      if (field && !field.value.trim()) {
+        showError(fieldName, 'This field is required');
+        isValid = false;
+      } else if (field && field.value.trim()) {
+        clearError(fieldName);
+      }
+    });
+
+    // Special validation for password match
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    if (password && confirmPassword && password !== confirmPassword) {
+      showError('confirmPassword', 'Passwords do not match');
+      isValid = false;
+    }
+
+    // Email validation
+    const email = document.getElementById('email').value;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (email && !emailRegex.test(email)) {
+      showError('email', 'Please enter a valid email address');
+      isValid = false;
+    }
+
+    return isValid;
+  }
+
+  function showError(fieldName, message) {
+    const errorElement = document.getElementById(fieldName + '-error');
+    if (errorElement) {
+      errorElement.textContent = message;
+      errorElement.style.display = 'block';
+    }
+
+    const field = document.getElementById(fieldName);
+    if (field) {
+      field.classList.add('error');
+    }
+  }
+
+  function clearError(fieldName) {
+    const errorElement = document.getElementById(fieldName + '-error');
+    if (errorElement) {
+      errorElement.style.display = 'none';
+    }
+
+    const field = document.getElementById(fieldName);
+    if (field) {
+      field.classList.remove('error');
+    }
+  }
+</script>
+</body>
+</html>
