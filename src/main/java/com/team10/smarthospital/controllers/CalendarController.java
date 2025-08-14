@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class CalendarController {
 
     @GetMapping("/calendar")
-    public String calendarPage(Model model) {
-        model.addAttribute("pageTitle", "Calendar");
-        return "calendar";
+    public String showCalendarPage(Model model) {
+        model.addAttribute("pageTitle", "Calendar"); // Dynamic title
+        return "calendar"; // View template name
     }
 } 
