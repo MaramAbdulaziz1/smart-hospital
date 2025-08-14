@@ -12,8 +12,49 @@
 <body>
   <div class="layout-container">
 
-    <!-- Sidebar -->
-    <div th:replace="~{layouts/sharedLayout :: sidebar}"></div>
+    <!-- Sidebar (replaced sharedLayout :: sidebar with the new sidebar HTML) -->
+    <aside class="sidebar">
+      <!-- Logo at the top of the sidebar -->
+      <img th:src="@{/SharedLayoutImages/LogoCircle.png}" alt="Logo" class="logo">
+    
+      <!-- 🔸 Patient Navigation Links -->
+      <nav class="sidebar-nav">
+        <div class="tab active-tab" data-page="home">
+          <a href="/patient/dashboard">
+            <img th:src="@{/SharedLayoutImages/homeIcon.svg}" alt="Home Icon" class="tab-icon">
+            <span>Home</span>
+          </a>
+        </div>
+
+        <div class="tab" data-page="calendar">
+          <a href="/patient/calendar">
+            <img th:src="@{/SharedLayoutImages/calendarIcon.svg}" alt="Calendar Icon" class="tab-icon">
+            <span>Calendar</span>
+          </a>
+        </div>
+
+        <div class="tab" data-page="health-qa">
+          <a href="/patient/health-qa">
+            <img th:src="@{/PatientSideImages/healthQA.svg}" alt="Health Q&amp;A Icon" class="tab-icon">
+            <span>Health Q&amp;A</span>
+          </a>
+        </div>
+
+        <!-- Active tab styling applied here for manage appointments page -->
+        <div class="tab" data-page="manage-appointments">
+          <a href="/patient/manageAppointments">
+            <img th:src="@{/PatientSideImages/ManageAppointment.svg}" alt="Manage Appointments Icon" class="tab-icon">
+            <span>Manage Appointments</span>
+          </a>
+        </div>
+      </nav>
+
+      <!-- 🔸 Logout Button at the bottom -->
+      <div class="tab logout-tab" data-action="logout">
+        <img th:src="@{/SharedLayoutImages/logoutIcon.svg}" alt="Logout Icon" class="tab-icon">
+        <span>Log Out</span>
+      </div>
+    </aside>
 
     <!-- Main Content -->
     <main class="main-content">
