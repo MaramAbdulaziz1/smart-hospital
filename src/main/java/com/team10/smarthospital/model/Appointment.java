@@ -20,6 +20,7 @@ public class Appointment {
   private String notes;
   private LocalDate createdAt;
   private LocalDate updatedAt;
+  private String nurseName;
 
   // Default constructor
   public Appointment() {
@@ -73,6 +74,9 @@ public class Appointment {
 
   public LocalDate getUpdatedAt() { return updatedAt; }
   public void setUpdatedAt(LocalDate updatedAt) { this.updatedAt = updatedAt; }
+
+  public String getNurseName() { return nurseName; }
+  public void setNurseName(String nurseName) { this.nurseName = nurseName; }
 
   // Business logic methods
 
@@ -128,6 +132,7 @@ public class Appointment {
       "id=" + id +
       ", patientId=" + patientId +
       ", doctorName='" + doctorName + '\'' +
+      ", nurseName='" + nurseName + '\'' +
       ", date=" + date +
       ", time=" + time +
       ", status=" + status +
