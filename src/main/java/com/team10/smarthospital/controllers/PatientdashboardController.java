@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class PatientdashboardController {
 
-    @GetMapping("/patient/dashboard")
+    @GetMapping("/patient/patientDashboard")
     public String showPatientDashboard() {
         // src/main/resources/templates/patientdashboard.html
         return "patientdashboard";
