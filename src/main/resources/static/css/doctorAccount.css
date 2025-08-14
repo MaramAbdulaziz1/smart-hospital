@@ -1,0 +1,221 @@
+/* Page-specific styles - Only retain styles that do not conflict with the shared layout */
+
+/* Profile Info - The first content block */
+.profile-info {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.profile-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  background: #e3f2fd;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: #74b9ff;
+  border: 3px solid #74b9ff;
+}
+
+.profile-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.profile-name {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.profile-title {
+  font-size: 1rem;
+  color: #636e72;
+  font-weight: 500;
+}
+
+.profile-location {
+  font-size: 0.9rem;
+  color: #636e72;
+}
+
+.edit-photo-btn {
+  background: transparent;
+  color: #636e72;
+  border: 1px solid #ddd;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.edit-photo-btn:hover {
+  border-color: #74b9ff;
+  color: #74b9ff;
+}
+
+/* Info Sections */
+.info-section {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.edit-btn {
+  background: transparent;
+  color: #636e72;
+  border: 1px solid #ddd;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.edit-btn:hover {
+  border-color: #74b9ff;
+  color: #74b9ff;
+}
+
+.edit-btn.editing {
+  background: #74b9ff;
+  color: white;
+  border-color: #74b9ff;
+}
+
+/* Info Grid */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.info-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.info-label {
+  font-weight: 500;
+  color: #636e72;
+  font-size: 0.9rem;
+}
+
+.info-field input,
+.info-field select {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #f8f9fa;
+  transition: all 0.2s;
+}
+
+.info-field input:focus,
+.info-field select:focus {
+  outline: none;
+  border-color: #74b9ff;
+  box-shadow: 0 0 0 3px rgba(116, 185, 255, 0.1);
+}
+
+.info-field input.editable,
+.info-field select:not([disabled]) {
+  background: white;
+  border-color: #74b9ff;
+}
+
+.info-field input[readonly],
+.info-field select[disabled] {
+  cursor: not-allowed;
+}
+
+/* Form Actions */
+.form-actions {
+  display: none;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+}
+
+.cancel-btn {
+  background: #636e72;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.cancel-btn:hover {
+  background: #2d3436;
+}
+
+.save-btn {
+  background: #00b894;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.save-btn:hover {
+  background: #00a085;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-info {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .profile-left {
+    flex-direction: column;
+    text-align: center;
+  }
+}

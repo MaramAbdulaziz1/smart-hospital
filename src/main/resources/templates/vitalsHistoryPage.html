@@ -1,92 +1,118 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <!-- Meta and fonts -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet">
-
-  <!-- Global and page-specific CSS -->
-  <link rel="stylesheet" th:href="@{/css/sharedLayout.css}">
-  <link rel="stylesheet" th:href="@{/css/vitalsHistoryPage.css}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Vitals History</title>
+    <link rel="stylesheet" th:href="@{/css/sharedLayout.css}">
+    <link rel="stylesheet" th:href="@{/css/vitalsHistoryPage.css}">
 </head>
-
 <body>
+
 <div class="layout-container">
+  <!-- Sidebar -->
+  <aside th:replace="layouts/sharedLayout :: vitalsSidebar"></aside>
 
-  <!-- 🔹 Sidebar (Navigation menu on the left) -->
-  <div th:replace="~{layouts/sharedLayout :: sidebar}"></div>
+  <!-- Main Content Area -->
+  <div class="main-content">
+    <!-- Top Navigation -->
+    <header th:replace="layouts/sharedLayout :: topNav"></header>
 
-  <!-- 🔸 Main content area -->
-  <main class="content">
+    <!-- Vitals History Content -->
+    <div class="vitals-content">
+        <!-- Patient Info Card -->
+        <section th:replace="layouts/sharedLayout :: patientCard"></section>
 
-    <!-- 🔹 Top navigation bar -->
-    <div th:replace="~{layouts/sharedLayout :: topNav}"></div>
+        <!-- Vitals History Section -->
+        <div class="vital-history">
+            <div class="history-header">
+                <div class="header-left">
+                    <button class="back-btn" onclick="history.back()">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 10H5M5 10L10 15M5 10L10 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Back
+                    </button>
+                    <h2>Vitals History</h2>
+                </div>
+            </div>
 
-    <!-- 🔹 Patient details card (name, gender, etc.) -->
-    <div th:replace="~{layouts/sharedLayout :: patientCard}"></div>
-
-    <!-- 🔸 Page-specific content for vitals history -->
-    <section class="page-content">
-
-      <!-- Back arrow and page title (static, for now) -->
-      <div class="vitals-header">
-        <img th:src="@{/VitalsPageImages/backArrow.svg}" alt="Back" class="back-arrow" onclick="history.back()">
-        <h2 class="vitals-title">Vitals History</h2>
-      </div>
-
-      <!-- Optional: white block under header for layout clarity -->
-      <div class="white-blocker-box"></div>
-
-      <!-- Vitals table container (scrollable) -->
-      <div class="vitals-table-container">
-
-        <!-- 🔹 Table column headers -->
-        <div class="table-row header-row">
-          <span>Date Of Visit</span>
-          <span>BP (mmHg)</span>
-          <span>HR (bpm)</span>
-          <span>Temp (°C)</span>
-          <span>Weight (kg)</span>
-          <span>Height (cm)</span>
-          <span>BMI</span>
-          <span>Glucose (mg/dl)</span>
-          <span>O₂ Saturation (%)</span>
-          <span>Recorded By</span>
+            <!-- Vitals Table -->
+            <div class="vitals-table-wrapper">
+                <table class="vitals-table">
+                    <thead>
+                        <tr>
+                            <th>Date Of Visit</th>
+                            <th>BP (mmHg)</th>
+                            <th>HR (bpm)</th>
+                            <th>Temp (°C)</th>
+                            <th>Weight (kg)</th>
+                            <th>Height (cm)</th>
+                            <th>BMI</th>
+                            <th>Glucose (mg/dl)</th>
+                            <th>O₂ Saturation (%)</th>
+                            <th>Recorded By</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="i : ${#numbers.sequence(1, 12)}">
+                            <td>15 Jul 2025</td>
+                            <td>120/78</td>
+                            <td>82</td>
+                            <td>37.1</td>
+                            <td>72</td>
+                            <td>165</td>
+                            <td>26.4</td>
+                            <td>5.6</td>
+                            <td>97</td>
+                            <td>Dr. Sarah Moyo</td>
+                        </tr>
+                        <tr>
+                            <td>10 Jul 2025</td>
+                            <td>118/75</td>
+                            <td>76</td>
+                            <td>36.9</td>
+                            <td>71</td>
+                            <td>165</td>
+                            <td>26.1</td>
+                            <td>5.4</td>
+                            <td>98</td>
+                            <td>Dr. Linda Patel</td>
+                        </tr>
+                        <tr>
+                            <td>18 Jun 2024</td>
+                            <td>130/85</td>
+                            <td>90</td>
+                            <td>37.8</td>
+                            <td>73</td>
+                            <td>165</td>
+                            <td>26.8</td>
+                            <td>6.2</td>
+                            <td>95</td>
+                            <td>Dr. Samuel Chen</td>
+                        </tr>
+                        <tr>
+                            <td>02 May 2024</td>
+                            <td>125/80</td>
+                            <td>78</td>
+                            <td>37.0</td>
+                            <td>70</td>
+                            <td>165</td>
+                            <td>25.7</td>
+                            <td>5.1</td>
+                            <td>99</td>
+                            <td>Dr. Emily Watson</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-
-        <!-- 🔹 Table content (dynamically repeated rows) -->
-        <div class="table-row data-row" th:each="i : ${#numbers.sequence(1, 12)}">
-          <span>15 Jul 2025</span>
-          <span>120/78</span>
-          <span>82</span>
-          <span>37.1</span>
-          <span>72</span>
-          <span>165</span>
-          <span>26.4</span>
-          <span>5.6</span>
-          <span>97</span>
-          <span>Dr. Sarah Moyo</span>
-        </div>
-
-      </div>
-    </section>
-  </main>
+    </div>
+  </div>
 </div>
 
-<!-- 🔹 Optional JS for navigation or logout -->
-<script>
-  function navigateTo(url) {
-    window.location.href = url;
-  }
+<!-- Scripts -->
+<script th:src="@{/js/sharedLayout.js}"></script>
 
-  function handleLogout() {
-    if (confirm('Are you sure you want to log out?')) {
-      window.location.href = '/login';
-    }
-  }
-</script>
 </body>
 </html>

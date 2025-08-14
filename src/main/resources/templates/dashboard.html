@@ -1,82 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Smart Hospital</title>
-  <link rel="stylesheet" href="dashboard.css" />
+  <title th:text="${pageTitle} + ' - Smart Hospital'">Smart Hospital</title>
+  <link rel="stylesheet" th:href="@{/css/sharedLayout.css}">
+  <link rel="stylesheet" th:href="@{/css/dashboard.css}">
 </head>
 <body>
-<div class="sidebar">
-  <a href="/">
-    <img src="DashboardPageImages/LogoCircle.png" alt="Logo" />
-  </a>
-  <a href="#" class="nav-item with-icon home active">Home</a>
-  <a href="#" class="nav-item with-icon calendar">Calendar</a>
-  <a href="/login" class="nav-item with-icon logout">Log Out</a>
-</div>
 
-<div class="main">
-  <div class="header">
-    <div class="title">Smart Hospital</div>
-    <div class="header-icons">
-      <!-- Notification Bell Icon -->
-      <svg class="notification-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
-      </svg>
-      <div class="top-right-avatar">👤</div>
+<div class="layout-container dashboard-page">
+  <!-- Dashboard Sidebar -->
+  <aside th:fragment="dashboardSidebar" class="sidebar">
+    <!-- Logo at the top of the sidebar -->
+    <img th:src="@{/SharedLayoutImages/LogoCircle.png}" alt="Logo" class="logo">
+
+    <!-- Navigation Tabs - Only Home, Calendar, and Logout -->
+    <nav class="sidebar-nav">
+      <!-- Main navigation tabs -->
+      <div class="nav-main">
+        <!-- Home tab (active for dashboard) -->
+        <div class="tab active-tab" data-page="home">
+          <a href="/dashboard" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px; width: 100%; height: 100%;">
+            <img th:src="@{/SharedLayoutImages/homeIcon.svg}" alt="Home Icon" class="tab-icon">
+            <span>Home</span>
+          </a>
+        </div>
+        
+        <!-- Calendar tab -->
+        <div class="tab" data-page="calendar">
+          <a href="#" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px; width: 100%; height: 100%;">
+            <img th:src="@{/SharedLayoutImages/calendarIcon.svg}" alt="Calendar Icon" class="tab-icon">
+            <span>Calendar</span>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Logout tab -->
+      <div class="tab logout-tab" data-action="logout">
+        <img th:src="@{/SharedLayoutImages/logoutIcon.svg}" alt="Logout Icon" class="tab-icon">
+        <span>Log Out</span>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Main Content Area -->
+  <div class="main-content">
+    <!-- Top Navigation -->
+    <header th:replace="layouts/sharedLayout :: topNav"></header>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-content">
+      <input class="search" type="text" placeholder="Search by name or ID" style="display: block; width: 100%; height: 50px; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: white; color: #333; font-size: 14px; box-sizing: border-box;" />
+      
+      <h3 class="section-title">Patient with appointments</h3>
+      
+      <div class="table-header">
+        <div>Patient</div>
+        <div>Date</div>
+        <div>Time</div>
+        <div></div>
+      </div>
+      
+      <div class="patient-table">
+        <div class="patient-row">
+          <div>
+            <strong>Harry Potter</strong><br />
+            <span class="id">ID: HAT17653D</span>
+          </div>
+          <div>5 Jul</div>
+          <div>9:00</div>
+          <div class="button-group">
+            <a th:href="@{/patientProfile}" class="btn filled">Profile</a>
+            <a th:href="@{/clinicalNotes}" class="btn">Intake</a>
+          </div>
+        </div>
+        <div class="patient-row">
+          <div>
+            <strong>Mary Johnson</strong><br />
+            <span class="id">ID: HAT17653E</span>
+          </div>
+          <div>8 Jul</div>
+          <div>12:00</div>
+          <div class="button-group">
+            <a th:href="@{/patientProfile}" class="btn filled">Profile</a>
+            <a th:href="@{/clinicalNotes}" class="btn">Intake</a>
+          </div>
+        </div>
+        <div class="patient-row">
+          <div>
+            <strong>James Brown</strong><br />
+            <span class="id">ID: HAT17653F</span>
+          </div>
+          <div>10 Jul</div>
+          <div>15:00</div>
+          <div class="button-group">
+            <a th:href="@{/patientProfile}" class="btn filled">Profile</a>
+            <a th:href="@{/clinicalNotes}" class="btn">Intake</a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
-
-  <div class="content">
-    <input class="search" type="text" placeholder="Search by name or ID" />
-    <h3 class="section-title">Patient with appointments</h3>
-    <div class="table-header">
-      <div>Patient</div>
-      <div>Appointment time</div>
-      <div></div>
-    </div>
-    <div class="patient-table">
-      <div class="patient-row">
-        <div>
-          <strong>Harry Potter</strong><br />
-          <span class="id">ID: HAT17653D</span>
-        </div>
-        <div>9:00</div>
-        <div class="button-group">
-          <button class="btn filled">Profile</button>
-          <button class="btn">Intake</button>
-        </div>
-      </div>
-      <div class="patient-row">
-        <div>
-          <strong>Mary Johnson</strong><br />
-          <span class="id">ID: HAT17653E</span>
-        </div>
-        <div>12:00</div>
-        <div class="button-group">
-          <button class="btn filled">Profile</button>
-          <button class="btn">Intake</button>
-        </div>
-      </div>
-      <div class="patient-row">
-        <div>
-          <strong>James Brown</strong><br />
-          <span class="id">ID: HAT17653F</span>
-        </div>
-        <div>15:00</div>
-        <div class="button-group">
-          <button class="btn filled">Profile</button>
-          <button class="btn">Intake</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="bottom-buttons">
-      <button class="btn">Editor</button>
-      <button class="btn">Save</button>
-    </div>
-  </div>
 </div>
+
+<!-- Scripts -->
+<script th:src="@{/js/sharedLayout.js}"></script>
+
 </body>
 </html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Patient Dashboard</title>
+
+  <!-- Shared layout CSS + Page CSS -->
+  <link rel="stylesheet" th:href="@{/css/sharedLayout.css}">
+  <link rel="stylesheet" href="/css/patientdashboard.css" />
+</head>
+<body>
+  <div class="layout-container">
+
+    <!-- Sidebar (replaced sharedLayout :: sidebar with the new sidebar HTML) -->
+    <aside class="sidebar">
+      <!-- Logo at the top of the sidebar -->
+      <img th:src="@{/SharedLayoutImages/LogoCircle.png}" alt="Logo" class="logo">
+    
+      <!-- 🔸 Patient Navigation Links -->
+      <nav class="sidebar-nav">
+        <div class="tab active-tab" data-page="home">
+          <a href="/patient/dashboard">
+            <img th:src="@{/SharedLayoutImages/homeIcon.svg}" alt="Home Icon" class="tab-icon">
+            <span>Home</span>
+          </a>
+        </div>
+
+        <div class="tab" data-page="calendar">
+          <a href="/patient/calendar">
+            <img th:src="@{/SharedLayoutImages/calendarIcon.svg}" alt="Calendar Icon" class="tab-icon">
+            <span>Calendar</span>
+          </a>
+        </div>
+
+        <div class="tab" data-page="health-qa">
+          <a href="/patient/health-qa">
+            <img th:src="@{/PatientSideImages/healthQA.svg}" alt="Health Q&amp;A Icon" class="tab-icon">
+            <span>Health Q&amp;A</span>
+          </a>
+        </div>
+
+        <!-- Active tab styling applied here for manage appointments page -->
+        <div class="tab" data-page="manage-appointments">
+          <a href="/patient/manageAppointments">
+            <img th:src="@{/PatientSideImages/ManageAppointment.svg}" alt="Manage Appointments Icon" class="tab-icon">
+            <span>Manage Appointments</span>
+          </a>
+        </div>
+      </nav>
+
+      <!-- 🔸 Logout Button at the bottom -->
+      <div class="tab logout-tab" data-action="logout">
+        <img th:src="@{/SharedLayoutImages/logoutIcon.svg}" alt="Logout Icon" class="tab-icon">
+        <span>Log Out</span>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Top Navigation -->
+      <div th:replace="~{layouts/sharedLayout :: topNav(pageTitle='Smart Hospital')}"></div>
+
+      <!-- Page-specific content -->
+      <section class="page-content">
+
+        <!-- Upcoming Appointments -->
+        <div class="page-heading">Upcoming Appointments</div>
+        <section class="upcoming-wrap">
+          <div class="upcoming-card">
+            <div class="line-1">05 07 2025</div>
+            <div class="line-2">10:00</div>
+            <div class="line-3">Vital</div>
+          </div>
+          <div class="upcoming-card">
+            <div class="line-1">07 07 2025</div>
+            <div class="line-2">13:00</div>
+            <div class="line-3">Dr. Weasley</div>
+          </div>
+        </section>
+
+        <!-- Make Appointments -->
+        <section class="panel">
+          <h3>Make Appointments</h3>
+          <div class="form-grid">
+            <div>
+              <div class="form-row">
+                <div class="field">
+                  <label class="label">Department</label>
+                  <select>
+                    <option></option>
+                    <option>General Medicine</option>
+                    <option>General Surgery</option>
+                    <option>Cardiology</option>
+                    <option>Chest</option>
+                    <option>Pediatrics</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label class="label">Doctor</label>
+                  <select>
+                    <option></option>
+                    <option>Dr. Weasley</option>
+                    <option>Dr. Carterfield</option>
+                    <option>Dr. Fennelly</option>
+                    <option>Dr. Bristow</option>
+                    <option>Dr. Ellington</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label class="label">Date</label><input
+                    type="text"
+                    class="date-like"
+                    placeholder="DD/MM/YYYY"
+                    inputmode="numeric"
+                    pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/[0-9]{4}$"
+                  />
+                </div>
+                <div class="field">
+                  <label class="label">Time</label>
+                  <select>
+                    <option></option>
+                    <option>09:00</option>
+                    <option>09:30</option>
+                    <option>10:00</option>
+                    <option>10:30</option>
+                    <option>11:00</option>
+                    <option>11:30</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="book-col">
+              <button class="btn">Book</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Make Vital Appointments -->
+        <section class="panel">
+          <h3>Make Vital Appointments</h3>
+          <div class="form-grid">
+            <div>
+              <div class="form-row">
+                <div class="field">
+                  <label class="label">Department</label>
+                  <select>
+                    <option></option>
+                    <option>General Medicine</option>
+                    <option>General Surgery</option>
+                    <option>Cardiology</option>
+                    <option>Chest</option>
+                    <option>Pediatrics</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label class="label">Nurse</label>
+                  <select>
+                    <option></option>
+                    <option>Miss Whitford</option>
+                    <option>Miss Hargrave</option>
+                    <option>Miss Sterling</option>
+                    <option>Miss Moonridge</option>
+                    <option>Miss Windermere</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label class="label">Date</label>
+                  <input
+                    type="text"
+                    class="date-like"
+                    placeholder="DD/MM/YYYY"
+                    inputmode="numeric"
+                    pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/[0-9]{4}$"
+                  />
+                </div>
+                <div class="field">
+                  <label class="label">Time</label>
+                  <select>
+                    <option></option>
+                    <option>09:00</option>
+                    <option>09:30</option>
+                    <option>10:00</option>
+                    <option>10:30</option>
+                    <option>11:00</option>
+                    <option>11:30</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="book-col">
+              <button class="btn">Book</button>
+            </div>
+          </div>
+        </section>
+
+      </section>
+    </main>
+  </div>
+
+  <!-- Shared behavior -->
+  <script th:src="@{/js/sharedLayout.js}"></script>
+</body>
+</html>

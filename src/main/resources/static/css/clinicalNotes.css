@@ -1,0 +1,100 @@
+.form-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-row{
+  display: flex;
+  gap: 24px;
+}
+
+textarea{
+  resize: none;
+}
+
+/*Main Content*/
+.page-content{
+  position: relative;                                 
+  margin-top: 120px;
+  margin-left: 250px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;        
+}
+
+
+
+/*intake part*/
+.tabs{
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  margin: 0 0 -40px 0;
+  height: 60px;
+  width: 188px;
+  padding: 10px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+  flex-shrink: 0;
+
+  border-radius: 16px;
+  ;
+}
+
+.tabs.active{
+  background: #FFF;
+}
+
+.tabs:not(.active){
+  background: #F5F5F5
+}
+
+.intake-card {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  background: #FFF;
+  border-radius: 20px;
+  padding: 20px;
+  border: none;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.intake-card[disabled] {
+  cursor: not-allowed;
+}
+
+.intake-card.complaint {
+  width: 75vw;
+  height: 15vh;
+}
+
+.intake-card.diagnosis {
+  width: 70vw;
+  height: 18vh;
+}
+
+/*button setting*/
+.button-group {
+  display: flex;
+  flex-direction:column;
+  gap: 15px;
+  justify-content: flex-end;
+}
+
+.edit-btn,.save-btn,.submit-btn {
+  width: 100px;
+  padding: 10px 20px;
+  border: 2px solid #a5dfef;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: white;
+  color: #a5dfef;
+}
