@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Patient Dashboard</title>
 
-  <!-- Shared layout CSS + Page CSS -->
-  <link rel="stylesheet" th:href="@{/css/sharedLayout.css}">
+  <!-- CSS files -->
   <link rel="stylesheet" href="/css/patientdashboard.css" />
+  <!-- Web font: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   
-  <!-- Success Notification Styles -->
+  <!-- Notification Styles -->
   <style>
-    /* Right-top notification styles */
     .notification {
         position: fixed;
         top: 20px;
@@ -29,20 +29,9 @@
         min-width: 200px;
         text-align: center;
     }
-
-    .notification.show {
-        display: block;
-    }
-
-    .notification.success {
-        background: #4CAF50;
-    }
-
-    .notification.error {
-        background: #f44336;
-    }
-
-    /* Close button */
+    .notification.show { display: block; }
+    .notification.success { background: #4CAF50; }
+    .notification.error { background: #f44336; }
     .notification .close-btn {
         position: absolute;
         top: 8px;
@@ -60,45 +49,21 @@
         border-radius: 50%;
         transition: background-color 0.2s;
     }
-
-    .notification .close-btn:hover {
-        background: rgba(255, 255, 255, 0.2);
-    }
-
-    /* Animation effects */
+    .notification .close-btn:hover { background: rgba(255, 255, 255, 0.2); }
     @keyframes slideInRight {
-        0% {
-            transform: translateX(100%);
-            opacity: 0;
-        }
-        100% {
-            transform: translateX(0);
-            opacity: 1;
-        }
+        0% { transform: translateX(100%); opacity: 0; }
+        100% { transform: translateX(0); opacity: 1; }
     }
-
+    .notification.hiding { animation: slideOutRight 0.3s ease-out forwards; }
     @keyframes slideOutRight {
-        0% {
-            transform: translateX(0);
-            opacity: 1;
-        }
-        100% {
-            transform: translateX(100%);
-            opacity: 0;
-        }
+        0% { transform: translateX(0); opacity: 1; }
+        100% { transform: translateX(100%); opacity: 0; }
     }
-
-    .notification.hiding {
-        animation: slideOutRight 0.3s ease-out forwards;
-    }
-
-    /* Loading state */
     .btn.loading {
         position: relative;
         opacity: 0.7;
         pointer-events: none;
     }
-
     .btn.loading::after {
         content: '';
         position: absolute;
@@ -112,7 +77,6 @@
         border-radius: 50%;
         animation: spin 1s linear infinite;
     }
-
     @keyframes spin {
         0% { transform: translate(-50%, -50%) rotate(0deg); }
         100% { transform: translate(-50%, -50%) rotate(360deg); }
@@ -121,36 +85,28 @@
 </head>
 <body>
   <div class="layout-container">
-
-    <!-- Sidebar (replaced sharedLayout :: sidebar with the new sidebar HTML) -->
+    <!-- Patient Sidebar -->
     <aside class="sidebar">
-      <!-- Logo at the top of the sidebar -->
       <img th:src="@{/SharedLayoutImages/LogoCircle.png}" alt="Logo" class="logo">
-    
-      <!-- Patient Navigation Links -->
       <nav class="sidebar-nav">
         <div class="tab active-tab" data-page="home">
-          <a href="/patient/dashboard">
+          <a href="/patient/patientDashboard">
             <img th:src="@{/SharedLayoutImages/homeIcon.svg}" alt="Home Icon" class="tab-icon">
             <span>Home</span>
           </a>
         </div>
-
         <div class="tab" data-page="calendar">
           <a th:href="@{/comingSoon}">
             <img th:src="@{/SharedLayoutImages/calendarIcon.svg}" alt="Calendar Icon" class="tab-icon">
             <span>Calendar</span>
           </a>
         </div>
-
         <div class="tab" data-page="health-qa">
           <a th:href="@{/comingSoon}">
             <img th:src="@{/PatientSideImages/healthQA.svg}" alt="Health Q&A Icon" class="tab-icon">
             <span>Health Q&A</span>
           </a>
         </div>
-
-        <!-- Active tab styling applied here for manage appointments page -->
         <div class="tab" data-page="manage-appointments">
           <a href="/patient/manageAppointments">
             <img th:src="@{/PatientSideImages/ManageAppointment.svg}" alt="Manage Appointments Icon" class="tab-icon">
@@ -158,8 +114,6 @@
           </a>
         </div>
       </nav>
-
-      <!-- Logout Button at the bottom -->
       <div class="tab logout-tab" data-action="logout">
         <img th:src="@{/SharedLayoutImages/logoutIcon.svg}" alt="Logout Icon" class="tab-icon">
         <span>Log Out</span>
@@ -169,7 +123,65 @@
     <!-- Main Content -->
     <main class="main-content">
       <!-- Top Navigation -->
-      <div th:replace="~{layouts/sharedLayout :: topNav(pageTitle='Smart Hospital')}"></div>
+      <header class="top-nav">
+        <h1 class="page-title">Smart Hospital</h1>
+        <div class="header-icons-container">
+          <!-- Notifications -->
+          <div class="notification-container">
+            <img th:src="@{/SharedLayoutImages/notificationIcon.svg}" alt="Notifications" class="notification-icon" id="notificationIcon" />
+            <div class="notification-popup" id="notificationPopup">
+              <div class="notification-header">
+                <h3>Notifications</h3>
+                <button class="close-btn" id="closeNotifications" aria-label="Close notifications">&times;</button>
+              </div>
+              <div class="notification-list">
+                <div class="notification-item unread">
+                  <div class="notification-content">
+                    <div class="notification-title">Your appointment is confirmed for tomorrow at 2:00 PM</div>
+                    <div class="notification-time">5 minutes ago</div>
+                  </div>
+                  <div class="notification-dot"></div>
+                </div>
+                <div class="notification-item">
+                  <div class="notification-content">
+                    <div class="notification-title">Prescription refill reminder</div>
+                    <div class="notification-time">2 hours ago</div>
+                  </div>
+                </div>
+              </div>
+              <div class="notification-footer">
+                <button class="mark-all-read" type="button">Mark all as read</button>
+                <button class="view-all" type="button">View all notifications</button>
+              </div>
+            </div>
+          </div>
+          <!-- Profile -->
+          <div class="profile-container">
+            <img th:src="@{/PatientProfile-PatientSide/patientProfilePic.png}" alt="Patient Profile" class="patient-profile" id="patientProfileIcon" />
+            <div class="profile-popup" id="profilePopup">
+              <div class="profile-header">
+                <img th:src="@{/PatientProfile-PatientSide/patientProfilePic.png}" alt="Patient Profile" class="profile-avatar" />
+                <div class="profile-info">
+                  <h3>Harry Potter</h3>
+                  <p>Patient ID: HAT17653D</p>
+                </div>
+                <button class="close-btn" id="closeProfile" aria-label="Close profile">&times;</button>
+              </div>
+              <div class="profile-menu">
+                <a th:href="@{/patientProfile-patientSide}" class="profile-menu-item" data-action="profile">
+                  <img th:src="@{/SharedLayoutImages/profileIcon.svg}" alt="Profile" class="menu-icon" />
+                  <span>My Profile</span>
+                </a>
+                <div class="profile-divider"></div>
+                <div class="profile-menu-item logout" data-action="logout">
+                  <img th:src="@{/PatientProfile-PatientSide/logoutIcon.svg}" alt="Logout" class="menu-icon" />
+                  <span>Log Out</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
 
       <!-- Success Notification -->
       <div class="notification" id="notification">
@@ -177,13 +189,8 @@
         <button class="close-btn" onclick="hideNotification()">&times;</button>
       </div>
 
-      <!-- Page-specific content -->
+      <!-- Page Content -->
       <section class="page-content">
-
-        <!-- Success/Error Messages -->
-        <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
-        <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
-
         <!-- Upcoming Appointments -->
         <div class="page-heading">Upcoming Appointments</div>
         <section class="upcoming-wrap">
@@ -210,9 +217,7 @@
                     <label class="label">Department</label>
                     <select id="department" name="department" onchange="loadDoctors()" required>
                       <option value="">- Select Department -</option>
-                      <option th:each="dept : ${departments}" 
-                              th:value="${dept}" 
-                              th:text="${dept}"></option>
+                      <option th:each="dept : ${departments}" th:value="${dept}" th:text="${dept}"></option>
                     </select>
                   </div>
                   <div class="field">
@@ -225,23 +230,13 @@
                 <div class="form-row">
                   <div class="field">
                     <label class="label">Date</label>
-                    <input
-                      type="text"
-                      name="dateStr"
-                      class="date-like"
-                      placeholder="DD/MM/YYYY"
-                      inputmode="numeric"
-                      pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/[0-9]{4}$"
-                      required
-                    />
+                    <input type="text" name="dateStr" class="date-like" placeholder="DD/MM/YYYY" inputmode="numeric" pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/[0-9]{4}$" required />
                   </div>
                   <div class="field">
                     <label class="label">Time</label>
                     <select name="timeStr" required>
                       <option value="">- Select Time -</option>
-                      <option th:each="time : ${availableTimes}" 
-                              th:value="${time}" 
-                              th:text="${time}"></option>
+                      <option th:each="time : ${availableTimes}" th:value="${time}" th:text="${time}"></option>
                     </select>
                   </div>
                 </div>
@@ -264,9 +259,7 @@
                     <label class="label">Department</label>
                     <select id="vitalDepartment" name="department" onchange="loadNurse()" required>
                       <option value="">- Select Department -</option>
-                      <option th:each="dept : ${departments}" 
-                              th:value="${dept}" 
-                              th:text="${dept}"></option>
+                      <option th:each="dept : ${departments}" th:value="${dept}" th:text="${dept}"></option>
                     </select>
                   </div>
                   <div class="field">
@@ -279,23 +272,13 @@
                 <div class="form-row">
                   <div class="field">
                     <label class="label">Date</label>
-                    <input
-                      type="text"
-                      name="dateStr"
-                      class="date-like"
-                      placeholder="DD/MM/YYYY"
-                      inputmode="numeric"
-                      pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/[0-9]{4}$"
-                      required
-                    />
+                    <input type="text" name="dateStr" class="date-like" placeholder="DD/MM/YYYY" inputmode="numeric" pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/[0-9]{4}$" required />
                   </div>
                   <div class="field">
                     <label class="label">Time</label>
                     <select name="timeStr" required>
                       <option value="">- Select Time -</option>
-                      <option th:each="time : ${availableTimes}" 
-                              th:value="${time}" 
-                              th:text="${time}"></option>
+                      <option th:each="time : ${availableTimes}" th:value="${time}" th:text="${time}"></option>
                     </select>
                   </div>
                 </div>
@@ -306,15 +289,90 @@
             </div>
           </form>
         </section>
-
       </section>
     </main>
   </div>
 
   <!-- JavaScript -->
-  <script th:src="@{/js/sharedLayout.js}"></script>
   <script>
-    // Handle form submission
+    document.addEventListener('DOMContentLoaded', function () {
+      // Notifications popup
+      const notificationIcon = document.getElementById('notificationIcon');
+      const notificationPopup = document.getElementById('notificationPopup');
+      const closeNotifications = document.getElementById('closeNotifications');
+
+      if (notificationIcon && notificationPopup) {
+        notificationIcon.addEventListener('click', (e) => {
+          e.stopPropagation();
+          notificationPopup.classList.toggle('show');
+          const profilePopup = document.getElementById('profilePopup');
+          if (profilePopup) profilePopup.classList.remove('show');
+        });
+        closeNotifications.addEventListener('click', () => notificationPopup.classList.remove('show'));
+      }
+
+      // Profile popup
+      const patientProfileIcon = document.getElementById('patientProfileIcon');
+      const profilePopup = document.getElementById('profilePopup');
+      const closeProfile = document.getElementById('closeProfile');
+
+      if (patientProfileIcon && profilePopup) {
+        patientProfileIcon.addEventListener('click', (e) => {
+          e.stopPropagation();
+          profilePopup.classList.toggle('show');
+          if (notificationPopup) notificationPopup.classList.remove('show');
+        });
+        closeProfile.addEventListener('click', () => profilePopup.classList.remove('show'));
+      }
+
+      // Close popups when clicking outside
+      document.addEventListener('click', (e) => {
+        if (notificationPopup && !notificationPopup.contains(e.target) && e.target !== notificationIcon) {
+          notificationPopup.classList.remove('show');
+        }
+        if (profilePopup && !profilePopup.contains(e.target) && e.target !== patientProfileIcon) {
+          profilePopup.classList.remove('show');
+        }
+      });
+
+      // Mark all notifications as read
+      const markAllReadBtn = document.querySelector('.mark-all-read');
+      if (markAllReadBtn) {
+        markAllReadBtn.addEventListener('click', () => {
+          document.querySelectorAll('.notification-item.unread').forEach(item => {
+            item.classList.remove('unread');
+            const dot = item.querySelector('.notification-dot');
+            if (dot) dot.remove();
+          });
+        });
+      }
+
+      // Logout functionality
+      const logoutBtns = document.querySelectorAll('[data-action="logout"]');
+      logoutBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (confirm('Are you sure you want to log out?')) {
+            window.location.href = '/patient-login';
+          }
+        });
+      });
+
+      // Date input formatting
+      document.querySelectorAll('.date-like').forEach(input => {
+        input.addEventListener('input', function(e) {
+          let value = e.target.value.replace(/\D/g, '');
+          if (value.length >= 2) {
+            value = value.substring(0, 2) + '/' + value.substring(2);
+          }
+          if (value.length >= 5) {
+            value = value.substring(0, 5) + '/' + value.substring(5, 9);
+          }
+          e.target.value = value;
+        });
+      });
+    });
+
+    // Form submission handler
     function handleFormSubmit(event, formId) {
         event.preventDefault();
         
@@ -333,12 +391,10 @@
         })
         .then(response => {
             if (response.ok) {
-                // Success: show notification and reset form
                 const appointmentType = formId === 'appointmentForm' ? 'Appointment' : 'Vital Appointment';
                 showNotification(`${appointmentType} Booked Successfully!`, 'success');
                 resetForm(formId);
             } else {
-                // Error: show error message
                 throw new Error('Booking failed, please try again');
             }
         })
@@ -347,7 +403,6 @@
             showNotification('Booking failed: ' + error.message, 'error');
         })
         .finally(() => {
-            // Remove loading state
             submitBtn.classList.remove('loading');
             submitBtn.disabled = false;
         });
@@ -358,13 +413,9 @@
         const notification = document.getElementById('notification');
         const messageElement = document.getElementById('notificationMessage');
         
-        // Set message content
         messageElement.textContent = message;
-        
-        // Set style
         notification.className = `notification ${type} show`;
         
-        // Auto hide after 3 seconds
         setTimeout(() => {
             hideNotification();
         }, 3000);
@@ -385,7 +436,6 @@
         const form = document.getElementById(formId);
         form.reset();
         
-        // Reset select options
         const doctorSelect = document.getElementById('doctor');
         const nurseSelect = document.getElementById('nurse');
         
@@ -397,7 +447,7 @@
         }
     }
 
-    // When department changes, load doctors
+    // Load doctors
     function loadDoctors() {
       const department = document.getElementById('department').value;
       const doctorSelect = document.getElementById('doctor');
@@ -420,7 +470,7 @@
       }
     }
 
-    // Load nurse for vital appointments
+    // Load nurse
     function loadNurse() {
       const department = document.getElementById('vitalDepartment').value;
       const nurseSelect = document.getElementById('nurse');
@@ -439,22 +489,6 @@
         nurseSelect.innerHTML = '<option value="">- Please select a department first -</option>';
       }
     }
-
-    // Date input formatting
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.date-like').forEach(input => {
-          input.addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            if (value.length >= 2) {
-              value = value.substring(0, 2) + '/' + value.substring(2);
-            }
-            if (value.length >= 5) {
-              value = value.substring(0, 5) + '/' + value.substring(5, 9);
-            }
-            e.target.value = value;
-          });
-        });
-    });
   </script>
 </body>
 </html>
