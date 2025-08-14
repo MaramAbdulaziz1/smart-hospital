@@ -3,9 +3,7 @@ package com.team10.smarthospital.model;
 public enum AppointmentStatus {
   UPCOMING("Upcoming"),
   COMPLETED("Completed"),
-  CANCELLED("Cancelled"),
-  NO_SHOW("No Show"),
-  RESCHEDULED("Rescheduled");
+  CANCELLED("Cancelled");
 
   private final String displayName;
 
