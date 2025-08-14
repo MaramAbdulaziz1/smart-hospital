@@ -1,0 +1,496 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #E5E5E5;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Blue Header with Logo - 修正后的布局 */
+.simple-header {
+  background: #A5DFEF; /* 改为纯色，不使用渐变 */
+  padding: 1rem 0 2rem 0; /* 减少上下padding，让header变矮 */
+  width: 100%;
+  position: relative;
+}
+
+.header-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 60px; /* 减少内部容器高度 */
+}
+
+/* Logo部分 - 左侧定位 */
+.logo-section {
+  position: absolute;
+  left: -35px;
+  top: -36px;
+  z-index: 10;
+}
+
+.simple-header .header-container .hospital-logo-img {
+  width: 150px !important;
+  height: 150px !important;
+  object-fit: contain !important;
+}
+
+/* Registration文字部分 - 移到logo旁边 */
+.registration-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 改为左对齐，不再居中 */
+  justify-content: center;
+  margin-left: -100px; /* 调整到logo旁边 */
+}
+
+.registration-section h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #2c3e50; /* 深色文字，不是白色 */
+  margin-bottom: 0.5rem;
+  text-shadow: none;
+}
+
+.registration-subtitle {
+  font-size: 1.1rem;
+  color: #34495e; /* 深色副标题 */
+  font-weight: 400;
+}
+
+/* Main Content Container */
+.content-container {
+  max-width: 1000px;
+  margin: -2rem auto 0;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Form Sections */
+.form-section {
+  background: white;
+  border-radius: 12px;
+  padding: 3rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  border: 1px solid #E0E0E0;
+  width: 100%;
+}
+
+/* First form section gets a header */
+.form-section:first-child {
+  position: relative;
+}
+
+.form-section:first-child::before {
+  content: "Enter details to register your account";
+  position: absolute;
+  top: 1.5rem;
+  left: 3rem;
+  font-size: 1.6rem; /* 与Emergency Contact相同 */
+  font-weight: 600;  /* 与Emergency Contact相同 */
+  color: #2c3e50;    /* 与Emergency Contact相同 */
+}
+
+.section-header {
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.section-header h3 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.section-header p {
+  font-size: 1rem;
+  color: #7D7D7D;
+}
+
+/* Form Grid Layout - More Compact */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  align-items: start;
+  margin-top: 2rem; /* 为顶部描述文字留出空间 */
+}
+
+.form-grid-emergency {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.medical-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-field.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-field.span-two {
+  grid-column: span 2;
+}
+
+/* Form Labels */
+.form-field label {
+  font-weight: 500;
+  color: #4A4A4A;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+.required {
+  color: #FF6B6B;
+}
+
+/* Form Inputs */
+.form-field input,
+.form-field select,
+.form-field textarea {
+  padding: 0.8rem;
+  border: 1px solid #DDD;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background: white;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: #4A90E2;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: #A8A8A8;
+  font-size: 0.9rem;
+}
+
+/* Input with Unit */
+.input-with-unit {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-with-unit input {
+  padding-right: 3rem;
+  flex: 1;
+}
+
+.unit {
+  position: absolute;
+  right: 0.75rem;
+  color: #7D7D7D;
+  font-size: 0.9rem;
+  pointer-events: none;
+}
+
+/* Error Messages */
+.error-message {
+  font-size: 0.8rem;
+  color: #FF6B6B;
+  display: none;
+  margin-top: 0.25rem;
+}
+
+.form-field input.error,
+.form-field select.error,
+.form-field textarea.error {
+  border-color: #FF6B6B;
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+}
+
+/* Profile Upload Section */
+.profile-upload {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+.profile-preview {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #4A90E2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F8F9FA;
+  flex-shrink: 0;
+}
+
+.profile-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: #7D7D7D;
+}
+
+.placeholder-icon {
+  font-size: 2.5rem;
+  opacity: 0.5;
+}
+
+.placeholder-text {
+  font-size: 0.8rem;
+}
+
+#profilePreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.upload-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.upload-btn {
+  background: #4A90E2;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  min-width: 120px;
+  font-family: inherit;
+  margin-right: 1rem;
+}
+
+.upload-btn:hover {
+  background: #357ABD;
+  transform: translateY(-1px);
+}
+
+.upload-btn.secondary {
+  background: transparent;
+  color: #4A90E2;
+  border: 1px solid #4A90E2;
+  margin-right: 0;
+}
+
+.upload-btn.secondary:hover {
+  background: #4A90E2;
+  color: white;
+}
+
+/* Form Buttons - Integrated with Profile Picture section */
+.form-buttons-integrated {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 2px solid #F0F0F0;
+}
+
+/* Form Buttons - Original standalone version */
+.form-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-top: 2rem;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  border: 1px solid #E0E0E0;
+}
+
+.btn-back {
+  background: #6C757D;
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s;
+  min-width: 100px;
+  font-family: inherit;
+  font-weight: 500;
+}
+
+.btn-back:hover {
+  background: #5A6268;
+  transform: translateY(-1px);
+}
+
+.btn-register {
+  background: #28A745;
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s;
+  min-width: 120px;
+  margin-left: auto;
+  font-family: inherit;
+  font-weight: 500;
+}
+
+.btn-register:hover {
+  background: #218838;
+  transform: translateY(-1px);
+}
+
+/* Medical History Specific Styling */
+.medical-section {
+  border-top: 2px solid #F0F0F0;
+  padding-top: 2rem;
+  margin-top: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .content-container {
+    padding: 0 1rem;
+    max-width: 100%;
+  }
+
+  .header-container {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+    height: auto;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .logo-section {
+    position: static;
+    transform: none;
+    margin-bottom: 1rem;
+  }
+
+  .hospital-logo-img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .registration-section {
+    margin-left: 0;
+  }
+
+  .registration-section h1 {
+    font-size: 2rem;
+  }
+
+  .form-grid,
+  .form-grid-emergency {
+    grid-template-columns: 1fr;
+  }
+
+  .medical-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-section {
+    padding: 2rem;
+  }
+
+  .profile-upload {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .upload-btn {
+    width: 100%;
+    max-width: 200px;
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+
+  .upload-btn.secondary {
+    margin-bottom: 0;
+  }
+
+  .form-buttons,
+  .form-buttons-integrated {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .btn-back,
+  .btn-register {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-preview {
+    width: 100px;
+    height: 100px;
+  }
+
+  .placeholder-icon {
+    font-size: 2rem;
+  }
+}
+
+/* Focus Indicators */
+.upload-btn:focus,
+.btn-back:focus,
+.btn-register:focus {
+  outline: 2px solid #4A90E2;
+  outline-offset: 2px;
+}
+
+/* Loading States */
+.btn-register:disabled {
+  background: #DDD;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-register:disabled:hover {
+  background: #DDD;
+  transform: none;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
