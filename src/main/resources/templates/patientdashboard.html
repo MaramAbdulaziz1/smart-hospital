@@ -8,6 +8,116 @@
   <!-- Shared layout CSS + Page CSS -->
   <link rel="stylesheet" th:href="@{/css/sharedLayout.css}">
   <link rel="stylesheet" href="/css/patientdashboard.css" />
+  
+  <!-- Success Notification Styles -->
+  <style>
+    /* Right-top notification styles */
+    .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        z-index: 1000;
+        display: none;
+        font-size: 14px;
+        font-weight: 500;
+        animation: slideInRight 0.3s ease-out;
+        min-width: 200px;
+        text-align: center;
+    }
+
+    .notification.show {
+        display: block;
+    }
+
+    .notification.success {
+        background: #4CAF50;
+    }
+
+    .notification.error {
+        background: #f44336;
+    }
+
+    /* Close button */
+    .notification .close-btn {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: background-color 0.2s;
+    }
+
+    .notification .close-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Animation effects */
+    @keyframes slideInRight {
+        0% {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        100% {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideOutRight {
+        0% {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        100% {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
+
+    .notification.hiding {
+        animation: slideOutRight 0.3s ease-out forwards;
+    }
+
+    /* Loading state */
+    .btn.loading {
+        position: relative;
+        opacity: 0.7;
+        pointer-events: none;
+    }
+
+    .btn.loading::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 16px;
+        height: 16px;
+        border: 2px solid transparent;
+        border-top: 2px solid white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: translate(-50%, -50%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
   <div class="layout-container">
@@ -17,7 +127,7 @@
       <!-- Logo at the top of the sidebar -->
       <img th:src="@{/SharedLayoutImages/LogoCircle.png}" alt="Logo" class="logo">
     
-      <!-- 🔸 Patient Navigation Links -->
+      <!-- Patient Navigation Links -->
       <nav class="sidebar-nav">
         <div class="tab active-tab" data-page="home">
           <a href="/patient/dashboard">
@@ -35,8 +145,8 @@
 
         <div class="tab" data-page="health-qa">
           <a href="/patient/health-qa">
-            <img th:src="@{/PatientSideImages/healthQA.svg}" alt="Health Q&amp;A Icon" class="tab-icon">
-            <span>Health Q&amp;A</span>
+            <img th:src="@{/PatientSideImages/healthQA.svg}" alt="Health Q&A Icon" class="tab-icon">
+            <span>Health Q&A</span>
           </a>
         </div>
 
@@ -49,7 +159,7 @@
         </div>
       </nav>
 
-      <!-- 🔸 Logout Button at the bottom -->
+      <!-- Logout Button at the bottom -->
       <div class="tab logout-tab" data-action="logout">
         <img th:src="@{/SharedLayoutImages/logoutIcon.svg}" alt="Logout Icon" class="tab-icon">
         <span>Log Out</span>
@@ -61,8 +171,18 @@
       <!-- Top Navigation -->
       <div th:replace="~{layouts/sharedLayout :: topNav(pageTitle='Smart Hospital')}"></div>
 
+      <!-- Success Notification -->
+      <div class="notification" id="notification">
+        <span id="notificationMessage">Book Successfully!</span>
+        <button class="close-btn" onclick="hideNotification()">&times;</button>
+      </div>
+
       <!-- Page-specific content -->
       <section class="page-content">
+
+        <!-- Success/Error Messages -->
+        <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+        <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
 
         <!-- Upcoming Appointments -->
         <div class="page-heading">Upcoming Appointments</div>
@@ -82,127 +202,259 @@
         <!-- Make Appointments -->
         <section class="panel">
           <h3>Make Appointments</h3>
-          <div class="form-grid">
-            <div>
-              <div class="form-row">
-                <div class="field">
-                  <label class="label">Department</label>
-                  <select>
-                    <option></option>
-                    <option>General Medicine</option>
-                    <option>General Surgery</option>
-                    <option>Cardiology</option>
-                    <option>Chest</option>
-                    <option>Pediatrics</option>
-                  </select>
+          <form id="appointmentForm" method="post" action="/patient/appointments/create" onsubmit="handleFormSubmit(event, 'appointmentForm')">
+            <div class="form-grid">
+              <div>
+                <div class="form-row">
+                  <div class="field">
+                    <label class="label">Department</label>
+                    <select id="department" name="department" onchange="loadDoctors()" required>
+                      <option value="">- Select Department -</option>
+                      <option th:each="dept : ${departments}" 
+                              th:value="${dept}" 
+                              th:text="${dept}"></option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="label">Doctor</label>
+                    <select id="doctor" name="doctor" required>
+                      <option value="">- Please select a department first -</option>
+                    </select>
+                  </div>
                 </div>
-                <div class="field">
-                  <label class="label">Doctor</label>
-                  <select>
-                    <option></option>
-                    <option>Dr. Weasley</option>
-                    <option>Dr. Carterfield</option>
-                    <option>Dr. Fennelly</option>
-                    <option>Dr. Bristow</option>
-                    <option>Dr. Ellington</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="field">
-                  <label class="label">Date</label><input
-                    type="text"
-                    class="date-like"
-                    placeholder="DD/MM/YYYY"
-                    inputmode="numeric"
-                    pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/[0-9]{4}$"
-                  />
-                </div>
-                <div class="field">
-                  <label class="label">Time</label>
-                  <select>
-                    <option></option>
-                    <option>09:00</option>
-                    <option>09:30</option>
-                    <option>10:00</option>
-                    <option>10:30</option>
-                    <option>11:00</option>
-                    <option>11:30</option>
-                  </select>
+                <div class="form-row">
+                  <div class="field">
+                    <label class="label">Date</label>
+                    <input
+                      type="text"
+                      name="dateStr"
+                      class="date-like"
+                      placeholder="DD/MM/YYYY"
+                      inputmode="numeric"
+                      pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/[0-9]{4}$"
+                      required
+                    />
+                  </div>
+                  <div class="field">
+                    <label class="label">Time</label>
+                    <select name="timeStr" required>
+                      <option value="">- Select Time -</option>
+                      <option th:each="time : ${availableTimes}" 
+                              th:value="${time}" 
+                              th:text="${time}"></option>
+                    </select>
+                  </div>
                 </div>
               </div>
+              <div class="book-col">
+                <button type="submit" class="btn">Book</button>
+              </div>
             </div>
-            <div class="book-col">
-              <button class="btn">Book</button>
-            </div>
-          </div>
+          </form>
         </section>
 
         <!-- Make Vital Appointments -->
         <section class="panel">
           <h3>Make Vital Appointments</h3>
-          <div class="form-grid">
-            <div>
-              <div class="form-row">
-                <div class="field">
-                  <label class="label">Department</label>
-                  <select>
-                    <option></option>
-                    <option>General Medicine</option>
-                    <option>General Surgery</option>
-                    <option>Cardiology</option>
-                    <option>Chest</option>
-                    <option>Pediatrics</option>
-                  </select>
+          <form id="vitalAppointmentForm" method="post" action="/patient/appointments/create-vital" onsubmit="handleFormSubmit(event, 'vitalAppointmentForm')">
+            <div class="form-grid">
+              <div>
+                <div class="form-row">
+                  <div class="field">
+                    <label class="label">Department</label>
+                    <select id="vitalDepartment" name="department" onchange="loadNurse()" required>
+                      <option value="">- Select Department -</option>
+                      <option th:each="dept : ${departments}" 
+                              th:value="${dept}" 
+                              th:text="${dept}"></option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="label">Nurse</label>
+                    <select id="nurse" name="nurse" required>
+                      <option value="">- Please select a department first -</option>
+                    </select>
+                  </div>
                 </div>
-                <div class="field">
-                  <label class="label">Nurse</label>
-                  <select>
-                    <option></option>
-                    <option>Miss Whitford</option>
-                    <option>Miss Hargrave</option>
-                    <option>Miss Sterling</option>
-                    <option>Miss Moonridge</option>
-                    <option>Miss Windermere</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="field">
-                  <label class="label">Date</label>
-                  <input
-                    type="text"
-                    class="date-like"
-                    placeholder="DD/MM/YYYY"
-                    inputmode="numeric"
-                    pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/[0-9]{4}$"
-                  />
-                </div>
-                <div class="field">
-                  <label class="label">Time</label>
-                  <select>
-                    <option></option>
-                    <option>09:00</option>
-                    <option>09:30</option>
-                    <option>10:00</option>
-                    <option>10:30</option>
-                    <option>11:00</option>
-                    <option>11:30</option>
-                  </select>
+                <div class="form-row">
+                  <div class="field">
+                    <label class="label">Date</label>
+                    <input
+                      type="text"
+                      name="dateStr"
+                      class="date-like"
+                      placeholder="DD/MM/YYYY"
+                      inputmode="numeric"
+                      pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/[0-9]{4}$"
+                      required
+                    />
+                  </div>
+                  <div class="field">
+                    <label class="label">Time</label>
+                    <select name="timeStr" required>
+                      <option value="">- Select Time -</option>
+                      <option th:each="time : ${availableTimes}" 
+                              th:value="${time}" 
+                              th:text="${time}"></option>
+                    </select>
+                  </div>
                 </div>
               </div>
+              <div class="book-col">
+                <button type="submit" class="btn">Book</button>
+              </div>
             </div>
-            <div class="book-col">
-              <button class="btn">Book</button>
-            </div>
-          </div>
+          </form>
         </section>
 
       </section>
     </main>
   </div>
 
-  <!-- Shared behavior -->
+  <!-- JavaScript -->
   <script th:src="@{/js/sharedLayout.js}"></script>
+  <script>
+    // Handle form submission
+    function handleFormSubmit(event, formId) {
+        event.preventDefault();
+        
+        const form = document.getElementById(formId);
+        const formData = new FormData(form);
+        const submitBtn = form.querySelector('button[type="submit"]');
+        
+        // Show loading state
+        submitBtn.classList.add('loading');
+        submitBtn.disabled = true;
+        
+        // Submit form
+        fetch(form.action, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                // Success: show notification and reset form
+                const appointmentType = formId === 'appointmentForm' ? 'Appointment' : 'Vital Appointment';
+                showNotification(`${appointmentType} Booked Successfully!`, 'success');
+                resetForm(formId);
+            } else {
+                // Error: show error message
+                throw new Error('Booking failed, please try again');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showNotification('Booking failed: ' + error.message, 'error');
+        })
+        .finally(() => {
+            // Remove loading state
+            submitBtn.classList.remove('loading');
+            submitBtn.disabled = false;
+        });
+    }
+
+    // Show notification
+    function showNotification(message, type = 'success') {
+        const notification = document.getElementById('notification');
+        const messageElement = document.getElementById('notificationMessage');
+        
+        // Set message content
+        messageElement.textContent = message;
+        
+        // Set style
+        notification.className = `notification ${type} show`;
+        
+        // Auto hide after 3 seconds
+        setTimeout(() => {
+            hideNotification();
+        }, 3000);
+    }
+
+    // Hide notification
+    function hideNotification() {
+        const notification = document.getElementById('notification');
+        notification.classList.add('hiding');
+        
+        setTimeout(() => {
+            notification.classList.remove('show', 'hiding');
+        }, 300);
+    }
+
+    // Reset form
+    function resetForm(formId) {
+        const form = document.getElementById(formId);
+        form.reset();
+        
+        // Reset select options
+        const doctorSelect = document.getElementById('doctor');
+        const nurseSelect = document.getElementById('nurse');
+        
+        if (doctorSelect) {
+            doctorSelect.innerHTML = '<option value="">- Please select a department first -</option>';
+        }
+        if (nurseSelect) {
+            nurseSelect.innerHTML = '<option value="">- Please select a department first -</option>';
+        }
+    }
+
+    // When department changes, load doctors
+    function loadDoctors() {
+      const department = document.getElementById('department').value;
+      const doctorSelect = document.getElementById('doctor');
+      
+      if (department) {
+        fetch(`/patient/getDoctors?department=${encodeURIComponent(department)}`)
+          .then(response => response.json())
+          .then(doctors => {
+            doctorSelect.innerHTML = '<option value="">- Select Doctor -</option>';
+            doctors.forEach(doctor => {
+              doctorSelect.innerHTML += `<option value="${doctor}">${doctor}</option>`;
+            });
+          })
+          .catch(error => {
+            console.error('Error loading doctors:', error);
+            doctorSelect.innerHTML = '<option value="">Failed to load doctors</option>';
+          });
+      } else {
+        doctorSelect.innerHTML = '<option value="">- Please select a department first -</option>';
+      }
+    }
+
+    // Load nurse for vital appointments
+    function loadNurse() {
+      const department = document.getElementById('vitalDepartment').value;
+      const nurseSelect = document.getElementById('nurse');
+      
+      if (department) {
+        fetch(`/patient/getNurse?department=${encodeURIComponent(department)}`)
+          .then(response => response.text())
+          .then(nurse => {
+            nurseSelect.innerHTML = `<option value="${nurse}">${nurse}</option>`;
+          })
+          .catch(error => {
+            console.error('Error loading nurse:', error);
+            nurseSelect.innerHTML = '<option value="">Failed to load nurse</option>';
+          });
+      } else {
+        nurseSelect.innerHTML = '<option value="">- Please select a department first -</option>';
+      }
+    }
+
+    // Date input formatting
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.date-like').forEach(input => {
+          input.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+              value = value.substring(0, 2) + '/' + value.substring(2);
+            }
+            if (value.length >= 5) {
+              value = value.substring(0, 5) + '/' + value.substring(5, 9);
+            }
+            e.target.value = value;
+          });
+        });
+    });
+  </script>
 </body>
 </html>

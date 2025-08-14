@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coming Soon</title>
+  <link rel="stylesheet" th:href="@{/css/sharedLayout.css}">
+  <link rel="stylesheet" href="/css/manageAppointments.css" />
+  <style>
+    .coming-soon-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 60vh;
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+
+    .coming-soon-icon {
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+      animation: pulse 2s ease-in-out infinite alternate;
+    }
+
+    .coming-soon-icon::before {
+      content: "🚧";
+      font-size: 3.5rem;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.05); }
+    }
+
+    .coming-soon-title {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #2c3e50;
+      margin-bottom: 1rem;
+    }
+
+    .coming-soon-subtitle {
+      font-size: 1.3rem;
+      color: #7f8c8d;
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+<div class="layout-container">
+
+  <!-- 🔹 Patient Sidebar: Left vertical navigation -->
+  <aside class="sidebar">
+    <!-- Logo at the top of the sidebar -->
+    <img th:src="@{/SharedLayoutImages/LogoCircle.png}" alt="Logo" class="logo">
+
+    <!-- 🔸 Patient Navigation Links -->
+    <nav class="sidebar-nav">
+      <div class="tab" data-page="home">
+        <a th:href="@{/patient/patientDashboard}">
+          <img th:src="@{/SharedLayoutImages/homeIcon.svg}" alt="Home Icon" class="tab-icon">
+          <span>Home</span>
+        </a>
+      </div>
+
+      <div class="tab" data-page="calendar">
+        <a th:href="@{/comingSoon}">
+          <img th:src="@{/SharedLayoutImages/calendarIcon.svg}" alt="Calendar Icon" class="tab-icon">
+          <span>Calendar</span>
+        </a>
+      </div>
+
+      <div class="tab" data-page="health-qa">
+        <a th:href="@{/comingSoon}">
+          <img th:src="@{/PatientSideImages/healthQA.svg}" alt="Health Q&A Icon" class="tab-icon">
+          <span>Health Q&A</span>
+        </a>
+      </div>
+
+      <!-- Active tab styling applied here for manage appointments page -->
+      <div class="tab" data-page="manage-appointments">
+        <a th:href="@{/patient/manageAppointments}">
+          <img th:src="@{/PatientSideImages/ManageAppointment.svg}" alt="Manage Appointments Icon" class="tab-icon">
+          <span>Manage Appointments</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- 🔸 Logout Button at the bottom -->
+    <div class="tab logout-tab" data-action="logout">
+      <img th:src="@{/SharedLayoutImages/logoutIcon.svg}" alt="Logout Icon" class="tab-icon">
+      <span>Log Out</span>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Top Navigation -->
+    <div th:replace="~{layouts/sharedLayout :: topNav(pageTitle='Coming Soon')}"></div>
+
+    <!-- Page Content -->
+    <section class="page-content">
+      <div class="coming-soon-container">
+        <div class="coming-soon-icon"></div>
+
+        <h1 class="coming-soon-title">Coming Soon</h1>
+        <p class="coming-soon-subtitle">
+          This feature is currently under development.<br>
+          Looking forward to serving you soon!
+        </p>
+      </div>
+    </section>
+  </main><!-- /.main-content -->
+</div><!-- /.layout-container -->
+
+<!-- Scripts -->
+<script th:src="@{/js/sharedLayout.js}"></script>
+
+</body>
+</html>
