@@ -10,8 +10,50 @@
 <body>
 
 <div class="layout-container">
-  <!-- Sidebar -->
-  <div th:replace="~{layouts/sharedLayout :: sidebar}"></div>
+
+  <!-- 🔹 Patient Sidebar: Left vertical navigation -->
+  <aside class="sidebar">
+    <!-- Logo at the top of the sidebar -->
+    <img th:src="@{/SharedLayoutImages/LogoCircle.png}" alt="Logo" class="logo">
+
+    <!-- 🔸 Patient Navigation Links -->
+    <nav class="sidebar-nav">
+      <div class="tab" data-page="home">
+        <a href="/patient/home">
+          <img th:src="@{/SharedLayoutImages/homeIcon.svg}" alt="Home Icon" class="tab-icon">
+          <span>Home</span>
+        </a>
+      </div>
+
+      <div class="tab" data-page="calendar">
+        <a href="/patient/calendar">
+          <img th:src="@{/SharedLayoutImages/calendarIcon.svg}" alt="Calendar Icon" class="tab-icon">
+          <span>Calendar</span>
+        </a>
+      </div>
+
+      <div class="tab" data-page="health-qa">
+        <a href="/patient/health-qa">
+          <img th:src="@{/PatientSideImages/healthQA.svg}" alt="Health Q&A Icon" class="tab-icon">
+          <span>Health Q&A</span>
+        </a>
+      </div>
+
+      <!-- Active tab styling applied here for manage appointments page -->
+      <div class="tab active-tab" data-page="manage-appointments">
+        <a href="/patient/manage-appointments">
+          <img th:src="@{/PatientSideImages/ManageAppointment.svg}" alt="Manage Appointments Icon" class="tab-icon">
+          <span>Manage Appointments</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- 🔸 Logout Button at the bottom -->
+    <div class="tab logout-tab" data-action="logout">
+      <img th:src="@{/SharedLayoutImages/logoutIcon.svg}" alt="Logout Icon" class="tab-icon">
+      <span>Log Out</span>
+    </div>
+  </aside>
 
   <!-- Main Content -->
   <main class="main-content">
@@ -140,33 +182,33 @@
           'X-Requested-With': 'XMLHttpRequest'
         }
       })
-        .then(response => response.json())
-        .then(data => {
-          if (data.success) {
-            // Update UI on success
-            const row = buttonElement.closest('tr');
-            row.style.opacity = '0.5';
-            buttonElement.textContent = 'Cancelled';
-            buttonElement.disabled = true;
-            buttonElement.classList.add('disabled');
+              .then(response => response.json())
+              .then(data => {
+                if (data.success) {
+                  // Update UI on success
+                  const row = buttonElement.closest('tr');
+                  row.style.opacity = '0.5';
+                  buttonElement.textContent = 'Cancelled';
+                  buttonElement.disabled = true;
+                  buttonElement.classList.add('disabled');
 
-            // Show success message
-            showSuccessMessage('Appointment cancelled successfully!');
+                  // Show success message
+                  showSuccessMessage('Appointment cancelled successfully!');
 
-            // Optionally remove row after animation
-            setTimeout(() => {
-              row.style.transition = 'all 0.5s ease';
-              row.style.transform = 'translateX(-100%)';
-              setTimeout(() => row.remove(), 500);
-            }, 2000);
-          } else {
-            throw new Error(data.message || 'Failed to cancel appointment');
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          showSuccessMessage('Error cancelling appointment. Please try again.', 'error');
-        });
+                  // Optionally remove row after animation
+                  setTimeout(() => {
+                    row.style.transition = 'all 0.5s ease';
+                    row.style.transform = 'translateX(-100%)';
+                    setTimeout(() => row.remove(), 500);
+                  }, 2000);
+                } else {
+                  throw new Error(data.message || 'Failed to cancel appointment');
+                }
+              })
+              .catch(error => {
+                console.error('Error:', error);
+                showSuccessMessage('Error cancelling appointment. Please try again.', 'error');
+              });
     }
   }
 
