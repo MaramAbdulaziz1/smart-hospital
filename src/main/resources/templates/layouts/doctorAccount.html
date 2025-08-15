@@ -20,16 +20,16 @@
     <header th:replace="~{layouts/sharedLayout :: topNav}"></header>
     <!--doctor information-->
     <!-- Profile Section -->
-    <section class="profile-info">
-      <div class="profile-left">
-        <div class="profile-avatar">👤</div>
-        <div class="profile-details">
-          <h3 class="profile-name">Ginny Weasley</h3>
-          <div class="profile-title">Doctor</div>
-          <div class="profile-location">Bristol, United Kingdom</div>
+    <section class="profile-info1">
+      <div class="profile-left1">
+        <div class="profile-avatar1">👤</div>
+        <div class="profile-details1">
+          <h3 class="profile-name1">Ginny Weasley</h3>
+          <div class="profile-title1">Doctor</div>
+          <div class="profile-location1">Bristol, United Kingdom</div>
         </div>
       </div>
-      <div class="profile-right">
+      <div class="profile-right1">
         <button class="edit-photo-btn">Edit Photo</button>
       </div>
     </section>
@@ -225,5 +225,6 @@
     document.body.removeChild(fileInput);
   });
 </script>
+<script th:src="@{/js/sharedLayout.js}"></script>
 </body>
 </html>
