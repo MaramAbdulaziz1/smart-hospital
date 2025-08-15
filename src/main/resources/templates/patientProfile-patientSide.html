@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Profile - Patient Portal</title>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" th:href="@{/css/patientProfile-patientSide.css}" />
+
+  <!-- Web font: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<div class="layout-container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <img th:src="@{/PatientProfile-PatientSide/LogoCircle.png}" alt="Logo" class="logo" />
+
+    <nav class="sidebar-nav">
+      <!-- Home -->
+      <div class="tab" data-page="home">
+        <a th:href="@{/patient/patientDashboard}">
+          <img th:src="@{/PatientProfile-PatientSide/homeIcon.svg}" alt="Home Icon" class="tab-icon" />
+          <span>Home</span>
+        </a>
+      </div>
+
+      <!-- Calendar -->
+      <div class="tab" data-page="calendar">
+        <a th:href="@{/comingSoon}">
+          <img th:src="@{/PatientProfile-PatientSide/calendarIcon.svg}" alt="Calendar Icon" class="tab-icon" />
+          <span>Calendar</span>
+        </a>
+      </div>
+
+      <!-- Health Q&A -->
+      <div class="tab" data-page="health-qa">
+        <a th:href="@{/comingSoon}">
+          <img th:src="@{/PatientProfile-PatientSide/healthQAIcon.svg}" alt="Health Q&A Icon" class="tab-icon" />
+          <span>Health Q&amp;A</span>
+        </a>
+      </div>
+
+      <!-- Manage Appointments (two-line label, same route as teammate) -->
+      <div class="tab two-line-tab" data-page="manage-appointments">
+        <a th:href="@{/patient/manageAppointments}">
+          <img th:src="@{/PatientProfile-PatientSide/manageApptIcon.svg}" alt="Manage Appointments Icon" class="tab-icon" />
+          <span>Manage<br/>Appointments</span>
+        </a>
+      </div>
+
+    </nav>
+
+    <div class="tab logout-tab" data-action="logout">
+      <img th:src="@{/PatientProfile-PatientSide/logoutIcon.svg}" alt="Logout Icon" class="tab-icon" />
+      <span>Log Out</span>
+    </div>
+  </aside>
+
+  <!-- Header -->
+  <header class="top-nav">
+    <h1 class="page-title" th:text="${pageTitle} ?: 'My Profile'">My Profile</h1>
+
+    <div class="header-icons-container">
+      <!-- Notifications -->
+      <div class="notification-container">
+        <img th:src="@{/SharedLayoutImages/notificationIcon.svg}" alt="Notifications" class="notification-icon" id="notificationIcon" />
+        <div class="notification-popup" id="notificationPopup">
+          <div class="notification-header">
+            <h3>Notifications</h3>
+            <button class="close-btn" id="closeNotifications" aria-label="Close notifications">&times;</button>
+          </div>
+          <div class="notification-list">
+            <div class="notification-item unread">
+              <div class="notification-content">
+                <div class="notification-title">Your appointment is confirmed for tomorrow at 2:00 PM</div>
+                <div class="notification-time">5 minutes ago</div>
+              </div>
+              <div class="notification-dot"></div>
+            </div>
+            <div class="notification-item unread">
+              <div class="notification-content">
+                <div class="notification-title">New test results are available</div>
+                <div class="notification-time">1 hour ago</div>
+              </div>
+              <div class="notification-dot"></div>
+            </div>
+            <div class="notification-item">
+              <div class="notification-content">
+                <div class="notification-title">Prescription refill reminder</div>
+                <div class="notification-time">2 hours ago</div>
+              </div>
+            </div>
+            <div class="notification-item">
+              <div class="notification-content">
+                <div class="notification-title">Health tip: Stay hydrated during winter</div>
+                <div class="notification-time">1 day ago</div>
+              </div>
+            </div>
+          </div>
+          <div class="notification-footer">
+            <button class="mark-all-read" type="button">Mark all as read</button>
+            <button class="view-all" type="button">View all notifications</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile -->
+      <div class="profile-container">
+        <img th:src="@{/PatientProfile-PatientSide/patientProfilePic.png}" alt="Patient Profile" class="patient-profile" id="patientProfileIcon" />
+        <div class="profile-popup" id="profilePopup">
+          <div class="profile-header">
+            <img th:src="@{/PatientProfile-PatientSide/patientProfilePic.png}" alt="Patient Profile" class="profile-avatar" />
+            <div class="profile-info">
+              <h3>Harry Potter</h3>
+              <p>Patient ID: HAT17653D</p>
+            </div>
+            <button class="close-btn" id="closeProfile" aria-label="Close profile">&times;</button>
+          </div>
+          <div class="profile-menu">
+            <a th:href="@{/patientProfile-patientSide}" class="profile-menu-item" data-action="profile">
+              <img th:src="@{/SharedLayoutImages/profileIcon.svg}" alt="Profile" class="menu-icon" />
+              <span>My Profile</span>
+            </a>
+
+            <div class="profile-divider"></div>
+            <div class="profile-menu-item logout" data-action="logout">
+              <img th:src="@{/PatientProfile-PatientSide/logoutIcon.svg}" alt="Logout" class="menu-icon" />
+              <span>Log Out</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="main-content">
+    <!-- Top card -->
+    <section class="patient-info">
+      <div class="wrapper">
+        <!-- Left -->
+        <div class="leftside">
+          <img class="avatar" th:src="@{/PatientProfile-PatientSide/patientProfilePic.png}" alt="Patient Photo" />
+          <h3 class="info editable">Harry Potter</h3>
+          <p class="email editable">harrypotter2000@gmail.com</p>
+          <p class="phone">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M2.98816 2.98816C2.67559 3.30072 2.5 3.72464 2.5 4.16667V5C2.5 11.9033 8.09667 17.5 15 17.5H15.8333C16.2754 17.5 16.6993 17.3244 17.0118 17.0118C17.3244 16.6993 17.5 16.2754 17.5 15.8333V13.1008C17.5 12.9259 17.445 12.7553 17.3427 12.6134C17.2404 12.4714 17.096 12.3653 16.93 12.31L13.1858 11.0617C12.9956 10.9984 12.7888 11.0059 12.6036 11.0827C12.4184 11.1596 12.2671 11.3006 12.1775 11.48L11.2358 13.3608C9.19538 12.4389 7.5611 10.8046 6.63917 8.76417L8.52 7.8225C8.69938 7.73288 8.84042 7.58158 8.91726 7.39637C8.9941 7.21116 9.00158 7.00445 8.93833 6.81417L7.69 3.07C7.63475 2.90413 7.52874 2.75984 7.38696 2.65754C7.24519 2.55525 7.07483 2.50013 6.9 2.5H4.16667C3.72464 2.5 3.30072 2.67559 2.98816 2.98816Z" stroke="#3F3F46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="editable">+44 07458545663</span>
+          </p>
+
+          <hr class="divider" />
+
+          <div class="emergency-contact">
+            <div class="label">Emergency Contact</div>
+            <div class="value">
+              <span class="editable">James Potter</span>
+              <span class="relation editable">(Father)</span><br />
+              <svg class="phone-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M2.98816 2.98816C2.67559 3.30072 2.5 3.72464 2.5 4.16667V5C2.5 11.9033 8.09667 17.5 15 17.5H15.8333C16.2754 17.5 16.6993 17.3244 17.0118 17.0118C17.3244 16.6993 17.5 16.2754 17.5 15.8333V13.1008C17.5 12.9259 17.445 12.7553 17.3427 12.6134C17.2404 12.4714 17.096 12.3653 16.93 12.31L13.1858 11.0617C12.9956 10.9984 12.7888 11.0059 12.6036 11.0827C12.4184 11.1596 12.2671 11.3006 12.1775 11.48L11.2358 13.3608C9.19538 12.4389 7.5611 10.8046 6.63917 8.76417L8.52 7.8225C8.69938 7.73288 8.84042 7.58158 8.91726 7.39637C8.9941 7.21116 9.00158 7.00445 8.93833 6.81417L7.69 3.07C7.63475 2.90413 7.52874 2.75984 7.38696 2.65754C7.24519 2.55525 7.07483 2.50013 6.9 2.5H4.16667C3.72464 2.5 3.30072 2.67559 2.98816 2.98816Z" stroke="#3F3F46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span class="contact-number editable">+44 07884556621</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vertical rule -->
+        <div class="vertical-line" role="separator" aria-hidden="true"></div>
+
+        <!-- Right -->
+        <div class="patient-right">
+          <div class="table">
+            <div class="column"><div class="label">Gender</div><div class="value editable">Male</div></div>
+            <div class="column"><div class="label">Age</div><div class="value editable">30</div></div>
+            <div class="column"><div class="label">Date of Birth</div><div class="value editable">23/08/1999</div></div>
+            <div class="column"><div class="label">Weight</div><div class="value editable">75 kg</div></div>
+            <div class="column"><div class="label">Height</div><div class="value editable">178 cm</div></div>
+            <div class="column"><div class="label">Blood Type</div><div class="value editable">A+</div></div>
+            <div class="column"><div class="label">National ID</div><div class="value editable">HAT17653D</div></div>
+            <div class="column">
+              <div class="label">Address</div>
+              <div class="value editable">Marlborough<br/>house, Bristol<br/>BS1 3NX</div>
+            </div>
+            <div class="column"><div class="label">Nearest Clinic</div><div class="value editable">East Street Health Center</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lower card: Current Condition + Medical History -->
+    <section class="health-card" id="healthCard">
+      <!-- Current Condition -->
+      <div class="hc-section">
+        <div class="hc-title">Current Condition:</div>
+        <label class="hc-sublabel" for="chiefComplaint">Chief Complaint</label>
+        <input id="chiefComplaint" class="hc-input hc-input--short" type="text" value="Blurred vision for two days" readonly />
+      </div>
+
+      <div class="hc-sep" aria-hidden="true"></div>
+
+      <!-- Medical History -->
+      <div class="hc-section">
+        <div class="hc-title">Medical History:</div>
+
+        <div class="mhx-grid">
+          <div class="mhx-field">
+            <label class="mhx-label" for="pmhx">Past Medical Conditions
+              <span class="mhx-hint">including chronic conditions</span>
+            </label>
+            <input id="pmhx" class="hc-input" type="text" value="Type 2 Diabetes Mellitus" readonly />
+          </div>
+
+          <div class="mhx-field">
+            <label class="mhx-label" for="pastMeds">Past Medications:</label>
+            <input id="pastMeds" class="hc-input" type="text" value="None" readonly />
+          </div>
+
+          <div class="mhx-field">
+            <label class="mhx-label" for="currentMeds">Current Medications:</label>
+            <input id="currentMeds" class="hc-input" type="text" value="Metformin" readonly />
+          </div>
+
+          <div class="mhx-field">
+            <label class="mhx-label" for="pshx">Past Surgical History</label>
+            <input id="pshx" class="hc-input" type="text" value="None" readonly />
+          </div>
+
+          <div class="mhx-field">
+            <label class="mhx-label" for="allergy">Allergies</label>
+            <input id="allergy" class="hc-input" type="text" value="None" readonly />
+          </div>
+
+          <div class="mhx-field">
+            <label class="mhx-label" for="fhx">Family History</label>
+            <input id="fhx" class="hc-input" type="text" value="Father with Type 2 Diabetes" readonly />
+          </div>
+
+          <!-- Social History: same rectangle size, centered -->
+          <div class="mhx-field mhx-center">
+            <label class="mhx-label" for="socialHx">Social History</label>
+            <input id="socialHx" class="hc-input" type="text" value="Non-smoker, no alcohol" readonly />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Global page actions (affects whole page) -->
+    <div class="page-actions" id="pageActions">
+      <button type="button" class="btn btn-edit">Edit</button>
+      <button type="button" class="btn btn-save" disabled>Save</button>
+    </div>
+  </main>
+</div>
+
+<!-- Behaviour -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    /* Notifications */
+    const notificationIcon = document.getElementById('notificationIcon');
+    const notificationPopup = document.getElementById('notificationPopup');
+    const closeNotifications = document.getElementById('closeNotifications');
+
+    if (notificationIcon && notificationPopup) {
+      notificationIcon.addEventListener('click', (e) => {
+        e.stopPropagation();
+        notificationPopup.classList.toggle('show');
+        const profilePopup = document.getElementById('profilePopup');
+        if (profilePopup) profilePopup.classList.remove('show');
+      });
+      closeNotifications.addEventListener('click', () => notificationPopup.classList.remove('show'));
+    }
+
+    /* Profile popup */
+    const patientProfileIcon = document.getElementById('patientProfileIcon');
+    const profilePopup = document.getElementById('profilePopup');
+    const closeProfile = document.getElementById('closeProfile');
+
+    if (patientProfileIcon && profilePopup) {
+      patientProfileIcon.addEventListener('click', (e) => {
+        e.stopPropagation();
+        profilePopup.classList.toggle('show');
+        if (notificationPopup) notificationPopup.classList.remove('show');
+      });
+      closeProfile.addEventListener('click', () => profilePopup.classList.remove('show'));
+    }
+
+    /* Close popups when clicking outside */
+    document.addEventListener('click', (e) => {
+      if (notificationPopup && !notificationPopup.contains(e.target) && e.target !== notificationIcon) {
+        notificationPopup.classList.remove('show');
+      }
+      if (profilePopup && !profilePopup.contains(e.target) && e.target !== patientProfileIcon) {
+        profilePopup.classList.remove('show');
+      }
+    });
+
+    /* Mark all notifications as read */
+    const markAllReadBtn = document.querySelector('.mark-all-read');
+    if (markAllReadBtn) {
+      markAllReadBtn.addEventListener('click', () => {
+        document.querySelectorAll('.notification-item.unread').forEach(item => {
+          item.classList.remove('unread');
+          const dot = item.querySelector('.notification-dot');
+          if (dot) dot.remove();
+        });
+      });
+    }
+
+    /* Logout */
+    const logoutBtns = document.querySelectorAll('[data-action="logout"]');
+    logoutBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (confirm('Are you sure you want to log out?')) window.location.href = '/patient-login';
+      });
+    });
+
+    /* Active tab */
+    const tabs = document.querySelectorAll('.tab[data-page]');
+    const currentPage = window.location.pathname;
+    tabs.forEach(tab => {
+      const link = tab.querySelector('a');
+      if (link && link.getAttribute('href') === currentPage) tab.classList.add('active-tab');
+    });
+
+    /* -------- Global view ↔ edit toggle for the whole page -------- */
+    const editBtn = document.querySelector('.page-actions .btn-edit');
+    const saveBtn = document.querySelector('.page-actions .btn-save');
+
+    // Readonly inputs (lower card)
+    const formFields = document.querySelectorAll('.hc-input');
+
+    // Editable text nodes (top card & elsewhere)
+    const textNodes = document.querySelectorAll('.editable');
+
+    function setMode(editing) {
+      // inputs
+      formFields.forEach(el => {
+        if (el.matches('input, textarea')) el.readOnly = !editing;
+      });
+      // contenteditable text
+      textNodes.forEach(el => el.contentEditable = editing ? 'true' : 'false');
+
+      editBtn.disabled = editing;
+      saveBtn.disabled = !editing;
+    }
+
+    // initial: view only
+    setMode(false);
+
+    editBtn.addEventListener('click', () => setMode(true));
+
+    saveBtn.addEventListener('click', () => {
+      // TODO: persist to backend if needed
+      setMode(false);
+    });
+  });
+</script>
+
+</body>
+</html>

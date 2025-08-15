@@ -242,3 +242,50 @@ body {
 .forgot-link:hover {
   text-decoration: underline;
 }
+
+/* Anchor the button + menu at the same place as before */
+.register-group {
+  position: absolute;
+  top: 350px;     /* same as your .register-btn */
+  left: 367px;    /* same as your .register-btn */
+  z-index: 4;     /* above background/shadows */
+}
+
+/* Inside the group, the button no longer needs absolute coords */
+.register-group .register-btn {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+/* Dropdown menu */
+.register-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 260px;
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  padding: 8px;
+  display: none;             /* hidden by default */
+}
+
+.register-menu.show {
+  display: block;
+}
+
+.register-option {
+  display: block;
+  padding: 12px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #0f172a;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+}
+
+.register-option:hover {
+  background: #F0F8FF;
+}

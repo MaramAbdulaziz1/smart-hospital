@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Profile menu item actions
     profileMenuItems.forEach(item => {
-        item.addEventListener('click', function() {
+        item.addEventListener('click', function(e) {
             const action = this.getAttribute('data-action');
             handleProfileAction(action);
         });
@@ -194,8 +194,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function handleProfileAction(action) {
         switch (action) {
             case 'profile':
-                showToast('Opening profile settings...');
-                // Navigate to profile page
+                // Navigate to the doctor's account settings page
+                window.location.href = '/doctorAccount';
                 break;
             case 'settings':
                 showToast('Opening application settings...');

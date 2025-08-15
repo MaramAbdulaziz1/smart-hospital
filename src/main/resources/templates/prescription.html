@@ -10,14 +10,14 @@
 <body>
 <div class="layout-container">
   <!-- Sidebar -->
-  <div th:replace="~{layouts/sharedLayout :: sidebar}"></div>
+  <aside th:replace="~{layouts/sharedLayout :: sidebar (activePage='prescription')}"></aside>
 
   <!-- Main Content -->
   <main class="main-content">
     <!-- Top Navigation -->
-    <div th:replace="~{layouts/sharedLayout :: topNav}"></div>
+    <header th:replace="~{layouts/sharedLayout :: topNav}"></header>
     <!-- Patient Info Card -->
-    <div th:replace="~{layouts/sharedLayout :: patientCard}"></div>
+    <section th:replace="~{layouts/sharedLayout :: patientCard}"></section>
 
     <!-- Page-specific content -->
     <section class="page-content">
@@ -122,8 +122,8 @@
                         </button>
                     </div>
                     <div class="floating-buttons">
-                        <button class="editor-btn">Editor</button>
                         <button class="save-btn">Save</button>
+                        <button class="submit-btn">Submit</button>
                     </div>
                 </div>
             </div>
@@ -136,6 +136,7 @@
 
 <!-- Scripts -->
 <script th:src="@{/js/sharedLayout.js}"></script>
+<script th:src="@{/js/prescription.js}"></script>
 </body>
 </html>
 

@@ -1,6 +1,6 @@
 %
 % File: chap03.tex
-% Author: 
+% Author:
 % Description: Design and Implementations
 %
 \chapter{Design and Implementations}
@@ -32,6 +32,49 @@ Begins a chapter. Example: When the beloved cellist (Christopher Walken - outsta
 
 \subsection{Early Stage-Virtual Hospital Africa(VHA)}
 \label{subsec:subsec01}
+
+During the initial discussions with the client, it was identified that the \textbf{Patient Intake page}
+contained too many information fields. This led to poor user experience, with many testers
+abandoning the form midway (Figure~\ref{fig:intake1}).
+To address this, the client designed a second version of a multi-step form interface (Figure~\ref{fig:intake2}).
+Finally, after our team's feedback, a third version was created (Figure~\ref{fig:intake3}).
+
+\subsubsection{Key Improvements in Patient Intake Page}
+\begin{enumerate}
+    \item \textbf{Left-side navigation bar:} Enabled non-linear navigation, allowing users to jump to
+    any section freely, improving flexibility and control.
+    \item \textbf{Optimized field grouping:} Consolidated fields such as name, gender, title, language,
+    and ID number into a ``General'' group. Added profile photo upload with instant preview.
+    \item \textbf{Unified navigation buttons:} Replaced inconsistent buttons with clear
+    \emph{Back/Next}, improving predictability and reducing disorientation.
+\end{enumerate}
+
+\subsubsection{Patient Profile Page Improvements}
+\begin{enumerate}
+    \item \textbf{Enhanced patient information card:} Added profile picture, gender/age tags, patient status,
+    quick contact and download buttons, and last edit time.
+    \item \textbf{Expanded information modules:} Unified the top tab bar and added a secondary menu
+    (General, Primary Care, Contacts, Biometrics, Insurance).
+    \item \textbf{Editable forms:} Personal data presented in structured fields supporting direct editing.
+\end{enumerate}
+
+\subsubsection{Vitals Page Redesign}
+\begin{enumerate}
+    \item \textbf{Grouped layout:} Divided vital signs into ``Required'' and ``Optional'' sections,
+    aligning with clinical practices.
+    \item \textbf{Optimized workflow:} Replaced single ``Continue'' button with \emph{Back/Next},
+    allowing users better control.
+    \item \textbf{Integration with patient panel:} Displayed patient summary and treatment timeline
+    alongside data entry.
+\end{enumerate}
+
+These improvements adhered to usability principles such as
+\emph{Match between system and the real world},
+\emph{Visibility of system status}, and
+\emph{Recognition rather than recall},
+reducing cognitive load, improving efficiency, and minimizing errors.
+
+
 
 \subsection{Smart Hospital}
 \label{subsec:subsec02}

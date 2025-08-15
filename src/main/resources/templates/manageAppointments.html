@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Manage Appointments</title>
+  <link rel="stylesheet" href="/css/manageAppointments.css" />
+  <!-- Web font: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<div class="layout-container">
+  <!-- Patient Sidebar: Left vertical navigation -->
+  <aside class="sidebar">
+    <!-- Logo at the top of the sidebar -->
+    <img th:src="@{/SharedLayoutImages/LogoCircle.png}" alt="Logo" class="logo">
+
+    <!-- Patient Navigation Links -->
+    <nav class="sidebar-nav">
+      <div class="tab" data-page="home">
+        <a href="/patient/patientDashboard">
+          <img th:src="@{/SharedLayoutImages/homeIcon.svg}" alt="Home Icon" class="tab-icon">
+          <span>Home</span>
+        </a>
+      </div>
+
+      <div class="tab" data-page="calendar">
+        <a th:href="@{/comingSoon}">
+          <img th:src="@{/SharedLayoutImages/calendarIcon.svg}" alt="Calendar Icon" class="tab-icon">
+          <span>Calendar</span>
+        </a>
+      </div>
+
+      <div class="tab" data-page="health-qa">
+        <a th:href="@{/healthQAPatient}">
+          <img th:src="@{/PatientSideImages/healthQA.svg}" alt="Health Q&A Icon" class="tab-icon">
+          <span>Health Q&A</span>
+        </a>
+      </div>
+
+      <!-- Active tab styling applied here for manage appointments page -->
+      <div class="tab active-tab" data-page="manage-appointments">
+        <a href="/patient/manageAppointments">
+          <img th:src="@{/PatientSideImages/ManageAppointment.svg}" alt="Manage Appointments Icon" class="tab-icon">
+          <span>Manage Appointments</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Logout Button at the bottom -->
+    <div class="tab logout-tab" data-action="logout">
+      <img th:src="@{/SharedLayoutImages/logoutIcon.svg}" alt="Logout Icon" class="tab-icon">
+      <span>Log Out</span>
+    </div>
+  </aside>
+
+  <!-- Patient-side Top Navigation (Custom, like your teammate's) -->
+  <header class="top-nav">
+    <h1 class="page-title">Manage Appointments</h1>
+
+    <div class="header-icons-container">
+      <!-- Notifications -->
+      <div class="notification-container">
+        <img th:src="@{/SharedLayoutImages/notificationIcon.svg}" alt="Notifications" class="notification-icon" id="notificationIcon" />
+        <div class="notification-popup" id="notificationPopup">
+          <div class="notification-header">
+            <h3>Notifications</h3>
+            <button class="close-btn" id="closeNotifications" aria-label="Close notifications">&times;</button>
+          </div>
+          <div class="notification-list">
+            <div class="notification-item unread">
+              <div class="notification-content">
+                <div class="notification-title">Your appointment is confirmed for tomorrow at 2:00 PM</div>
+                <div class="notification-time">5 minutes ago</div>
+              </div>
+              <div class="notification-dot"></div>
+            </div>
+            <div class="notification-item unread">
+              <div class="notification-content">
+                <div class="notification-title">New test results are available</div>
+                <div class="notification-time">1 hour ago</div>
+              </div>
+              <div class="notification-dot"></div>
+            </div>
+            <div class="notification-item">
+              <div class="notification-content">
+                <div class="notification-title">Prescription refill reminder</div>
+                <div class="notification-time">2 hours ago</div>
+              </div>
+            </div>
+            <div class="notification-item">
+              <div class="notification-content">
+                <div class="notification-title">Health tip: Stay hydrated during winter</div>
+                <div class="notification-time">1 day ago</div>
+              </div>
+            </div>
+          </div>
+          <div class="notification-footer">
+            <button class="mark-all-read" type="button">Mark all as read</button>
+            <button class="view-all" type="button">View all notifications</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile -->
+      <div class="profile-container">
+        <img th:src="@{/PatientProfile-PatientSide/patientProfilePic.png}" alt="Patient Profile" class="patient-profile" id="patientProfileIcon" />
+        <div class="profile-popup" id="profilePopup">
+          <div class="profile-header">
+            <img th:src="@{/PatientProfile-PatientSide/patientProfilePic.png}" alt="Patient Profile" class="profile-avatar" />
+            <div class="profile-info">
+              <h3>Harry Potter</h3>
+              <p>Patient ID: HAT17653D</p>
+            </div>
+            <button class="close-btn" id="closeProfile" aria-label="Close profile">&times;</button>
+          </div>
+          <div class="profile-menu">
+            <!-- Key link - points to patient-side profile -->
+            <a th:href="@{/patientProfile-patientSide}" class="profile-menu-item" data-action="profile">
+              <img th:src="@{/SharedLayoutImages/profileIcon.svg}" alt="Profile" class="menu-icon" />
+              <span>My Profile</span>
+            </a>
+
+            <div class="profile-divider"></div>
+            <div class="profile-menu-item logout" data-action="logout">
+              <img th:src="@{/PatientProfile-PatientSide/logoutIcon.svg}" alt="Logout" class="menu-icon" />
+              <span>Log Out</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Page Content -->
+    <section class="page-content">
+      <!-- Manage Your Appointments Section -->
+      <h2 class="section-title">Manage Your Appointments</h2>
+      <div class="appointments-management-section">
+        <table class="appointments-table">
+          <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Doctor/Nurse</th>
+            <th>Manage</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="appointment : ${upcomingAppointments}">
+            <td th:text="${appointment.formattedDate}">05 09 2025</td>
+            <td th:text="${appointment.formattedTime}">10:00</td>
+            <td th:text="${appointment.doctorName}">Oral Nurse</td>
+            <td>
+              <button class="cancel-btn"
+                      th:onclick="'cancelAppointment(' + ${appointment.id} + ', this)'">
+                Cancel
+              </button>
+            </td>
+          </tr>
+          <!-- Static data for demonstration if no appointments -->
+          <tr th:if="${#lists.isEmpty(upcomingAppointments)}">
+            <td>05 09 2025</td>
+            <td>10:00</td>
+            <td>Oral Nurse</td>
+            <td>
+              <button class="cancel-btn" onclick="cancelAppointment(1, this)">
+                Cancel
+              </button>
+            </td>
+          </tr>
+          <tr th:if="${#lists.isEmpty(upcomingAppointments)}">
+            <td>27 08 2025</td>
+            <td>10:00</td>
+            <td>Dr. Weasley</td>
+            <td>
+              <button class="cancel-btn" onclick="cancelAppointment(2, this)">
+                Cancel
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Appointment History Section -->
+      <h2 class="section-title">Your Appointments Record</h2>
+      <div class="appointments-history-section">
+        <table class="appointments-history-table">
+          <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Doctor/Nurse</th>
+            <th>Status</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="appointment : ${appointmentHistory}">
+            <td th:text="${appointment.formattedDate}">05 09 2025</td>
+            <td th:text="${appointment.formattedTime}">10:00</td>
+            <td th:text="${appointment.doctorName}">Oral Nurse</td>
+            <td>
+              <span class="status"
+                    th:classappend="${appointment.statusLowerCase}"
+                    th:text="${appointment.statusDisplayName}">
+                Upcoming
+              </span>
+            </td>
+          </tr>
+          <!-- Static data for demonstration if no history -->
+          <tr th:if="${#lists.isEmpty(appointmentHistory)}">
+            <td>05 09 2025</td>
+            <td>10:00</td>
+            <td>Oral Nurse</td>
+            <td><span class="status upcoming">Upcoming</span></td>
+          </tr>
+          <tr th:if="${#lists.isEmpty(appointmentHistory)}">
+            <td>27 08 2025</td>
+            <td>10:00</td>
+            <td>Dr. Weasley</td>
+            <td><span class="status upcoming">Upcoming</span></td>
+          </tr>
+          <tr th:if="${#lists.isEmpty(appointmentHistory)}">
+            <td>05 06 2025</td>
+            <td>09:00</td>
+            <td>Oral Nurse</td>
+            <td><span class="status completed">Completed</span></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- Success Message (Hidden by default) -->
+<div id="successMessage" class="success-message" style="display: none;">
+  <span id="messageText">Appointment cancelled successfully!</span>
+  <button onclick="closeMessage()" class="close-btn">&times;</button>
+</div>
+
+<!-- Scripts -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    /* Notifications */
+    const notificationIcon = document.getElementById('notificationIcon');
+    const notificationPopup = document.getElementById('notificationPopup');
+    const closeNotifications = document.getElementById('closeNotifications');
+
+    if (notificationIcon && notificationPopup) {
+      notificationIcon.addEventListener('click', (e) => {
+        e.stopPropagation();
+        notificationPopup.classList.toggle('show');
+        const profilePopup = document.getElementById('profilePopup');
+        if (profilePopup) profilePopup.classList.remove('show');
+      });
+      closeNotifications.addEventListener('click', () => notificationPopup.classList.remove('show'));
+    }
+
+    /* Profile popup */
+    const patientProfileIcon = document.getElementById('patientProfileIcon');
+    const profilePopup = document.getElementById('profilePopup');
+    const closeProfile = document.getElementById('closeProfile');
+
+    if (patientProfileIcon && profilePopup) {
+      patientProfileIcon.addEventListener('click', (e) => {
+        e.stopPropagation();
+        profilePopup.classList.toggle('show');
+        if (notificationPopup) notificationPopup.classList.remove('show');
+      });
+      closeProfile.addEventListener('click', () => profilePopup.classList.remove('show'));
+    }
+
+    /* Close popups when clicking outside */
+    document.addEventListener('click', (e) => {
+      if (notificationPopup && !notificationPopup.contains(e.target) && e.target !== notificationIcon) {
+        notificationPopup.classList.remove('show');
+      }
+      if (profilePopup && !profilePopup.contains(e.target) && e.target !== patientProfileIcon) {
+        profilePopup.classList.remove('show');
+      }
+    });
+
+    /* Mark all notifications as read */
+    const markAllReadBtn = document.querySelector('.mark-all-read');
+    if (markAllReadBtn) {
+      markAllReadBtn.addEventListener('click', () => {
+        document.querySelectorAll('.notification-item.unread').forEach(item => {
+          item.classList.remove('unread');
+          const dot = item.querySelector('.notification-dot');
+          if (dot) dot.remove();
+        });
+      });
+    }
+
+    /* Logout */
+    const logoutBtns = document.querySelectorAll('[data-action="logout"]');
+    logoutBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (confirm('Are you sure you want to log out?')) {
+          window.location.href = '/patient-login';
+        }
+      });
+    });
+
+    /* Active tab */
+    const tabs = document.querySelectorAll('.tab[data-page]');
+    const currentPage = window.location.pathname;
+    tabs.forEach(tab => {
+      const link = tab.querySelector('a');
+      if (link && link.getAttribute('href') === currentPage) tab.classList.add('active-tab');
+    });
+
+    /* Add table row hover effects */
+    const tableRows = document.querySelectorAll('tbody tr');
+    tableRows.forEach(row => {
+      row.addEventListener('mouseenter', function() {
+        this.style.backgroundColor = '#f8fbfb';
+      });
+      row.addEventListener('mouseleave', function() {
+        this.style.backgroundColor = '';
+      });
+    });
+  });
+
+  // Cancel appointment function
+  function cancelAppointment(appointmentId, buttonElement) {
+    if (confirm('Are you sure you want to cancel this appointment?')) {
+      // Send AJAX request to cancel appointment
+      fetch('/patient/appointments/cancel/' + appointmentId, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest'
+        }
+      })
+              .then(response => response.json())
+              .then(data => {
+                if (data.success) {
+                  // Update UI on success
+                  const row = buttonElement.closest('tr');
+                  row.style.opacity = '0.5';
+                  buttonElement.textContent = 'Cancelled';
+                  buttonElement.disabled = true;
+                  buttonElement.classList.add('disabled');
+
+                  // Show success message
+                  showSuccessMessage('Appointment cancelled successfully!');
+
+                  // Optionally remove row after animation
+                  setTimeout(() => {
+                    row.style.transition = 'all 0.5s ease';
+                    row.style.transform = 'translateX(-100%)';
+                    setTimeout(() => row.remove(), 500);
+                  }, 2000);
+                } else {
+                  throw new Error(data.message || 'Failed to cancel appointment');
+                }
+              })
+              .catch(error => {
+                console.error('Error:', error);
+                showSuccessMessage('Error cancelling appointment. Please try again.', 'error');
+              });
+    }
+  }
+
+  // Show success message
+  function showSuccessMessage(message, type = 'success') {
+    const messageElement = document.getElementById('successMessage');
+    const messageText = document.getElementById('messageText');
+
+    messageText.textContent = message;
+    messageElement.className = 'success-message ' + type;
+    messageElement.style.display = 'flex';
+
+    // Auto hide after 5 seconds
+    setTimeout(() => {
+      closeMessage();
+    }, 5000);
+  }
+
+  // Close message
+  function closeMessage() {
+    const messageElement = document.getElementById('successMessage');
+    messageElement.style.display = 'none';
+  }
+</script>
+
+</body>
+</html>

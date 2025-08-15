@@ -11,75 +11,66 @@
 
 <div class="layout-container">
   <!-- Sidebar -->
-  <aside th:replace="layouts/sharedLayout :: sidebar"></aside>
+  <aside th:replace="~{layouts/sharedLayout :: sidebar (activePage='vitals')}"></aside>
 
   <!-- Main Content Area -->
   <main class="main-content">
     <!-- Top Navigation -->
-    <div th:replace="layouts/sharedLayout :: topNav"></div>
+    <header th:replace="layouts/sharedLayout :: topNav"></header>
 
     <!-- Patient Info Card -->
-    <div th:replace="layouts/sharedLayout :: patientCard"></div>
+    <section th:replace="layouts/sharedLayout :: patientCard"></section>
 
     <!-- Vitals Content -->
-    <div class="page-content">
+    <section class="page-content">
         <!-- Vitals Form -->
         <div class="vitals-form">
             <h2>Patient Vitals Record</h2>
             <div class="vitals-grid">
                 <!-- First Row -->
-                <div class="vital-group">
+                <div class="vital-group" data-unit="bpm">
                     <label for="heart-rate">
-                        <svg class="vital-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                        </svg>
                         Heart Rate
                     </label>
                     <input type="text" id="heart-rate" name="heart-rate" placeholder="Enter heart rate">
                 </div>
-                <div class="vital-group">
+                <div class="vital-group" data-unit="mmHg">
                     <label for="blood-pressure">
-                        <svg class="vital-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
                         Blood Pressure
                     </label>
                     <input type="text" id="blood-pressure" name="blood-pressure" placeholder="Enter blood pressure">
                 </div>
-                <div class="vital-group">
+                <div class="vital-group" data-unit="°C">
                     <label for="temperature">
-                        <svg class="vital-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2zm0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-                        </svg>
                         Temperature
                     </label>
                     <input type="text" id="temperature" name="temperature" placeholder="Enter temperature">
                 </div>
 
                 <!-- Second Row -->
-                <div class="vital-group">
+                <div class="vital-group" data-unit="kg">
                     <label for="weight">Weight</label>
                     <input type="text" id="weight" name="weight" placeholder="Enter weight">
                 </div>
-                <div class="vital-group">
+                <div class="vital-group" data-unit="cm">
                     <label for="height">Height</label>
                     <input type="text" id="height" name="height" placeholder="Enter height">
                 </div>
-                <div class="vital-group">
+                <div class="vital-group" data-unit="kg/m²">
                     <label for="bmi">BMI</label>
                     <input type="text" id="bmi" name="bmi" placeholder="Enter BMI">
                 </div>
 
                 <!-- Third Row -->
-                <div class="vital-group">
+                <div class="vital-group" data-unit="mg/dl">
                     <label for="blood-glucose">Blood Glucose</label>
                     <input type="text" id="blood-glucose" name="blood-glucose" placeholder="Enter blood glucose">
                 </div>
-                <div class="vital-group">
+                <div class="vital-group" data-unit="%">
                     <label for="oxygen-saturation">Blood Oxygen Saturation</label>
                     <input type="text" id="oxygen-saturation" name="oxygen-saturation" placeholder="Enter oxygen saturation">
                 </div>
-                <div class="vital-group">
+                <div class="vital-group" data-unit="breaths/min">
                     <label for="respiratory-rate">Respiratory Rate</label>
                     <input type="text" id="respiratory-rate" name="respiratory-rate" placeholder="Enter respiratory rate">
                 </div>
@@ -134,7 +125,7 @@
                 </tbody>
             </table>
         </div>
-    </div>
+    </section>
   </main>
 </div>
 

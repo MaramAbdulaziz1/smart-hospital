@@ -415,15 +415,7 @@ INPUT ./chapters/chapter03/chap03.tex
 INPUT chapters/chapter03/chap03.tex
 INPUT ./chapters/chapter03/chap03.tex
 INPUT chapters/chapter03/chap03.tex
-INPUT ./chapters/chapter03/chap03-01-03.tex
-INPUT chapters/chapter03/chap03-01-03.tex
-INPUT ./chapters/chapter03/chap03-01-03.tex
-INPUT chapters/chapter03/chap03-01-03.tex
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
-INPUT ./chapters/chapter03/chap03-02-02-01.tex
-INPUT chapters/chapter03/chap03-02-02-01.tex
-INPUT ./chapters/chapter03/chap03-02-02-01.tex
-INPUT chapters/chapter03/chap03-02-02-01.tex
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
 INPUT ./chapters/chapter04/chap04.tex
 INPUT chapters/chapter04/chap04.tex
 INPUT ./chapters/chapter04/chap04.tex
@@ -443,7 +435,7 @@ INPUT chapters/appendices/app0A.tex
 INPUT ./memoirthesis.bbl
 INPUT ./memoirthesis.bbl
 INPUT memoirthesis.bbl
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
 OUTPUT memoirthesis.toc
 OUTPUT memoirthesis.lot
 OUTPUT memoirthesis.lof

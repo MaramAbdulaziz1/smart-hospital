@@ -98,7 +98,7 @@ function openLoginPopup() {
         text-align: center;
         color: #000;
       ">
-        <a href="/forgot-password" class="forgot-link">Forgot Password?</a>
+        <a href="/resetPassword" class="forgot-link">Forgot Password?</a>
       </div>
     </div>
   `;
@@ -111,3 +111,38 @@ function closeLoginPopup() {
   const popup = document.querySelector('[style*="position: fixed"]');
   if (popup) popup.remove();
 }
+
+  (function () {
+  const registerBtn = document.getElementById('registerBtn');
+  const registerMenu = document.getElementById('registerMenu');
+
+  if (!registerBtn || !registerMenu) return;
+
+  registerBtn.addEventListener('click', function (e) {
+  e.stopPropagation();
+  const open = registerMenu.classList.toggle('show');
+  registerBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  registerMenu.setAttribute('aria-hidden', open ? 'false' : 'true');
+});
+
+  // Close when clicking outside
+  document.addEventListener('click', function (e) {
+  if (registerMenu.classList.contains('show') &&
+  !registerMenu.contains(e.target) &&
+  e.target !== registerBtn) {
+  registerMenu.classList.remove('show');
+  registerBtn.setAttribute('aria-expanded', 'false');
+  registerMenu.setAttribute('aria-hidden', 'true');
+}
+});
+
+  // Close on Escape
+  document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+  registerMenu.classList.remove('show');
+  registerBtn.setAttribute('aria-expanded', 'false');
+  registerMenu.setAttribute('aria-hidden', 'true');
+}
+});
+})();
+
