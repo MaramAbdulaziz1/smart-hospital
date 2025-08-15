@@ -18,6 +18,22 @@ html, body {
   background: #F5F5F5;
 }
 
+/* Main content area - Compatible with shared layout - uniform all page style */
+.main-content {
+  margin-left: 210px; /* Match sidebar width */
+  padding-top: 80px;  /* Match top-nav height */
+  padding-left: 20px;
+  padding-right: 20px;
+  background: #F5F5F5;
+  min-height: 100vh;
+}
+
+/* page content area - Compatible with shared layout - uniform all page style */
+.page-content{
+  margin-top: 20px;        
+}
+
+
 /* 🔹 Sidebar (Left navigation) */
 .sidebar {
   width: 210px;
@@ -284,8 +300,6 @@ html, body {
 
 /* 🔹 Patient Card Fragment: Displays patient info */
 .patient-card {
-  /*TODO: absolute->relative*/
-  position: relative;
   width: calc(100vw - 210px - 100px);
   max-width: 1200px;
   height: 170px;
@@ -301,6 +315,7 @@ html, body {
   z-index: 1;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   border: 1px solid #E5E5E5;
+  margin-top: 20px;
 }
 
 /* 🔹 Modern Patient Card Layout (for vitals and history pages) */

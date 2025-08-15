@@ -11,12 +11,12 @@
 
 <div class="layout-container">
   <!-- Sidebar -->
-  <div th:replace="~{layouts/sharedLayout :: sidebar (activePage='patientProfile')}"></div>
+  <aside th:replace="~{layouts/sharedLayout :: sidebar (activePage='patientProfile')}"></aside>
 
   <!-- Main Content -->
   <main class="main-content">
     <!-- Top Navigation -->
-    <div th:replace="~{layouts/sharedLayout :: topNav}"></div>
+    <header th:replace="~{layouts/sharedLayout :: topNav}"></header>
 
     <!-- Patient Info -->
     <section class="patient-info">
