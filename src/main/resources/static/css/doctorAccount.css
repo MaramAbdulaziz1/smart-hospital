@@ -1,24 +1,26 @@
 /* Page-specific styles - Only retain styles that do not conflict with the shared layout */
 
 /* Profile Info - The first content block */
-.profile-info {
+.profile-info1 {
+  width: 1117px;
+  height: 158px;
+  margin-top: 20px;
   background: white;
   border-radius: 12px;
-  padding: 2rem;
-  margin-bottom: 2rem;
+  padding: 25px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-.profile-left {
+.profile-left1 {
   display: flex;
   align-items: center;
   gap: 1.5rem;
 }
 
-.profile-avatar {
+.profile-avatar1 {
   width: 80px;
   height: 80px;
   background: #e3f2fd;
@@ -31,26 +33,26 @@
   border: 3px solid #74b9ff;
 }
 
-.profile-details {
+.profile-details1 {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
 }
 
-.profile-name {
+.profile-name1 {
   font-size: 1.4rem;
   font-weight: 600;
   color: #2c3e50;
   margin: 0;
 }
 
-.profile-title {
+.profile-title1 {
   font-size: 1rem;
   color: #636e72;
   font-weight: 500;
 }
 
-.profile-location {
+.profile-location1 {
   font-size: 0.9rem;
   color: #636e72;
 }
@@ -75,8 +77,8 @@
 .info-section {
   background: white;
   border-radius: 12px;
-  padding: 2rem;
-  margin-bottom: 2rem;
+  padding: 25px;
+  margin-top: 20px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
@@ -208,13 +210,13 @@
     grid-template-columns: 1fr;
   }
 
-  .profile-info {
+  .profile-info1 {
     flex-direction: column;
     text-align: center;
     gap: 1rem;
   }
 
-  .profile-left {
+  .profile-left1 {
     flex-direction: column;
     text-align: center;
   }

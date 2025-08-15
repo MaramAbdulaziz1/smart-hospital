@@ -9,10 +9,10 @@ import org.springframework.ui.Model;
 @Controller
 public class DoctorAccountController {
 
-  @GetMapping("/account")
+  @GetMapping("/doctorAccount")
   public String accountPage(Model model) {
 
-    model.addAttribute("pageTitle", "Account Settings");
+    model.addAttribute("pageTitle", "My Profile");
     return "layouts/doctorAccount";  //stay layouts路径
   }
 
