@@ -5,18 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Smart Hospital - Account Settings</title>
   <!-- Page-specific CSS -->
+  <link rel="stylesheet" th:href="@{/css/sharedLayout.css}">
   <link rel="stylesheet" th:href="@{/css/doctorAccount.css}">
 </head>
 <body>
-<!-- Temporary simple layout, to be replaced once the shared layout is ready -->
-<div class="simple-layout">
-  <header class="simple-header">
-    <h1>Account Settings</h1>
-  </header>
 
-  <main class="simple-content">
+<div class="layout-container">
+  <!-- Sidebar -->
+  <aside th:replace="~{layouts/sharedLayout :: sidebar-variant1}"></aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Top Navigation -->
+    <header th:replace="~{layouts/sharedLayout :: topNav}"></header>
+    <!--doctor information-->
     <!-- Profile Section -->
-    <div class="profile-info">
+    <section class="profile-info">
       <div class="profile-left">
         <div class="profile-avatar">👤</div>
         <div class="profile-details">
@@ -28,10 +32,10 @@
       <div class="profile-right">
         <button class="edit-photo-btn">Edit Photo</button>
       </div>
-    </div>
+    </section>
 
     <!-- Personal Information Section -->
-    <div class="info-section">
+    <section class="info-section">
       <div class="section-header">
         <div class="section-title">Personal Information</div>
         <button class="edit-btn" onclick="toggleEdit('personal')">Edit</button>
@@ -73,10 +77,10 @@
           <button type="submit" class="save-btn">Save</button>
         </div>
       </form>
-    </div>
+    </section>
 
     <!-- Hospital Information Section -->
-    <div class="info-section">
+    <section class="info-section">
       <div class="section-header">
         <div class="section-title">Hospital Information</div>
         <button class="edit-btn" onclick="toggleEdit('hospital')">Edit</button>
@@ -110,9 +114,10 @@
           <button type="submit" class="save-btn">Save</button>
         </div>
       </form>
-    </div>
+    </section>
   </main>
 </div>
+
 
 <script>
   const originalData = {

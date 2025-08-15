@@ -1,7 +1,20 @@
 /* Page-specific styles - Only retain styles that do not conflict with the shared layout */
 
+/* Main content area - Compatible with shared layout */
+.main-content {
+  margin-left: 210px; /* Match sidebar width */
+  padding-top: 80px;  /* Match top-nav height */
+  padding-left: 20px;
+  padding-right: 20px;
+  background: #F5F5F5;
+  min-height: 100vh;
+}
+
 /* Profile Info - The first content block */
 .profile-info {
+  width: 1117px;
+  height: 158px;
+  margin: 20px auto 0 auto;
   background: white;
   border-radius: 12px;
   padding: 2rem;

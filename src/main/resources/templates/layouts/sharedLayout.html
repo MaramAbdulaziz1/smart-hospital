@@ -61,6 +61,48 @@
 
 </aside>
 
+<!-- 🔹 Sidebar Fragment: for dashboard and my profile -->
+<aside th:fragment="sidebar-variant1" class="sidebar">
+
+  <!-- Logo at the top of the sidebar -->
+  <img th:src="@{/SharedLayoutImages/LogoCircle.png}" alt="Logo" class="logo">
+
+  <!-- 🔸 Navigation Links -->
+  <nav class="sidebar-nav">
+    <!-- Home tab (active for dashboard) -->
+    <div class="tab" data-page="home">
+      <a href="/dashboard" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px; width: 100%; height: 100%;">
+        <img th:src="@{/SharedLayoutImages/homeIcon.svg}" alt="Home Icon" class="tab-icon">
+        <span>Home</span>
+      </a>
+    </div>
+
+    <!-- Calendar tab -->
+    <div class="tab" data-page="calendar">
+      <a href="#" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px; width: 100%; height: 100%;">
+        <img th:src="@{/SharedLayoutImages/calendarIcon.svg}" alt="Calendar Icon" class="tab-icon">
+        <span>Calendar</span>
+      </a>
+    </div>
+
+    <!--QA tab-->
+    <div class="tab" data-page="health-qa">
+      <a th:href="@{/comingSoon}">
+        <img th:src="@{/PatientSideImages/healthQA.svg}" alt="Health Q&A Icon" class="tab-icon">
+        <span>Health Q&A</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- 🔸 Logout Button at the bottom -->
+  <div class="tab logout-tab" data-action="logout">
+    <img th:src="@{/SharedLayoutImages/logoutIcon.svg}" alt="Logout Icon" class="tab-icon">
+    <span>Log Out</span>
+  </div>
+
+</aside>
+
+
 <!-- 🔹 Vitals Sidebar Fragment: Left vertical navigation with vitals active -->
 <aside th:fragment="vitalsSidebar" class="sidebar">
 
