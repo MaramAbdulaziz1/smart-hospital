@@ -28,7 +28,7 @@ public class ResetPasswordController {
     }
 
     // Verify password length
-    if (newPassword.length() < 6) {
+    if (newPassword.length() < 8 || newPassword.length() > 16) {
       model.addAttribute("error", "Password must be at least 6 characters long.");
       return "layouts/resetPassword";
     }
@@ -43,9 +43,9 @@ public class ResetPasswordController {
     // For example: checking whether the user exists, updating the password in the database, etc
     // userService.resetPassword(email, newPassword);
 
-    // Add a success message and redirect to the login page
+    // Add a success message and redirect to the EmailVerify page
     model.addAttribute("success", "Password has been reset successfully. You can now log in with your new password.");
-    return "redirect:/login";
+    return "redirect:/EmailVerify";
   }
 
   // Auxiliary methods for verifying email format
