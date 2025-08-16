@@ -61,7 +61,7 @@ input[type="text"].search {
 
 .search-row .search1 {
   height: 50px;
-  font-size: 16px;
+  font-size: 15px;
   border-radius: 8px;
   border: 1px solid #ccc;
   box-sizing: border-box;
@@ -74,6 +74,7 @@ input[type="text"].search {
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: #6DA2B1;
 }*/
+
 .search-row .btn{
   background: #6DA2B1;
   border: 2px solid #6DA2B1;
@@ -128,10 +129,10 @@ input[type="text"].search {
 
 /* Section Title */
 .section-title {
-  font-size: 22px;
-  margin-bottom: 10px;
-  color: #333;
-  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 20px 20px;
+  color: #363535;
+  font-style: normal;
 }
 
 /* Table Header */
@@ -148,9 +149,9 @@ input[type="text"].search {
 }
 
 .table-header .text{
-  color: #53535D;
-  font-size: 20px;
-  font-style: normal;
+  color: #000000;
+  font-size: 19px;
+  font-style: bold;
   font-weight: 400;
   line-height: normal;
 }
@@ -197,7 +198,7 @@ input[type="text"].search {
 
 .patient-row strong {
   font-weight: normal;
-  font-size: 20px;
+  font-size: 19px;
   margin-bottom: 4px;
   display: block;
 }
@@ -208,7 +209,7 @@ input[type="text"].search {
 }
 
 .default-text{
-  font-size: 20px;
+  font-size: 19px;
   margin-bottom: 10px;
 }
 
@@ -228,7 +229,7 @@ input[type="text"].search {
   cursor: pointer;
   background-color: white;
   color: #333;
-  font-size: 16px;
+  font-size: 15px;
   transition: background-color 0.2s ease;
 }
 
