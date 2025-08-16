@@ -7,77 +7,184 @@
   <link rel="stylesheet" href="../css/register.css">
 </head>
 <body>
-
-<!-- Full Page Wrapper -->
-<div class="container">
-
-  <!-- Top Navigation Header -->
-  <div class="header">
-    <img src="RegisterPageImages/LogoCircle.png" alt="Logo" class="logo">
-    <div class="header-title">Registration</div>
+<!-- Blue Header with Logo -->
+<header class="simple-header">
+  <div class="header-container">
+    <div class="logo-section">
+      <img src="RegisterPageImages/LogoCircle.png" alt="Logo" class="hospital-logo-img">
+    </div>
+    <div class="registration-section">
+      <h1>Registration</h1>
+    </div>
   </div>
-  <div class="details-title">Enter details to register your account</div>
-  <!-- User Information Section (Box 1) -->
-  <div class="details-box">
+</header>
 
-    <!-- Left Side Inputs -->
-    <label class="details-label full-name-label">Full Name (as shown on employee ID)</label>
-    <input type="text" class="details-input full-name-input">
+<!-- Main Content Container -->
+<div class="content-container">
+  <form>
+    <!-- User Information Section -->
+    <div class="form-section">
+      <div class="form-grid">
+        <div class="form-field">
+          <label>First Name</label>
+          <input type="text" class="first-name-input">
+        </div>
 
-    <label class="details-label employee-label">Employee ID</label>
-    <input type="text" class="details-input employee-input">
+        <div class="form-field">
+          <label>Last Name</label>
+          <input type="text" class="last-name-input">
+        </div>
 
-    <label class="details-label gender-label">Gender</label>
-    <select class="details-input gender-input">
-      <option value="">Select</option>
-      <option value="female">Female</option>
-      <option value="male">Male</option>
-      <option value="other">Other</option>
-    </select>
+        <div class="form-field">
+          <label>Date of Birth</label>
+          <input type="date" class="date-of-birth-input">
+        </div>
 
-    <!-- Right Side Inputs -->
-    <label class="details-label department-label">
-      Department <span class="helper-text">Which department you will be working in?</span>
-    </label>
-    <input type="text" class="details-input department-input">
+        <div class="form-field">
+          <label>Employee ID</label>
+          <input type="text" class="employee-input">
+        </div>
 
-    <label class="details-label position-label">
-      Position <span class="helper-text">Doctor/Nurse/Etc. Please specify</span>
-    </label>
-    <input type="text" class="details-input position-input">
+        <div class="form-field">
+          <label>Department
+            <span class="tooltip-container">
+              <span class="tooltip-icon">?</span>
+              <span class="tooltip-text">Which department you will be working in?</span>
+            </span>
+          </label>
+          <select class="department-input">
+            <option value="">Select Department</option>
+            <option value="general-medicine">General Medicine</option>
+            <option value="general-surgery">General Surgery</option>
+            <option value="cardiology">Cardiology</option>
+            <option value="nephrology">Nephrology</option>
+            <option value="pediatrics">Pediatrics</option>
+          </select>
+        </div>
 
-    <label class="details-label location-label">
-      Location <span class="helper-text">Where will you be working from?</span>
-    </label>
-    <input type="text" class="details-input location-input">
-  </div>
+        <div class="form-field">
+          <label>Position</label>
+          <select class="position-input">
+            <option value="">Select Position</option>
+            <option value="doctor">Doctor</option>
+            <option value="nurse">Nurse</option>
+          </select>
+        </div>
 
-  <!-- Account Credentials Section (Box 2) -->
-  <div class="account-box">
-    <label class="account-label email-label">Work Email</label>
-    <input type="email" class="account-input email-input">
+        <div class="form-field">
+          <label>Gender</label>
+          <select class="gender-input">
+            <option value="">Select</option>
+            <option value="female">Female</option>
+            <option value="male">Male</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
 
-    <label class="account-label mobile-label">Mobile Number</label>
-    <input type="text" class="account-input mobile-input">
+        <div class="form-field">
+          <label>Location
+            <span class="tooltip-container">
+              <span class="tooltip-icon">?</span>
+              <span class="tooltip-text">Where will you be working from?</span>
+            </span>
+          </label>
+          <input type="text" class="location-input">
+        </div>
+      </div>
+    </div>
 
-    <label class="account-label work-label">Work Number</label>
-    <input type="text" class="account-input work-input">
+    <!-- Account Credentials Section -->
+    <div class="form-section">
+      <div class="form-grid">
+        <div class="form-field full-width">
+          <label>Work Email</label>
+          <input type="email" class="email-input">
+        </div>
 
-    <label class="account-label password-label">New Password</label>
-    <input type="password" class="account-input password-input">
+        <div class="form-field">
+          <label>Mobile Number</label>
+          <input type="text" class="mobile-input">
+        </div>
 
-    <label class="account-label confirm-label">Confirm New Password</label>
-    <input type="password" class="account-input confirm-input">
-  </div>
+        <div class="form-field">
+          <label>Work Number</label>
+          <input type="text" class="work-input">
+        </div>
 
-  <!-- Submit & Cancel Buttons -->
-  <div class="button-wrapper">
-    <button class="action-btn cancel-btn" onclick="cancelRegistration()">CANCEL</button>
-    <button class="action-btn">REGISTER</button>
-  </div>
+        <div class="form-field">
+          <label>New Password</label>
+          <input type="password" class="password-input">
+        </div>
 
+        <div class="form-field">
+          <label>Confirm New Password</label>
+          <input type="password" class="confirm-input">
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile Picture Section with Buttons -->
+    <div class="form-section">
+      <div class="section-header">
+        <h3>Profile Picture</h3>
+      </div>
+
+      <div class="profile-upload">
+        <div class="profile-preview">
+          <div class="profile-placeholder" id="profilePlaceholder">
+            <div class="placeholder-icon">👤</div>
+            <div class="placeholder-text">No photo selected</div>
+          </div>
+          <img id="profilePreview" style="display: none;">
+        </div>
+
+        <input type="file" id="profilePictureInput" name="profilePicture"
+               accept="image/*" style="display: none;">
+        <input type="file" id="cameraInput" name="cameraInput"
+               accept="image/*" capture="user" style="display: none;">
+        <div class="upload-buttons">
+          <button type="button" class="upload-btn" onclick="document.getElementById('cameraInput').click()">
+            Take a picture
+          </button>
+          <button type="button" class="upload-btn secondary" onclick="document.getElementById('profilePictureInput').click()">
+            Upload a photo
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit & Cancel Buttons -->
+    <div class="button-wrapper">
+      <button type="button" class="action-btn cancel-btn" onclick="cancelRegistration()">CANCEL</button>
+      <button type="submit" class="action-btn">REGISTER</button>
+    </div>
+  </form>
 </div>
 
 <script src="../js/register.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Profile picture upload handlers
+    document.getElementById('profilePictureInput').addEventListener('change', handleProfilePictureUpload);
+    document.getElementById('cameraInput').addEventListener('change', handleProfilePictureUpload);
+  });
+
+  function handleProfilePictureUpload(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const preview = document.getElementById('profilePreview');
+        const placeholder = document.getElementById('profilePlaceholder');
+
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+        placeholder.style.display = 'none';
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+</script>
 </body>
 </html>

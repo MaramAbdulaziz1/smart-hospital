@@ -1,188 +1,333 @@
-/* Base page layout */
-body {
+/* Reset and base styles */
+* {
   margin: 0;
   padding: 0;
-  background: #ffffff;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
+  box-sizing: border-box;
 }
 
-/* Page container */
-.container {
-  width: 100vw;
-  height: 100vh;
-  background-color: #ffffff;
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #E5E5E5;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Blue Header with Logo */
+.simple-header {
+  background: #A5DFEF;
+  padding: 1rem 0 2rem 0;
+  width: 100%;
   position: relative;
 }
 
-/* Top bar containing logo and title */
-.header {
+.header-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 60px;
+}
+
+/* Logo section - exact positioning as patientRegistration */
+.logo-section {
+  position: absolute;
+  left: -300px;
+  top: -60px;
+  z-index: 10;
+}
+
+.hospital-logo-img {
+  width: 200px !important;
+  height: 200px !important;
+  object-fit: contain !important;
+}
+
+/* Registration text section - next to logo */
+.registration-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-left: -100px;
+}
+
+.registration-section h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  text-shadow: none;
+}
+
+/* Main Content Container */
+.content-container {
+  max-width: 1000px;
+  margin: -2rem auto 0;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Form Sections */
+.form-section {
+  background: white;
+  border-radius: 12px;
+  padding: 3rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  border: 1px solid #E0E0E0;
   width: 100%;
-  height: 89px;
-  background-color: #A5DFEF;
-  position: absolute;
-  top: 0;
-  left: 0;
 }
 
-/* Logo image inside header */
-.logo {
-  position: absolute;
-  width: 165px;
-  height: 165px;
-  top: -38px;
-  left: -15px;
-  transform: rotate(0.16deg);
+/* First form section gets a header */
+.form-section:first-child {
+  position: relative;
 }
 
-/* "Registration" title in header */
-.header-title {
+.form-section:first-child::before {
+  content: "Enter details to register your account";
   position: absolute;
-  top: 24px;
-  left: 135px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  font-size: 37px;
-  line-height: 1;
-  color: #000000;
+  top: 1.5rem;
+  left: 3rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #2c3e50;
 }
 
-/* First form section box */
-.details-box {
-  position: absolute;
-  top: 130px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 900px;
-  height: 246px;
-  background-color: #F2F2F299;
-  border: 1px solid #F2F2F2;
-  border-radius: 16px;
-  box-sizing: border-box;
+/* Form Grid Layout */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  align-items: start;
+  margin-top: 2rem;
 }
 
-/* Label for section title */
-.details-title {
-  position: absolute;
-  top: 100px;
-  left: 330px;
-  font-family: 'Inter', sans-serif;
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-field.full-width {
+  grid-column: 1 / -1;
+}
+
+/* Form Labels */
+.form-field label {
   font-weight: 500;
-  font-size: 20px;
-  color: #000000;
+  color: #4A4A4A;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-/* Styling for field labels */
-.details-label {
-  position: absolute;
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  color: #53535D;
-}
-
-/* Description text beside labels */
 .helper-text {
-  font-size: 12.7px;
+  font-size: 0.75rem;
   font-style: italic;
   font-weight: 300;
-  color: #53535D;
+  color: #7D7D7D;
   margin-left: 5px;
 }
 
-/* Input field base styling */
-.details-input {
-  position: absolute;
-  background-color: #FFFFFF;
-  border: 1px solid #402D2D4F;
-  border-radius: 10px;
-  box-sizing: border-box;
-  font-size: 16px;
-  padding-left: 10px;
+/* Modern Tooltip Styling */
+.tooltip-container {
+  position: relative;
+  display: inline-block;
 }
 
-/* Field positioning: Left column */
-.full-name-label { top: 20px; left: 35px; }
-.full-name-input { top: 44px; left: 35px; width: 420px; height: 33px; }
+.tooltip-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  background-color: #4A90E2;
+  color: white;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: help;
+  transition: all 0.2s;
+}
 
-.employee-label { top: 93px; left: 35px; }
-.employee-input { top: 115px; left: 35px; width: 280px; height: 35px; }
+.tooltip-icon:hover {
+  background-color: #357ABD;
+  transform: scale(1.1);
+}
 
-.gender-label { top: 168px; left: 35px; }
-.gender-input { top: 189px; left: 35px; width: 280px; height: 35px; }
-
-/* Field positioning: Right column */
-.department-label { top: 20px; left: 490px; }
-.department-input { top: 44px; left: 490px; width: 280px; height: 35px; }
-
-.position-label { top: 93px; left: 490px; }
-.position-input { top: 115px; left: 490px; width: 280px; height: 35px; }
-
-.location-label { top: 168px; left: 490px; }
-.location-input { top: 189px; left: 490px; width: 280px; height: 35px; }
-
-/* Second form section box */
-.account-box {
+.tooltip-text {
+  visibility: hidden;
+  width: 220px;
+  background-color: #2c3e50;
+  color: white;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 12px;
   position: absolute;
-  top: 390px;
+  z-index: 1000;
+  bottom: 125%;
   left: 50%;
-  transform: translateX(-50%);
-  width: 900px;
-  height: 270px;
-  background-color: #F2F2F299;
-  border: 1px solid #F2F2F2;
-  border-radius: 16px;
-  box-sizing: border-box;
-}
-
-/* Label styling for second box */
-.account-label {
-  position: absolute;
-  font-family: 'Inter', sans-serif;
+  margin-left: -110px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 0.8rem;
   font-weight: 400;
-  font-size: 16px;
-  color: #53535D;
+  font-style: normal;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* Input field styling for second box */
-.account-input {
+.tooltip-text::after {
+  content: "";
   position: absolute;
-  background-color: #FFFFFF;
-  border: 1px solid #402D2D4F;
-  border-radius: 10px;
-  box-sizing: border-box;
-  font-size: 16px;
-  padding-left: 10px;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #2c3e50 transparent transparent transparent;
 }
 
-/* Email, password, and confirmation field positioning */
-.email-label { top: 23px; left: 35px; }
-.email-input { top: 48px; left: 35px; width: 420px; height: 35px; }
+.tooltip-container:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
 
-.mobile-label { top: 103px; left: 35px; }
-.mobile-input { top: 128px; left: 35px; width: 280px; height: 35px; }
+/* Section Headers */
+.section-header {
+  text-align: left;
+  margin-bottom: 2rem;
+}
 
-.work-label { top: 103px; left: 490px; }
-.work-input { top: 128px; left: 490px; width: 280px; height: 35px; }
+.section-header h3 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
 
-.password-label { top: 184px; left: 35px; }
-.password-input { top: 210px; left: 35px; width: 280px; height: 35px; }
+/* Profile Upload Section */
+.profile-upload {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem 0;
+}
 
-.confirm-label { top: 184px; left: 490px; }
-.confirm-input { top: 210px; left: 490px; width: 280px; height: 35px; }
+.profile-preview {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #4A90E2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F8F9FA;
+  flex-shrink: 0;
+}
 
-/* Button wrapper section */
+.profile-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: #7D7D7D;
+}
+
+.placeholder-icon {
+  font-size: 2.5rem;
+  opacity: 0.5;
+}
+
+.placeholder-text {
+  font-size: 0.8rem;
+}
+
+#profilePreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.upload-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.upload-btn {
+  background: #4A90E2;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  min-width: 120px;
+  font-family: inherit;
+  margin-right: 1rem;
+}
+
+.upload-btn:hover {
+  background: #357ABD;
+  transform: translateY(-1px);
+}
+
+.upload-btn.secondary {
+  background: transparent;
+  color: #4A90E2;
+  border: 1px solid #4A90E2;
+  margin-right: 0;
+}
+
+.upload-btn.secondary:hover {
+  background: #4A90E2;
+  color: white;
+}
+
+/* Form Inputs */
+.form-field input,
+.form-field select {
+  padding: 0.8rem;
+  border: 1px solid #DDD;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background: white;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+  outline: none;
+  border-color: #4A90E2;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.form-field input::placeholder {
+  color: #A8A8A8;
+  font-size: 0.9rem;
+}
+
+/* Button Wrapper - moved outside form sections and positioned to the right */
 .button-wrapper {
-  position: absolute;
-  bottom: 5px;
-  right: 34.8%;
-  transform: translateX(380px);
   display: flex;
   gap: 15px;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  margin-right: 2rem;
+  margin-bottom: 3rem;
 }
 
-/* Styling for Register and Cancel buttons */
+/* Original button styling preserved */
 .action-btn {
   width: 150px;
   height: 45px;
@@ -196,4 +341,83 @@ body {
   text-align: center;
   line-height: 45px;
   cursor: pointer;
+  transition: all 0.2s;
+}
+
+.action-btn:hover {
+  background-color: rgba(7, 7, 56, 1);
+  transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .content-container {
+    padding: 0 1rem;
+    max-width: 100%;
+  }
+
+  .header-container {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+    height: auto;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .logo-section {
+    position: static;
+    transform: none;
+    margin-bottom: 1rem;
+  }
+
+  .hospital-logo-img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .registration-section {
+    margin-left: 0;
+  }
+
+  .registration-section h1 {
+    font-size: 2rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-section {
+    padding: 2rem;
+  }
+
+  .profile-upload {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .upload-btn {
+    width: 100%;
+    max-width: 200px;
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+
+  .upload-btn.secondary {
+    margin-bottom: 0;
+  }
+
+  .button-wrapper {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    margin-right: 0;
+  }
+
+  .action-btn {
+    width: 100%;
+    max-width: 200px;
+  }
 }
