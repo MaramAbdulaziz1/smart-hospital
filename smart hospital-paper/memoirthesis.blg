@@ -4,9 +4,11 @@ The top-level auxiliary file: memoirthesis.aux
 The style file: siam.bst
 Database file #1: thesisbiblio.bib
 Warning--I didn't find a database entry for "teladocwebsite"
+Warning--I didn't find a database entry for "nielsen1995"
+Warning--I didn't find a database entry for "webform"
 You've used 4 entries,
             2030 wiz_defined-function locations,
-            519 strings with 4369 characters,
+            521 strings with 4387 characters,
 and the built_in function-call counts, 884 in all, are:
 = -- 80
 > -- 28
@@ -45,4 +47,4 @@ warning$ -- 0
 while$ -- 8
 width$ -- 5
 write$ -- 46
-(There was 1 warning)
+(There were 3 warnings)

@@ -22,13 +22,11 @@
 \contentsline {subsection}{\numberline {3.1.5}Testing Tools}{7}{subsection.3.1.5}%
 \contentsline {section}{\numberline {3.2}Front-end Design and Implementations}{7}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}Early Stage-Virtual Hospital Africa(VHA)}{7}{subsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.1.1}Key Improvements in Patient Intake Page}{8}{subsubsection.3.2.1.1}%
-\contentsline {subsubsection}{\numberline {3.2.1.2}Patient Profile Page Improvements}{8}{subsubsection.3.2.1.2}%
-\contentsline {subsubsection}{\numberline {3.2.1.3}Vitals Page Redesign}{8}{subsubsection.3.2.1.3}%
-\contentsline {subsection}{\numberline {3.2.2}Smart Hospital}{8}{subsection.3.2.2}%
-\contentsline {section}{\numberline {3.3}Back-end Design and Implementations}{8}{section.3.3}%
-\contentsline {chapter}{\chapternumberline {4}Evaluation and Testing}{9}{chapter.4}%
-\contentsline {chapter}{\chapternumberline {5}Conclusion}{10}{chapter.5}%
-\contentsline {chapter}{\chapternumberline {6}Reference}{11}{chapter.6}%
-\contentsline {appendix}{\chapternumberline {A}Appendix A}{12}{appendix.A}%
-\contentsline {chapter}{Bibliography}{13}{appendix*.10}%
+\contentsline {subsection}{\numberline {3.2.2}Smart Hospital}{11}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}Back-end Design and Implementations}{11}{section.3.3}%
+\contentsline {chapter}{\chapternumberline {4}Evaluation and Testing}{12}{chapter.4}%
+\contentsline {chapter}{\chapternumberline {5}Conclusion}{13}{chapter.5}%
+\contentsline {chapter}{\chapternumberline {6}Reference}{14}{chapter.6}%
+\contentsline {chapter}{Bibliography}{15}{chapter*.13}%
+\contentsline {appendix}{\chapternumberline {A}Appendix A}{16}{appendix.A}%
+\contentsline {chapter}{Bibliography}{17}{appendix*.14}%
