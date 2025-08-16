@@ -1,4 +1,3 @@
-
 /* 🔹 Reset styles for full-page control */
 html, body {
   margin: 0;
@@ -30,11 +29,10 @@ html, body {
 
 /* page content area - Compatible with shared layout - uniform all page style */
 .page-content{
-  margin-top: 20px;        
+  margin-top: 20px;
 }
 
-
-/* 🔹 Sidebar (Left navigation) */
+/* 🔹 Sidebar (Left navigation) - Updated to match patient-side design */
 .sidebar {
   width: 210px;
   height: 100vh;
@@ -45,10 +43,10 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between; /* Separates nav tabs from logout */
+  justify-content: space-between;
 }
 
-/* 🔹 Sidebar logo */
+/* 🔹 Sidebar logo - Updated to match patient-side design */
 .logo {
   position: absolute;
   width: 264px;
@@ -57,16 +55,16 @@ html, body {
   left: -35px;
 }
 
-/* 🔹 Sidebar navigation links */
+/* 🔹 Sidebar navigation links - Updated to match patient-side design */
 .sidebar-nav {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
   align-items: center;
   padding-top: 193px;
 }
 
-/* 🔹 Sidebar tab styling */
+/* 🔹 Sidebar tab styling - Updated to match patient-side design */
 .tab {
   width: 170px;
   height: 50px;
@@ -74,33 +72,40 @@ html, body {
   align-items: center;
   gap: 10px;
   padding-left: 20px;
-  font-size: 18px;
+  font-size: 16px;
   color: #000;
   border-radius: 16px;
   cursor: pointer;
-}
-
-.tab.active{
-  background-color: #F5F5F5;
-  border-radius: 16px;
+  transition: all 0.3s ease;
 }
 
 .tab:hover {
-  background-color: #F5F5F5;
+  background-color: #F0F8FF;
+  transform: translateX(2px);
+}
+
+.tab.active {
+  background-color: #E6F3FF;
+  border-left: 4px solid #A5DFEF;
 }
 
 .active-tab {
-  background-color: #F5F5F5;
-  border-radius: 16px;
+  background-color: #E6F3FF;
+  border-left: 4px solid #A5DFEF;
 }
 
-/* 🔹 Tab icon */
+/* 🔹 Tab icon - Updated to match patient-side design */
 .tab-icon {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease;
 }
 
-/* 🔹 Tab link styling */
+.tab:hover .tab-icon {
+  transform: scale(1.1);
+}
+
+/* 🔹 Tab link styling - Updated to match patient-side design */
 .tab a {
   text-decoration: none;
   color: inherit;
@@ -109,6 +114,7 @@ html, body {
   gap: 10px;
   width: 100%;
   height: 100%;
+  font-weight: 500;
 }
 
 /* 🔹 Group multiple icons */
@@ -118,11 +124,16 @@ html, body {
   align-items: center;
 }
 
-/* 🔹 Logout tab positioned at bottom of sidebar */
+/* 🔹 Logout tab positioned at bottom of sidebar - Updated to match patient-side design */
 .logout-tab {
   margin-top: auto;
   margin-bottom: 30px;
-  align-self: center;
+  color: #000000;
+}
+
+.logout-tab:hover {
+  background-color: #F0F8FF;
+  border-left: 4px solid #000000;
 }
 
 /* 🔹 Top navigation bar */
@@ -807,4 +818,3 @@ html, body {
     left: 130px;
   }
 }
-
