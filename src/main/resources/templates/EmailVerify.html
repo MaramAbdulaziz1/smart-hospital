@@ -7,18 +7,25 @@
   <link rel="stylesheet" href="../css/EmailVerify.css">
 </head>
 <body>
-   <!-- Full Page Wrapper -->
-   <div class="container">
-      <!-- Top Navigation Header -->
-      <div class="header">
-         <img src="RegisterPageImages/LogoCircle.png" alt="Logo" class="logo">
-         <div class="header-title"></div>
-      </div>
-      <!--message box-->
-      <div class="messagebox">
-         <div class="message">Thank You! Check your inbox for a verification email.</div>
-         <div class="smallmessage">Remember to check your spam folder.</div>
-      </div> 
-   </div>
+<!-- Full Page Wrapper -->
+<div class="container">
+  <!-- Top Navigation Header -->
+  <div class="header">
+    <img src="RegisterPageImages/LogoCircle.png" alt="Logo" class="logo">
+    <div class="header-title"></div>
+  </div>
+  <!--message box-->
+  <div class="messagebox">
+    <div class="message">Thank You! Check your inbox for a verification email.</div>
+    <div class="smallmessage">Remember to check your spam folder.</div>
+    <div class="smallmessage">Redirecting automatically...</div>
+  </div>
+</div>
+
+<script>
+  setTimeout(function() {
+    window.location.href = '/PasswordVerify';
+  }, 3000);
+</script>
 </body>
 </html>
