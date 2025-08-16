@@ -15,7 +15,7 @@ input[type="text"].search {
 /* Dashboard Content */
 .dashboard-content {
   padding: 20px;
-  margin-top: 80px; /* Add top margin to avoid being hidden by top-nav */
+  margin-top: 20px; /* Add top margin to avoid being hidden by top-nav */
   height: calc(100vh - 80px);
   overflow-y: auto;
   background-color: #f9f9f9;
@@ -190,19 +190,19 @@ input[type="text"].search {
 
 
 .patient-row strong {
-  font-weight: bold;
+  font-weight: normal;
   font-size: 16px;
   margin-bottom: 4px;
   display: block;
 }
 
 .id {
-  font-size: 24px;
+  font-size: 20px;
   color: #777;
 }
 
 .default-text{
-  font-size: 32px;
+  font-size: 24px;
 }
 
 /* Button Group */
@@ -221,7 +221,7 @@ input[type="text"].search {
   cursor: pointer;
   background-color: white;
   color: #333;
-  font-size: 24px;
+  font-size: 20px;
   transition: background-color 0.2s ease;
 }
 
