@@ -1,5 +1,15 @@
 \begin{thebibliography}{1}
 
+\bibitem{nhs_design_system}
+{\sc N.~Digital}, {\em Nhs service manual – card component}.
+\newblock \url{https://service-manual.nhs.uk/design-system/components/card}, 2023.
+\newblock Online.
+
+\bibitem{GFG-Djanggo-SB}
+{\sc GeeksforGeeks}, {\em Django vs spring boot}.
+\newblock \url{https://www.geeksforgeeks.org/blogs/django-vs-spring-boot/}, 2025.
+\newblock Online.
+
 \bibitem{femhline}
 {\sc F.~E.~M. Hospital}, {\em Official line account}.
 \newblock \url{https://line.me/R/ti/p/@femh}, 2025.
@@ -9,6 +19,21 @@
 {\sc {International Labour Organization}}, {\em Decent work for rural health workers}.
 \newblock \url{https://www.ilo.org/global/topics/economic-and-social-development/rural-development/WCMS_768518/lang--en/index.htm}, 2021.
 \newblock Accessed: 2025-08-02.
+
+\bibitem{JavaGuides-Thymeleaf-ReactJS}
+{\sc JavaGuides}, {\em Thymeleaf vs react js}.
+\newblock \url{https://www.javaguides.net/2024/08/thymeleaf-vs-react-js.html}, 2024.
+\newblock Online.
+
+\bibitem{rcp_med_standards}
+{\sc R.~C. of~Physicians, Health, and S.~C. I.~C. (HSCIC)}, {\em Medication and allergy standards: Structured record standards for the nhs}.
+\newblock \url{https://developer.nhs.uk/apis/gpconnect/pages/accessrecord_structured/use_cases/Medication_record.pdf}, 2013.
+\newblock Online.
+
+\bibitem{Simplilearn-Nodejs-SB}
+{\sc Simplilearn}, {\em Node.js vs spring boot}.
+\newblock \url{https://www.simplilearn.com/node-js-vs-spring-boot-article}, 2025.
+\newblock Online.
 
 \bibitem{nuffield_gp}
 {\sc N.~Trust}, {\em Digital primary care: Where next?}

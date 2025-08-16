@@ -16,19 +16,32 @@
 \contentsline {chapter}{\chapternumberline {3}Design and Implementations}{7}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Methodology}{7}{section.3.1}%
 \contentsline {subsection}{\numberline {3.1.1}Work Flow}{7}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}Process}{7}{subsection.3.1.2}%
-\contentsline {subsection}{\numberline {3.1.3}Front-end Tools}{7}{subsection.3.1.3}%
-\contentsline {subsection}{\numberline {3.1.4}Back-end Tools}{7}{subsection.3.1.4}%
-\contentsline {subsection}{\numberline {3.1.5}Testing Tools}{7}{subsection.3.1.5}%
-\contentsline {section}{\numberline {3.2}Front-end Design and Implementations}{7}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Early Stage-Virtual Hospital Africa(VHA)}{7}{subsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.1.1}Key Improvements in Patient Intake Page}{8}{subsubsection.3.2.1.1}%
-\contentsline {subsubsection}{\numberline {3.2.1.2}Patient Profile Page Improvements}{8}{subsubsection.3.2.1.2}%
-\contentsline {subsubsection}{\numberline {3.2.1.3}Vitals Page Redesign}{8}{subsubsection.3.2.1.3}%
-\contentsline {subsection}{\numberline {3.2.2}Smart Hospital}{8}{subsection.3.2.2}%
-\contentsline {section}{\numberline {3.3}Back-end Design and Implementations}{8}{section.3.3}%
-\contentsline {chapter}{\chapternumberline {4}Evaluation and Testing}{9}{chapter.4}%
-\contentsline {chapter}{\chapternumberline {5}Conclusion}{10}{chapter.5}%
-\contentsline {chapter}{\chapternumberline {6}Reference}{11}{chapter.6}%
-\contentsline {appendix}{\chapternumberline {A}Appendix A}{12}{appendix.A}%
-\contentsline {chapter}{Bibliography}{13}{appendix*.10}%
+\contentsline {subsection}{\numberline {3.1.2}Front-end Tools}{7}{subsection.3.1.2}%
+\contentsline {paragraph}{Figma}{7}{section*.10}%
+\contentsline {paragraph}{HTML}{8}{section*.11}%
+\contentsline {paragraph}{CSS}{9}{section*.12}%
+\contentsline {paragraph}{Spring Boot and Thymeleaf}{9}{section*.13}%
+\contentsline {subsection}{\numberline {3.1.3}Back-end Tools}{11}{subsection.3.1.3}%
+\contentsline {subsection}{\numberline {3.1.4}Testing Tools}{11}{subsection.3.1.4}%
+\contentsline {section}{\numberline {3.2}Front-end Design and Implementations}{11}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Early Stage-Virtual Hospital Africa(VHA)}{11}{subsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.1.1}Key Improvements in Patient Intake Page}{11}{subsubsection.3.2.1.1}%
+\contentsline {subsubsection}{\numberline {3.2.1.2}Patient Profile Page Improvements}{11}{subsubsection.3.2.1.2}%
+\contentsline {subsubsection}{\numberline {3.2.1.3}Vitals Page Redesign}{11}{subsubsection.3.2.1.3}%
+\contentsline {subsection}{\numberline {3.2.2}Smart Hospital}{12}{subsection.3.2.2}%
+\contentsline {paragraph}{Design Process}{12}{section*.15}%
+\contentsline {paragraph}{From Concept to User Needs: Ideation and Story Mappingigma}{12}{section*.16}%
+\contentsline {paragraph}{Bridging Stories and Systems: Workflow Design}{12}{section*.17}%
+\contentsline {paragraph}{Visualizing Functionality: Prototyping with Figma}{12}{section*.18}%
+\contentsline {paragraph}{Front-end Implementation}{18}{section*.26}%
+\contentsline {paragraph}{Code Structure and Component Organisation}{18}{section*.27}%
+\contentsline {paragraph}{Integrating Shared Layouts with Thymeleaf}{19}{section*.28}%
+\contentsline {paragraph}{Page Navigation and User Flow}{21}{section*.32}%
+\contentsline {paragraph}{User Flow and Functional Testing}{21}{section*.33}%
+\contentsline {paragraph}{Challenges Encountered During Frontend Development}{21}{section*.34}%
+\contentsline {section}{\numberline {3.3}Back-end Design and Implementations}{22}{section.3.3}%
+\contentsline {chapter}{\chapternumberline {4}Evaluation and Testing}{23}{chapter.4}%
+\contentsline {chapter}{\chapternumberline {5}Conclusion}{24}{chapter.5}%
+\contentsline {chapter}{\chapternumberline {6}Reference}{25}{chapter.6}%
+\contentsline {appendix}{\chapternumberline {A}Appendix A}{26}{appendix.A}%
+\contentsline {chapter}{Bibliography}{27}{appendix*.35}%
