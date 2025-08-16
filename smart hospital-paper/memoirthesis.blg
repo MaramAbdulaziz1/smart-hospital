@@ -1,48 +1,51 @@
-This is BibTeX, Version 0.99d (TeX Live 2023/Debian)
+This is BibTeX, Version 0.99d (TeX Live 2025)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: memoirthesis.aux
 The style file: siam.bst
 Database file #1: thesisbiblio.bib
-Warning--I didn't find a database entry for "teladocwebsite"
-You've used 4 entries,
+Warning--entry type for "teladocwebsite" isn't style-file defined
+--line 115 of file thesisbiblio.bib
+Warning--entry type for "femhline" isn't style-file defined
+--line 162 of file thesisbiblio.bib
+You've used 12 entries,
             2030 wiz_defined-function locations,
-            519 strings with 4369 characters,
-and the built_in function-call counts, 884 in all, are:
-= -- 80
-> -- 28
+            560 strings with 5804 characters,
+and the built_in function-call counts, 3311 in all, are:
+= -- 320
+> -- 122
 < -- 0
-+ -- 12
-- -- 8
-* -- 46
-:= -- 153
-add.period$ -- 12
-call.type$ -- 4
-change.case$ -- 16
++ -- 50
+- -- 38
+* -- 183
+:= -- 511
+add.period$ -- 28
+call.type$ -- 12
+change.case$ -- 55
 chr.to.int$ -- 0
-cite$ -- 4
-duplicate$ -- 36
-empty$ -- 89
-format.name$ -- 8
-if$ -- 185
+cite$ -- 12
+duplicate$ -- 166
+empty$ -- 276
+format.name$ -- 38
+if$ -- 729
 int.to.chr$ -- 0
-int.to.str$ -- 4
-missing$ -- 0
-newline$ -- 23
-num.names$ -- 8
-pop$ -- 28
+int.to.str$ -- 12
+missing$ -- 3
+newline$ -- 55
+num.names$ -- 24
+pop$ -- 81
 preamble$ -- 1
-purify$ -- 12
+purify$ -- 43
 quote$ -- 0
-skip$ -- 24
+skip$ -- 151
 stack$ -- 0
-substring$ -- 20
-swap$ -- 8
+substring$ -- 112
+swap$ -- 76
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 16
+type$ -- 48
 warning$ -- 0
-while$ -- 8
-width$ -- 5
-write$ -- 46
-(There was 1 warning)
+while$ -- 27
+width$ -- 14
+write$ -- 124
+(There were 2 warnings)

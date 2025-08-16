@@ -4,8 +4,16 @@
 \addvspace {10pt}
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Homepage of Teladoc Health.}}{5}{figure.caption.7}%
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Service menu of Teladoc Health.}}{5}{figure.caption.7}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Screenshot of LINE services from Far Eastern Memorial Hospital, showing options like booking, announcements, and personal info links~\cite {femhline}.}}{5}{figure.caption.8}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Screenshots of Far Eastern Memorial Hospital (FEMH) LINE services.}}{6}{figure.caption.8}%
 \addvspace {10pt}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Shared Figma file displaying landing pages by Maram.}}{13}{figure.caption.19}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Using Figma's comment feature for collaborative design reviews.}}{15}{figure.caption.20}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces The iterative design process of the Vitals page, showing its evolution through six key versions. (a)Basic layout without a sidebar or patient card. (b)Introduction of a navigation sidebar. (c)Adding a patient information card at the top. (d)Refining the layout and adding a history table. (e)Improving visual consistency and button placement. (f)Final design with all key components integrated.}}{17}{figure.caption.23}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Comparison of the Prescription Page before and after design iteration based on supervisor feedback. (a)Initial design of the Prescription Page. (b)Redesigned page with structured ``Medication Cards'' and comprehensive fields, following NHS guidelines.}}{18}{figure.caption.24}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Evolution of the doctor's profile menu on the Patient Profile Page. (a)Initial design with a static, non-interactive doctor profile picture. (b)Enhanced design with a functional popup menu for account settings and logout.}}{19}{figure.caption.25}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces vitalsHistoryPage.html consuming shared fragments (vitalsSidebar, topNav, patientCard) via th:replace.}}{20}{figure.caption.29}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Snippet from sharedLayout.html showing the sidebar fragment, including the logo at the top and navigation links.}}{21}{figure.caption.30}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Rendered UI in the browser showing the shared sidebar, patient card, and top navigation in the Vitals module.}}{22}{figure.caption.31}%
 \addvspace {10pt}
 \addvspace {10pt}
 \addvspace {10pt}

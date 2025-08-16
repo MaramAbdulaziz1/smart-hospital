@@ -1,0 +1,222 @@
+%
+% File: chap03-02-02.tex
+% Author: 
+% Description: 
+% 3.2 Front-end Design & Implementation
+%  3.2.2 Smart Hospital
+%     Design Process
+%     Front-end Implementation
+% TODO:something wrong in chapter title
+%
+
+\paragraph{Design Process}\mbox{}
+\paragraph{From Concept to User Needs: Ideation and Story Mappingigma}\mbox{}\\
+
+\paragraph{Bridging Stories and Systems: Workflow Design}\mbox{}\\
+
+\paragraph{Visualizing Functionality: Prototyping with Figma}\mbox{}\\
+After we completed the workflow diagram, we used it as the foundation to divide tasks among team members. Each member is responsible for designing specific pages for different parts of the website while working all within a single file, shown as Figure~\ref{fig:3-2-2-DS-figma-f1}, simplified cross-reviewing and allowed for seamless handoffs instead of manually sending assets or screenshots . Next, we will introduce our layout design.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\linewidth]{images03/3-2-2-figure1.png} 
+  \caption{Shared Figma file displaying landing pages by Maram.}
+  \label{fig:3-2-2-DS-figma-f1}
+\end{figure}
+
+The primary goal of our layout is to ensure intuitive user interaction. For example when doctors are diagnosing a patient, they typically start by reviewing the patient’s profile to gain a comprehensive understanding of the patient’s condition. This information is displayed on the “Patient Profile” page. At the same time, doctors may need access to the patient’s visits history, so we design a clear and concise list that displays the date of each visit, a brief summary of the diagnosis, and the attending physician. If more detailed information is needed, doctors can click the “view” button to open a pop-up window showing the full report. Another example is during the diagnosis process–doctors may want to take temporary notes before writing the final prescription or summary. To support this, we included a text area on the “Clinical Notes” page where doctors can write their notes down. These features are all designed to enhance the experience for medical professionals interacting with our platform.
+
+Color selection plays a vital role in website design. In our project, we choose a range of blue tones as the primary color scheme, as blue often represents inclusiveness and trust. To make the overall atmosphere feel more approachable and friendly, we incorporate some earthy tones into the blue. Meanwhile, white and gray is used for  elements like buttons and text areas to create a clean and orderly appearance. Through these color combinations, we aim to convey a sense of stability and warmth to our users. The overall visual design reflects the spirit of our platform, to serve as a strong and trustworthy support for users of all ages, genders, physical conditions and cultural background.
+
+We continually review each other’s work using the comment feature which is one of the most useful features we employed, to ensure real-time feedback and update.Throughout the development of each screen, we actively left comments for one another, either suggesting improvements or pointing out issues to be addressed. These comments were visible directly on the relevant design elements, helping us avoid miscommunication and track suggested changes efficiently.
+
+We often initiated discussions either directly within Figma or first during our meetings, and then documented the agreed-upon feedback using the comment feature to ensure accountability. This helped prevent any feedback from being forgotten and gave each designer a clear to-do list for updates. For instance, comments could be left directly on the design (Figure~\ref{fig:figma-comments-example-direct}) or used to track resolved issues after a meeting (Figure~\ref{fig:figma-comments-example-direct-afmeetings}).
+\begin{figure}[htbp]
+  \centering
+  \captionsetup[subfigure]{labelformat=simple, labelsep=space, justification=centering}
+  \renewcommand{\thesubfigure}{(\alph{subfigure})}
+  \begin{subfigure}[t]{0.48\linewidth}
+    \centering
+    \includegraphics[height=6cm]{images03/3-2-2-figure2.png}
+    \caption{Providing feedback via comments.}
+    \label{fig:figma-comments-example-direct}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.48\linewidth}
+    \centering
+    \includegraphics[height=6cm]{images03/3-2-2-figure3.png}
+    \caption{Tracking and resolving design feedback.}
+    \label{fig:figma-comments-example-direct-afmeetings}
+  \end{subfigure}
+  \caption{Using Figma's comment feature for collaborative design reviews.}
+  \label{fig:figma-collaboration-comments}
+\end{figure}
+
+To evaluate whether the designs meet our requirements, we test various user scenarios using Figma’s prototyping feature to link different steps and assess the overall flow. Also, we shared links to Figma with our academic supervisor during our weekly review sessions so that they could view the prototype live. During these review sessions, we made use of the "Follow" feature so that we were all concentrated on the same element of the design so that it was simpler for the supervisor to provide targeted, contextual feedback on specific areas.
+
+This direct communication also allowed us to quickly clarify and allowed us to reduce uncertainty about comments such as "this needs to be more visible" or "consider redesigning this layout."
+
+Moreover, Figma’s version history feature allowed us to continuously improve our design by reflecting on what worked and what didn’t. Although we didn’t manually take snapshots, Figma automatically saved our progress, which made it easy to revisit previous versions at any point. This proved especially helpful when comparing earlier designs with more refined iterations, as it allowed us to clearly see what had improved and what needed further adjustment.
+
+A great example of this is the evolution of the Vitals page, which went through at least six major visual and functional changes, shown in Figure~\ref{fig:vitals-evolution}. In the earliest version, the layout lacked structure, had no sidebar for navigation, and missed key interactive elements such as the "Save Vitals" button, as shown in Figure~\ref{fig:vitals-v1}. As feedback was gathered through team discussions and supervisor input, we iteratively refined the page. By the sixth version (Figure~\ref{fig:vitals-v6}), the design included:
+
+\begin{itemize}
+    \item An aligned, visually consistent layout that matches the rest of the system.
+    \item A patient card was added at the top to remind clinicians whose record they were updating.
+    \item A "Save Vitals" button to improve usability.
+    \item A vitals history table, allowing easy access to previously recorded data.
+\end{itemize}
+
+% The figure is split into two parts to allow a page break.
+\begin{figure}[H] % Part 1 of the figure
+  \centering
+  \captionsetup[subfigure]{labelformat=simple, labelsep=space, justification=centering}
+  \renewcommand{\thesubfigure}{(\alph{subfigure})}
+  \begin{subfigure}[t]{0.48\linewidth}
+    \centering
+    \includegraphics[height=6cm]{images03/3-2-2-figure4a.png}
+    \caption{}
+    \label{fig:vitals-v1}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.48\linewidth}
+    \centering
+    \includegraphics[height=6cm]{images03/3-2-2-figure4b.png}
+    \caption{}
+    \label{fig:vitals-v2}
+  \end{subfigure}
+\end{figure}
+\begin{figure}[H]\ContinuedFloat
+  \par\smallskip
+  \begin{subfigure}[t]{0.48\linewidth}
+    \centering
+    \includegraphics[height=6cm]{images03/3-2-2-figure4c.png}
+    \caption{}
+    \label{fig:vitals-v3}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.48\linewidth}
+    \centering
+    \includegraphics[height=6cm]{images03/3-2-2-figure4d.png}
+    \caption{}
+    \label{fig:vitals-v4}
+  \end{subfigure}
+\end{figure}
+\begin{figure}[H]\ContinuedFloat % Part 2 of the figure
+  \centering
+  \begin{subfigure}[t]{0.48\linewidth}
+    \centering
+    \includegraphics[height=6cm]{images03/3-2-2-figure4e.png}
+    \captionsetup{justification=centering}
+    \caption{}
+    \label{fig:vitals-v5}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.48\linewidth}
+    \centering
+    \includegraphics[height=6cm]{images03/3-2-2-figure4f.png}
+    \captionsetup{justification=centering}
+    \caption{}
+    \label{fig:vitals-v6}
+  \end{subfigure}
+  %\captionsetup{justification=centering}
+  \caption{The iterative design process of the Vitals page, showing its evolution through six key versions. (a)Basic layout without a sidebar or patient card. (b)Introduction of a navigation sidebar. (c)Adding a patient information card at the top. (d)Refining the layout and adding a history table. (e)Improving visual consistency and button placement. (f)Final design with all key components integrated.}
+  \label{fig:vitals-evolution}
+\end{figure}
+
+These changes not only enhanced the interface visually, but also made the page much more usable in a real clinical workflow. Since healthcare professionals often move quickly between patient records, having the patient card consistently displayed at the top of all patient-specific pages helps reduce confusion, reminding them of whose data they are viewing or editing.
+
+We made multiple adjustments to several pages based on weekly feedback from our supervisor and internal team reviews. This ensured a more user-friendly and functional design across the platform.
+
+One of the most significant design iterations in our project involved the Prescription Page. During a weekly meeting with our supervisor, we received feedback that the initial layout appeared empty and lacked the essential clinical details typically expected in a real-world healthcare system. Based on this feedback, we conducted research into existing healthcare system standards to understand what prescription interfaces should contain, with a particular focus on NHS guidelines and clinical UX principles.
+
+% NOTE: Please replace 'rcp_med_standards' and 'nhs_design_system' with the correct keys from your thesisbiblio.bib file.
+We referred to the \emph{Medication and Allergy Standards for structured records}, published by the Royal College of Physicians in collaboration with the Health and Social Care Information Centre (HSCIC) in 2013. These standards recommend that digital prescriptions should include key information such as medication name, dosage, frequency, route, duration, and notes, all of which are fields we implemented in our updated interface~\cite{rcp_med_standards}.
+
+In terms of user interface design, we followed the NHS Design System’s guidance on card components, which recommends grouping related form fields into visually distinct blocks. This improves usability and reduces cognitive load by allowing clinicians to focus on one section at a time. Inspired by this, we introduced structured “Medication Cards” in our interface, each containing fields for medication name, dosage (e.g., 500mg), frequency (e.g., twice a day), route (e.g., oral or IV), duration (e.g., for 7 days), and clinical notes (e.g., take before meals). We also added a dropdown for selecting saved medication records, improving both usability and completeness of the page~\cite{nhs_design_system}.
+
+These changes transformed the original sparse interface into a more complete, user-friendly, and clinically appropriate design. They also align our application with industry standards for both content structure and interface design, as shown in Figure~{\ref{fig:prescription-evolution}}.
+
+\begin{figure}[htbp]
+  \centering
+  \captionsetup[subfigure]{labelformat=simple, labelsep=space, justification=centering}
+  \renewcommand{\thesubfigure}{(\alph{subfigure})}
+  \begin{subfigure}[t]{0.48\linewidth}
+    \centering
+    \includegraphics[height=6cm]{images03/3-2-2-figure5a.png}
+    \caption{}
+    \label{fig:prescription-before}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.48\linewidth}
+    \centering
+    \includegraphics[height=6cm]{images03/3-2-2-figure5b.png}
+    \caption{}
+    \label{fig:prescription-after}
+  \end{subfigure}
+  \caption{Comparison of the Prescription Page before and after design iteration based on supervisor feedback. (a)Initial design of the Prescription Page. (b)Redesigned page with structured ``Medication Cards'' and comprehensive fields, following NHS guidelines.}
+  \label{fig:prescription-evolution}
+\end{figure}
+
+Similarly, during one of our internal design review meetings, we identified a gap in the Patient Profile Page. Initially, the Patient Profile Page featured the doctor’s profile picture, but it lacked interactivity. In a later iteration, we enhanced the design by implementing a functional popup menu. This allowed doctors to either access their account settings or securely log out, improving both usability and navigation consistency, as shown in Figure~{\ref{fig:profile-menu-evolution}}. These feedback-driven design iterations not only improved usability but also aligned the interface with real-world clinical workflows and recognized healthcare UI standards.
+
+\begin{figure}[H]
+  \centering
+  \captionsetup[subfigure]{labelformat=simple, labelsep=space, justification=centering}
+  \renewcommand{\thesubfigure}{(\alph{subfigure})}
+  \begin{subfigure}[t]{0.48\linewidth}
+    \centering
+    \includegraphics[height=6cm]{images03/3-2-2-figure6a.png}
+    \caption{}
+    \label{fig:profile-menu-before}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.48\linewidth}
+    \centering
+    \includegraphics[height=6cm]{images03/3-2-2-figure6b.png}
+    \caption{}
+    \label{fig:profile-menu-after}
+  \end{subfigure}
+  \caption{Evolution of the doctor's profile menu on the Patient Profile Page. (a)Initial design with a static, non-interactive doctor profile picture. (b)Enhanced design with a functional popup menu for account settings and logout.}
+  \label{fig:profile-menu-evolution}
+\end{figure}
+
+
+
+\paragraph{Front-end Implementation}\mbox{}\\
+
+In the front-end implementation section, we illustrate the process of how we created, organised, and tested our front-end code. We divide this process into 5 stages. First, we describe how we structured and developed the codebase. Then, we explain how we integrate shared layouts using Thymeleaf to improve consistency and maintainability across pages. Next, we explain how different pages are connected to form a smooth user flow. We also discuss the steps we took to test each function to ensure the website behaves as intended. Finally, we reflect on the main challenges we encountered during the front-end development and how we addressed them. These topics are covered in following subsections: Code Structure and Component Organisation, Integrating Shared Layouts with Thymeleaf, Page Navigation and User Flow, User Flow and Functional Testing, and Challenges Encountered During Frontend Development, respectively.
+\paragraph{Code Structure and Component Organisation}\mbox{}\\
+In this section, we describe how we constructed the front-end codebase. As mentioned earlier, each member was responsible for designing different parts of the website in Figma. We continued the pattern during implementation–each member developed their assigned parts using HTML and CSS, focusing on accurately reproducing the layout and visual style from our Figma design.
+
+At this stage, our goal is to replicate the layout and visual style of our Figma design. Most interactive elements, such as buttons, pop-up windows, and form submissions, have not yet been functionalized. We have also not yet integrated a shared layout system using Thymeleaf. These shared elements are currently duplicated across individual pages, and we plan to organize them in the next development stage to improve maintainability and consistency.
+
+\paragraph{Integrating Shared Layouts with Thymeleaf}\mbox{}\\
+After developing all the pages, we noticed that many structural elements–such as headers, sidebars, and forms–were repeated across different pages. To reduce redundancy and to make the Smart Hospital UI consistent and maintainable, we wrapped repeated interface components (sidebar, top navigation, and patient header) into reusable Thymeleaf fragments and consumed them across pages with th:replace. As shown in Figure~\ref{fig:3-2-2-vital-history-page}, the vitalsHistoryPage.html file defines an empty container, CSS links, outer grid, and main content area, while common UI components are injected at render time from layouts/sharedLayout.html.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\linewidth]{images03/3-2-2-vitalHS.png} 
+  \caption{vitalsHistoryPage.html consuming shared fragments (vitalsSidebar, topNav, patientCard) via th:replace.}
+  \label{fig:3-2-2-vital-history-page}
+\end{figure}
+
+For example, the Vitals page loads the active vitalsSidebar fragment (highlighting the Vitals tab), the topNav fragment (with dynamic pageTitle provided via the model), and a patientCard fragment (so clinicians can always see the patient context at the top of patient-specific pages). This server-side composition makes our design system dry, updating the sidebar icon set or the patient header once applied everywhere without touching individual pages. Figure~\ref{fig:3-2-2-sharedLayout} illustrates part of the sharedLayout.html file, displaying the sidebar fragment and its logo and most crucial navigation links.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\linewidth]{images03/3-2-2-sharedLayout.png} 
+  \caption{Snippet from sharedLayout.html showing the sidebar fragment, including the logo at the top and navigation links.}
+  \label{fig:3-2-2-sharedLayout}
+\end{figure}
+
+We also separated shared and page-specific styling concerns to avoid cascade conflicts. Fragment-level styles for global pages live in \verb|sharedLayout.css| and are loaded ahead of each page's own stylesheet (e.g., \verb|vitalsHistoryPage.css|). Fragments leverage Thymeleaf's URL syntax (e.g., \verb|th:src="@{/SharedLayoutImages/}"|) to refer to assets so paths get resolved properly no matter the environment. Where a page needs alternative "active" navigation, we provide a purpose-specific fragment (e.g., \verb|sidebar| vs. \verb|vitalsSidebar|) to facilitate correct tab state without hardcoded per-page logic. This approach assisted in achieving consistency (the same chrome everywhere), maintainability (one change affects all pages), and clarity. As shown in Figure~\ref{fig:3-2-2-renderLayout}, clinicians always have navigation context and the patient card visible when navigating between modules.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\linewidth]{images03/3-2-2-renderLayout.png} 
+  \caption{Rendered UI in the browser showing the shared sidebar, patient card, and top navigation in the Vitals module.}
+  \label{fig:3-2-2-renderLayout}
+\end{figure}
+
+\paragraph{Page Navigation and User Flow}\mbox{}\\
+In this stage, we began to functionalize interactive elements such as buttons, hyperlinks to ensure the website provides a smooth and intuitive experience. The overall user flow had already been defined in our early-stage Figma design, a clear user flow that reflects typical interactions between patients and doctors in our early-stage Figma design, reflecting typical interactions between patients and doctors. Each page was connected according to the logical steps users would take when navigating through the platform. For example, clicking the “Register” button on the homepage directs users to the registration form, and buttons on the “Dashboard” page are linked to corresponding pages. These workflows were clearly visualized in our Figma prototype. The main goal of this stage is to ensure that all the interactive elements function as the origin design. In the next stage, we plan to test the whole website work appropriately and collect the disadvantages that can be improved.
+\paragraph{User Flow and Functional Testing}\mbox{}\\
+
+\paragraph{Challenges Encountered During Frontend Development}\mbox{}\\
+One of the biggest challenges encountered while performing frontend development was how to break down the Figma-based design system into Thymeleaf templates. Even though the Figma designs created a solid visual reference for layout, typography, and spacing between elements, the server-side rendering approach of Thymeleaf required the interface to be split into smaller, more manageable parts. It introduced additional difficulty in the process of converting pixel-perfect designs into coherent HTML templates with alignment, responsiveness, and style consistency preserved. Visual parity usually needed to be delivered by iterative adjustments of the HTML structure as well as accompanying CSS.
+
+An analogous problem involved the handling of shared styles and bits within the multi-page Thymeleaf application. Shared interface pieces, the sidebar navigation, header, and footer, were included as reusable fragments to foster consistency and reduce redundancy. With this came, however, the risk of side effects: a modification of a shared fragment would likely disrupt the styling or layout of multiple pages. To tackle this, the development team implemented a formalized update process, such as fragment-specific testing and peer review prior to merge of changes. This procedure ensured global component updates maintained visual correctness without causing regressions in other parts of the system.
