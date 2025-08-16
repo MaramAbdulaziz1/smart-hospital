@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.7.31)  16 AUG 2025 16:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.7.31)  16 AUG 2025 16:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1179,47 +1179,47 @@ Overfull \hbox (11.71945pt too wide) in paragraph at lines 103--118
 
 ] (./chapters/chapter03/chap03-01-02.tex [8
 
-] [9]
+]
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [10]
-<chapters/chapter03/images03/3-1-2-springbootTable.png, id=316, 584.4234pt x 118.041pt>
+ [9]
+<chapters/chapter03/images03/3-1-2-springbootTable.png, id=310, 584.4234pt x 118.041pt>
 File: chapters/chapter03/images03/3-1-2-springbootTable.png Graphic file (type png)
 <use chapters/chapter03/images03/3-1-2-springbootTable.png>
 Package pdftex.def Info: chapters/chapter03/images03/3-1-2-springbootTable.png  used on input line 40.
 (pdftex.def)             Requested size: 358.40137pt x 72.39034pt.
-) [11 <./chapters/chapter03/images03/3-1-2-springbootTable.png>] [12] [13]
+ [10 <./chapters/chapter03/images03/3-1-2-springbootTable.png>]) [11] [12] [13]
 <images/(VHA)-1.jpg, id=344, 1204.5pt x 634.62094pt>
 File: images/(VHA)-1.jpg Graphic file (type jpg)
 <use images/(VHA)-1.jpg>
-Package pdftex.def Info: images/(VHA)-1.jpg  used on input line 82.
+Package pdftex.def Info: images/(VHA)-1.jpg  used on input line 80.
 (pdftex.def)             Requested size: 210.56055pt x 110.93443pt.
 <images/(VHA)-2.jpg, id=345, 1606.0pt x 1003.75pt>
 File: images/(VHA)-2.jpg Graphic file (type jpg)
 <use images/(VHA)-2.jpg>
-Package pdftex.def Info: images/(VHA)-2.jpg  used on input line 88.
+Package pdftex.def Info: images/(VHA)-2.jpg  used on input line 86.
 (pdftex.def)             Requested size: 210.56055pt x 131.59483pt.
 <images/(VHA)-3.jpg, id=346, 1606.0pt x 1305.87875pt>
 File: images/(VHA)-3.jpg Graphic file (type jpg)
 <use images/(VHA)-3.jpg>
-Package pdftex.def Info: images/(VHA)-3.jpg  used on input line 97.
+Package pdftex.def Info: images/(VHA)-3.jpg  used on input line 95.
 (pdftex.def)             Requested size: 210.56055pt x 171.20486pt.
 <images/(VHA)-4.jpg, id=347, 957.5775pt x 392.96812pt>
 File: images/(VHA)-4.jpg Graphic file (type jpg)
 <use images/(VHA)-4.jpg>
-Package pdftex.def Info: images/(VHA)-4.jpg  used on input line 103.
+Package pdftex.def Info: images/(VHA)-4.jpg  used on input line 101.
 (pdftex.def)             Requested size: 210.56055pt x 86.40527pt.
 <images/(VHA)-5.jpg, id=348, 963.6pt x 460.72125pt>
 File: images/(VHA)-5.jpg Graphic file (type jpg)
 <use images/(VHA)-5.jpg>
-Package pdftex.def Info: images/(VHA)-5.jpg  used on input line 112.
+Package pdftex.def Info: images/(VHA)-5.jpg  used on input line 110.
 (pdftex.def)             Requested size: 210.56055pt x 100.67004pt.
 <images/(VHA)-6.jpg, id=349, 1204.5pt x 584.93532pt>
 File: images/(VHA)-6.jpg Graphic file (type jpg)
 <use images/(VHA)-6.jpg>
-Package pdftex.def Info: images/(VHA)-6.jpg  used on input line 118.
+Package pdftex.def Info: images/(VHA)-6.jpg  used on input line 116.
 (pdftex.def)             Requested size: 210.56055pt x 102.24918pt.
  [14 <./images/(VHA)-1.jpg> <./images/(VHA)-2.jpg>] (./chapters/chapter03/chap03-02-02.tex
 Underfull \hbox (badness 10000) in paragraph at lines 13--14
@@ -1435,7 +1435,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  85i,13n,131p,1708b,692s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on memoirthesis.pdf (40 pages, 7126322 bytes).
+Output written on memoirthesis.pdf (40 pages, 7125537 bytes).
 PDF statistics:
  575 PDF objects out of 1000 (max. 8388607)
  461 compressed objects within 5 object streams
