@@ -411,6 +411,10 @@ INPUT ./chapters/chapter02/../../images/line.jpg
 INPUT chapters/chapter02/../../images/line.jpg
 INPUT ./chapters/chapter02/../../images/line.jpg
 INPUT ./chapters/chapter02/../../images/line.jpg
+INPUT ./chapters/chapter02/../../images/line_english.jpg
+INPUT chapters/chapter02/../../images/line_english.jpg
+INPUT ./chapters/chapter02/../../images/line_english.jpg
+INPUT ./chapters/chapter02/../../images/line_english.jpg
 INPUT ./chapters/chapter03/chap03.tex
 INPUT chapters/chapter03/chap03.tex
 INPUT ./chapters/chapter03/chap03.tex
