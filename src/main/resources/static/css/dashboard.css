@@ -52,7 +52,7 @@ input[type="text"].search {
 /* Search Section */
 .search-row{
   display: grid;
-  grid-template-columns: 4fr 1fr;
+  grid-template-columns: 4fr 0.5fr;
   align-items: center;
   column-gap: 10px;
   padding: 10px 10px;
@@ -61,18 +61,26 @@ input[type="text"].search {
 
 .search-row .search1 {
   height: 50px;
-  font-size: 14px;
+  font-size: 15px;
   border-radius: 8px;
   border: 1px solid #ccc;
   box-sizing: border-box;
   padding: 0 12px;
 }
 
-.search-row .btn{
-  border-radius: 16px;
+/*.search-row .btn{
+  border-radius: 8px;
   border: 1px solid #6DA2B1;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: #6DA2B1;
+}*/
+
+.search-row .btn{
+  background: #6DA2B1;
+  border: 2px solid #6DA2B1;
+  color: white;
+  text-decoration: none;
+  max-width: 100px;
 }
 
 .search:focus {
@@ -121,10 +129,10 @@ input[type="text"].search {
 
 /* Section Title */
 .section-title {
-  font-size: 32px;
-  margin-bottom: 10px;
-  color: #333;
-  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 20px 20px;
+  color: #363535;
+  font-style: normal;
 }
 
 /* Table Header */
@@ -141,10 +149,9 @@ input[type="text"].search {
 }
 
 .table-header .text{
-  color: #53535D;
-  font-family: Inter;
-  font-size: 24px;
-  font-style: normal;
+  color: #000000;
+  font-size: 19px;
+  font-style: bold;
   font-weight: 400;
   line-height: normal;
 }
@@ -191,18 +198,19 @@ input[type="text"].search {
 
 .patient-row strong {
   font-weight: normal;
-  font-size: 16px;
+  font-size: 19px;
   margin-bottom: 4px;
   display: block;
 }
 
 .id {
-  font-size: 20px;
+  font-size: 14px;
   color: #777;
 }
 
 .default-text{
-  font-size: 24px;
+  font-size: 19px;
+  margin-bottom: 10px;
 }
 
 /* Button Group */
@@ -221,7 +229,7 @@ input[type="text"].search {
   cursor: pointer;
   background-color: white;
   color: #333;
-  font-size: 20px;
+  font-size: 15px;
   transition: background-color 0.2s ease;
 }
 
@@ -233,7 +241,7 @@ input[type="text"].search {
 }
 
 .btn:hover {
-  background-color: #e8f7fb;
+  background-color: #5a8a97;
 }
 
 .btn.filled:hover {
@@ -324,11 +332,11 @@ input[type="text"].search {
 }
 
 .dashboard-page .sidebar .tab:hover {
-  background-color: #F5F5F5;
+  background-color: #F0F8FF;
 }
 
 .dashboard-page .sidebar .tab.active-tab {
-  background-color: #F5F5F5;
+  background-color: #E6F3FF;
   border-radius: 16px;
 }
 
@@ -402,4 +410,3 @@ input[type="text"].search {
     width: calc(100% - 180px);
   }
 }
-
