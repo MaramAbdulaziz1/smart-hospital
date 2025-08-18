@@ -12,7 +12,7 @@ import java.util.Map;
 
 @Controller
 public class PatientdashboardController {
-    
+
     @Autowired
     private HospitalDataService hospitalDataService;
 
@@ -47,20 +47,20 @@ public class PatientdashboardController {
             @RequestParam String doctor,
             @RequestParam String dateStr,
             @RequestParam String timeStr) {
-        
+
         Map<String, Object> response = new HashMap<>();
-        
+
         try {
-            
+
             response.put("success", true);
-            response.put("message", "Appointment successful!");
-            
+            response.put("message", "AppointmentView successful!");
+
             return ResponseEntity.ok(response);
-            
+
         } catch (Exception e) {
             response.put("success", false);
-            response.put("message", "Appointment failed：" + e.getMessage());
-            
+            response.put("message", "AppointmentView failed：" + e.getMessage());
+
             return ResponseEntity.badRequest().body(response);
         }
     }
@@ -73,20 +73,20 @@ public class PatientdashboardController {
             @RequestParam String nurse,
             @RequestParam String dateStr,
             @RequestParam String timeStr) {
-        
+
         Map<String, Object> response = new HashMap<>();
-        
+
         try {
-            
+
             response.put("success", true);
-            response.put("message", "Appointment successful!");
-            
+            response.put("message", "AppointmentView successful!");
+
             return ResponseEntity.ok(response);
-            
+
         } catch (Exception e) {
             response.put("success", false);
-            response.put("message", "Appointment failed：" + e.getMessage());
-            
+            response.put("message", "AppointmentView failed：" + e.getMessage());
+
             return ResponseEntity.badRequest().body(response);
         }
     }

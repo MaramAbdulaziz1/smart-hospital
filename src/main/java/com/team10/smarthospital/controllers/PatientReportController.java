@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
   import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import com.team10.smarthospital.model.PatientProfile;
+import com.team10.smarthospital.model.PatientProfileView;
 import com.team10.smarthospital.model.VisitRecord;
 import com.team10.smarthospital.service.HospitalDataService;
 
@@ -78,15 +78,15 @@ System.out.println("Date of visit value " + visitRecords.get(0).getDateOfVisit()
       visitRecord.setPastMedications(null);
       visitRecord.setPastMedicalConditions(null);
 
-      //PatientProfile object to be used in the template
-      PatientProfile patientProfile = new PatientProfile();
-      patientProfile.setId(1L); // Mock ID, in a real application this would be dynamic
-      patientProfile.setName("Harry Potter");
+      //PatientProfileView object to be used in the template
+      PatientProfileView patientProfileView = new PatientProfileView();
+      patientProfileView.setId(1L); // Mock ID, in a real application this would be dynamic
+      patientProfileView.setName("Harry Potter");
       visitRecords.add(visitRecord);
       // In a real application, you would fetch the visit record from the database using patientId and date
 
       model.addAttribute("visitRecord", visitRecord);
-      model.addAttribute("patientProfile", patientProfile);
+      model.addAttribute("patientProfileView", patientProfileView);
 
       return "patient-report"; // loads patient-report.html
       }

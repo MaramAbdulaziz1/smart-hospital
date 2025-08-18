@@ -4,10 +4,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- * Appointment entity representing a medical appointment
+ * AppointmentView entity representing a medical appointment
  * Core data structure for appointment management
  */
-public class Appointment {
+public class AppointmentView {
 
   private Long id;
   private Long patientId;
@@ -15,7 +15,7 @@ public class Appointment {
   private String department;
   private LocalDate date;
   private LocalTime time;
-  private AppointmentStatus status;
+  private AppointmentStatusView status;
   private AppointmentType type;
   private String notes;
   private LocalDate createdAt;
@@ -23,14 +23,14 @@ public class Appointment {
   private String nurseName;
 
   // Default constructor
-  public Appointment() {
+  public AppointmentView() {
     this.createdAt = LocalDate.now();
     this.updatedAt = LocalDate.now();
-    this.status = AppointmentStatus.UPCOMING;
+    this.status = AppointmentStatusView.UPCOMING;
   }
 
   // Constructor with essential fields
-  public Appointment(Long patientId, String doctorName, LocalDate date, LocalTime time) {
+  public AppointmentView(Long patientId, String doctorName, LocalDate date, LocalTime time) {
     this();
     this.patientId = patientId;
     this.doctorName = doctorName;
@@ -57,8 +57,8 @@ public class Appointment {
   public LocalTime getTime() { return time; }
   public void setTime(LocalTime time) { this.time = time; }
 
-  public AppointmentStatus getStatus() { return status; }
-  public void setStatus(AppointmentStatus status) {
+  public AppointmentStatusView getStatus() { return status; }
+  public void setStatus(AppointmentStatusView status) {
     this.status = status;
     this.updatedAt = LocalDate.now();
   }
@@ -84,7 +84,7 @@ public class Appointment {
    * Check if appointment is upcoming (future date/time)
    */
   public boolean isUpcoming() {
-    return status == AppointmentStatus.UPCOMING &&
+    return status == AppointmentStatusView.UPCOMING &&
       (date.isAfter(LocalDate.now()) ||
         (date.isEqual(LocalDate.now()) && time.isAfter(LocalTime.now())));
   }
@@ -93,7 +93,7 @@ public class Appointment {
    * Check if appointment can be cancelled
    */
   public boolean canBeCancelled() {
-    return status == AppointmentStatus.UPCOMING && isUpcoming();
+    return status == AppointmentStatusView.UPCOMING && isUpcoming();
   }
 
   // Formatting methods for Thymeleaf templates
@@ -128,7 +128,7 @@ public class Appointment {
 
   @Override
   public String toString() {
-    return "Appointment{" +
+    return "AppointmentView{" +
       "id=" + id +
       ", patientId=" + patientId +
       ", doctorName='" + doctorName + '\'' +

@@ -1,56 +1,34 @@
 package com.team10.smarthospital.model;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "patients")
-public class PatientProfile extends BaseEntity {
+public class PatientProfileView extends BaseEntityView {
 
-  @NotBlank(message = "Name is required")
-  @Size(min = 2, max = 100, message = "Name must be between 2 and 100 characters")
-  @Column(name = "name", nullable = false)
   private String name;
 
-  @Email(message = "Email should be valid")
-  @Column(name = "email", unique = true)
   private String email;
 
-  @Pattern(regexp = "^[+]?[0-9\\s\\-()]+$", message = "Phone number should be valid")
-  @Column(name = "phone")
   private String phone;
 
-  @Enumerated(EnumType.STRING)
-  @Column(name = "sex")
-  private Gender sex;
+  private GenderView sex;
 
-  @Min(value = 0, message = "Age must be positive")
-  @Max(value = 100, message = "Age must be reasonable")
-  @Column(name = "age")
   private Integer age;
 
-  @Column(name = "date_of_birth")
   private LocalDate dateOfBirth;
 
-  @Column(name = "weight")
   private String weight;
 
-  @Column(name = "height")
   private String height;
 
-  @Column(name = "blood_type")
   private String bloodType;
 
-  @Column(name = "address", length = 500)
   private String address;
 
   // Default constructor
-  public PatientProfile() {
-  }
+  public PatientProfileView() {}
 
   // Constructor with required fields
-  public PatientProfile(String name, String email) {
+  public PatientProfileView(String name, String email) {
     this.name = name;
     this.email = email;
   }
@@ -80,11 +58,11 @@ public class PatientProfile extends BaseEntity {
     this.phone = phone;
   }
 
-  public Gender getSex() {
+  public GenderView getSex() {
     return sex;
   }
 
-  public void setSex(Gender sex) {
+  public void setSex(GenderView sex) {
     this.sex = sex;
   }
 
@@ -157,13 +135,22 @@ public class PatientProfile extends BaseEntity {
 
   @Override
   public String toString() {
-    return "PatientProfile{" +
-      "id=" + getId() +
-      ", name='" + name + '\'' +
-      ", email='" + email + '\'' +
-      ", phone='" + phone + '\'' +
-      ", sex=" + sex +
-      ", age=" + age +
-      '}';
+    return "PatientProfileView{"
+      + "id="
+      + getId()
+      + ", name='"
+      + name
+      + '\''
+      + ", email='"
+      + email
+      + '\''
+      + ", phone='"
+      + phone
+      + '\''
+      + ", sex="
+      + sex
+      + ", age="
+      + age
+      + '}';
   }
 }

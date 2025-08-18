@@ -1,7 +1,7 @@
 package com.team10.smarthospital.controllers;
 
-import com.team10.smarthospital.model.Appointment;
-import com.team10.smarthospital.model.AppointmentStatus;
+import com.team10.smarthospital.model.AppointmentView;
+import com.team10.smarthospital.model.AppointmentStatusView;
 import com.team10.smarthospital.model.AppointmentType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -30,14 +30,14 @@ public class ManageAppointmentsController {
   @GetMapping("/patient/manageAppointments")
   public String manageAppointmentsPage(Model model) {
     // Create mock upcoming appointments data
-    List<Appointment> upcomingAppointments = createMockUpcomingAppointments();
+    List<AppointmentView> upcomingAppointmentViews = createMockUpcomingAppointments();
 
     // Create mock appointment history data
-    List<Appointment> appointmentHistory = createMockAppointmentHistory();
+    List<AppointmentView> appointmentViewHistory = createMockAppointmentHistory();
 
     // Add data to model for template rendering
-    model.addAttribute("upcomingAppointments", upcomingAppointments);
-    model.addAttribute("appointmentHistory", appointmentHistory);
+    model.addAttribute("upcomingAppointmentViews", upcomingAppointmentViews);
+    model.addAttribute("appointmentViewHistory", appointmentViewHistory);
     model.addAttribute("pageTitle", "Manage Appointments");
 
     return "manageAppointments";
@@ -60,7 +60,7 @@ public class ManageAppointmentsController {
 
       if (success) {
         response.put("success", true);
-        response.put("message", "Appointment cancelled successfully");
+        response.put("message", "AppointmentView cancelled successfully");
       } else {
         response.put("success", false);
         response.put("message", "Unable to cancel this appointment, it may be expired or not exist");
@@ -86,12 +86,12 @@ public class ManageAppointmentsController {
     Map<String, Object> response = new HashMap<>();
 
     try {
-      List<Appointment> upcomingAppointments = createMockUpcomingAppointments();
-      List<Appointment> appointmentHistory = createMockAppointmentHistory();
+      List<AppointmentView> upcomingAppointmentViews = createMockUpcomingAppointments();
+      List<AppointmentView> appointmentViewHistory = createMockAppointmentHistory();
 
       response.put("success", true);
-      response.put("upcomingAppointments", upcomingAppointments);
-      response.put("appointmentHistory", appointmentHistory);
+      response.put("upcomingAppointmentViews", upcomingAppointmentViews);
+      response.put("appointmentViewHistory", appointmentViewHistory);
 
       return ResponseEntity.ok(response);
 
@@ -109,56 +109,56 @@ public class ManageAppointmentsController {
    * Create mock upcoming appointments for testing
    * TODO: Replace with repository calls when connecting to database
    */
-  private List<Appointment> createMockUpcomingAppointments() {
-    List<Appointment> appointments = new ArrayList<>();
+  private List<AppointmentView> createMockUpcomingAppointments() {
+    List<AppointmentView> appointmentViews = new ArrayList<>();
 
-    // Appointment 1
-    Appointment appointment1 = new Appointment();
-    appointment1.setId(1L);
-    appointment1.setPatientId(1L);
-    appointment1.setDoctorName("Oral Nurse");
-    appointment1.setDepartment("Dentistry");
-    appointment1.setDate(LocalDate.of(2025, 9, 5));
-    appointment1.setTime(LocalTime.of(10, 0));
-    appointment1.setStatus(AppointmentStatus.UPCOMING);
-    appointment1.setType(AppointmentType.CONSULTATION);
-    appointments.add(appointment1);
+    // AppointmentView 1
+    AppointmentView appointmentView1 = new AppointmentView();
+    appointmentView1.setId(1L);
+    appointmentView1.setPatientId(1L);
+    appointmentView1.setDoctorName("Oral Nurse");
+    appointmentView1.setDepartment("Dentistry");
+    appointmentView1.setDate(LocalDate.of(2025, 9, 5));
+    appointmentView1.setTime(LocalTime.of(10, 0));
+    appointmentView1.setStatus(AppointmentStatusView.UPCOMING);
+    appointmentView1.setType(AppointmentType.CONSULTATION);
+    appointmentViews.add(appointmentView1);
 
-    // Appointment 2
-    Appointment appointment2 = new Appointment();
-    appointment2.setId(2L);
-    appointment2.setPatientId(1L);
-    appointment2.setDoctorName("Dr. Weasley");
-    appointment2.setDepartment("General Medicine");
-    appointment2.setDate(LocalDate.of(2025, 8, 27));
-    appointment2.setTime(LocalTime.of(10, 0));
-    appointment2.setStatus(AppointmentStatus.UPCOMING);
-    appointment2.setType(AppointmentType.FOLLOW_UP);
-    appointments.add(appointment2);
+    // AppointmentView 2
+    AppointmentView appointmentView2 = new AppointmentView();
+    appointmentView2.setId(2L);
+    appointmentView2.setPatientId(1L);
+    appointmentView2.setDoctorName("Dr. Weasley");
+    appointmentView2.setDepartment("General Medicine");
+    appointmentView2.setDate(LocalDate.of(2025, 8, 27));
+    appointmentView2.setTime(LocalTime.of(10, 0));
+    appointmentView2.setStatus(AppointmentStatusView.UPCOMING);
+    appointmentView2.setType(AppointmentType.FOLLOW_UP);
+    appointmentViews.add(appointmentView2);
 
-    return appointments;
+    return appointmentViews;
   }
 
   /**
    * Create mock appointment history for testing
    * TODO: Replace with repository calls when connecting to database
    */
-  private List<Appointment> createMockAppointmentHistory() {
-    List<Appointment> history = new ArrayList<>();
+  private List<AppointmentView> createMockAppointmentHistory() {
+    List<AppointmentView> history = new ArrayList<>();
 
     // Add upcoming appointments to history
     history.add(createAppointment(3L, "Oral Nurse", "Dentistry",
       LocalDate.of(2025, 9, 5), LocalTime.of(10, 0),
-      AppointmentStatus.UPCOMING, AppointmentType.CONSULTATION));
+      AppointmentStatusView.UPCOMING, AppointmentType.CONSULTATION));
 
     history.add(createAppointment(4L, "Dr. Weasley", "General Medicine",
       LocalDate.of(2025, 8, 27), LocalTime.of(10, 0),
-      AppointmentStatus.UPCOMING, AppointmentType.FOLLOW_UP));
+      AppointmentStatusView.UPCOMING, AppointmentType.FOLLOW_UP));
 
     // Add completed appointments
     history.add(createAppointment(5L, "Oral Nurse", "Dentistry",
       LocalDate.of(2025, 6, 5), LocalTime.of(9, 0),
-      AppointmentStatus.COMPLETED, AppointmentType.VITAL_CHECK));
+      AppointmentStatusView.COMPLETED, AppointmentType.VITAL_CHECK));
 
     return history;
   }
@@ -166,19 +166,19 @@ public class ManageAppointmentsController {
   /**
    * Helper method to create appointment objects
    */
-  private Appointment createAppointment(Long id, String doctorName, String department,
-                                        LocalDate date, LocalTime time,
-                                        AppointmentStatus status, AppointmentType type) {
-    Appointment appointment = new Appointment();
-    appointment.setId(id);
-    appointment.setPatientId(1L); // Currently using fixed patient ID
-    appointment.setDoctorName(doctorName);
-    appointment.setDepartment(department);
-    appointment.setDate(date);
-    appointment.setTime(time);
-    appointment.setStatus(status);
-    appointment.setType(type);
-    return appointment;
+  private AppointmentView createAppointment(Long id, String doctorName, String department,
+                                            LocalDate date, LocalTime time,
+                                            AppointmentStatusView status, AppointmentType type) {
+    AppointmentView appointmentView = new AppointmentView();
+    appointmentView.setId(id);
+    appointmentView.setPatientId(1L); // Currently using fixed patient ID
+    appointmentView.setDoctorName(doctorName);
+    appointmentView.setDepartment(department);
+    appointmentView.setDate(date);
+    appointmentView.setTime(time);
+    appointmentView.setStatus(status);
+    appointmentView.setType(type);
+    return appointmentView;
   }
 
   /**
