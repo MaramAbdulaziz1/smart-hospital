@@ -11,7 +11,7 @@
 
 <div class="layout-container">
 
-  <!-- <div th:replace="~{layouts/sharedLayout :: sidebar}"></div> -->
+
   <aside th:replace="~{layouts/sharedLayout :: sidebar (activePage='patientProfile')}"></aside>
 
 
@@ -83,11 +83,11 @@
         <!-- Doctor's Notes -->
         <div class="card">
             <h2 class="card-title">Clinical Notes</h2>
-           <!-- <textarea class="notes-area" th:field="*{doctorNotes}"
-                      placeholder="Enter doctor's notes...">Some notes</textarea> -->
-               <textarea class="notes-area" disabled th:field="*{visitRecord.doctorsNotes}"
-                      placeholder="Enter doctor's notes...">Some notes</textarea>
-        </div>
+            <p th:text="${visitRecord.doctorsNotes}">Clinical Notes</p>
+
+            <div th:if="${visitRecord.doctorsNotes == null or visitRecord.doctorsNotes.isEmpty()}">
+                <p class="no-data">No clinical notes available</p>
+            </div>
 
         <!-- Treatment and Follow-up Plan -->
         <div class="card">
