@@ -79,4 +79,25 @@ textarea{
   cursor: pointer;
   background-color: white;
   color: #a5dfef;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.edit-btn:hover,.save-btn:hover,.submit-btn:hover {
+  background-color: #e8f7fb;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(165, 223, 239, 0.3);
+}
+
+.edit-btn:disabled,.save-btn:disabled,.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.edit-btn:disabled:hover,.save-btn:disabled:hover,.submit-btn:disabled:hover {
+  background-color: white;
+  transform: none;
+  box-shadow: none;
 }

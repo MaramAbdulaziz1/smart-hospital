@@ -8,6 +8,6 @@ public class ComingSoonController {
 
   @GetMapping("/comingSoon")
   public String showComingSoon() {
-    return "comingSoon";  // 对应 comingSoon.html
+    return "comingSoon";  // with comingSoon.html
   }
 }
