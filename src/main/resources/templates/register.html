@@ -161,30 +161,8 @@
   </form>
 </div>
 
+<!-- Reference external JavaScript files, removing all inline scripts -->
 <script src="../js/register.js"></script>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Profile picture upload handlers
-    document.getElementById('profilePictureInput').addEventListener('change', handleProfilePictureUpload);
-    document.getElementById('cameraInput').addEventListener('change', handleProfilePictureUpload);
-  });
-
-  function handleProfilePictureUpload(event) {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const preview = document.getElementById('profilePreview');
-        const placeholder = document.getElementById('profilePlaceholder');
-
-        preview.src = e.target.result;
-        preview.style.display = 'block';
-        placeholder.style.display = 'none';
-      };
-      reader.readAsDataURL(file);
-    }
-  }
-</script>
 </body>
 </html>

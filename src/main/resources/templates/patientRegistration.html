@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Smart Hospital - Patient Registration</title>
-  <link rel="stylesheet" th:href="@{/css/patientRegistration.css}">
+  <link rel="stylesheet" href="/css/patientRegistration.css">
 
-  <!-- 仅保留logo定位的关键CSS -->
+  <!-- Keep only logo positioning critical CSS -->
   <style>
-    /* Logo部分强制定位 - 覆盖shared layout */
+    /* Logo section forced positioning - override shared layout */
     .simple-header .header-container .logo-section {
       position: absolute !important;
       left: -300px !important;
@@ -29,7 +29,7 @@
 <header class="simple-header">
   <div class="header-container">
     <div class="logo-section">
-      <img th:src="@{/SharedLayoutImages/LogoCircle.png}" alt="Smart Hospital Logo" class="hospital-logo-img">
+      <img src="/SharedLayoutImages/LogoCircle.png" alt="Smart Hospital Logo" class="hospital-logo-img">
     </div>
     <div class="registration-section">
       <h1>Registration</h1>
@@ -277,160 +277,7 @@
   </form>
 </div>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Profile picture upload handlers
-    document.getElementById('profilePictureInput').addEventListener('change', handleProfilePictureUpload);
-    document.getElementById('cameraInput').addEventListener('change', handleProfilePictureUpload);
-
-    // Form validation
-    setupFormValidation();
-  });
-
-  function handleProfilePictureUpload(event) {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const preview = document.getElementById('profilePreview');
-        const placeholder = document.getElementById('profilePlaceholder');
-
-        preview.src = e.target.result;
-        preview.style.display = 'block';
-        placeholder.style.display = 'none';
-      };
-      reader.readAsDataURL(file);
-    }
-  }
-
-  function setupFormValidation() {
-    const form = document.getElementById('patientRegistrationForm');
-
-    // Real-time validation for password confirmation
-    const password = document.getElementById('password');
-    const confirmPassword = document.getElementById('confirmPassword');
-
-    confirmPassword.addEventListener('input', function() {
-      if (password.value !== confirmPassword.value) {
-        showError('confirmPassword', 'Passwords do not match');
-      } else {
-        clearError('confirmPassword');
-      }
-    });
-
-    // National ID validation
-    const nationalId = document.getElementById('nationalId');
-    nationalId.addEventListener('input', function() {
-      const value = this.value.replace(/\D/g, '');
-      this.value = value.length > 13 ? value.substr(0, 13) : value;
-      if (value.length !== 13 && value.length > 0) {
-        showError('nationalId', 'National ID must be 13 digits');
-      } else {
-        clearError('nationalId');
-      }
-    });
-
-    // Mobile number validation
-    const mobileNumber = document.getElementById('mobileNumber');
-    mobileNumber.addEventListener('input', function() {
-      const value = this.value.replace(/\D/g, '');
-      this.value = value.length > 9 ? value.substr(0, 9) : value;
-      if (value.length !== 9 && value.length > 0) {
-        showError('mobileNumber', 'Mobile number must be 9 digits');
-      } else {
-        clearError('mobileNumber');
-      }
-    });
-
-    // Emergency phone validation
-    const emergencyPhone = document.getElementById('emergencyPhone');
-    emergencyPhone.addEventListener('input', function() {
-      const value = this.value.replace(/\D/g, '');
-      this.value = value.length > 9 ? value.substr(0, 9) : value;
-      if (value.length !== 9 && value.length > 0) {
-        showError('emergencyPhone', 'Phone number must be 9 digits');
-      } else {
-        clearError('emergencyPhone');
-      }
-    });
-
-    // Form submission
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      if (validateForm()) {
-        alert('Registration successful! Please check your email for verification.');
-        // Here you would normally submit the form data
-        // form.submit();
-      }
-    });
-  }
-
-  function validateForm() {
-    let isValid = true;
-
-    // Get all required form fields
-    const requiredFields = [
-      'firstName', 'lastName', 'dateOfBirth', 'gender', 'bloodType', 'height', 'weight',
-      'homeAddress', 'nationalId', 'email', 'mobileNumber', 'nearestClinic',
-      'password', 'confirmPassword', 'emergencyFirstName', 'emergencyLastName',
-      'emergencyRelationship', 'emergencyPhone'
-    ];
-
-    // Check each required field
-    requiredFields.forEach(fieldName => {
-      const field = document.getElementById(fieldName);
-      if (field && !field.value.trim()) {
-        showError(fieldName, 'This field is required');
-        isValid = false;
-      } else if (field && field.value.trim()) {
-        clearError(fieldName);
-      }
-    });
-
-    // Special validation for password match
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirmPassword').value;
-    if (password && confirmPassword && password !== confirmPassword) {
-      showError('confirmPassword', 'Passwords do not match');
-      isValid = false;
-    }
-
-    // Email validation
-    const email = document.getElementById('email').value;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (email && !emailRegex.test(email)) {
-      showError('email', 'Please enter a valid email address');
-      isValid = false;
-    }
-
-    return isValid;
-  }
-
-  function showError(fieldName, message) {
-    const errorElement = document.getElementById(fieldName + '-error');
-    if (errorElement) {
-      errorElement.textContent = message;
-      errorElement.style.display = 'block';
-    }
-
-    const field = document.getElementById(fieldName);
-    if (field) {
-      field.classList.add('error');
-    }
-  }
-
-  function clearError(fieldName) {
-    const errorElement = document.getElementById(fieldName + '-error');
-    if (errorElement) {
-      errorElement.style.display = 'none';
-    }
-
-    const field = document.getElementById(fieldName);
-    if (field) {
-      field.classList.remove('error');
-    }
-  }
-</script>
+<!-- JavaScript Files -->
+<script src="/js/patientRegistration.js"></script>
 </body>
 </html>
