@@ -98,12 +98,13 @@
           </thead>
           <tbody>
           <tr th:each="visit : ${history}">
-            <td th:text="${visit.date}">10 Jul 2025</td>
+            <td th:text="${visit.DateOfVisit}">10 Jul 2025</td>
             <td th:text="${visit.department}">General Medicine</td>
             <td th:text="${visit.diagnosis}">Viral Flu</td>
-            <td th:text="${visit.doctor}">Dr. Sarah Moyo</td>
+            <td th:text="${visit.doctorName}">Dr. Sarah Moyo</td>
             <td>
-              <a href="#" class="report-link">View</a>
+            <!--  <a href="@{/patient-report}" class="report-link">View</a> -->
+              <a th:href="@{/patient-report/{id}/{date}(id=${patient.id}, date=${visit.DateOfVisit})}" class="report-link">View</a>
               <a href="#" class="report-link">Download</a>
             </td>
           </tr>
@@ -114,7 +115,7 @@
             <td>Eczema</td>
             <td>Dr. Samuel Chen</td>
             <td>
-              <a href="#" class="report-link">View</a>
+              <a th:href="@{/patient-report(patientId=${patient.id}, DateOfVisit=${${visit.date}})}" class="btn btn-primary">View</a>
               <a href="#" class="report-link">Download</a>
             </td>
           </tr>

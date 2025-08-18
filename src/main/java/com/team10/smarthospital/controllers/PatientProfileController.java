@@ -6,6 +6,7 @@ import com.team10.smarthospital.model.VisitRecord;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+//import org.springframework.web.bind.annotation.RequestParam;
 import java.lang.reflect.Field;
 
 import java.time.LocalDate;
@@ -68,3 +69,29 @@ public class PatientProfileController {
     }
   }
 }
+
+/*@Controller
+public class PatientReportController {
+
+    @GetMapping("/patient-report")
+    public String showPatientReport(@RequestParam("id") Long patientId, Model model) {
+        // Fetch patient data by ID
+        Patient patient = patientService.getPatientById(patientId);
+        if (patient == null) {
+            throw new IllegalArgumentException("Patient not found with ID: " + patientId);
+        }
+
+        // Fetch patient report
+        PatientReport patientReport = reportService.getPatientReportByPatientId(patientId);
+
+        // Fetch dropdown items
+        List<Item> items = reportService.getDropdownItems();
+
+        // Add attributes to the model
+        model.addAttribute("patient", patient);
+        model.addAttribute("patientReport", patientReport);
+        model.addAttribute("items", items);
+
+        return "patient-report"; // Return the name of the Thymeleaf template
+    }
+}*/

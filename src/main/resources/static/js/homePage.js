@@ -98,7 +98,7 @@ function openLoginPopup() {
         text-align: center;
         color: #000;
       ">
-        <a href="/forgot-password" class="forgot-link">Forgot Password?</a>
+        <a href="/resetPassword" class="forgot-link">Forgot Password?</a>
       </div>
     </div>
   `;

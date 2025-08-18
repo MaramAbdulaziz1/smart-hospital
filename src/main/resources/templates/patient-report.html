@@ -1,150 +1,351 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Report</title>
-    <link rel="stylesheet" href="/static/patientreport.css">
-    <style>
-        /* Modal styles */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4); /* Black background with opacity */
-        }
-
-        .modal-content {
-            background-color: #fff;
-            margin: 10% auto;
-            padding: 20px;
-            border-radius: 16px;
-            width: 60%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Patient Profile</title>
+  <link rel="stylesheet" th:href="@{/css/sharedLayout.css}">
+  <link rel="stylesheet" href="/css/patientreport.css" />
 </head>
 <body>
-    <!-- for testing -->
-    <button id="viewButton">View Patient Report</button>
 
-    <!-- Modal -->
-    <div id="patientReportModal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="closeModal">&times;</span>
-            <h2 class="patient-record">Patient Report - <span th:text=${visitRecord.date}></span></h2>
+<div class="layout-container">
 
-            <!-- Doctor's Notes Section -->
-            <h3 class="doctorsNote">Doctor's Notes:</h3>
-            <div class="doctorsNoteText">
-                <p th:text="${visitRecord.doctorsNotes}">Sample doctor's notes for testing.</p>
-            </div>
+  <div th:replace="~{layouts/sharedLayout :: sidebar}"></div>
 
-            <!-- Treatment Plan Section -->
-            <h3 class="treatmentPlan">Treatment Plan:</h3>
-            <div class="treatmentPlanText">
-                <p th:text="${visitRecord.treatmentPlan}">Sample treatment plan for testing.</p>
-            </div>
 
-            <!-- Vitals Section -->
-            <style>
-              table {
-                font-family: arial, sans-serif;
-                border-collapse: collapse;
-                width: 100%;
-              }
+  <main class="main-content">
+    <!-- Top Navigation-->
+    <div th:replace="~{layouts/sharedLayout :: topNav}"></div>
 
-              td, th {
-                border: 1px solid #dddddd;
-                text-align: left;
-                padding: 8px;
-              }
-
-              tr:nth-child(even) {
-                background-color: #dddddd;
-              }
-              </style>
-              </head>
-              <body>
-
-              <table>
-                <tr>
-                  <th>Vital</th>
-                  <th>Value</th>
-                </tr>
-                <tr>
-                  <td>Height (cm) </td>
-                  <td>175</td>
-                </tr>
-                <tr>
-                  <td>Weight (kg) </td>
-                  <td>80</td>
-                </tr>
-                <tr>
-                  <td>Heart Rate (bpm) </td>
-                  <td>101</td>
-                </tr>
-                <tr>
-                  <td>Blood Pressure (mmHg) </td>
-                  <td>120/80</td>
-                </tr>
-                <tr>
-                  <td>Temperature (°C) </td>
-                  <td>36.6</td>
-
-                </tr>
-              </table>
-        </div>
+    <div class="patient-header">
+      <h3 th:text="'Patient Reports - ' + ${patientProfile.Name} + '  ' + ${patientProfile.Id}">Patient Reports - Harry Potter #HAT17653D</h3>
+     <!-- <div class="patient-id" th:text="'#' + ${visitRecord.patientId}">#HAT17653D</div> -->
     </div>
 
-    <script>
-        // JavaScript to handle modal functionality
-        const modal = document.getElementById("patientReportModal"); // testing
-        const closeModalBtn = document.getElementById("closeModal");
-        const viewButton = document.getElementById("viewButton"); // testing
 
-        // Open modal when triggered by the parent page
-        window.addEventListener("message", function (event) {
-            if (event.data === "openPatientReport") {
-                modal.style.display = "block";
-            }
-        });
+    <!-- Patient Report -->
 
-        // Show the modal when the View button is clicked - testing
-        viewButton.onclick = function () {
-            modal.style.display = "block";
-        };
 
-        // Close modal
-        closeModalBtn.onclick = function () {
-            modal.style.display = "none";
-        };
 
-        // Close modal when clicking outside of it
-        window.onclick = function (event) {
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
-        };
-    </script>
+    <!--<form  th:action="@{/patient-reports/{id}(id=${patientId})}"  method="get"> -->
+      <form>
+      <div class="form-grid">
+        <div class="form-group">
+
+          <div class="form-group">
+            <label for="visitDate">Date Of Visit</label>
+            <div class="dropdown-container">
+              <!-- <select name="dropdown" id="dropdown" onchange="submitForm()">
+                    <option value="" disabled selected>Select a date</option>
+                    <th:block th:each="item : ${items}">
+                        <option th:value="${item.id}" th:text="${item.name}"></option>
+                    </th:block>
+                </select>-->
+
+                <select id="dateSelect" onchange="populateForm()">
+                 <!-- <option value="">-- Select a date --</option> -->
+                  <option th:each="v : ${visitRecord}" th:value="${v.dateOfVisit}" th:text="${v.dateOfVisit}"></option>
+                  <!-- for testing remove after once data integration
+                  <option value="2025-08-15">2025-08-15</option>
+                  <option value="2025-08-17">2025-08-17</option>-->
+              </select>
+
+            </div>
+          </div>
+
+        </div>
+      <div class="form-group">
+          <label for="doctor">Doctor</label>
+          <p th:text="${visitRecord.doctorName}" class="form-control-static">Dr Sarah Johnson</p>
+      </div>
+        <div class="form-group">
+            <label for="department">Department</label>
+            <p th:text="${visitRecord.department}">Neurology</p>
+        </div>
+
+     </div>
+
+        <!-- Diagnosis -->
+        <div class="card">
+            <h2 class="card-title">Diagnosis</h2>
+            <div th:if="${visitRecord.diagnosis != null and not #lists.isEmpty(visitRecord.diagnosis)}">
+                <ul class="diagnosis-list">
+                    <li th:each="diagnosis : ${visitRecord.diagnosis}" th:text="${diagnosis ?: 'Unknown Diagnosis'}">Viral Flu</li>
+                </ul>
+            </div>
+            <div th:if="${visitRecord.diagnosis == null or #lists.isEmpty(visitRecord.diagnosis)}">
+                <span class="diagnosis-tag">No diagnosis recorded</span>
+            </div>
+        </div>
+
+        <!-- Doctor's Notes -->
+        <div class="card">
+            <h2 class="card-title">Clinical Notes</h2>
+           <!-- <textarea class="notes-area" th:field="*{doctorNotes}"
+                      placeholder="Enter doctor's notes...">Some notes</textarea> -->
+               <textarea class="notes-area" disabled th:field="*{visitRecord.doctorsNotes}"
+                      placeholder="Enter doctor's notes...">Some notes</textarea>
+        </div>
+
+        <!-- Treatment and Follow-up Plan -->
+        <div class="card">
+          <h2 class="card-title">Treatment and Follow-up Plan</h2>
+          <div class="treatment-content">
+              <!-- Treatment Plan -->
+             <!-- <div class="treatment-item">
+                  <strong>Treatment Plan:</strong>
+                  <p th:text="${visitRecord.treatmentPlan ?: 'No treatment plan specified'}">Paracetmol</p>
+              </div> -->
+
+              <div class="treatment-item">
+                <strong>Treatment Plan:</strong>
+                <div th:if="${visitRecord.treatmentPlan != null and not #lists.isEmpty(visitRecord.treatmentPlan)}">
+                    <ul class="medical-list">
+                        <li th:each="treatment : ${visitRecord.medicationsPrescribed}" th:text="${treatment}">
+                        </li>
+                    </ul>
+                </div>
+                <p th:if="${visitRecord.treatmentPlan == null or #lists.isEmpty(visitRecord.treatmentPlan)}">
+                    No  Treatment Plan
+                </p>
+            </div>
+
+              <!-- Medications Prescribed -->
+              <div class="treatment-item">
+                  <strong>Medications Prescribed:</strong>
+                  <div th:if="${visitRecord.medicationsPrescribed != null and not #lists.isEmpty(visitRecord.medicationsPrescribed)}">
+                      <ul class="medical-list">
+                          <li th:each="prescription : ${visitRecord.medicationsPrescribed}" th:text="${prescription}">
+                          </li>
+                      </ul>
+                  </div>
+                  <p th:if="${visitRecord.medicationsPrescribed == null or #lists.isEmpty(visitRecord.medicationsPrescribed)}">
+                      No medications prescribed
+                  </p>
+              </div>
+          </div>
+      </div>
+
+       <!-- Medical History -->
+       <div class="card">
+        <h2 class="card-title">Medical History</h2>
+        <div class="medical-grid">
+            <!-- Past Medical Conditions -->
+            <div class="medical-grid-item">
+                <label>Past Medical Conditions: <span class="small-label">including chronic conditions</span></label>
+                <div th:if="${visitRecord.pastMedicalConditions != null and not #lists.isEmpty(visitRecord.pastMedicalConditions)}">
+                    <ul class="medical-list">
+                        <li th:each="condition : ${visitRecord.pastMedicalConditions}" th:text="${condition}"></li>
+                    </ul>
+                </div>
+                <p class="no-data" th:if="${visitRecord.pastMedicalConditions == null or #lists.isEmpty(visitRecord.pastMedicalConditions)}">
+                    None
+                </p>
+            </div>
+
+            <!-- Past Medications -->
+            <div class="medical-grid-item">
+                <label>Past Medications:</label>
+                <div th:if="${visitRecord.pastMedications != null and not #lists.isEmpty(visitRecord.pastMedications)}">
+                    <ul class="medical-list">
+                        <li th:each="medication : ${visitRecord.pastMedications}" th:text="${medication}"></li>
+                    </ul>
+                </div>
+                <p class="no-data" th:if="${visitRecord.pastMedications == null or #lists.isEmpty(visitRecord.pastMedications)}">
+                    None
+                </p>
+            </div>
+
+            <!-- Current Medications -->
+            <div class="medical-grid-item">
+                <label>Current Medications:</label>
+                <div th:if="${visitRecord.currentMedications != null and not #lists.isEmpty(visitRecord.currentMedications)}">
+                    <ul class="medical-list">
+                      <!--  <li th:each="medication : ${visitRecord.currentMedications}" th:text="${medication.name + ' - ' + medication.dosage}"></li>-->
+                      <li th:each="medication : ${visitRecord.currentMedications}" th:text="${medication}"></li>
+                    </ul>
+                </div>
+                <p class="no-data" th:if="${visitRecord.currentMedications == null or #lists.isEmpty(visitRecord.currentMedications)}">
+                    None
+                </p>
+            </div>
+
+            <!-- Past Surgical History -->
+            <div class="medical-grid-item">
+                <label>Past Surgical History:</label>
+                <div th:if="${visitRecord.surgicalHistory != null and not #lists.isEmpty(visitRecord.surgicalHistory)}">
+                    <ul class="medical-list">
+                        <li th:each="surgery : ${visitRecord.surgicalHistory}" th:text="${surgery.procedure + ' (' + surgery.date + ')'}"></li>
+                    </ul>
+                </div>
+                <p class="no-data" th:if="${visitRecord.surgicalHistory == null or #lists.isEmpty(visitRecord.surgicalHistory)}">
+                    None
+                </p>
+            </div>
+
+            <!-- Allergies -->
+            <div class="medical-grid-item">
+                <label>Allergies:</label>
+                <div th:if="${visitRecord.allergies != null and not #lists.isEmpty(visitRecord.allergies)}">
+                    <ul class="medical-list">
+                        <li th:each="allergy : ${visitRecord.allergies}" th:text="${allergy.allergen + ' (' + allergy.severity + ')'}"></li>
+                    </ul>
+                </div>
+                <p class="no-data" th:if="${visitRecord.allergies == null or #lists.isEmpty(visitRecord.allergies)}">
+                    None
+                </p>
+            </div>
+
+            <!-- Family History -->
+            <div class="medical-grid-item">
+                <label>Family History:</label>
+                <div th:if="${visitRecord.familyHistory != null and not #lists.isEmpty(visitRecord.familyHistory)}">
+                    <ul class="medical-list">
+                        <li th:each="history : ${visitRecord.familyHistory}"
+                            th:text="${history.relation ?: 'Unknown'} + ' with ' + ${history.condition ?: 'Unknown'}">
+                          </li>
+                    </ul>
+                </div>
+                <p class="no-data" th:if="${visitRecord.familyHistory == null or #lists.isEmpty(visitRecord.familyHistory)}">
+                    No family history recorded
+                </p>
+            </div>
+
+            <!-- Social History -->
+            <div class="medical-grid-item full-width">
+                <label>Social History:</label>
+                <p class="form-control" th:text="${visitRecord.socialHistory ?: 'No social history recorded'}"></p>
+            </div>
+        </div>
+
+        <!-- Vitals -->
+        <div class="card">
+            <h2 class="card-title">Vitals</h2>
+            <!-- <a th:href="@{/patients/{id}/vitals(id=${patientid})}" class="btn btn-primary vitals-btn">View Vitals History</a>-->
+            <a th:href="@{/vitals}" class="btn btn-primary vitals-btn">View Vitals History</a>
+        </div>
+    </form>
+  </main>
+</div>
+
+<script>
+  // Dropdown functionality
+  document.addEventListener('DOMContentLoaded', () => {
+      const dateDropdown = document.getElementById('dateDropdown');
+      const dateInput = document.getElementById('visit-date');
+      const dropdownMenu = document.getElementById('dateDropdownMenu');
+
+      if (dateDropdown && dateInput && dropdownMenu) {
+          // Toggle dropdown open/close
+          dateDropdown.addEventListener('click', (e) => {
+              if (!e.target.classList.contains('dropdown-item')) {
+                  dateDropdown.classList.toggle('open');
+              }
+          });
+
+          // Handle dropdown item selection
+          dropdownMenu.addEventListener('click', (e) => {
+              if (e.target.classList.contains('dropdown-item')) {
+                  // Update selected item
+                  document.querySelectorAll('.dropdown-item.selected').forEach(item =>
+                      item.classList.remove('selected')
+                  );
+                  e.target.classList.add('selected');
+
+                  // Update input value and close dropdown
+                  dateInput.value = e.target.textContent.trim();
+                  dateDropdown.classList.remove('open');
+              }
+          });
+
+          // Close dropdown when clicking outside
+          document.addEventListener('click', (e) => {
+              if (!dateDropdown.contains(e.target)) {
+                  dateDropdown.classList.remove('open');
+              }
+          });
+      }
+
+      // Form interactions
+      document.querySelectorAll('.form-control').forEach(input => {
+          input.addEventListener('focus', () => input.style.transform = 'scale(1.02)');
+          input.addEventListener('blur', () => input.style.transform = 'scale(1)');
+      });
+  });
+
+</script>
+
+<script th:inline="javascript">
+  let visits = /*[[${visits}]]*/ [];
+
+  function populateVisit() {
+      const selectedDate = document.getElementById("visitSelect").value;
+      const selected = visits.find(v => v.visitDate === selectedDate);
+
+      if (selected) {
+          document.querySelector('[name="visitDate"]').value = selected.visitDate;
+          document.querySelector('[name="doctorName"]').value = selected.doctorName;
+          document.querySelector('[name="notes"]').value = selected.notes;
+      } else {
+          document.querySelector('[name="visitDate"]').value = '';
+          document.querySelector('[name="doctorName"]').value = '';
+          document.querySelector('[name="notes"]').value = '';
+      }
+  }
+</script>
+
+
+<!-- Fragment: no-data.html -->
+<p th:if="${data == null or #lists.isEmpty(data)}" class="no-data">No data available</p>
+
 </body>
-</html>
+</html><select id="dateSelect" onchange="fetchVisitRecords()">
+    <option value="">-- Select a date --</option>
+    <option th:each="v : ${visitRecords}" th:value="${v.dateOfVisit}" th:text="${v.dateOfVisit}"></option>
+</select>
+
+<div id="visitDetails">
+    <!-- This section will be dynamically updated -->
+    <div class="form-group">
+        <label for="doctor">Doctor</label>
+        <p id="doctor" class="form-control-static"></p>
+    </div>
+    <div class="form-group">
+        <label for="department">Department</label>
+        <p id="department"></p>
+    </div>
+    <div class="form-group">
+        <label for="diagnosis">Diagnosis</label>
+        <p id="diagnosis"></p>
+    </div>
+</div>
+
+<script>
+    async function fetchVisitRecords() {
+        const date = document.getElementById("dateSelect").value;
+        if (!date) {
+            document.getElementById("visitDetails").style.display = "none";
+            return;
+        }
+
+        try {
+            const response = await fetch(`/api/visit-records?date=${date}`);
+            const records = await response.json();
+
+            if (records.length > 0) {
+                const record = records[0]; // Assuming one record per date
+                document.getElementById("doctor").textContent = record.doctor;
+                document.getElementById("department").textContent = record.department;
+                document.getElementById("diagnosis").textContent = record.diagnosis;
+                document.getElementById("visitDetails").style.display = "block";
+            } else {
+                document.getElementById("visitDetails").style.display = "none";
+                alert("No records found for the selected date.");
+            }
+        } catch (error) {
+            console.error("Error fetching visit records:", error);
+            alert("Failed to fetch visit records.");
+        }
+    }
+</script>
