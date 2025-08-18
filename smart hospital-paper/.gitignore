@@ -14,6 +14,9 @@
 *.synctex.gz
 *.bbl
 *.blg
+*.idx
+*.ilg
+*.ind
 
 # PDF output
 *.pdf

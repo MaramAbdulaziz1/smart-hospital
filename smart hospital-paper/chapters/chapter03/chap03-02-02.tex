@@ -10,9 +10,51 @@
 %
 
 \paragraph{Design Process}\mbox{}
-\paragraph{From Concept to User Needs: Ideation and Story Mappingigma}\mbox{}\\
+\paragraph{From Concept to User Needs: Ideation and Story Mapping}\mbox{}\\
+After the basic requirements in Section 2.3 were written, the next step was to think about how the Smart Hospital could really work in practice. Because the main goal of the system is to solve the problem that many local residents cannot get proper treatment, the design started from the patient’s side, thinking about what kind of functions they may need.  
+
+Next, some existing problems in hospitals were analysed. Team members with hospital internship experience observed many issues in real hospitals. For example, nurses often record patient information by hand. Sometimes the writing is messy, so it is hard to read or can cause mistakes. It also has to spend some time finding previous records, and sometimes the paper can be lost. Patients also face problems when they want to get their own medical history. They need to fill out many forms and wait for a long time, and sometimes the staff cannot even find the file.  
+
+The background of the Virtual Hospital Africa system was also considered. In South Africa, medical resources are not well distributed. Many people in rural areas need to travel a long distance to big hospitals if they want to see a doctor. At the same time, some people go to the hospital even for small problems that might not need to go to a hospital, but they don’t know what to do. This situation makes the hospital more crowded. If these problems can be solved by an online system, the efficiency will be much better.  
+
+Then, the tasks of each role were listed. Patients want to have online consultations, ask health questions, and download their reports. Nurses want to input vitals like blood pressure and temperature using computers. Doctors want to review patient history, record diagnoses, and give prescriptions. All of these were written into user stories, some of which are shown in Table 2.1.
+
+For each user story, we used the method we learned in the Software Engineering Discipline and Practice class — Planning Poker — to evaluate the technical difficulty. As shown in Figure~\ref{fig:planning_poker_examples}, we used the Fibonacci numbers 1, 2, 5, 8, 13, 21, and 34 as the scores so that the gap between the numbers was not too small; otherwise, the scores would not be meaningful. Each team member gave an individual score; then the stories with large differences were discussed, and a final agreement was reached. The simpler functions were implemented first, while the more complex ones were scheduled for later. In this way, the development had a clear order, and we did not get stuck at the beginning. We also kept updating the stories because the remaining time was limited, so it was necessary to ensure they were truly necessary.
+
+\begin{figure}[h]
+   \centering
+   \begin{subfigure}[t]{0.45\textwidth}
+     \centering
+     \includegraphics[width=\linewidth]{../../images/planning_poker_low.jpeg}
+     \caption{Planning Poker result for the task "doctor records diagnoses," with an average score of 3.8.}
+   \end{subfigure}%
+   \hfill
+   \begin{subfigure}[t]{0.45\textwidth}
+     \centering
+     \includegraphics[width=\linewidth]{../../images/planning_poker_high.jpg}
+     \caption{Planning Poker result for the task "Health Q\&A," with an average score of 17.5.}
+   \end{subfigure}
+   \caption{Examples of Planning Poker voting results.}
+   \label{fig:planning_poker_examples}
+\end{figure}
 
 \paragraph{Bridging Stories and Systems: Workflow Design}\mbox{}\\
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=0.8\linewidth]{../../images/userflow_registration.png}
+   \caption{User flow diagram for the registration process.}
+   \label{fig:userflow-registration}
+\end{figure}
+
+The registration user flow ensures that new users can easily create accounts and proceed to the dashboard. The process is designed to be intuitive and minimize user friction.
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=0.8\linewidth]{../../images/userflow_whole.png}
+   \caption{Overall user flow diagram of the system.}
+   \label{fig:userflow-whole}
+\end{figure}
 
 \paragraph{Visualizing Functionality: Prototyping with Figma}\mbox{}\\
 After we completed the workflow diagram, we used it as the foundation to divide tasks among team members. Each member is responsible for designing specific pages for different parts of the website while working all within a single file, shown as Figure~\ref{fig:3-2-2-DS-figma-f1}, simplified cross-reviewing and allowed for seamless handoffs instead of manually sending assets or screenshots . Next, we will introduce our layout design.
