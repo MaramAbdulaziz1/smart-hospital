@@ -11,13 +11,13 @@
 <body>
 <div class="layout-container">
     <!-- Sidebar -->
-    <div th:replace="~{layouts/sharedLayout :: sidebar}"></div>
+    <aside th:replace="~{layouts/sharedLayout :: sidebar (activePage='clinicalNotes')}"></aside>
     <!--main content-->
     <main class="main-content">
         <!-- Top Navigation -->
-        <div th:replace="~{layouts/sharedLayout :: topNav}"></div>
+        <header th:replace="~{layouts/sharedLayout :: topNav}"></header>
         <!-- Patient Info Card -->
-        <div th:replace="~{layouts/sharedLayout :: patientCard}"></div>
+        <section th:replace="~{layouts/sharedLayout :: patientCard}"></section>
         <section class="page-content">
             <!--intake section-->
             <div class="form-column">
@@ -70,13 +70,13 @@
         const tabText = tab.textContent.trim();
 
         if (tabText === 'Note') {
-            textarea.placeholder = 'Click "Edit" to enter a note...';
+            textarea.placeholder = 'Click "Edit" to enter note...';
         } else if (tabText === 'Diagnosis') {
             textarea.placeholder = 'Click "Edit" to enter diagnosis...';
         } else if (tabText === 'Medical History') {
             textarea.placeholder = 'Click "Edit" to enter medical history...';
         } else if (tabText === 'Follow-up Plan') {
-            textarea.placeholder = 'Click "Edit" to enter a follow-up plan...';
+            textarea.placeholder = 'Click "Edit" to enter follow-up plan...';
         }
         });
     });

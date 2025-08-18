@@ -45,14 +45,23 @@
       </div>
     </button>
 
-    <!-- Register button (links to /register page) -->
-    <a th:href="@{/register}" class="register-btn">
-      <span class="button-text">Register</span>
-      <div class="double-arrow">
-        <img src="HomePageImages/rightArrow.svg" alt="arrow" class="arrow-icon">
-        <img src="HomePageImages/rightArrow.svg" alt="arrow" class="arrow-icon">
+    <!-- Register split button (same position; opens a small menu) -->
+    <div class="register-group">
+      <button type="button" class="register-btn" id="registerBtn" aria-haspopup="true" aria-expanded="false">
+        <span class="button-text">Register</span>
+        <div class="double-arrow">
+          <img src="HomePageImages/rightArrow.svg" alt="arrow" class="arrow-icon">
+          <img src="HomePageImages/rightArrow.svg" alt="arrow" class="arrow-icon">
+        </div>
+      </button>
+
+      <!-- Choices menu -->
+      <div class="register-menu" id="registerMenu" role="menu" aria-hidden="true">
+        <a th:href="@{/patient/registration}" class="register-option" role="menuitem">Patient</a>
+        <a th:href="@{/register}" class="register-option" role="menuitem">Doctor/Nurse</a>
       </div>
-    </a>
+    </div>
+
   </section>
 
   <!-- Bottom Navigation Bar -->

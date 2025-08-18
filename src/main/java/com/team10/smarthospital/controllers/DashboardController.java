@@ -9,7 +9,7 @@ public class DashboardController {
 
   @GetMapping("/dashboard")
   public String dashboardPage(Model model) {
-    model.addAttribute("pageTitle", "Home");
+    model.addAttribute("pageTitle", "Smart Hospital");
     return "dashboard";
   }
 }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title th:text="${pageTitle} + ' - Smart Hospital'">Smart Hospital</title>
+  <title>Smart Hospital</title>
   <link rel="stylesheet" th:href="@{/css/sharedLayout.css}">
   <link rel="stylesheet" th:href="@{/css/dashboard.css}">
 </head>
@@ -26,16 +26,25 @@
             <span>Home</span>
           </a>
         </div>
-        
+
         <!-- Calendar tab -->
         <div class="tab" data-page="calendar">
-          <a href="#" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px; width: 100%; height: 100%;">
+          <a th:href="@{/calendar}" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px; width: 100%; height: 100%;">
             <img th:src="@{/SharedLayoutImages/calendarIcon.svg}" alt="Calendar Icon" class="tab-icon">
             <span>Calendar</span>
           </a>
         </div>
+
+
+        <div class="tab" data-page="health-qa">
+          <a th:href="@{/HealthQADoctor}" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px; width: 100%; height: 100%;">
+            <img th:src="@{/PatientSideImages/healthQA.svg}" alt="Health Q&A Icon" class="tab-icon">
+            <span>Health Q&A</span>
+          </a>
+        </div>
+
       </div>
-      
+
       <!-- Logout tab -->
       <div class="tab logout-tab" data-action="logout">
         <img th:src="@{/SharedLayoutImages/logoutIcon.svg}" alt="Logout Icon" class="tab-icon">
@@ -51,52 +60,51 @@
 
     <!-- Dashboard Content -->
     <div class="dashboard-content">
-      <input class="search" type="text" placeholder="Search by name or ID" style="display: block; width: 100%; height: 50px; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: white; color: #333; font-size: 14px; box-sizing: border-box;" />
-      
+      <div class="search-row">
+        <input class="search1" type="text" placeholder="Search by name or ID" />
+        <button class="btn">Search</button>
+      </div>
       <h3 class="section-title">Patient with appointments</h3>
-      
+
       <div class="table-header">
-        <div>Patient</div>
-        <div>Date</div>
-        <div>Time</div>
+        <div class="text">Patient</div>
+        <div class="text">Date</div>
+        <div class="text">Time</div>
         <div></div>
       </div>
-      
+
       <div class="patient-table">
         <div class="patient-row">
           <div>
-            <strong>Harry Potter</strong><br />
+            <div class="default-text">Harry Potter</div>
             <span class="id">ID: HAT17653D</span>
           </div>
-          <div>5 Jul</div>
-          <div>9:00</div>
+          <div class="default-text">2025/07/05</div>
+          <div class="default-text">9:00</div>
           <div class="button-group">
             <a th:href="@{/patientProfile}" class="btn filled">Profile</a>
-            <a th:href="@{/clinicalNotes}" class="btn">Intake</a>
           </div>
         </div>
         <div class="patient-row">
           <div>
-            <strong>Mary Johnson</strong><br />
+            <div class="default-text">Mary Johnson</div>
             <span class="id">ID: HAT17653E</span>
           </div>
-          <div>8 Jul</div>
-          <div>12:00</div>
+          <div class="default-text">2025/07/08</div>
+          <div class="default-text">12:00</div>
           <div class="button-group">
             <a th:href="@{/patientProfile}" class="btn filled">Profile</a>
-            <a th:href="@{/clinicalNotes}" class="btn">Intake</a>
           </div>
         </div>
         <div class="patient-row">
           <div>
-            <strong>James Brown</strong><br />
+            <div class="default-text">James Brown</div>
             <span class="id">ID: HAT17653F</span>
           </div>
-          <div>10 Jul</div>
-          <div>15:00</div>
+          <div class="default-text">2025/07/10</div>
+          <div class="default-text">15:00</div>
           <div class="button-group">
             <a th:href="@{/patientProfile}" class="btn filled">Profile</a>
-            <a th:href="@{/clinicalNotes}" class="btn">Intake</a>
           </div>
         </div>
       </div>
