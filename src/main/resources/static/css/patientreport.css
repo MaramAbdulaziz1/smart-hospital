@@ -1,27 +1,10 @@
-/* .main-content{
-  width: 1130px;
-  height: 862px;
-  flex-shrink: 0;
-  background: #FFF;
+.patient-header {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100px;
 }
- .title{
-  width: 593px;
-  color: #000;
-  font-family: Inter;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
- }
-
-  .patientNameId{
-  color: #000;
-  font-family: Inter;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  }
   .dateOfVisit {
     width: 211px;
     height: 24px;
