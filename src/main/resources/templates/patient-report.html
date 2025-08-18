@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Patient Profile</title>
+
   <link rel="stylesheet" th:href="@{/css/sharedLayout.css}">
   <link rel="stylesheet" href="/css/patientreport.css" />
+<title>Patient Profile</title>
 </head>
 <body>
 
@@ -20,7 +21,7 @@
     <div th:replace="~{layouts/sharedLayout :: topNav}"></div>
 
     <div class="patient-header">
-      <h3 th:text="'Patient Reports - ' + ${patientProfile.Name} + '  ' + ${patientProfile.Id}">Patient Reports - Harry Potter #HAT17653D</h3>
+      <h3 th:text="'Patient Reports - ' + ${patientProfile.Name} + '  ' + ${patientProfile.Id}"></h3>
      <!-- <div class="patient-id" th:text="'#' + ${visitRecord.patientId}">#HAT17653D</div> -->
     </div>
 
@@ -35,7 +36,7 @@
         <div class="form-group">
 
           <div class="form-group">
-            <label for="visitDate">Date Of Visit</label>
+            <label class="dateOfVisit" for="visitDate">Date of Visit</label>
             <div class="dropdown-container">
               <!-- <select name="dropdown" id="dropdown" onchange="submitForm()">
                     <option value="" disabled selected>Select a date</option>
@@ -57,11 +58,11 @@
 
         </div>
       <div class="form-group">
-          <label for="doctor">Doctor</label>
+          <label class="doctorName" for="doctor">Doctor</label>
           <p th:text="${visitRecord.doctorName}" class="form-control-static">Dr Sarah Johnson</p>
       </div>
         <div class="form-group">
-            <label for="department">Department</label>
+            <label class="department" for="department">Department</label>
             <p th:text="${visitRecord.department}">Neurology</p>
         </div>
 
@@ -69,7 +70,7 @@
 
         <!-- Diagnosis -->
         <div class="card">
-            <h2 class="card-title">Diagnosis</h2>
+            <h3 class="card-title">Diagnosis</h3>
             <div th:if="${visitRecord.diagnosis != null and not #lists.isEmpty(visitRecord.diagnosis)}">
                 <ul class="diagnosis-list">
                     <li th:each="diagnosis : ${visitRecord.diagnosis}" th:text="${diagnosis ?: 'Unknown Diagnosis'}">Viral Flu</li>
@@ -82,7 +83,7 @@
 
         <!-- Doctor's Notes -->
         <div class="card">
-            <h2 class="card-title">Clinical Notes</h2>
+            <h3 class="card-title">Clinical Notes</h3>
             <p th:text="${visitRecord.doctorsNotes}">Clinical Notes</p>
 
             <div th:if="${visitRecord.doctorsNotes == null or visitRecord.doctorsNotes.isEmpty()}">
@@ -91,7 +92,7 @@
 
         <!-- Treatment and Follow-up Plan -->
         <div class="card">
-          <h2 class="card-title">Treatment and Follow-up Plan</h2>
+          <h3 class="card-title">Treatment and Follow-up Plan</h3>
           <div class="treatment-content">
               <!-- Treatment Plan -->
              <!-- <div class="treatment-item">
