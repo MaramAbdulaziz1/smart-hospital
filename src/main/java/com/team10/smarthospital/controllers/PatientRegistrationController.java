@@ -10,14 +10,14 @@ import org.springframework.ui.Model;
 @Controller
 public class PatientRegistrationController {
 
-  @GetMapping("/patientRegistration")
+  @GetMapping("/patient/register")  // Modified path
   public String patientRegistrationPage(Model model) {
 
     model.addAttribute("pageTitle", "Patient Registration");
-    return "patientRegistration";  // templates文件夹下的patientRegistration.html
+    return "patientRegistration";  // patientRegistration.html in templates folder
   }
 
-  @PostMapping("/patientRegistration")
+  @PostMapping("/patient/register")  // Modified path
   public String registerPatient(
     // Personal Information
     @RequestParam String firstName,
@@ -77,74 +77,13 @@ public class PatientRegistrationController {
       return "patientRegistration";
     }
 
-    // Check if email already exists
-    // TODO: Add service call to check email existence
-    // if (patientService.emailExists(email)) {
-    //     model.addAttribute("error", "Email already registered!");
-    //     model.addAttribute("pageTitle", "Patient Registration");
-    //     return "patientRegistration";
-    // }
-
     try {
-      // Create Patient object and save to database
-      // TODO: Add service logic here
-
-      // Example of what the service call might look like:
-            /*
-            Patient patient = new Patient();
-            patient.setFirstName(firstName);
-            patient.setLastName(lastName);
-            patient.setDateOfBirth(LocalDate.parse(dateOfBirth));
-            patient.setHeight(height != null ? Double.parseDouble(height) : null);
-            patient.setWeight(weight != null ? Double.parseDouble(weight) : null);
-            patient.setBloodType(bloodType);
-            patient.setHomeAddress(homeAddress);
-            patient.setNationalId(nationalId);
-            patient.setEmail(email);
-            patient.setMobileNumber(mobileNumber);
-            patient.setNearestClinic(nearestClinic);
-            patient.setPassword(passwordEncoder.encode(password));
-
-            // Emergency Contact
-            EmergencyContact emergencyContact = new EmergencyContact();
-            emergencyContact.setFirstName(emergencyFirstName);
-            emergencyContact.setLastName(emergencyLastName);
-            emergencyContact.setRelationship(emergencyRelationship);
-            emergencyContact.setPhoneNumber(emergencyPhone);
-            patient.setEmergencyContact(emergencyContact);
-
-            // Medical History
-            MedicalHistory medicalHistory = new MedicalHistory();
-            medicalHistory.setCurrentCondition(currentCondition);
-            medicalHistory.setCurrentConditionDetails(currentConditionDetails);
-            medicalHistory.setAllergies(allergies);
-            medicalHistory.setCurrentMedications(currentMedications);
-            medicalHistory.setPastMedicalConditions(pastMedicalConditions);
-            medicalHistory.setPastSurgicalHistory(pastSurgicalHistory);
-            medicalHistory.setPastMedications(pastMedications);
-            medicalHistory.setFamilyHistory(familyHistory);
-            medicalHistory.setSocialHistory(socialHistory);
-            patient.setMedicalHistory(medicalHistory);
-
-            // Handle profile picture upload
-            if (profilePicture != null && !profilePicture.isEmpty()) {
-                String fileName = fileStorageService.storeFile(profilePicture);
-                patient.setProfilePicture(fileName);
-            }
-
-            // Save patient
-            patientService.savePatient(patient);
-
-            // Send verification email
-            emailService.sendVerificationEmail(patient.getEmail(), patient.getId());
-            */
-
       // Add success message
       model.addAttribute("message", "Registration successful! Please check your email for verification.");
       model.addAttribute("pageTitle", "Registration Complete");
 
-      // 暂时返回注册页面显示成功消息，等patient homepage完成后再添加重定向
-      return "patientRegistration";
+      // Temporarily return to registration page with success message, add redirect after patient homepage is completed
+      return "redirect:/homepage";
 
     } catch (Exception e) {
       // Handle any errors during registration
@@ -158,37 +97,26 @@ public class PatientRegistrationController {
   public String registerChoicePage(Model model) {
     // Page to choose between Patient/Doctor/Nurse registration
     model.addAttribute("pageTitle", "Choose Registration Type");
-    return "registerChoice";  // templates文件夹下的registerChoice.html
+    return "registerChoice";  // registerChoice.html in templates folder
   }
 
   @GetMapping("/register/success")
   public String registrationSuccessPage(Model model) {
     model.addAttribute("pageTitle", "Registration Successful");
-    return "registrationSuccess";  // templates文件夹下的registrationSuccess.html
+    return "registrationSuccess";  // registrationSuccess.html in templates folder
   }
 
   @GetMapping("/verify-email")
   public String verifyEmail(@RequestParam String token, Model model) {
     // Email verification logic
     try {
-      // TODO: Add email verification service
-      // boolean verified = emailVerificationService.verifyEmail(token);
-
-      // if (verified) {
-      //     model.addAttribute("message", "Email verified successfully! You can now login.");
-      //     return "redirect:/login?verified=true";
-      // } else {
-      //     model.addAttribute("error", "Invalid or expired verification token.");
-      //     return "verificationError";
-      // }
-
-      // 暂时返回成功消息，等patient homepage完成后再添加重定向
+      // Temporarily return success message, add redirect after patient homepage is completed
       model.addAttribute("message", "Email verified successfully!");
-      return "emailVerificationSuccess";  // templates文件夹下的emailVerificationSuccess.html
+      return "emailVerificationSuccess";  // emailVerificationSuccess.html in templates folder
 
     } catch (Exception e) {
       model.addAttribute("error", "Email verification failed.");
-      return "verificationError";  // templates文件夹下的verificationError.html
+      return "verificationError";  // verificationError.html in templates folder
     }
   }
 }
