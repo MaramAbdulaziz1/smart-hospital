@@ -34,7 +34,7 @@ import com.team10.smarthospital.service.HospitalDataService;
 
 
 
-      // In a real application, you would fetch the visit record from the database
+      // In the real application, you would fetch the visit record from the database
       ArrayList<VisitRecord> visitRecords = (ArrayList<VisitRecord>) hospitalDataService.getPatientVisitsByPatientId("HAT17653D");
 System.out.println("0 visitRecords size: " + visitRecords.size());
 System.out.println("Date of visit value " + visitRecords.get(0).getDateOfVisit());
