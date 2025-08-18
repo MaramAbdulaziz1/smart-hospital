@@ -40,21 +40,45 @@ For each user story, we used the method we learned in the Software Engineering D
 
 \paragraph{Bridging Stories and Systems: Workflow Design}\mbox{}\\
 
+After writing the user stories, we started thinking about how these functions could actually connect with each other. For example, if a nurse records the patient’s blood pressure, the doctor should be able to see this data at the next visit. When the doctor checks the medical history and writes the diagnosis, the patient can then see the advice given by the doctor, and so on. 
+
+To make these workflows clearer, we drew user flow diagrams in Figma to show the paths of different roles in the system. As shown in Figure~\ref{fig:userflow-registration}, we began with the most basic authentication process, including login, registration, and password reset, so that all users can access the system.
+
 \begin{figure}[H]
    \centering
-   \includegraphics[width=0.8\linewidth]{../../images/userflow_registration.png}
+   \includegraphics[width=0.4\linewidth]{../../images/userflow_registration.png}
    \caption{User flow diagram for the registration process.}
    \label{fig:userflow-registration}
 \end{figure}
 
-The registration user flow ensures that new users can easily create accounts and proceed to the dashboard. The process is designed to be intuitive and minimize user friction.
-
+Next, we designed the main workflow for the patient role, as shown in Figure~\ref{fig:userflow-whole}. Starting from the dashboard, the patient can use the sidebar to navigate to different pages, including patient intake, patient profile, vital records, and prescription. Each page also contains the sidebar and a log out option, so that the user can switch between functions and log out at any time.
 \begin{figure}[H]
    \centering
-   \includegraphics[width=0.8\linewidth]{../../images/userflow_whole.png}
+   \includegraphics[width=1.1\linewidth]{../../images/userflow_whole.png}
    \caption{Overall user flow diagram of the system.}
    \label{fig:userflow-whole}
 \end{figure}
+
+
+For the function design on each role side, we followed how real hospitals usually work. 
+Patients can only see their own records and cannot see other people’s information. 
+For now, nurses can only enter vital signs. 
+Doctors have the most functions: they can view the full medical history and write diagnoses, 
+but they cannot change the patient’s basic information. 
+We think this setup is quite similar to how real hospitals operate. 
+
+One difference from real hospitals is that we also considered the remote consultation process. 
+After the patient makes an appointment, they can first see the doctor from home. 
+If the doctor thinks it is needed, the patient will then go to a clinic to measure vital signs, 
+or go to the hospital for further treatment. 
+This can reduce unnecessary visits, and at the same time still make sure we do not miss any patients who really need care. 
+
+The user flow diagrams we drew in Figma helped us make sure each function connects smoothly, 
+and they also gave the frontend team a clear reference for page navigation. 
+At this stage, we clarified the logic of the hospital side. 
+For example, the user must log in before entering the dashboard, 
+and from the dashboard they can directly or indirectly access all the designed pages. 
+These two basic user flow diagrams gave us a clear direction when we started designing the webpages.
 
 \paragraph{Visualizing Functionality: Prototyping with Figma}\mbox{}\\
 After we completed the workflow diagram, we used it as the foundation to divide tasks among team members. Each member is responsible for designing specific pages for different parts of the website while working all within a single file, shown as Figure~\ref{fig:3-2-2-DS-figma-f1}, simplified cross-reviewing and allowed for seamless handoffs instead of manually sending assets or screenshots . Next, we will introduce our layout design.
