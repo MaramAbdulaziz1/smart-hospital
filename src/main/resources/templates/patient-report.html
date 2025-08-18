@@ -46,11 +46,7 @@
                 </select>-->
 
                 <select id="dateSelect" onchange="populateForm()">
-                 <!-- <option value="">-- Select a date --</option> -->
                   <option th:each="v : ${visitRecord}" th:value="${v.dateOfVisit}" th:text="${v.dateOfVisit}"></option>
-                  <!-- for testing remove after once data integration
-                  <option value="2025-08-15">2025-08-15</option>
-                  <option value="2025-08-17">2025-08-17</option>-->
               </select>
 
             </div>
@@ -131,7 +127,7 @@
 
        <!-- Medical History -->
        <div class="card">
-        <h2 class="card-title">Medical History</h2>
+        <h3 class="card-title">Medical History</h3>
         <div class="medical-grid">
             <!-- Past Medical Conditions -->
             <div class="medical-grid-item">
@@ -217,13 +213,13 @@
             <!-- Social History -->
             <div class="medical-grid-item full-width">
                 <label>Social History:</label>
-                <p class="form-control" th:text="${visitRecord.socialHistory ?: 'No social history recorded'}"></p>
+                <p  th:text="${visitRecord.socialHistory ?: 'No social history recorded'}"></p>
             </div>
         </div>
 
         <!-- Vitals -->
         <div class="card">
-            <h2 class="card-title">Vitals</h2>
+            <h3 class="card-title">Vitals</h3>
             <!-- <a th:href="@{/patients/{id}/vitals(id=${patientid})}" class="btn btn-primary vitals-btn">View Vitals History</a>-->
             <a th:href="@{/vitals}" class="btn btn-primary vitals-btn">View Vitals History</a>
         </div>

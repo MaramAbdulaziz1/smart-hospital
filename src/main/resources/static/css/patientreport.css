@@ -1,20 +1,9 @@
-.title{
-width: 593px;
-color: #000;
-font-family: Inter;
-font-size: 24px;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
-}
-
-.patientNameId{
-color: #000;
-font-family: Inter;
-font-size: 24px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
+.patient-header {
+    display: flex; /* Enables flexbox layout */
+    justify-content: center; /* Centers content horizontally */
+    align-items: center; /* Centers content vertically */
+    text-align: center; /* Ensures text is centered within the container */
+    height: 100px; /* Optional: Set a height for vertical centering */
 }
 
 .dateOfVisit {
