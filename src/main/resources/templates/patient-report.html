@@ -11,7 +11,8 @@
 
 <div class="layout-container">
 
-  <div th:replace="~{layouts/sharedLayout :: sidebar}"></div>
+  <!-- <div th:replace="~{layouts/sharedLayout :: sidebar}"></div> -->
+  <aside th:replace="~{layouts/sharedLayout :: sidebar (activePage='patientProfile')}"></aside>
 
 
   <main class="main-content">
