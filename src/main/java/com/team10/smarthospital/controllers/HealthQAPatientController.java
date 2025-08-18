@@ -1,6 +1,7 @@
 package com.team10.smarthospital.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
@@ -10,7 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HealthQAPatientController {
 
   @GetMapping("/healthQAPatient")
-  public String healthQAPatient() {
+  public String healthQAPatient(Model model) {
+    model.addAttribute("pageTitle", "Coming Soon");
     return "healthQAPatient"; // This refers to healthQAPatient.html in templates folder
   }
 }

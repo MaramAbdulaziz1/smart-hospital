@@ -42,8 +42,13 @@ body {
   background-color: transparent;
 }
 
-.dashboard-page .sidebar .tab[data-page="home"]:hover {
-  background-color: #F5F5F5;
+.dashboard-page .sidebar .tab:hover {
+  background-color: #F0F8FF;
+  transform: translateX(2px);
+}
+
+.dashboard-page .sidebar .tab:hover .tab-icon {
+  transform: scale(1.1);
 }
 
 /* Ensure logout tab styling is correct for calendar page */
@@ -86,13 +91,13 @@ body {
   cursor: pointer;
   padding: 8px;
   border-radius: 8px;
-  color: #666;
+  color: #1DA5DF;
   transition: all 0.3s ease;
 }
 
 .nav-btn:hover {
-  background-color: #e8f7fb;
-  color: #333;
+  background-color: #1DA5DF;
+  color: #1DA5DF;
 }
 
 /* Calendar Container */
