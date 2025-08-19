@@ -212,7 +212,7 @@
     font-weight: 400;
     line-height: normal;
   }
-
+  
   @media (max-width: 1024px) {
     .form-grid {
         grid-template-columns: 1fr 1fr;
@@ -224,7 +224,7 @@
         transform: translateX(-100%);
         transition: transform 0.3s;
     }
-*/
+  }
 
 .reportbackground{
 width: 1130px;
