@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team10.smarthospital.mapper.UserMapper">
+  <insert id="insertUser">
+    INSERT INTO
+    `User` (
+      user_id, email, password, `role`, first_name, last_name, gender, mobile_number, avatar_url)
+    VALUES (
+      #{userId}, #{email}, #{password}, #{role}, #{firstName}, #{lastName}, #{gender}, #{mobileNumber}, #{avatarUrl})
+  </insert>
+  <select id="getUserByEmail" resultType="com.team10.smarthospital.model.entity.User">
+    SELECT
+      user_id, first_name, last_name, gender, email, password, `role`
+    FROM
+      User
+    WHERE
+      email=#{email}
+  </select>
+  <select id="getUserByUserId" resultType="com.team10.smarthospital.model.entity.User">
+    SELECT
+      user_id, first_name, last_name, gender, email, password, `role`, avatar_url
+    FROM
+      `User`
+    WHERE
+      user_id=#{userId}
+  </select>
+  <update id="updateUser">
+    UPDATE
+      `User`
+    SET
+      first_name=#{firstName}, last_name= #{lastName}, gender=#{gender},
+      email=#{email}, password=#{password}, #{role}, avatar_url=#{avatarUrl}
+    WHERE
+      user_id=#{userId};
+  </update>
+</mapper>
