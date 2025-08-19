@@ -24,4 +24,9 @@ public class PrescriptionController {
     public String loginPage() {
         return "homePage";
     }
+
+    @GetMapping("/patient-login")
+    public String patientLoginPage() {
+        return "homePage";
+    }
 }

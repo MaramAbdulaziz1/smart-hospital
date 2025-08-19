@@ -56,6 +56,7 @@
             diagnosisTextarea.focus();
         }
     }
+    
     // find all .sub-tabs elements
     document.querySelectorAll('.sub-tabs').forEach(tab => {
         tab.addEventListener('click', () => {
@@ -79,6 +80,121 @@
             textarea.placeholder = 'Click "Edit" to enter follow-up plan...';
         }
         });
+    });
+
+    // Save and Submit button functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const saveBtn = document.querySelector('.save-btn');
+        const submitBtn = document.querySelector('.submit-btn');
+        const editBtn = document.querySelector('.edit-btn');
+        const textarea = document.querySelector('.intake-card.diagnosis');
+        
+        // Save button functionality
+        saveBtn.addEventListener('click', function() {
+            if (textarea.disabled) {
+                showNotification('Please click "Edit" first to enable editing', 'warning');
+                return;
+            }
+            
+            const content = textarea.value.trim();
+            if (!content) {
+                showNotification('Please enter some content before saving', 'warning');
+                return;
+            }
+            
+            // Show saving state
+            saveBtn.textContent = 'Saving...';
+            saveBtn.disabled = true;
+            
+            // Simulate save operation
+            setTimeout(() => {
+                showNotification('Clinical notes saved successfully!', 'success');
+                saveBtn.textContent = 'Save';
+                saveBtn.disabled = false;
+            }, 1000);
+        });
+        
+        // Submit button functionality
+        submitBtn.addEventListener('click', function() {
+            if (textarea.disabled) {
+                showNotification('Please click "Edit" first to enable editing', 'warning');
+                return;
+            }
+            
+            const content = textarea.value.trim();
+            if (!content) {
+                showNotification('Please enter some content before submitting', 'warning');
+                return;
+            }
+            
+            // Show submitting state
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
+            saveBtn.disabled = true;
+            editBtn.disabled = true;
+            
+            // Simulate submit operation
+            setTimeout(() => {
+                showNotification('Clinical notes submitted successfully!', 'success');
+                submitBtn.textContent = 'Submit';
+                submitBtn.disabled = false;
+                saveBtn.disabled = false;
+                editBtn.disabled = false;
+                
+                // Disable textarea after successful submit
+                textarea.disabled = true;
+                textarea.placeholder = 'Notes have been submitted. Click "Edit" to make changes...';
+            }, 1500);
+        });
+        
+        // Show notification function
+        function showNotification(message, type) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            
+            // Set background color based on type
+            let bgColor = '#4CAF50'; // success
+            if (type === 'warning') bgColor = '#FF9800';
+            if (type === 'error') bgColor = '#f44336';
+            
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${bgColor};
+                color: white;
+                padding: 12px 20px;
+                border-radius: 6px;
+                z-index: 10000;
+                font-size: 14px;
+                opacity: 0;
+                transform: translateX(100%);
+                transition: all 0.3s ease;
+                max-width: 300px;
+                word-wrap: break-word;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.style.opacity = '1';
+                notification.style.transform = 'translateX(0)';
+            }, 10);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
     });
 
 </script>

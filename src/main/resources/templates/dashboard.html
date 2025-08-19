@@ -61,8 +61,8 @@
     <!-- Dashboard Content -->
     <div class="dashboard-content">
       <div class="search-row">
-        <input class="search1" type="text" placeholder="Search by name or ID" />
-        <button class="btn">Search</button>
+        <input class="search1" type="text" id="searchInput" placeholder="Search by name or ID" />
+        <button class="btn" id="searchBtn">Search</button>
       </div>
       <h3 class="section-title">Patient with appointments</h3>
 
@@ -73,8 +73,8 @@
         <div></div>
       </div>
 
-      <div class="patient-table">
-        <div class="patient-row">
+      <div class="patient-table" id="patientTable">
+        <div class="patient-row" data-name="Harry Potter" data-id="HAT17653D">
           <div>
             <div class="default-text">Harry Potter</div>
             <span class="id">ID: HAT17653D</span>
@@ -85,7 +85,7 @@
             <a th:href="@{/patientProfile}" class="btn filled">Profile</a>
           </div>
         </div>
-        <div class="patient-row">
+        <div class="patient-row" data-name="Mary Johnson" data-id="HAT17653E">
           <div>
             <div class="default-text">Mary Johnson</div>
             <span class="id">ID: HAT17653E</span>
@@ -96,7 +96,7 @@
             <a th:href="@{/patientProfile}" class="btn filled">Profile</a>
           </div>
         </div>
-        <div class="patient-row">
+        <div class="patient-row" data-name="James Brown" data-id="HAT17653F">
           <div>
             <div class="default-text">James Brown</div>
             <span class="id">ID: HAT17653F</span>
@@ -115,6 +115,143 @@
 
 <!-- Scripts -->
 <script th:src="@{/js/sharedLayout.js}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    const searchBtn = document.getElementById('searchBtn');
+    const patientTable = document.getElementById('patientTable');
+    const patientRows = document.querySelectorAll('.patient-row');
+    
+    // Store original patient rows for reset functionality
+    const originalRows = Array.from(patientRows);
+    
+    // Search functionality
+    function performSearch() {
+        const searchTerm = searchInput.value.trim().toLowerCase();
+        
+        if (!searchTerm) {
+            // If search is empty, show all patients
+            showAllPatients();
+            return;
+        }
+        
+        // Filter patients based on name or ID
+        const filteredRows = originalRows.filter(row => {
+            const name = row.getAttribute('data-name').toLowerCase();
+            const id = row.getAttribute('data-id').toLowerCase();
+            
+            return name.includes(searchTerm) || id.includes(searchTerm);
+        });
+        
+        // Clear current table
+        patientTable.innerHTML = '';
+        
+        if (filteredRows.length === 0) {
+            // Show "no results" message
+            showNoResultsMessage();
+        } else {
+            // Add filtered rows back to table
+            filteredRows.forEach(row => {
+                patientTable.appendChild(row.cloneNode(true));
+            });
+            
+            // Show search results count
+            showSearchResultsCount(filteredRows.length);
+        }
+    }
+    
+    // Show all patients (reset search)
+    function showAllPatients() {
+        patientTable.innerHTML = '';
+        originalRows.forEach(row => {
+            patientTable.appendChild(row.cloneNode(true));
+        });
+        
+        // Clear any search result messages
+        clearSearchMessages();
+    }
+    
+    // Show "no results" message
+    function showNoResultsMessage() {
+        const noResultsDiv = document.createElement('div');
+        noResultsDiv.className = 'no-results';
+        noResultsDiv.innerHTML = `
+            <div style="text-align: center; padding: 40px; color: #666;">
+                <div style="font-size: 18px; margin-bottom: 10px;">No patients found</div>
+                <div style="font-size: 14px;">Try searching with a different name or ID</div>
+            </div>
+        `;
+        patientTable.appendChild(noResultsDiv);
+    }
+    
+    // Show search results count
+    function showSearchResultsCount(count) {
+        // Remove any existing count message
+        const existingCount = document.querySelector('.search-results-count');
+        if (existingCount) {
+            existingCount.remove();
+        }
+        
+        // Create count message
+        const countDiv = document.createElement('div');
+        countDiv.className = 'search-results-count';
+        countDiv.style.cssText = `
+            background: #e8f7fb;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            border-left: 4px solid #6DA2B1;
+        `;
+        countDiv.textContent = `Found ${count} patient${count === 1 ? '' : 's'}`;
+        
+        // Insert before the table
+        patientTable.parentNode.insertBefore(countDiv, patientTable);
+    }
+    
+    // Clear search messages
+    function clearSearchMessages() {
+        const countMessage = document.querySelector('.search-results-count');
+        if (countMessage) {
+            countMessage.remove();
+        }
+    }
+    
+    // Event listeners
+    searchBtn.addEventListener('click', performSearch);
+    
+    // Search on Enter key press
+    searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            performSearch();
+        }
+    });
+    
+    // Real-time search (optional - uncomment if you want instant search)
+    // searchInput.addEventListener('input', performSearch);
+    
+    // Clear search when input is cleared
+    searchInput.addEventListener('input', function() {
+        if (this.value.trim() === '') {
+            showAllPatients();
+        }
+    });
+    
+    // Add loading state to search button
+    searchBtn.addEventListener('click', function() {
+        const originalText = this.textContent;
+        this.textContent = 'Searching...';
+        this.disabled = true;
+        
+        // Simulate search delay
+        setTimeout(() => {
+            this.textContent = originalText;
+            this.disabled = false;
+        }, 300);
+    });
+});
+</script>
 
 </body>
 </html>
