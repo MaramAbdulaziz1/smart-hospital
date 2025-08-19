@@ -76,18 +76,6 @@
     line-height: normal;
   }
 
-  .diagnosisText{
-    width: 199px;
-    height: 29px;
-    flex-shrink: 0;
-    color: #53535D;
-    font-family: Inter;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-  }
-
   .doctorNotes{
     width: 153px;
     height: 24px;
@@ -121,18 +109,6 @@
     font-size: 20px;
     font-style: normal;
     font-weight: 700;
-    line-height: normal;
-  }
-
-  .treatmentFollowupText{
-    width: 222px;
-    height: 45px;
-    flex-shrink: 0;
-    color: #53535D;
-    font-family: Inter;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
     line-height: normal;
   }
 
@@ -238,7 +214,6 @@
   }
 
   .allergies{
-
 
   }
   @media (max-width: 1024px) {
@@ -688,32 +663,6 @@ line-height: normal;
     color: #6c757d; /* Neutral gray colour */
 }
 
-/* Responsive Design*/
-@media (max-width: 1024px) {
-  .form-grid {
-      grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 768px) {
-  .sidebar {
-      transform: translateX(-100%);
-      transition: transform 0.3s;
-  }
-
-  .main-content {
-      margin-left: 0;
-      margin-right: 0;
-  }
-
-  .form-grid {
-      grid-template-columns: 1fr;
-  }
-
-  .medical-grid {
-      grid-template-columns: 1fr;
-  }
-}
 
 .full-width {
     grid-column: 1 / -1;
