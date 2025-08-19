@@ -1,21 +1,20 @@
 %
 % File: chap03-02-02.tex
-% Author: 
-% Description: 
+% Author:
+% Description:
 % 3.2 Front-end Design & Implementation
-%  3.2.2 Smart Hospital
+%  3.2.1 Smart Hospital
 %     Design Process
 %     Front-end Implementation
-% TODO:something wrong in chapter title
 %
 
 \paragraph{Design Process}\mbox{}
 \paragraph{From Concept to User Needs: Ideation and Story Mapping}\mbox{}\\
-After the basic requirements in Section 2.3 were written, the next step was to think about how the Smart Hospital could really work in practice. Because the main goal of the system is to solve the problem that many local residents cannot get proper treatment, the design started from the patient’s side, thinking about what kind of functions they may need.  
+After the basic requirements in Section 2.3 were written, the next step was to think about how the Smart Hospital could really work in practice. Because the main goal of the system is to solve the problem that many local residents cannot get proper treatment, the design started from the patient’s side, thinking about what kind of functions they may need.
 
-Next, some existing problems in hospitals were analysed. Team members with hospital internship experience observed many issues in real hospitals. For example, nurses often record patient information by hand. Sometimes the writing is messy, so it is hard to read or can cause mistakes. It also has to spend some time finding previous records, and sometimes the paper can be lost. Patients also face problems when they want to get their own medical history. They need to fill out many forms and wait for a long time, and sometimes the staff cannot even find the file.  
+Next, some existing problems in hospitals were analysed. Team members with hospital internship experience observed many issues in real hospitals. For example, nurses often record patient information by hand. Sometimes the writing is messy, so it is hard to read or can cause mistakes. It also has to spend some time finding previous records, and sometimes the paper can be lost. Patients also face problems when they want to get their own medical history. They need to fill out many forms and wait for a long time, and sometimes the staff cannot even find the file.
 
-The background of the Virtual Hospital Africa system was also considered. In South Africa, medical resources are not well distributed. Many people in rural areas need to travel a long distance to big hospitals if they want to see a doctor. At the same time, some people go to the hospital even for small problems that might not need to go to a hospital, but they don’t know what to do. This situation makes the hospital more crowded. If these problems can be solved by an online system, the efficiency will be much better.  
+The background of the Virtual Hospital Africa system was also considered. In South Africa, medical resources are not well distributed. Many people in rural areas need to travel a long distance to big hospitals if they want to see a doctor. At the same time, some people go to the hospital even for small problems that might not need to go to a hospital, but they don’t know what to do. This situation makes the hospital more crowded. If these problems can be solved by an online system, the efficiency will be much better.
 
 Then, the tasks of each role were listed. Patients want to have online consultations, ask health questions, and download their reports. Nurses want to input vitals like blood pressure and temperature using computers. Doctors want to review patient history, record diagnoses, and give prescriptions. All of these were written into user stories, some of which are shown in Table 2.1.
 
@@ -40,7 +39,7 @@ For each user story, we used the method we learned in the Software Engineering D
 
 \paragraph{Bridging Stories and Systems: Workflow Design}\mbox{}\\
 
-After writing the user stories, we started thinking about how these functions could actually connect with each other. For example, if a nurse records the patient’s blood pressure, the doctor should be able to see this data at the next visit. When the doctor checks the medical history and writes the diagnosis, the patient can then see the advice given by the doctor, and so on. 
+After writing the user stories, we started thinking about how these functions could actually connect with each other. For example, if a nurse records the patient’s blood pressure, the doctor should be able to see this data at the next visit. When the doctor checks the medical history and writes the diagnosis, the patient can then see the advice given by the doctor, and so on.
 
 To make these workflows clearer, we drew user flow diagrams in Figma to show the paths of different roles in the system. As shown in Figure~\ref{fig:userflow-registration}, we began with the most basic authentication process, including login, registration, and password reset, so that all users can access the system.
 
@@ -60,31 +59,31 @@ Next, we designed the main workflow for the patient role, as shown in Figure~\re
 \end{figure}
 
 
-For the function design on each role side, we followed how real hospitals usually work. 
-Patients can only see their own records and cannot see other people’s information. 
-For now, nurses can only enter vital signs. 
-Doctors have the most functions: they can view the full medical history and write diagnoses, 
-but they cannot change the patient’s basic information. 
-We think this setup is quite similar to how real hospitals operate. 
+For the function design on each role side, we followed how real hospitals usually work.
+Patients can only see their own records and cannot see other people’s information.
+For now, nurses can only enter vital signs.
+Doctors have the most functions: they can view the full medical history and write diagnoses,
+but they cannot change the patient’s basic information.
+We think this setup is quite similar to how real hospitals operate.
 
-One difference from real hospitals is that we also considered the remote consultation process. 
-After the patient makes an appointment, they can first see the doctor from home. 
-If the doctor thinks it is needed, the patient will then go to a clinic to measure vital signs, 
-or go to the hospital for further treatment. 
-This can reduce unnecessary visits, and at the same time still make sure we do not miss any patients who really need care. 
+One difference from real hospitals is that we also considered the remote consultation process.
+After the patient makes an appointment, they can first see the doctor from home.
+If the doctor thinks it is needed, the patient will then go to a clinic to measure vital signs,
+or go to the hospital for further treatment.
+This can reduce unnecessary visits, and at the same time still make sure we do not miss any patients who really need care.
 
-The user flow diagrams we drew in Figma helped us make sure each function connects smoothly, 
-and they also gave the frontend team a clear reference for page navigation. 
-At this stage, we clarified the logic of the hospital side. 
-For example, the user must log in before entering the dashboard, 
-and from the dashboard they can directly or indirectly access all the designed pages. 
+The user flow diagrams we drew in Figma helped us make sure each function connects smoothly,
+and they also gave the frontend team a clear reference for page navigation.
+At this stage, we clarified the logic of the hospital side.
+For example, the user must log in before entering the dashboard,
+and from the dashboard they can directly or indirectly access all the designed pages.
 These two basic user flow diagrams gave us a clear direction when we started designing the webpages.
 
 \paragraph{Visualizing Functionality: Prototyping with Figma}\mbox{}\\
 After we completed the workflow diagram, we used it as the foundation to divide tasks among team members. Each member is responsible for designing specific pages for different parts of the website while working all within a single file, shown as Figure~\ref{fig:3-2-2-DS-figma-f1}, simplified cross-reviewing and allowed for seamless handoffs instead of manually sending assets or screenshots . Next, we will introduce our layout design.
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.8\linewidth]{images03/3-2-2-figure1.png} 
+  \includegraphics[width=0.8\linewidth]{images03/3-2-2-figure1.png}
   \caption{Shared Figma file displaying landing pages by Maram.}
   \label{fig:3-2-2-DS-figma-f1}
 \end{figure}
@@ -255,7 +254,7 @@ After developing all the pages, we noticed that many structural elements–such 
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.8\linewidth]{images03/3-2-2-vitalHS.png} 
+  \includegraphics[width=0.8\linewidth]{images03/3-2-2-vitalHS.png}
   \caption{vitalsHistoryPage.html consuming shared fragments (vitalsSidebar, topNav, patientCard) via th:replace.}
   \label{fig:3-2-2-vital-history-page}
 \end{figure}
@@ -264,7 +263,7 @@ For example, the Vitals page loads the active vitalsSidebar fragment (highlighti
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.8\linewidth]{images03/3-2-2-sharedLayout.png} 
+  \includegraphics[width=0.8\linewidth]{images03/3-2-2-sharedLayout.png}
   \caption{Snippet from sharedLayout.html showing the sidebar fragment, including the logo at the top and navigation links.}
   \label{fig:3-2-2-sharedLayout}
 \end{figure}
@@ -273,7 +272,7 @@ We also separated shared and page-specific styling concerns to avoid cascade con
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.8\linewidth]{images03/3-2-2-renderLayout.png} 
+  \includegraphics[width=0.8\linewidth]{images03/3-2-2-renderLayout.png}
   \caption{Rendered UI in the browser showing the shared sidebar, patient card, and top navigation in the Vitals module.}
   \label{fig:3-2-2-renderLayout}
 \end{figure}
