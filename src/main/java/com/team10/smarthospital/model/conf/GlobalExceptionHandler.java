@@ -11,7 +11,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public BaseResponse<?> handleException(Exception e) {
         BaseResponse<Object> response = new BaseResponse<>();
-        response.setCode("-1");
+        response.setCode("501");
         response.setMessage("Operation failed: " + e.getMessage());
         return response;
     }
