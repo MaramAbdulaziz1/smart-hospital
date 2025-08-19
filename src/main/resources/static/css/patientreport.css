@@ -1,9 +1,9 @@
 .patient-header {
-    display: flex; /* Enables flexbox layout */
-    justify-content: center; /* Centers content horizontally */
-    align-items: center; /* Centers content vertically */
-    text-align: center; /* Ensures text is centered within the container */
-    height: 100px; /* Optional: Set a height for vertical centering */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100px;
 }
 
 .dateOfVisit {
@@ -78,18 +78,6 @@
   line-height: normal;
 }
 
-.drNotesText{
-  width: 199px;
-  height: 29px;
-  flex-shrink: 0;
-  color: #53535D;
-  font-family: Inter;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
 .treatmentFollowup{
   width: 299px;
   height: 24px;
@@ -100,22 +88,6 @@
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-}
-
-.treatmentFollowupText{
-  width: 222px;
-  height: 45px;
-  flex-shrink: 0;
-  color: #53535D;
-  font-family: Inter;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.cards{
-  background: #FFF
 }
 
 .medicalHistory{

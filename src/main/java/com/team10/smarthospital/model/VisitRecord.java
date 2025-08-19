@@ -4,7 +4,7 @@ package com.team10.smarthospital.model;
 import java.util.List;
 
 public class VisitRecord {
-  String patientId;
+  Long patientId;
   String patientName;
 
 
@@ -39,11 +39,11 @@ public class VisitRecord {
     this.doctorName = doctorName;
   }
 
-  public String getPatientId() {
+  public Long getPatientId() {
     return patientId;
   }
 
-  public void setPatientId(String patientId) {
+  public void setPatientId(Long patientId) {
     this.patientId = patientId;
   }
 
@@ -175,11 +175,4 @@ public class VisitRecord {
         + ", currentMedications=" + currentMedications + ", surgicalHistory=" + surgicalHistory + ", allergies="
         + allergies + ", familyHistory=" + familyHistory + ", socialHistory=" + socialHistory + "]";
   }
-
-
-
-
-
-
-
 }

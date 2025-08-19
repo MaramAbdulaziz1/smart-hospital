@@ -1,4 +1,4 @@
-//This is the package name that all classes are in 
+//This is the package name that all classes are in
 package com.team10.smarthospital.model;
 
 import jakarta.persistence.*;
@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public class BaseEntity {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

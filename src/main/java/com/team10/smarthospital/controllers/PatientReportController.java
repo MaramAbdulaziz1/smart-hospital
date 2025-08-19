@@ -1,12 +1,15 @@
 package com.team10.smarthospital.controllers;
 
+  import java.time.LocalDate;
   import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
   import org.springframework.ui.Model;
   import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.team10.smarthospital.model.PatientProfile;
 import com.team10.smarthospital.model.VisitRecord;
@@ -29,18 +32,35 @@ import com.team10.smarthospital.service.HospitalDataService;
      * @param model The model to hold attributes for the view.
      * @return The name of the view to render.
      */
-    @GetMapping("/patient/{id}/visits")
-    public String getVisitsByPatientId(@PathVariable("id") String patientId, Model model) {
+    @GetMapping("/{patientId}/visits")
+    public String showVisitRecordsPage(@PathVariable Long patientId, Model model) {
 
 
 
-      // In a real application, you would fetch the visit record from the database
-      ArrayList<VisitRecord> visitRecords = (ArrayList<VisitRecord>) hospitalDataService.getPatientVisitsByPatientId("HAT17653D");
-System.out.println("0 visitRecords size: " + visitRecords.size());
-System.out.println("Date of visit value " + visitRecords.get(0).getDateOfVisit());
-      model.addAttribute("visitRecords", visitRecords);
+      List<String> visitDates = hospitalDataService.getVisitDatesByPatientId(patientId);
+
+        model.addAttribute("patientId", patientId);
+        model.addAttribute("visitDates", visitDates);
+        model.addAttribute("selectedDate", null);
+        model.addAttribute("records", List.of());
 
       return "patient-report"; // loads patient-report.html
+    }
+
+    // After selecting a date
+    @GetMapping("/{patientId}/visits/records")
+    public String getVisitRecordsByDate(@PathVariable Long patientId,
+                                        @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+                                        Model model) {
+        List<String> visitDates = hospitalDataService.getVisitDatesByPatientId(patientId);
+        List<VisitRecord> records = hospitalDataService.getRecordsByDate(patientId, date);
+
+        model.addAttribute("patientId", patientId);
+        model.addAttribute("visitDates", visitDates);
+        model.addAttribute("selectedDate", date);
+        model.addAttribute("records", records);
+
+        return "patient-report";
     }
 
 
@@ -54,12 +74,12 @@ System.out.println("Date of visit value " + visitRecords.get(0).getDateOfVisit()
        */
 
       @GetMapping("/patient-report/{id}/{date}")
-      public String getPatientReport(@PathVariable("id") String patientId, @PathVariable("date") String date, Model model) {
+      public String getPatientReport(@PathVariable("id") Long patientId, @PathVariable("date") String date, Model model) {
 
       List<VisitRecord> visitRecords = new ArrayList<>();
       //get the visit record  for the given patientId along with visit dates from database , filter by requested data and popuate visitRecord object
       VisitRecord visitRecord = new VisitRecord();
-      visitRecord.setPatientId("HAT17653D"); // Mock patient ID, in a real application this would be dynamic
+      visitRecord.setPatientId(patientId); // Mock patient ID, in a real application this would be dynamic
       visitRecord.setPatientName("Harry Potter");
       visitRecord.setDateOfVisit(date); // Mock date, in a real application this would be dynamic
       visitRecord.setDepartment("Cardiology");
@@ -80,7 +100,7 @@ System.out.println("Date of visit value " + visitRecords.get(0).getDateOfVisit()
 
       //PatientProfile object to be used in the template
       PatientProfile patientProfile = new PatientProfile();
-      patientProfile.setId(1L); // Mock ID, in a real application this would be dynamic
+      patientProfile.setId(patientId); // Mock ID, in a real application this would be dynamic
       patientProfile.setName("Harry Potter");
       visitRecords.add(visitRecord);
       // In a real application, you would fetch the visit record from the database using patientId and date
