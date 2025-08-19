@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.team10.smarthospital.model.VisitRecord;
 
+import java.time.LocalDate;
 import java.util.*;
 
 /**
@@ -60,7 +61,7 @@ public class HospitalDataService {
         );
     }
     //get patient visits by patient ID
-    public List<VisitRecord> getPatientVisitsByPatientId(String patientId){
+    public List<VisitRecord> getPatientVisitsByPatientId(Long patientId){
        //get the visit record for the given date from database and popuate visitRecord object
       //TO_DO: Implement database logic to fetch visit records by date
       // For demonstration purposes, we will create a mock VisitRecord object
@@ -69,9 +70,9 @@ public class HospitalDataService {
         // For now, we will return an empty list as a placeholder.
       List<VisitRecord> patientVisits = new ArrayList<>();
       VisitRecord visitRecord = new VisitRecord();
-      visitRecord.setPatientId("HAT17653D"); // Mock patient ID, in a real application this would be dynamic
+      visitRecord.setPatientId(patientId); // Mock patient ID, in a real application this would be dynamic
       visitRecord.setPatientName("Harry Potter");
-      visitRecord.setDateOfVisit("2023-10-01"); // Mock date, in a real application this would be dynamic
+      visitRecord.setDateOfVisit(LocalDate.now().toString()); // Mock date, in a real application this would be dynamic
       visitRecord.setDepartment("Cardiology");
       visitRecord.setDiagnosis("Hypertension");
       visitRecord.setDoctorName("Dr. John Smith");
@@ -89,5 +90,18 @@ public class HospitalDataService {
 
       patientVisits.add(visitRecord);
       return patientVisits;
+    }
+    public List<String> getVisitDatesByPatientId(Long patientId) {
+        return getPatientVisitsByPatientId(patientId).stream()
+                .map(VisitRecord::getDateOfVisit)
+                .distinct()
+                .sorted()
+                .toList();
+    }
+
+    public List<VisitRecord> getRecordsByDate(Long patientId, LocalDate date) {
+        return getPatientVisitsByPatientId(patientId).stream()
+                .filter(r -> r.getDateOfVisit().equals(date))
+                .toList();
     }
 }
