@@ -30,6 +30,7 @@
 % Adding metadata:
 \let\ordinal\relax %to avoid warning with datetime and memoir
 \usepackage{datetime}
+\usepackage{url}
 \usepackage{ifpdf}
 \ifpdf
 \pdfinfo{
@@ -243,13 +244,8 @@
 \import{chapters/appendices/}{app0A.tex}
 \clearemptydoublepage
 %
-% Apparently the guidelines don't say anything about citations or
-% bibliography styles so I guess we can use anything.
+% References are now included in the reference chapter above
 \backmatter
-\bibliographystyle{siam}
-\refstepcounter{chapter}
-\bibliography{thesisbiblio}
-\clearemptydoublepage
 %
 % Add index
 %\printindex
