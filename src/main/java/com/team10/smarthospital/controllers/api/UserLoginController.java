@@ -6,8 +6,8 @@ import com.team10.smarthospital.model.response.UserResponse;
 import com.team10.smarthospital.service.LoginService;
 
 import jakarta.servlet.http.HttpServletRequest;
-
 import jakarta.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,7 +25,7 @@ public class UserLoginController {
             @RequestBody LoginRequest loginRequest,
             HttpServletRequest request,
             HttpServletResponse response) {
-        return loginService.login(loginRequest);
+        return loginService.login(loginRequest, request, response);
     }
 
     @PostMapping("/logout")

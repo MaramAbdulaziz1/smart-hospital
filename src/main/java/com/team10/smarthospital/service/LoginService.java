@@ -5,10 +5,15 @@ import com.team10.smarthospital.model.request.LoginRequest;
 import com.team10.smarthospital.model.response.BaseResponse;
 import com.team10.smarthospital.model.response.UserResponse;
 
+import jakarta.servlet.http.HttpServletRequest;
+
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,7 +21,12 @@ public class LoginService {
 
     @Autowired private AuthenticationManager authenticationManager;
 
-    public BaseResponse<UserResponse> login(LoginRequest request) {
+    @Autowired private SecurityContextRepository securityContextRepository;
+
+    public BaseResponse<UserResponse> login(
+            LoginRequest request,
+            HttpServletRequest httpServletRequest,
+            HttpServletResponse servletRequest) {
         String email = request.getUsername();
         String password = request.getPassword();
 
@@ -32,7 +42,10 @@ public class LoginService {
                     new UsernamePasswordAuthenticationToken(email, password);
             Authentication authentication = authenticationManager.authenticate(token);
 
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            SecurityContext context = SecurityContextHolder.createEmptyContext();
+            context.setAuthentication(authentication);
+            SecurityContextHolder.setContext(context);
+            securityContextRepository.saveContext(context, httpServletRequest, servletRequest);
 
             CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
             UserResponse userResponse = new UserResponse();

@@ -43,10 +43,7 @@ function openLoginPopup() {
       <h2>Login</h2>
 
       <!-- Username -->
-      <input
-        type="text"
-        placeholder="Username"
-        style="
+      <input id="username" type="text" placeholder="Username" style="
           display: block;
           width: 80%;
           margin: 50px auto;
@@ -57,10 +54,7 @@ function openLoginPopup() {
       >
 
       <!-- Password -->
-      <input
-        type="password"
-        placeholder="Password"
-        style="
+      <input id="password" type="password" placeholder="Password" style="
           display: block;
           width: 80%;
           margin: -40px auto 10px;
@@ -71,7 +65,7 @@ function openLoginPopup() {
       >
 
       <!-- Login button -->
-      <button style="
+      <button id="login-button" style="
         width: 130px;
         height: 40px;
         background-color: rgba(7, 7, 56, 0.8);
@@ -105,6 +99,45 @@ function openLoginPopup() {
 
   // Append to the body
   document.body.appendChild(overlay);
+
+  // Add event listener for login button
+  document.getElementById('login-button').addEventListener('click', function () {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      fetch('/user/login', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username, password }),
+          credentials: 'include'
+      })
+          .then(response => response.json())
+          .then(data => {
+              if (data.code == '0') {
+                  const role = data.data.role;
+                  let redirectUrl = '/dashboard';
+
+                  if (role === 0) {
+                      redirectUrl = '/patient/patientDashboard';
+                  } else if (role === 1) {
+                      redirectUrl = '/dashboard';
+                  } else if (role === 2) {
+                      redirectUrl = '/dashboard-patient';
+                  }
+
+                  // 跳转到对应页面
+                  window.location.href = redirectUrl;
+              } else {
+                  alert('Login failed: ' + data.message);
+              }
+          })
+          .catch(error => {
+              console.error('Error:', error);
+              alert('An error occurred during login.');
+          });
+  });
 }
 
 function closeLoginPopup() {
