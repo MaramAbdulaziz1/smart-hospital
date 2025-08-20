@@ -145,4 +145,50 @@ patient: {
 \end{verbatim}
 
 This demonstrates how nested data structures are managed with union types and other optional properties.
-Layout components handle the overall application structure including headers, navigation, sidebars, and footer elements. These components provide consistent positioning and responsive behaviour across all application pages. UI components represent reusable interface elements such as buttons, forms, modals, and data display components.
+Layout components handle the overall application structure including headers, navigation, sidebars, and footer elements. These components provide consistent positioning and responsive behaviour across all application pages. UI components represent reusable interface elements such as buttons, forms, modals, and data display components. Feature components encapsulate specific business logic and user interactions related to particular application features. Page components serve as containers that compose multiple components to create complete user interfaces. This hierarchical approach enables efficient code reuse and simplified maintenance.
+
+The \texttt{PatientDrawerV2} component demonstrates implementation patterns with comprehensive error handling and type safety. Research indicates that TypeScript adoption in frontend development significantly reduces runtime errors and improves code maintainability (Chen et al., 2019). The component includes customised utility functions such as \texttt{calcutaeAge()} and \texttt{formatAge()} which showcase input validation and error handling:
+\begin{verbatim}
+  export function calculateAge(dateOfBirth: string): number {
+  if (!dateOfBirth) {
+    return 0
+  }
+
+  const birthDate = new Date(dateOfBirth)
+
+  if (isNaN(birthDate.getTime())) {
+    console.log('Invalid birth date:', dateOfBirth)
+    return 0
+  }
+
+  const today = new Date()
+  let age = today.getFullYear() - birthDate.getFullYear()
+  const monthDiff = today.getMonth() - birthDate.getMonth()
+  if (monthDiff < 0 || monthDiff === 0 && today.getDate()
+  < birthDate.getDate()) {
+    age--
+  }
+  return age
+}
+\end{verbatim}
+This function establishes null checking and type validation as well as error handling. Edge cases are handled by the age calculation logic and are provided fallback values to ensure the component remains functional even with invalid or incomplete data. The component also showcases union type handling in the age display logic, where multiple data sources are checked in priority order:
+\begin{verbatim}
+     Primary - patient.age_year
+     Formatted display - patient.age_display
+     Fallback numeric value - patient.age
+   	 Calculated from patient.date_of_birth or patient.dob_formatted
+\end{verbatim}
+Higher-order components and render props enable component composition whilst maintaining type safety. Furthermore, this implementation uses generic constraints to ensure proper type inference in composed components. Context providers manage global state and shared functionality with typed context values.
+
+The code further demonstrates complex error handling of medical data with type safety measures. in \texttt{family.tsx}, the execution shows data validation:
+\begin{verbatim}
+  const patient_id = ctx.state.patient.id
+  const family = await patient_family.get(ctx.state.trx, { patient_id })
+  assert(ctx.state.patient.age_years != null)
+  const age_years = ctx.state.patient.age_years
+  assert(typeof age_years === 'number' && age_years >= 0)
+\end{verbatim}
+
+This code runtime type assertions, database integrations, and data validation:
+
+\textbf{Runtime Type Assertions:} Assert() statements are used to make sure the data conforms to the expected types and parameters at runtime, assisting in checking before compile time checking.
