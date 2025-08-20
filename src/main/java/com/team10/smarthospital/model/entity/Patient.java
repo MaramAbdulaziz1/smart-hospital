@@ -12,8 +12,6 @@ public class Patient extends User {
 
     private String patientCode;
 
-    private LocalDate birth;
-
     private BigDecimal height;
 
     private BigDecimal weight;

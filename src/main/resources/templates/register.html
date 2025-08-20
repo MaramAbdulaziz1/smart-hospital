@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registration</title>
+  <title>Smart Hospital - Employee Registration</title>
   <link rel="stylesheet" href="../css/register.css">
 </head>
 <body>
@@ -14,111 +14,127 @@
       <img src="RegisterPageImages/LogoCircle.png" alt="Logo" class="hospital-logo-img">
     </div>
     <div class="registration-section">
-      <h1>Registration</h1>
+      <h1>Employee Registration</h1>
     </div>
   </div>
 </header>
 
 <!-- Main Content Container -->
 <div class="content-container">
-  <form>
+  <form id="registrationForm">
     <!-- User Information Section -->
     <div class="form-section">
       <div class="form-grid">
         <div class="form-field">
-          <label>First Name</label>
-          <input type="text" class="first-name-input">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" name="firstName" required>
+          <div class="error-message" id="firstNameError"></div>
         </div>
 
         <div class="form-field">
-          <label>Last Name</label>
-          <input type="text" class="last-name-input">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" name="lastName" required>
+          <div class="error-message" id="lastNameError"></div>
         </div>
 
         <div class="form-field">
-          <label>Date of Birth</label>
-          <input type="date" class="date-of-birth-input">
+          <label for="birth">Date of Birth</label>
+          <input type="date" id="birth" name="birth" required>
+          <div class="error-message" id="birthError"></div>
         </div>
 
         <div class="form-field">
-          <label>Employee ID</label>
-          <input type="text" class="employee-input">
+          <label for="employeeId">Employee ID</label>
+          <input type="text" id="employeeId" name="employeeId" required>
+          <div class="error-message" id="employeeIdError"></div>
         </div>
 
         <div class="form-field">
-          <label>Department
+          <label for="department">Department
             <span class="tooltip-container">
               <span class="tooltip-icon">?</span>
               <span class="tooltip-text">Which department you will be working in?</span>
             </span>
           </label>
-          <select class="department-input">
+          <select id="department" name="department" required>
             <option value="">Select Department</option>
-            <option value="general-medicine">General Medicine</option>
-            <option value="general-surgery">General Surgery</option>
-            <option value="cardiology">Cardiology</option>
-            <option value="nephrology">Nephrology</option>
-            <option value="pediatrics">Pediatrics</option>
+            <option value="1">General Medicine</option>
+            <option value="2">General Surgery</option>
+            <option value="3">Cardiology</option>
+            <option value="4">Nephrology</option>
+            <option value="5">Pediatrics</option>
           </select>
+          <div class="error-message" id="departmentError"></div>
         </div>
 
         <div class="form-field">
-          <label>Position</label>
-          <select class="position-input">
+          <label for="position">Position</label>
+          <select id="position" name="position" required>
             <option value="">Select Position</option>
-            <option value="doctor">Doctor</option>
-            <option value="nurse">Nurse</option>
+            <option value="1">Doctor</option>
+            <option value="2">Nurse</option>
           </select>
+          <div class="error-message" id="positionError"></div>
         </div>
 
         <div class="form-field">
-          <label>Gender</label>
-          <select class="gender-input">
+          <label for="gender">Gender</label>
+          <select id="gender" name="gender" required>
             <option value="">Select</option>
-            <option value="female">Female</option>
-            <option value="male">Male</option>
-            <option value="other">Other</option>
+            <option value="0">Female</option>
+            <option value="1">Male</option>
+            <option value="2">Other</option>
           </select>
+          <div class="error-message" id="genderError"></div>
         </div>
 
         <div class="form-field">
-          <label>Location
+          <label for="location">Location
             <span class="tooltip-container">
               <span class="tooltip-icon">?</span>
               <span class="tooltip-text">Where will you be working from?</span>
             </span>
           </label>
-          <input type="text" class="location-input">
+          <input type="text" id="location" name="location" required>
+          <div class="error-message" id="locationError"></div>
         </div>
       </div>
     </div>
 
     <!-- Account Credentials Section -->
     <div class="form-section">
+      <div class="section-header">
+        <h3>Account Credentials</h3>
+      </div>
       <div class="form-grid">
         <div class="form-field full-width">
-          <label>Work Email</label>
-          <input type="email" class="email-input">
+          <label for="email">Work Email</label>
+          <input type="email" id="email" name="email" required>
+          <div class="error-message" id="emailError"></div>
         </div>
 
         <div class="form-field">
-          <label>Mobile Number</label>
-          <input type="text" class="mobile-input">
+          <label for="mobileNumber">Mobile Number</label>
+          <input type="text" id="mobileNumber" name="mobileNumber" required>
+          <div class="error-message" id="mobileNumberError"></div>
         </div>
 
         <div class="form-field">
-          <label>Work Number</label>
-          <input type="text" class="work-input">
+          <label for="workNumber">Work Number</label>
+          <input type="text" id="workNumber" name="workNumber">
+          <div class="error-message" id="workNumberError"></div>
         </div>
 
         <div class="form-field">
-          <label>New Password</label>
-          <input type="password" class="password-input">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required minlength="8">
+          <div class="error-message" id="passwordError"></div>
         </div>
 
         <div class="form-field">
-          <label>Confirm New Password</label>
-          <input type="password" class="confirm-input">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" required minlength="8">
+          <div class="error-message" id="confirmPasswordError"></div>
         </div>
       </div>
     </div>
@@ -152,11 +168,10 @@
         </div>
       </div>
     </div>
-
     <!-- Submit & Cancel Buttons -->
     <div class="button-wrapper">
       <button type="button" class="action-btn cancel-btn" onclick="cancelRegistration()">CANCEL</button>
-      <button type="submit" class="action-btn">REGISTER</button>
+      <button type="submit" class="action-btn" id="submitBtn">REGISTER</button>
     </div>
   </form>
 </div>

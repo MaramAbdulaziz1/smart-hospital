@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function() {
   // Profile picture upload handlers
   document.getElementById('profilePictureInput').addEventListener('change', handleProfilePictureUpload);
@@ -35,6 +34,9 @@ function handleProfilePictureUpload(event) {
       preview.src = e.target.result;
       preview.style.display = 'block';
       placeholder.style.display = 'none';
+
+      // Convert image to base64 and set as avatarBase64
+      document.getElementById('avatarBase64').value = e.target.result;
 
       clearError('profile');
     };
@@ -123,7 +125,7 @@ function setupFormValidation() {
     e.preventDefault();
 
     if (validateForm()) {
-      handleSuccessfulRegistration();
+      submitRegistrationForm();
     }
   });
 }
@@ -192,24 +194,94 @@ function validateForm() {
 }
 
 /**
+ * Submit registration form to backend API
+ */
+function submitRegistrationForm() {
+  // Disable submit button to prevent double submission
+  const submitBtn = document.querySelector('.btn-register');
+  const buttonText = submitBtn.querySelector('.button-text');
+  const spinner = submitBtn.querySelector('.spinner');
+
+  buttonText.textContent = 'Registering...';
+  spinner.style.display = 'inline-block';
+  submitBtn.disabled = true;
+
+  // Prepare data for API
+  const formData = {
+    firstName: document.getElementById('firstName').value,
+    lastName: document.getElementById('lastName').value,
+    gender: parseInt(document.getElementById('gender').value),
+    email: document.getElementById('email').value,
+    password: document.getElementById('password').value,
+    mobileNumber: document.getElementById('mobileNumber').value,
+    avatarBase64: document.getElementById('avatarBase64').value,
+    birth: document.getElementById('dateOfBirth').value,
+    height: parseFloat(document.getElementById('height').value),
+    weight: parseFloat(document.getElementById('weight').value),
+    bloodType: parseInt(document.getElementById('bloodType').value),
+    address: document.getElementById('homeAddress').value,
+    nationalId: document.getElementById('nationalId').value,
+    nearestClinic: document.getElementById('nearestClinic').value,
+    ecFirstName: document.getElementById('emergencyFirstName').value,
+    ecLastName: document.getElementById('emergencyLastName').value,
+    ecRelationship: parseInt(document.getElementById('emergencyRelationship').value),
+    ecMobileNumber: document.getElementById('emergencyPhone').value,
+    chiefComplaint: document.getElementById('currentConditionDetails').value,
+    allergies: document.getElementById('allergies').value,
+    pastMedicalConditions: document.getElementById('pastMedicalConditions').value,
+    currentMedications: document.getElementById('currentMedications').value,
+    pastSurgicalHistory: document.getElementById('pastSurgicalHistory').value,
+    familyHistory: document.getElementById('familyHistory').value,
+    socialHistory: document.getElementById('socialHistory').value
+  };
+
+  // Send request to backend API
+  fetch('/user/register/patient', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData)
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+    if (data.code === "0") {
+      // Registration successful
+      handleSuccessfulRegistration();
+    } else {
+      // Registration failed
+      throw new Error(data.message || 'Registration failed');
+    }
+  })
+  .catch(error => {
+    // Handle errors
+    console.error('Error:', error);
+    showError('registration', 'Registration failed: ' + error.message);
+
+    // Re-enable the submit button
+    buttonText.textContent = 'Register';
+    spinner.style.display = 'none';
+    submitBtn.disabled = false;
+  });
+}
+
+/**
  * New registration success handling function
  */
 function handleSuccessfulRegistration() {
-  // Disable submit button to prevent double submission
-  const submitBtn = document.querySelector('.btn-register');
-  const originalText = submitBtn.textContent;
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'Registering...';
+  // Hide form and show success message
+  document.getElementById('patientRegistrationForm').style.display = 'none';
+  document.getElementById('successMessage').style.display = 'block';
 
-  // Simulated processing time
+  // Redirect to HomePage after 2 seconds
   setTimeout(() => {
-    // Show success message
-    alert('Registration successful! You will be redirected to the homepage.');
-
-    // Redirect to HomePage - Based on the root path mapping of HomeController
     window.location.href = '/';
-
-  }, 1500); //  1.5-second delay in displaying processing status
+  }, 2000);
 }
 
 /**
@@ -255,6 +327,12 @@ function clearError(fieldName) {
   if (field) {
     field.classList.remove('error');
     field.style.borderColor = ''; // Reset border color
+  }
+}
+
+function cancelRegistration() {
+  if (confirm('Are you sure you want to cancel registration? All entered data will be lost.')) {
+    window.location.href = '/';
   }
 }
 

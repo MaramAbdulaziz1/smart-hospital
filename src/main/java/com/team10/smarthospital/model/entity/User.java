@@ -5,6 +5,8 @@ import com.team10.smarthospital.model.enums.Role;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 public class User extends BaseEntity {
@@ -14,6 +16,8 @@ public class User extends BaseEntity {
     private String firstName;
 
     private String lastName;
+
+    private LocalDate birth;
 
     private Integer gender;
 
@@ -25,7 +29,7 @@ public class User extends BaseEntity {
 
     private String mobileNumber;
 
-    private String avatarUrl;
+    private String avatarBase64;
 
     public String getFullName() {
         if (Role.DOCTOR.getRoleCode().equals(this.role)) {

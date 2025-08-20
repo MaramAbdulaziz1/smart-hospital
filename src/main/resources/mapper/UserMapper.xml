@@ -4,13 +4,13 @@
   <insert id="insertUser">
     INSERT INTO
     `User` (
-      user_id, email, password, `role`, first_name, last_name, gender, mobile_number, avatar_url)
+      user_id, email, password, `role`, first_name, last_name, birth, gender, mobile_number, avatar_base64)
     VALUES (
-      #{userId}, #{email}, #{password}, #{role}, #{firstName}, #{lastName}, #{gender}, #{mobileNumber}, #{avatarUrl})
+      #{userId}, #{email}, #{password}, #{role}, #{firstName}, #{lastName}, #{birth}, #{gender}, #{mobileNumber}, #{avatarBase64})
   </insert>
   <select id="getUserByEmail" resultType="com.team10.smarthospital.model.entity.User">
     SELECT
-      user_id, first_name, last_name, gender, email, password, `role`
+      user_id, first_name, last_name, birth, gender, email, password, `role`
     FROM
       User
     WHERE
@@ -18,7 +18,7 @@
   </select>
   <select id="getUserByUserId" resultType="com.team10.smarthospital.model.entity.User">
     SELECT
-      user_id, first_name, last_name, gender, email, password, `role`, avatar_url
+      user_id, first_name, last_name, birth, gender, email, password, `role`, avatar_base64
     FROM
       `User`
     WHERE
@@ -28,8 +28,8 @@
     UPDATE
       `User`
     SET
-      first_name=#{firstName}, last_name= #{lastName}, gender=#{gender},
-      email=#{email}, password=#{password}, #{role}, avatar_url=#{avatarUrl}
+      first_name=#{firstName}, last_name= #{lastName}, birth=#{birth}, gender=#{gender},
+      email=#{email}, password=#{password}, #{role}, avatar_base64=#{avatarBase64}
     WHERE
       user_id=#{userId};
   </update>
