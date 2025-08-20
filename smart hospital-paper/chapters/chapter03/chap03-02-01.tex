@@ -105,11 +105,44 @@ Virtual Hospital Africa's goal is to implement a virtual hospital website with a
 
 \paragraph{TypeScript}\mbox{}
 
-TypeScript is a superset of JavaScript which allows developers to catch errors at compile time rather than runtime, making it easier to maintain and refactor code. It provides static type checking, which helps in identifying any potential issues early in the development process. This is particularly useful for large codebases like Virtual Hospital Africa, where maintaining code quality and consistency is crucial. The codebase demonstrates comprehensive type definitions for complex data structures, as evidenced in the patient management system components. TypeScript's type system provides significant advantages in large-scale application development by enabling early error detection and improved code maintainability (Bierman et al., 2014).
+TypeScript is a superset of JavaScript which allows developers to catch errors at compile time rather than runtime, making it easier to maintain and refactor code. It provides static type checking, which helps in identifying any potential issues early in the development process. This is particularly useful for large codebases like Virtual Hospital Africa, where maintaining code quality and consistency is crucial. The codebase demonstrates type definitions for complex data structures, as shown in the patient management system components. TypeScript's type system provides significant advantages in large-scale application development by enabling early error detection and improved code maintainability (Bierman et al., 2014).
 
 The implementation showcases strong type safety through interfaces and type definitions. For example, the \texttt{Measurements} definition in \texttt{type.ts} includes precise geographic positioning with \texttt{latitude: number} and \texttt{longitude: number} properties, along with optional \texttt{admit\_reasons?: string[]} arrays. The patient data structure demonstrates TypeScript's nullable type handling with properties like \texttt{age\_years?: Maybe<number> | string | null}, showcasing the framework's flexibility in handling uncertain data states.
 
 The SQL integration in \texttt{patient.ts} demonstrates TypeScript's template literal types and generic constraints with complex database queries: \texttt{\detokenize{sql<string | null>`
-\patient_age.age_years::text`.as('age_years')`}} and high-level string interpolation for formatted patient data. This ensures type safety in SQL queries, preventing runtime errors and increasing code reliability.
+\patient_age.age_years::text`.as('age_years')`}} and string interpolation for formatted patient data. This ensures type safety in SQL queries, preventing runtime errors and increasing code reliability.
 
-Interface Segregation Principles (ISP) guide 
+Interface Segregation Principles (ISP) guide the API contracts and the component props  design. this makes sure that the components only recieve the necessary data they need to function. Generic types enable reusable components that work with different data types whilst maintaining type safety. The implementation includes comprehensive error handling with typed error objects and proper exception management, leveraging TypeScript's structural type system to ensure compile-time safety (Bierman et al., 2014).
+
+\paragraph{Tailwind CSS}\mbox{}
+
+Tailwind CSS is a utility-first CSS framework that allows developers to create custom designs without writing custom CSS. It provides a set of pre-defined classes that can be combined to build complex user interfaces. This approach promotes consistency and reusability across the code, making it easier to maintain and adapt the design as needed.
+The implementation includes a custom configuration that defines design tokens, colour palettes, typography scales, and spacing systems for each project. The structure adds custom colours, fonts, and breakpoints to the default theme to meet the design needs. Customised utility classes manage unique designs and varying components  that go further than the built-in utilities. The solution uses Just-In-Time compilation for the best speed and decreased bundle sizes(Tailwind Labs, 2024). Component variations and responsive designs tools make certain that style remains consistent across varying screen sizes as well as devices. The approach to style highlights atomic CSS classes for rapid prototype development while retaining a design consistency employing a well-defined design system.
+
+\paragraph{Component Architecture}\mbox{}
+
+The \texttt{PatientDrawerV2} component in \texttt{DrawerV2.ts} shows a well-structured component architecture. This component demonstrates an organised approach to feature components, handling complex patient data presentation with the proper TypeScript interfaces.
+The component accepts a comprehensive props interface that includes nested object types:
+
+\begin{verbatim}
+patient: {
+  id: string
+  name: string
+  description: string | null
+  avatar_url?: Maybe<string>
+  date_of_birth?: string
+  dob_formatted?: string | null
+  gender?: Maybe<Gender>
+  age?: number
+  age_year?: number
+  age_years?: Maybe<number> | string | null
+  age_display?: Maybe<string>
+  allergies?: string
+  actions: {
+    view: string
+  }
+}
+\end{verbatim}
+
+This demonstrates how nested data structures are managed with union types and other optional properties.
+Layout components handle the overall application structure including headers, navigation, sidebars, and footer elements. These components provide consistent positioning and responsive behaviour across all application pages. UI components represent reusable interface elements such as buttons, forms, modals, and data display components.
