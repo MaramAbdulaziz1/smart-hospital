@@ -4,11 +4,11 @@ import lombok.Getter;
 
 @Getter
 public enum DoctorDepartment {
-    INTERNAL_MEDICINE(0, "INTERNAL_MEDICINE"),
-    SURGERY(0, "SURGERY"),
-    OBSTETRICS_AND_GYNECOLOGY(0, "OBSTETRICS_AND_GYNECOLOGY"),
-    PEDIATRICS(0, "PEDIATRICS"),
-    ENT(0, "ENT");
+    GENERAL_MEDICINE(1, "General Medicine"),
+    GENERAL_SURGERY(2, "General Surgery"),
+    CARDIOLOGY(3, "Cardiology"),
+    NEPHROLOGY(4, "Nephrology"),
+    PEDIATRICS(5, "Pediatrics");
 
     private final Integer departmentCode;
     private final String departmentName;
