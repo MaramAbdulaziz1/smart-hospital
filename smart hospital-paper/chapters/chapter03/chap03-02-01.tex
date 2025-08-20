@@ -98,4 +98,18 @@ These changes adhere to usability principles such as “Match between system and
         \label{fig:design-6}
     \end{minipage}
 \end{figure}
-% === END AUTO-INSERTED DESIGN ===
+
+\subsection{Code Implementation - Patient Data Management}
+
+Virtual Hospital Africa's goal is to implement a virtual hospital website with a fast user interface that is also maintainable and adaptable. Achieved by using type-safe frameworks, such as TypeScript and React, to ensure code quality and reduce runtime errors and the utility first approach with tailwind CSS.
+
+\paragraph{TypeScript}\mbox{}
+
+TypeScript is a superset of JavaScript which allows developers to catch errors at compile time rather than runtime, making it easier to maintain and refactor code. It provides static type checking, which helps in identifying any potential issues early in the development process. This is particularly useful for large codebases like Virtual Hospital Africa, where maintaining code quality and consistency is crucial. The codebase demonstrates comprehensive type definitions for complex data structures, as evidenced in the patient management system components. TypeScript's type system provides significant advantages in large-scale application development by enabling early error detection and improved code maintainability (Bierman et al., 2014).
+
+The implementation showcases strong type safety through interfaces and type definitions. For example, the \texttt{Measurements} definition in \texttt{type.ts} includes precise geographic positioning with \texttt{latitude: number} and \texttt{longitude: number} properties, along with optional \texttt{admit\_reasons?: string[]} arrays. The patient data structure demonstrates TypeScript's nullable type handling with properties like \texttt{age\_years?: Maybe<number> | string | null}, showcasing the framework's flexibility in handling uncertain data states.
+
+The SQL integration in \texttt{patient.ts} demonstrates TypeScript's template literal types and generic constraints with complex database queries: \texttt{\detokenize{sql<string | null>`
+\patient_age.age_years::text`.as('age_years')`}} and high-level string interpolation for formatted patient data. This ensures type safety in SQL queries, preventing runtime errors and increasing code reliability.
+
+Interface Segregation Principles (ISP) guide 
