@@ -101,11 +101,11 @@ These changes adhere to usability principles such as “Match between system and
 
 \subsection{Code Implementation - Patient Data Management}
 
-Virtual Hospital Africa's goal is to implement a virtual hospital website with a fast user interface that is also maintainable and adaptable. Achieved by using type-safe frameworks, such as TypeScript and React, to ensure code quality and reduce runtime errors and the utility first approach with tailwind CSS.
+Virtual Hospitals Africa's goal is to implement a virtual hospital website with a fast user interface that is also maintainable and adaptable. Achieved by using type-safe frameworks, such as TypeScript and React, to ensure code quality and reduce runtime errors and the utility first approach with tailwind CSS.
 
 \paragraph{TypeScript}\mbox{}
 
-TypeScript is a superset of JavaScript which allows developers to catch errors at compile time rather than runtime, making it easier to maintain and refactor code. It provides static type checking, which helps in identifying any potential issues early in the development process. This is particularly useful for large codebases like Virtual Hospital Africa, where maintaining code quality and consistency is crucial. The codebase demonstrates type definitions for complex data structures, as shown in the patient management system components. TypeScript's type system provides significant advantages in large-scale application development by enabling early error detection and improved code maintainability (Bierman et al., 2014).
+TypeScript is a superset of JavaScript which allows developers to catch errors at compile time rather than runtime, making it easier to maintain and refactor code. It provides static type checking, which helps in identifying any potential issues early in the development process. This is particularly useful for large codebases like Virtual Hospitals Africa, where maintaining code quality and consistency is crucial. The codebase demonstrates type definitions for complex data structures, as shown in the patient management system components. TypeScript's type system provides significant advantages in large-scale application development by enabling early error detection and improved code maintainability (Bierman et al., 2014).
 
 The implementation showcases strong type safety through interfaces and type definitions. For example, the \texttt{Measurements} definition in \texttt{type.ts} includes precise geographic positioning with \texttt{latitude: number} and \texttt{longitude: number} properties, along with optional \texttt{admit\_reasons?: string[]} arrays. The patient data structure demonstrates TypeScript's nullable type handling with properties like \texttt{age\_years?: Maybe<number> | string | null}, showcasing the framework's flexibility in handling uncertain data states.
 
@@ -262,3 +262,23 @@ The code below is the date display logic in \texttt{PatientDrawerV2:}
   '2-digit' })
   return `${day} ${month}, ${year} at ${time}`
 \end{verbatim}
+
+To further develop the user experience: interactive elements use ARIA\footnote{Accessible Rich Internet Applications - a set of roles and attributes which define ways to develop web applications} attributes to enhance accessibility. Responsive design to allow the layout to adapt to different screen sizes. In addition, navigation adapts to different screen sizes with features such as drawer navigation, context appropriate elements, and collapsible menus. This is to maintain usability and function across all devices while optimising the user experience.
+
+Loading states provide clear feedback during asynchronous operations. The implementation includes skeleton screens, progress indicators, and loading spinners that maintain interface consistency. Error states provide helpful feedback and recovery options for users when operations fail.
+Form validation includes real-time feedback with clear error messages and input validation indicators. The implementation utilises TypeScript for client-side validation logic and provides immediate user feedback for form interactions. Success states confirm completed actions and guide users through multi-step processes.
+
+\paragraph{Workflow and Tooling}\mbox{}
+
+As for the development environment, TypeScript tooling is with along with real-time checking. The configurations used to keep the code formatting consistant as well as catch errors/issues during development are Prettier\footnote{Used for code formatting} and ESLint\footnote{Used to enforce code quality}. The implementation includes Pre-commit hooks that validate TypeScript compilation and code quality.
+IDE integration to provide immediate feedback on type errors and suggests appropriate fixes. The workflow includes automated testing with TypeScript-aware testing frameworks that validate both function and type safety. Build processes include TypeScript compilation optimisation and bundle analysis.
+Development of components follows test-driven principles with unit tests for all. The testing implementation includes type checking in test files and mock implementations for external dependencies. Integration tests validate component interactions and data flow patterns.
+
+\paragraph{Performance Optimisation}\mbox{}
+
+Frontend build processes include optimisation strategies for deployments. TypeScript compilation involves dead code elimination to minimise bundle sizes. This utilises modern bundling tools with chunk splitting\footnote{Of arrays of strings} and lazy loading\footnote{\label{fn:lazy}A strategy which if a resource is identified as non-critical, it loads them only when needed}.
+Tailwind CSS is configured to remove any unused styles for minimal file sizes. This comprises of optimising assets, efficient caching and compressing images.
+Runtime performance optimisation involves efficient component rendering and minimised re-renders. Using \texttt{React.memo, useMemo, and useCallback} to intentionally prevent unneccessary updating of components. Image optimisation uses lazy loading, responsive images, and efficient image formats in order to load assests efficiently.
+
+\paragraph{}\mbox{}
+The frontend implementation of the Virtual Hospitals Africa web application exhibits a complex and well-designed user interface, built with Typecript and Tailwind CSS. In collaboration with typing, utility-first styling and \texttt{React}, the codebase is adaptable and maintainable. THis application will provide an efficient and user-friendly experience for a medical team in South Africa. The careful consideration of component architecture, accessibility, and performance optimisation ensures the application can scale effectively whilst maintaining high code quality and developer productivity. This implementation serves as a solid foundation for further development and enhancement of features while adhering to the best frontend development practices.
