@@ -226,5 +226,39 @@ justify-between, items-start}  are used for layout management and consistent spa
 
 \paragraph{Component Styling}\mbox{}
 
-Component styling follows consistent patterns that promote maintainability and design coherence. Base component styles define default appearances and behaviours that can be extended through additional utility classes. Variant patterns handle different component states and appearances through prop-driven class application. The coding includes focus, hover and active states. Accessiblity 
+Component styling follows consistent patterns that promote maintainability and design coherence. Base component styles define default appearances and behaviours that can be extended through additional utility classes. Variant patterns handle different component states and appearances through prop-driven class application. The coding includes focus, hover and active states.
 
+\paragraph{Performance Optimisation}\mbox{}
+
+
+Tailwind's purge configuration removes unused CSS classes from the production build; significantly reducing bundle sizes. The includes purge patterns that scan all TypeScript and component files for used utility classes. Custom purge configurations handle dynamic class generation and conditional styling. The coding includes class concatenation utilities and conditional class application. Performance monitoring ensures optimal CSS bundle sizes and rendering performance.(Chen et al., 2019)
+
+\paragraph{UX Implementation}\mbox{}
+
+\texttt{PatientDrawerV2} shows user experience considerations. E.g. Date formatting is coded to be consistant withthe local setting.
+\begin{verbatim}
+  export function formatDate(date: string | Date): string {
+  const Dates = new Date(date)
+
+  if (isNaN(Dates.getTime())) {
+    console.log('Invalid Date', date)
+    return ''
+  }
+
+  return Dates.toLocaleDateString('en-GB', {
+    year: 'numeric',
+    month: 'short',
+    day: '2-digit',
+  })
+}
+\end{verbatim}
+
+The code below is the date display logic in \texttt{PatientDrawerV2:}
+\begin{verbatim}
+  const day = date.toLocaleDateString('en-GB', { day: '2-digit' })
+  const month = date.toLocaleDateString('en-GB', { month: 'long' })
+  const year = date.toLocaleDateString('en-GB', { year: 'numeric' })
+  const time = date.toLocaleTimeString('en-GB', { hour: 'numeric', minute:
+  '2-digit' })
+  return `${day} ${month}, ${year} at ${time}`
+\end{verbatim}
