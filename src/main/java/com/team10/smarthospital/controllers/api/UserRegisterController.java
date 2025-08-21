@@ -1,6 +1,6 @@
 package com.team10.smarthospital.controllers.api;
 
-import com.team10.smarthospital.model.request.NurseRegister;
+import com.team10.smarthospital.model.request.EmployeeRegister;
 import com.team10.smarthospital.model.request.PatientRegister;
 import com.team10.smarthospital.model.response.BaseResponse;
 import com.team10.smarthospital.service.RegisterService;
@@ -23,7 +23,7 @@ public class UserRegisterController {
     }
 
     @PostMapping("/employee")
-    public BaseResponse<Void> registerDoctor(@RequestBody NurseRegister register) {
+    public BaseResponse<Void> registerDoctor(@RequestBody EmployeeRegister register) {
         return registerService.register(register);
     }
 }

@@ -10,7 +10,7 @@
   </insert>
   <select id="getUserByEmail" resultType="com.team10.smarthospital.model.entity.User">
     SELECT
-      user_id, first_name, last_name, birth, gender, email, password, `role`
+      user_id, email, password, `role`, first_name, last_name, birth, gender, mobile_number, avatar_base64
     FROM
       User
     WHERE
@@ -18,7 +18,7 @@
   </select>
   <select id="getUserByUserId" resultType="com.team10.smarthospital.model.entity.User">
     SELECT
-      user_id, first_name, last_name, birth, gender, email, password, `role`, avatar_base64
+      user_id, email, password, `role`, first_name, last_name, birth, gender, mobile_number, avatar_base64
     FROM
       `User`
     WHERE
