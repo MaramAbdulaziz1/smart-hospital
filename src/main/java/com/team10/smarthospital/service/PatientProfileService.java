@@ -40,6 +40,7 @@ public class PatientProfileService
         response.setPastMedicalConditions(patient.getPastMedicalConditions());
         response.setCurrentMedications(patient.getCurrentMedications());
         response.setPastSurgicalHistory(patient.getPastSurgicalHistory());
+        response.setPastMedications(patient.getPastMedications());
         response.setFamilyHistory(patient.getFamilyHistory());
         response.setSocialHistory(patient.getSocialHistory());
         return response;

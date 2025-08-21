@@ -229,6 +229,7 @@ function submitRegistrationForm() {
     chiefComplaint: document.getElementById('currentConditionDetails').value,
     allergies: document.getElementById('allergies').value,
     pastMedicalConditions: document.getElementById('pastMedicalConditions').value,
+    pastMedications: document.getElementById('pastMedications').value,
     currentMedications: document.getElementById('currentMedications').value,
     pastSurgicalHistory: document.getElementById('pastSurgicalHistory').value,
     familyHistory: document.getElementById('familyHistory').value,
