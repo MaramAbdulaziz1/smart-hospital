@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DoctorService implements IUserService<Doctor> {
+
     @Autowired private DoctorMapper doctorMapper;
 
     @Override
-    public void insertUser(Doctor user) {}
+    public void insertUser(Doctor user) {
+        doctorMapper.insertUser(user);
+    }
 }

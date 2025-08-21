@@ -2,13 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team10.smarthospital.mapper.NurseMapper">
   <insert id="insertUser">
-    INSERT INTO smart_hospital.Nurse
-    (user_id, department, employee_id, location, work_number)
-    VALUES(#{userId}, #{employeeId}, #{password}, #{location}, #{workNumber});
+    INSERT INTO Nurse
+      (user_id, department, employee_id, location, work_number)
+    VALUES
+      (#{userId}, #{department}, #{employeeId}, #{location}, #{workNumber})
   </insert>
   <select id="getUserByUserId" resultType="com.team10.smarthospital.model.entity.Nurse">
-    SELECT user_id, patient_code, birth, height, weight, blood_type, address, national_id
-    FROM Patient
-    WHERE user_id=#{userId};
+    SELECT
+      user_id, department, employee_id, location, work_number, create_time, update_time
+    FROM Nurse
+      WHERE user_id=#{userId}
   </select>
 </mapper>

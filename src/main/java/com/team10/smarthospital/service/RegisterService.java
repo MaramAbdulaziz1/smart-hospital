@@ -2,7 +2,7 @@ package com.team10.smarthospital.service;
 
 import com.team10.smarthospital.model.entity.User;
 import com.team10.smarthospital.model.enums.Role;
-import com.team10.smarthospital.model.request.NurseRegister;
+import com.team10.smarthospital.model.request.EmployeeRegister;
 import com.team10.smarthospital.model.request.PatientRegister;
 import com.team10.smarthospital.model.response.BaseResponse;
 
@@ -38,7 +38,7 @@ public class RegisterService {
     }
 
     @Transactional
-    public BaseResponse<Void> register(NurseRegister register) {
+    public BaseResponse<Void> register(EmployeeRegister register) {
         User userOld = userService.getUserByEmail(register.getEmail());
         if (userOld != null) {
             return BaseResponse.fail("", "This username has already been registered");

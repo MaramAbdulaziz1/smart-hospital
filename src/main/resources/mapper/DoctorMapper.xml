@@ -2,13 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team10.smarthospital.mapper.DoctorMapper">
   <insert id="insertUser">
-    INSERT INTO
-    (id, name, password, email, `role`)
-    VALUES(#{userId}, #{department}, #{employeeId}, #{location}, #{workNumber});
+    INSERT INTO Doctor
+      (user_id, department, employee_id, location, work_number)
+    VALUES
+      (#{userId}, #{department}, #{employeeId}, #{location}, #{workNumber})
   </insert>
   <select id="getUserByUserId" resultType="com.team10.smarthospital.model.entity.Doctor">
-    SELECT user_id, department, employee_id, location, work_number, create_time, update_time
+    SELECT
+      user_id, department, employee_id, location, work_number, create_time, update_time
     FROM Doctor
-    WHERE user_id=#{userId};
+      WHERE user_id=#{userId}
   </select>
 </mapper>

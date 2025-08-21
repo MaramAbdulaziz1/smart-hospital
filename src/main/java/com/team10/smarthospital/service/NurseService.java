@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class NurseService implements IUserService<Nurse> {
+
     @Autowired private NurseMapper nurseMapper;
 
     @Override
-    public void insertUser(Nurse user) {}
+    public void insertUser(Nurse user) {
+        nurseMapper.insertUser(user);
+    }
 }
