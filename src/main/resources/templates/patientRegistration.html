@@ -22,6 +22,34 @@
       height: 200px !important;
       object-fit: contain !important;
     }
+
+    /* Loading spinner */
+    .spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Success message */
+    .success-message {
+      background-color: #d4edda;
+      color: #155724;
+      padding: 12px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      text-align: center;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -39,103 +67,118 @@
 
 <!-- Main Content Container -->
 <div class="content-container">
-  <form id="patientRegistrationForm" method="post" action="/patientRegistration">
+  <div class="success-message" id="successMessage">
+    Registration successful! Redirecting to homepage...
+  </div>
+
+  <form id="patientRegistrationForm" method="post">
 
     <!-- Main Form Section -->
     <div class="form-section">
       <div class="form-grid">
         <div class="form-field">
-          <label>First Name</label>
+          <label>First Name *</label>
           <input type="text" name="firstName" id="firstName">
           <div class="error-message" id="firstName-error"></div>
         </div>
 
         <div class="form-field">
-          <label>Last Name</label>
+          <label>Last Name *</label>
           <input type="text" name="lastName" id="lastName">
           <div class="error-message" id="lastName-error"></div>
         </div>
 
         <div class="form-field">
-          <label>Date of Birth</label>
+          <label>Date of Birth *</label>
           <input type="date" name="dateOfBirth" id="dateOfBirth">
           <div class="error-message" id="dateOfBirth-error"></div>
         </div>
 
         <div class="form-field">
-          <label>Gender</label>
+          <label>Gender *</label>
           <select name="gender" id="gender">
             <option value="">Select Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
+            <option value="0">Male</option>
+            <option value="1">Female</option>
+            <option value="2">Other</option>
           </select>
           <div class="error-message" id="gender-error"></div>
         </div>
 
         <div class="form-field">
-          <label>Blood Type</label>
-          <input type="text" name="bloodType" id="bloodType" placeholder="Enter your blood type">
+          <label>Blood Type *</label>
+          <select name="bloodType" id="bloodType">
+            <option value="">Select Blood Type</option>
+            <option value="0">A+</option>
+            <option value="1">A-</option>
+            <option value="2">B+</option>
+            <option value="3">B-</option>
+            <option value="4">AB+</option>
+            <option value="5">AB-</option>
+            <option value="6">O+</option>
+            <option value="7">O-</option>
+            <option value="8">Other</option>
+          </select>
           <div class="error-message" id="bloodType-error"></div>
         </div>
 
         <div class="form-field">
-          <label>Height</label>
+          <label>Height *</label>
           <div class="input-with-unit">
-            <input type="text" name="height" id="height">
+            <input type="number" step="0.1" name="height" id="height">
             <span class="unit">cm</span>
           </div>
           <div class="error-message" id="height-error"></div>
         </div>
 
         <div class="form-field">
-          <label>Weight</label>
+          <label>Weight *</label>
           <div class="input-with-unit">
-            <input type="text" name="weight" id="weight">
+            <input type="number" step="0.1" name="weight" id="weight">
             <span class="unit">kg</span>
           </div>
           <div class="error-message" id="weight-error"></div>
         </div>
 
         <div class="form-field full-width">
-          <label>Home Address</label>
+          <label>Home Address *</label>
           <textarea name="homeAddress" id="homeAddress" rows="3" placeholder="Enter your full address"></textarea>
           <div class="error-message" id="homeAddress-error"></div>
         </div>
 
         <div class="form-field">
-          <label>National ID</label>
+          <label>National ID *</label>
           <input type="text" name="nationalId" id="nationalId" placeholder="13-digit National ID">
           <div class="error-message" id="nationalId-error"></div>
         </div>
 
         <div class="form-field">
-          <label>Email</label>
+          <label>Email *</label>
           <input type="email" name="email" id="email">
           <div class="error-message" id="email-error"></div>
         </div>
 
         <div class="form-field">
-          <label>Mobile Number</label>
+          <label>Mobile Number *</label>
           <input type="tel" name="mobileNumber" id="mobileNumber" placeholder="9-digit number">
           <div class="error-message" id="mobileNumber-error"></div>
         </div>
 
         <div class="form-field">
-          <label>Nearest Clinic</label>
+          <label>Nearest Clinic *</label>
           <input type="text" name="nearestClinic" id="nearestClinic" placeholder="Enter your nearest clinic">
           <div class="error-message" id="nearestClinic-error"></div>
         </div>
 
         <div class="form-field">
-          <label>Password</label>
-          <input type="password" name="password" id="password">
+          <label>Password *</label>
+          <input type="password" name="password" id="password" required minlength="8">
           <div class="error-message" id="password-error"></div>
         </div>
 
         <div class="form-field">
-          <label>Confirm Password</label>
-          <input type="password" name="confirmPassword" id="confirmPassword">
+          <label>Confirm Password *</label>
+          <input type="password" name="confirmPassword" id="confirmPassword" required minlength="8">
           <div class="error-message" id="confirmPassword-error"></div>
         </div>
       </div>
@@ -149,25 +192,34 @@
 
       <div class="form-grid-emergency">
         <div class="form-field">
-          <label>First Name</label>
+          <label>First Name *</label>
           <input type="text" name="emergencyFirstName" id="emergencyFirstName">
           <div class="error-message" id="emergencyFirstName-error"></div>
         </div>
 
         <div class="form-field">
-          <label>Last Name</label>
+          <label>Last Name *</label>
           <input type="text" name="emergencyLastName" id="emergencyLastName">
           <div class="error-message" id="emergencyLastName-error"></div>
         </div>
 
         <div class="form-field">
-          <label>Relationship to Patient</label>
-          <input type="text" name="emergencyRelationship" id="emergencyRelationship" placeholder="Enter relationship">
+          <label>Relationship to Patient *</label>
+          <select name="emergencyRelationship" id="emergencyRelationship">
+            <option value="">Select Relationship</option>
+            <option value="1">Parent</option>
+            <option value="2">Spouse</option>
+            <option value="3">Child</option>
+            <option value="4">Sibling</option>
+            <option value="5">Other Relative</option>
+            <option value="6">Friend</option>
+            <option value="7">Other</option>
+          </select>
           <div class="error-message" id="emergencyRelationship-error"></div>
         </div>
 
         <div class="form-field full-width">
-          <label>Phone Number</label>
+          <label>Phone Number *</label>
           <input type="tel" name="emergencyPhone" id="emergencyPhone">
           <div class="error-message" id="emergencyPhone-error"></div>
         </div>
@@ -268,10 +320,16 @@
         </div>
       </div>
 
+      <!-- Hidden field for avatar URL -->
+      <input type="hidden" id="avatarBase64" name="avatarBase64">
+
       <!-- Form Buttons moved inside Profile Picture section -->
       <div class="form-buttons-integrated">
-        <button type="button" class="btn-back" onclick="window.history.back()">Back</button>
-        <button type="submit" class="btn-register">Register</button>
+        <button type="button" class="btn-back" onclick="cancelRegistration()">>Back</button>
+        <button type="submit" class="btn-register" id="registerButton">
+          <span class="button-text">Register</span>
+          <span class="spinner" style="display: none;"></span>
+        </button>
       </div>
     </div>
   </form>

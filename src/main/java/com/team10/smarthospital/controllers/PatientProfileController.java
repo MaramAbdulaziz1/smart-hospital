@@ -1,7 +1,7 @@
 package com.team10.smarthospital.controllers;
 
-import com.team10.smarthospital.model.Gender;
-import com.team10.smarthospital.model.PatientProfile;
+import com.team10.smarthospital.model.GenderView;
+import com.team10.smarthospital.model.PatientProfileView;
 import com.team10.smarthospital.model.VisitRecord;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,11 +19,11 @@ public class PatientProfileController {
   @GetMapping("/patientProfile")
   public String patientProfilePage(Model model) {
     // Create mock patient data
-    PatientProfile patient = new PatientProfile();
+    PatientProfileView patient = new PatientProfileView();
     patient.setName("Harry Potter");
     patient.setEmail("harrypotter2000@gmail.com");
     patient.setPhone("+44 07458545663");
-    patient.setSex(Gender.MALE);
+    patient.setSex(GenderView.MALE);
     patient.setAge(30);
     patient.setDateOfBirth(LocalDate.of(1999, 8, 23));
     patient.setWeight("75 kg");
@@ -50,11 +50,11 @@ public class PatientProfileController {
   }
 
   // Helper method to set mock ID for testing
-  private void setMockId(PatientProfile patient, Long id) {
+  private void setMockId(PatientProfileView patient, Long id) {
     try {
-      // Use reflection to set the ID field in BaseEntity
+      // Use reflection to set the ID field in BaseEntityView
       Class<?> baseClass = patient.getClass();
-      while (baseClass != null && !baseClass.getSimpleName().equals("BaseEntity")) {
+      while (baseClass != null && !baseClass.getSimpleName().equals("BaseEntityView")) {
         baseClass = baseClass.getSuperclass();
       }
 

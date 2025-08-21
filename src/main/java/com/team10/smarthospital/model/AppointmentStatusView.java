@@ -1,13 +1,13 @@
 package com.team10.smarthospital.model;
 
-public enum AppointmentStatus {
+public enum AppointmentStatusView {
   UPCOMING("Upcoming"),
   COMPLETED("Completed"),
   CANCELLED("Cancelled");
 
   private final String displayName;
 
-  AppointmentStatus(String displayName) {
+  AppointmentStatusView(String displayName) {
     this.displayName = displayName;
   }
 

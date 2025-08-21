@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team10.smarthospital.mapper.PatientMapper">
+  <insert id="insertUser">
+    INSERT INTO
+    Patient (
+      user_id, patient_code, height, weight, blood_type, address, national_id,
+      nearest_clinic, ec_first_name, ec_last_name, ec_relationship, ec_mobile_number,
+      chief_complaint, allergies, past_medical_conditions, current_medications,
+      past_surgical_history, family_history, social_history)
+    VALUES (
+      #{userId}, #{patientCode}, #{height}, #{weight}, #{bloodType}, #{address}, #{nationalId},
+      #{nearestClinic}, #{ecFirstName}, #{ecLastName}, #{ecRelationship}, #{ecMobileNumber},
+      #{chiefComplaint}, #{allergies}, #{pastMedicalConditions}, #{currentMedications},
+      #{pastSurgicalHistory}, #{familyHistory}, #{socialHistory})
+  </insert>
+  <select id="getUserByUserId" resultType="com.team10.smarthospital.model.entity.Patient">
+    SELECT
+      user_id, patient_code, height, weight, blood_type, address, national_id
+    FROM
+      Patient
+    WHERE
+      user_id=#{userId}
+  </select>
+  <select id="existsByPatientCode" parameterType="string" resultType="int">
+    SELECT COUNT(1) FROM Patient WHERE patient_code = #{patientCode}
+  </select>
+</mapper>
