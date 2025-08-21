@@ -20,6 +20,9 @@ public class PatientProfileService
         response.setGender(user.getGender());
         response.setEmail(user.getEmail());
         response.setRole(Role.PATIENT.getRoleCode());
+        response.setAvatarBase64(user.getAvatarBase64());
+        response.setBirth(user.getBirth());
+        response.setMobileNumber(user.getMobileNumber());
         response.setPatientCode(patient.getPatientCode());
         response.setBirth(patient.getBirth());
         response.setHeight(patient.getHeight());

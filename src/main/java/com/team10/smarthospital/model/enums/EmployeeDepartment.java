@@ -3,7 +3,8 @@ package com.team10.smarthospital.model.enums;
 import lombok.Getter;
 
 @Getter
-public enum DoctorDepartment {
+public enum EmployeeDepartment {
+
     GENERAL_MEDICINE(1, "General Medicine"),
     GENERAL_SURGERY(2, "General Surgery"),
     CARDIOLOGY(3, "Cardiology"),
@@ -13,13 +14,13 @@ public enum DoctorDepartment {
     private final Integer departmentCode;
     private final String departmentName;
 
-    DoctorDepartment(Integer departmentCode, String departmentName) {
+    EmployeeDepartment(Integer departmentCode, String departmentName) {
         this.departmentCode = departmentCode;
         this.departmentName = departmentName;
     }
 
-    public static DoctorDepartment getDoctorDepartment(Integer departmentCode) {
-        for (DoctorDepartment department : DoctorDepartment.values()) {
+    public static EmployeeDepartment getDoctorDepartment(Integer departmentCode) {
+        for (EmployeeDepartment department : EmployeeDepartment.values()) {
             if (department.getDepartmentCode().equals(departmentCode)) {
                 return department;
             }
