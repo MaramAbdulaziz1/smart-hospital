@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.team10.smarthospital.model.PatientProfile;
+import com.team10.smarthospital.model.PatientProfileView;
 import com.team10.smarthospital.model.VisitRecord;
 import com.team10.smarthospital.service.HospitalDataService;
 
@@ -28,7 +28,6 @@ import com.team10.smarthospital.service.HospitalDataService;
     /**
      * Handles the request to display the patient report by date.
      *
-     * @param date The date of the visit.
      * @param model The model to hold attributes for the view.
      * @return The name of the view to render.
      */
@@ -99,7 +98,7 @@ import com.team10.smarthospital.service.HospitalDataService;
       visitRecord.setPastMedicalConditions(null);
 
       //PatientProfile object to be used in the template
-      PatientProfile patientProfile = new PatientProfile();
+      PatientProfileView patientProfile = new PatientProfileView();
       patientProfile.setId(patientId); // Mock ID, in a real application this would be dynamic
       patientProfile.setName("Harry Potter");
       visitRecords.add(visitRecord);
