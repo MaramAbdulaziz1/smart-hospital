@@ -109,13 +109,13 @@
 
       <!-- Profile -->
       <div class="profile-container">
-        <img th:src="@{/PatientProfile-PatientSide/patientProfilePic.png}" alt="Patient Profile" class="patient-profile" id="patientProfileIcon" />
+        <img id="headerAvatar" th:src="@{/PatientProfile-PatientSide/patientProfilePic.png}" alt="Patient Profile" class="patient-profile" />
         <div class="profile-popup" id="profilePopup">
           <div class="profile-header">
-            <img th:src="@{/PatientProfile-PatientSide/patientProfilePic.png}" alt="Patient Profile" class="profile-avatar" />
+            <img id="popupAvatar" th:src="@{/PatientProfile-PatientSide/patientProfilePic.png}" alt="Patient Profile" class="profile-avatar" />
             <div class="profile-info">
-              <h3>Harry Potter</h3>
-              <p>Patient ID: HAT17653D</p>
+              <h3 id="popupName">Harry Potter</h3>
+              <p id="popupPatientCode">Patient ID: HAT17653D</p>
             </div>
             <button class="close-btn" id="closeProfile" aria-label="Close profile">&times;</button>
           </div>
@@ -143,14 +143,14 @@
       <div class="wrapper">
         <!-- Left -->
         <div class="leftside">
-          <img class="avatar" th:src="@{/PatientProfile-PatientSide/patientProfilePic.png}" alt="Patient Photo" />
-          <h3 class="info editable">Harry Potter</h3>
-          <p class="email editable">harrypotter2000@gmail.com</p>
+          <img id="avatar" class="avatar" th:src="@{/PatientProfile-PatientSide/patientProfilePic.png}" alt="Patient Photo" />
+          <h3 class="info editable" id="fullName">Harry Potter</h3>
+          <p class="email editable" id="email">harrypotter2000@gmail.com</p>
           <p class="phone">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <path d="M2.98816 2.98816C2.67559 3.30072 2.5 3.72464 2.5 4.16667V5C2.5 11.9033 8.09667 17.5 15 17.5H15.8333C16.2754 17.5 16.6993 17.3244 17.0118 17.0118C17.3244 16.6993 17.5 16.2754 17.5 15.8333V13.1008C17.5 12.9259 17.445 12.7553 17.3427 12.6134C17.2404 12.4714 17.096 12.3653 16.93 12.31L13.1858 11.0617C12.9956 10.9984 12.7888 11.0059 12.6036 11.0827C12.4184 11.1596 12.2671 11.3006 12.1775 11.48L11.2358 13.3608C9.19538 12.4389 7.5611 10.8046 6.63917 8.76417L8.52 7.8225C8.69938 7.73288 8.84042 7.58158 8.91726 7.39637C8.9941 7.21116 9.00158 7.00445 8.93833 6.81417L7.69 3.07C7.63475 2.90413 7.52874 2.75984 7.38696 2.65754C7.24519 2.55525 7.07483 2.50013 6.9 2.5H4.16667C3.72464 2.5 3.30072 2.67559 2.98816 2.98816Z" stroke="#3F3F46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            <span class="editable">+44 07458545663</span>
+            <span class="editable" id="mobileNumber">+44 07458545663</span>
           </p>
 
           <hr class="divider" />
@@ -158,12 +158,12 @@
           <div class="emergency-contact">
             <div class="label">Emergency Contact</div>
             <div class="value">
-              <span class="editable">James Potter</span>
-              <span class="relation editable">(Father)</span><br />
+              <span class="editable" id="ecName">James Potter</span>
+              <span class="relation editable" id="ecRelationship">(Father)</span><br />
               <svg class="phone-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M2.98816 2.98816C2.67559 3.30072 2.5 3.72464 2.5 4.16667V5C2.5 11.9033 8.09667 17.5 15 17.5H15.8333C16.2754 17.5 16.6993 17.3244 17.0118 17.0118C17.3244 16.6993 17.5 16.2754 17.5 15.8333V13.1008C17.5 12.9259 17.445 12.7553 17.3427 12.6134C17.2404 12.4714 17.096 12.3653 16.93 12.31L13.1858 11.0617C12.9956 10.9984 12.7888 11.0059 12.6036 11.0827C12.4184 11.1596 12.2671 11.3006 12.1775 11.48L11.2358 13.3608C9.19538 12.4389 7.5611 10.8046 6.63917 8.76417L8.52 7.8225C8.69938 7.73288 8.84042 7.58158 8.91726 7.39637C8.9941 7.21116 9.00158 7.00445 8.93833 6.81417L7.69 3.07C7.63475 2.90413 7.52874 2.75984 7.38696 2.65754C7.24519 2.55525 7.07483 2.50013 6.9 2.5H4.16667C3.72464 2.5 3.30072 2.67559 2.98816 2.98816Z" stroke="#3F3F46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              <span class="contact-number editable">+44 07884556621</span>
+              <span class="contact-number editable" id="ecMobileNumber">+44 07884556621</span>
             </div>
           </div>
         </div>
@@ -174,18 +174,18 @@
         <!-- Right -->
         <div class="patient-right">
           <div class="table">
-            <div class="column"><div class="label">Gender</div><div class="value editable">Male</div></div>
-            <div class="column"><div class="label">Age</div><div class="value editable">30</div></div>
-            <div class="column"><div class="label">Date of Birth</div><div class="value editable">23/08/1999</div></div>
-            <div class="column"><div class="label">Weight</div><div class="value editable">75 kg</div></div>
-            <div class="column"><div class="label">Height</div><div class="value editable">178 cm</div></div>
-            <div class="column"><div class="label">Blood Type</div><div class="value editable">A+</div></div>
-            <div class="column"><div class="label">National ID</div><div class="value editable">HAT17653D</div></div>
+            <div class="column"><div class="label">Gender</div><div class="value editable" id="gender">Male</div></div>
+            <div class="column"><div class="label">Age</div><div class="value editable" id="age">30</div></div>
+            <div class="column"><div class="label">Date of Birth</div><div class="value editable" id="birth">23/08/1999</div></div>
+            <div class="column"><div class="label">Weight</div><div class="value editable" id="weight">75 kg</div></div>
+            <div class="column"><div class="label">Height</div><div class="value editable" id="height">178 cm</div></div>
+            <div class="column"><div class="label">Blood Type</div><div class="value editable" id="bloodType">A+</div></div>
+            <div class="column"><div class="label">National ID</div><div class="value editable" id="nationalId">HAT17653D</div></div>
             <div class="column">
               <div class="label">Address</div>
-              <div class="value editable">Marlborough<br/>house, Bristol<br/>BS1 3NX</div>
+              <div class="value editable" id="address">Marlborough<br/>house, Bristol<br/>BS1 3NX</div>
             </div>
-            <div class="column"><div class="label">Nearest Clinic</div><div class="value editable">East Street Health Center</div></div>
+            <div class="column"><div class="label">Nearest Clinic</div><div class="value editable" id="nearestClinic">East Street Health Center</div></div>
           </div>
         </div>
       </div>
@@ -259,6 +259,141 @@
 <!-- Behaviour -->
 <script>
   document.addEventListener('DOMContentLoaded', function () {
+    async function fetchPatientData() {
+      try {
+        const response = await fetch('/profile/me/patient', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const result = await response.json();
+
+        if (result.code === "0") {
+          populatePatientData(result.data);
+        } else {
+          console.error('API returned error:', result.message);
+          alert('Failed to load patient data: ' + result.message);
+        }
+      } catch (error) {
+        console.error('Error fetching patient data:', error);
+        alert('Failed to load patient data. Please try again later.');
+      }
+    }
+
+    function populatePatientData(data) {
+      if (data.avatarBase64) {
+        document.getElementById('avatar').src = data.avatarBase64;
+        document.getElementById('headerAvatar').src = data.avatarBase64;
+        document.getElementById('popupAvatar').src = data.avatarBase64;
+      }
+
+      const fullName = `${data.firstName} ${data.lastName}`;
+      document.getElementById('fullName').textContent = fullName;
+      document.getElementById('popupName').textContent = fullName;
+      document.getElementById('email').textContent = data.email || 'N/A';
+      document.getElementById('mobileNumber').textContent = data.mobileNumber || 'N/A';
+
+      document.getElementById('ecName').textContent = `${data.ecFirstName} ${data.ecLastName}`;
+      document.getElementById('ecRelationship').textContent = `(${getRelationshipText(data.ecRelationship)})`;
+      document.getElementById('ecMobileNumber').textContent = data.ecMobileNumber || 'N/A';
+      document.getElementById('gender').textContent = getGenderText(data.gender);
+
+      if (data.birth) {
+        const birthDate = new Date(data.birth);
+        const age = calculateAge(birthDate);
+        document.getElementById('age').textContent = age;
+        document.getElementById('birth').textContent = formatDate(birthDate);
+      } else {
+        document.getElementById('age').textContent = 'N/A';
+        document.getElementById('birth').textContent = 'N/A';
+      }
+      document.getElementById('weight').textContent = data.weight ? `${data.weight} kg` : 'N/A';
+      document.getElementById('height').textContent = data.height ? `${data.height} cm` : 'N/A';
+      document.getElementById('bloodType').textContent = getBloodTypeText(data.bloodType);
+      document.getElementById('nationalId').textContent = data.nationalId || 'N/A';
+      document.getElementById('address').innerHTML = data.address ? data.address.replace(/\n/g, '<br/>') : 'N/A';
+      document.getElementById('nearestClinic').textContent = data.nearestClinic || 'N/A';
+
+      document.getElementById('popupPatientCode').textContent = `Patient ID: ${data.patientCode}`;
+
+      document.getElementById('chiefComplaint').value = data.chiefComplaint || 'N/A';
+      document.getElementById('pmhx').value = data.pastMedicalConditions || 'N/A';
+      document.getElementById('currentMeds').value = data.currentMedications || 'N/A';
+      document.getElementById('pshx').value = data.pastSurgicalHistory || 'N/A';
+      document.getElementById('allergy').value = data.allergies || 'N/A';
+      document.getElementById('fhx').value = data.familyHistory || 'N/A';
+      document.getElementById('socialHx').value = data.socialHistory || 'N/A';
+      document.getElementById('pastMeds').value = data.pastMedications || 'N/A';
+    }
+
+    function getGenderText(genderCode) {
+      const genderMap = {
+        0: 'Unknown',
+        1: 'Male',
+        2: 'Female',
+        3: 'Other'
+      };
+      return genderMap[genderCode] || 'Unknown';
+    }
+
+    function getBloodTypeText(bloodTypeCode) {
+      const bloodTypeMap = {
+        0: 'Unknown',
+        1: 'A+',
+        2: 'A-',
+        3: 'B+',
+        4: 'B-',
+        5: 'AB+',
+        6: 'AB-',
+        7: 'O+',
+        8: 'O-'
+      };
+      return bloodTypeMap[bloodTypeCode] || 'Unknown';
+    }
+
+    function getRelationshipText(relationshipCode) {
+      const relationshipMap = {
+        0: 'Unknown',
+        1: 'Father',
+        2: 'Mother',
+        3: 'Spouse',
+        4: 'Child',
+        5: 'Sibling',
+        6: 'Other Relative',
+        7: 'Friend',
+        8: 'Other'
+      };
+      return relationshipMap[relationshipCode] || 'Unknown';
+    }
+
+    function calculateAge(birthDate) {
+      const today = new Date();
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const monthDiff = today.getMonth() - birthDate.getMonth();
+
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+
+      return age;
+    }
+
+    function formatDate(date) {
+      const day = date.getDate().toString().padStart(2, '0');
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const year = date.getFullYear();
+
+      return `${day}/${month}/${year}`;
+    }
+
+    fetchPatientData();
+
     /* Notifications */
     const notificationIcon = document.getElementById('notificationIcon');
     const notificationPopup = document.getElementById('notificationPopup');
