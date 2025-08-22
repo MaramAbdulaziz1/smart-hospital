@@ -9,18 +9,18 @@
 %     Data Security and Privacy Considerations
 %
 
-After we finished the detailed discussion of each page’s user flow, we moved on to database design. Our first task was to clarify what kinds of data the system must store, and map them to a clear set of entities and relationships. We first created a rough data model on dbdiagram.io /reference as a quick way to communicate and iterate. During modelling, we noticed several issues in button navigation and page flow. To avoid a mismatch between frontend and backend, we worked in parallel—“draw the diagram and verify the flow at the same time”—and actively met with teammates to unify the detailed flows and the data to read/write. After that, for every system button or operation, we traced back the required primary/foreign keys and necessary column types, and then integrated all of these needs into the final data model.
+After we finished the detailed discussion of each page’s user flow, we moved on to database design. Our first task was to clarify what kinds of data the system must store, and map them to a clear set of entities and relationships. We first created a rough data model on dbdiagram.io \citep{dbmldocs} as a quick way to communicate and iterate. During modelling, we noticed several issues in button navigation and page flow. To avoid a mismatch between frontend and backend, we worked in parallel—“draw the diagram and verify the flow at the same time”—and actively met with teammates to unify the detailed flows and the data to read/write. After that, for every system button or operation, we traced back the required primary/foreign keys and necessary column types, and then integrated all of these needs into the final data model.
 
 % 確保有載入：\usepackage{graphicx}
 
 
 
-The system’s full relationship structure is shown with crow’s-foot notation /reference. We implemented the revised schema in MySQL and used DBeaver’s reverse engineering /reference to automatically generate the ERD from the live database. All ERDs in the final report were exported from DBeaver to ensure the diagrams match the actual tables, as shown in Figure~\ref{fig:final_erd}.
+The system’s full relationship structure is shown with crow’s-foot notation \citep{crowsfoot}. We implemented the revised schema in MySQL and used DBeaver’s reverse engineering \citep{dbeaverERD} to automatically generate the ERD from the live database. All ERDs in the final report were exported from DBeaver to ensure the diagrams match the actual tables, as shown in Figure~\ref{fig:final_erd}.
 
 \begin{figure}[!htbp]
   \centering
   \includegraphics[width=\linewidth]{../../images/ERD.jpeg}
-  \caption{Final ERD (reverse-generated from MySQL via DBeaver /reference).}
+  \caption{Final ERD (reverse-generated from MySQL via DBeaver \protect\citep{dbeaverERD}).}
   \label{fig:final_erd}
 \end{figure}
 \FloatBarrier
