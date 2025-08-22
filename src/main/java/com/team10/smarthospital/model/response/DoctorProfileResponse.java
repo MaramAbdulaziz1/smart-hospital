@@ -7,8 +7,6 @@ import lombok.Setter;
 @Setter
 public class DoctorProfileResponse extends ProfileResponse {
 
-    private Integer department;
-
     private String departmentName;
 
     private String employeeId;

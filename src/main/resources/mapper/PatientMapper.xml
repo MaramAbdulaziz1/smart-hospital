@@ -7,19 +7,29 @@
       user_id, patient_code, height, weight, blood_type, address, national_id,
       nearest_clinic, ec_first_name, ec_last_name, ec_relationship, ec_mobile_number,
       chief_complaint, allergies, past_medical_conditions, current_medications,
-      past_surgical_history, family_history, social_history)
+      past_surgical_history, past_medications, family_history, social_history)
     VALUES (
       #{userId}, #{patientCode}, #{height}, #{weight}, #{bloodType}, #{address}, #{nationalId},
       #{nearestClinic}, #{ecFirstName}, #{ecLastName}, #{ecRelationship}, #{ecMobileNumber},
       #{chiefComplaint}, #{allergies}, #{pastMedicalConditions}, #{currentMedications},
-      #{pastSurgicalHistory}, #{familyHistory}, #{socialHistory})
+      #{pastSurgicalHistory}, #{pastMedications}, #{familyHistory}, #{socialHistory})
   </insert>
+  <update id="updatePatientProfile">
+    UPDATE
+      Patient
+    SET
+      chief_complaint=#{chiefComplaint}, allergies=#{allergies}, past_medical_conditions=#{pastMedicalConditions},
+      current_medications=#{currentMedications}, past_surgical_history=#{pastSurgicalHistory}, past_medications=#{pastMedications},
+      family_history=#{familyHistory}, social_history=#{socialHistory}
+    WHERE
+      user_id=#{patientId}
+  </update>
   <select id="getUserByUserId" resultType="com.team10.smarthospital.model.entity.Patient">
     SELECT
       user_id, patient_code, height, weight, blood_type, address, national_id,
       nearest_clinic, ec_first_name, ec_last_name, ec_relationship, ec_mobile_number,
       chief_complaint, allergies, past_medical_conditions, current_medications,
-      past_surgical_history, family_history, social_history
+      past_surgical_history, past_medications, family_history, social_history
     FROM
       Patient
     WHERE

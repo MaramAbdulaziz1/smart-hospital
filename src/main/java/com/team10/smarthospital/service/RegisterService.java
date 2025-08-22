@@ -1,6 +1,7 @@
 package com.team10.smarthospital.service;
 
 import com.team10.smarthospital.model.entity.User;
+import com.team10.smarthospital.model.enums.ResponseCode;
 import com.team10.smarthospital.model.enums.Role;
 import com.team10.smarthospital.model.request.EmployeeRegister;
 import com.team10.smarthospital.model.request.PatientRegister;
@@ -25,9 +26,9 @@ public class RegisterService {
 
     @Transactional
     public BaseResponse<Void> register(PatientRegister register) {
-        User userOld = userService.getUserByEmail(register.getEmail());
-        if (userOld != null) {
-            return BaseResponse.fail("", "This username has already been registered");
+        BaseResponse<User> userBaseResponse = userService.getUserByEmail(register.getEmail());
+        if (!ResponseCode.USER_NOT_FOUND.getCode().equals(userBaseResponse.getCode())) {
+            return BaseResponse.fail("", "This username/email has already been registered");
         }
         User user = this.getUserByRegister(register);
         user.setRole(Role.PATIENT.getRoleCode());
@@ -39,9 +40,9 @@ public class RegisterService {
 
     @Transactional
     public BaseResponse<Void> register(EmployeeRegister register) {
-        User userOld = userService.getUserByEmail(register.getEmail());
-        if (userOld != null) {
-            return BaseResponse.fail("", "This username has already been registered");
+        BaseResponse<User> userBaseResponse = userService.getUserByEmail(register.getEmail());
+        if (!ResponseCode.USER_NOT_FOUND.getCode().equals(userBaseResponse.getCode())) {
+            return BaseResponse.fail("", "This username/email has already been registered");
         }
         User user = this.getUserByRegister(register);
         register.setUserId(user.getUserId());

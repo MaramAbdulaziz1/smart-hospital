@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -16,7 +15,7 @@ public class PatientProfileResponse extends ProfileResponse {
 
     private BigDecimal weight;
 
-    private Integer bloodType;
+    private String bloodTypeName;
 
     private String address;
 
@@ -28,7 +27,7 @@ public class PatientProfileResponse extends ProfileResponse {
 
     private String ecLastName;
 
-    private Integer ecRelationship;
+    private String ecRelationshipName;
 
     private String ecMobileNumber;
 
@@ -41,6 +40,8 @@ public class PatientProfileResponse extends ProfileResponse {
     private String currentMedications;
 
     private String pastSurgicalHistory;
+
+    private String pastMedications;
 
     private String familyHistory;
 

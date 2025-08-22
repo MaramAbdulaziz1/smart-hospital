@@ -4,7 +4,6 @@ import lombok.Getter;
 
 @Getter
 public enum EmployeeDepartment {
-
     GENERAL_MEDICINE(1, "General Medicine"),
     GENERAL_SURGERY(2, "General Surgery"),
     CARDIOLOGY(3, "Cardiology"),
@@ -19,10 +18,10 @@ public enum EmployeeDepartment {
         this.departmentName = departmentName;
     }
 
-    public static EmployeeDepartment getDoctorDepartment(Integer departmentCode) {
+    public static String getEmployeeDepartmentName(Integer employeeDepartmentCode) {
         for (EmployeeDepartment department : EmployeeDepartment.values()) {
-            if (department.getDepartmentCode().equals(departmentCode)) {
-                return department;
+            if (department.getDepartmentCode().equals(employeeDepartmentCode)) {
+                return department.getDepartmentName();
             }
         }
         return null;

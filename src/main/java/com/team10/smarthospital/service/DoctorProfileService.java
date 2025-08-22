@@ -4,6 +4,7 @@ import com.team10.smarthospital.mapper.DoctorMapper;
 import com.team10.smarthospital.model.entity.Doctor;
 import com.team10.smarthospital.model.entity.User;
 import com.team10.smarthospital.model.enums.EmployeeDepartment;
+import com.team10.smarthospital.model.enums.Gender;
 import com.team10.smarthospital.model.enums.Role;
 import com.team10.smarthospital.model.response.DoctorProfileResponse;
 
@@ -18,18 +19,15 @@ public class DoctorProfileService
         DoctorProfileResponse response = new DoctorProfileResponse();
         response.setFirstName(user.getFirstName());
         response.setLastName(user.getLastName());
-        response.setGender(user.getGender());
+        response.setGenderName(Gender.getGenderName(user.getGender()));
         response.setEmail(user.getEmail());
         response.setRole(Role.DOCTOR.getRoleCode());
+        response.setRoleName(Role.DOCTOR.getRoleName());
         response.setAvatarBase64(user.getAvatarBase64());
         response.setBirth(user.getBirth());
         response.setMobileNumber(user.getMobileNumber());
-        EmployeeDepartment department =
-                EmployeeDepartment.getDoctorDepartment(doctor.getDepartment());
-        if (department != null) {
-            response.setDepartment(department.getDepartmentCode());
-            response.setDepartmentName(department.getDepartmentName());
-        }
+        response.setDepartmentName(
+                EmployeeDepartment.getEmployeeDepartmentName(doctor.getDepartment()));
         response.setEmployeeId(doctor.getEmployeeId());
         response.setLocation(doctor.getLocation());
         response.setWorkNumber(doctor.getWorkNumber());

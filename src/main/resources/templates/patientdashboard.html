@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Patient Dashboard</title>
 
   <!-- CSS files -->
-  <link rel="stylesheet" href="/css/patientdashboard.css" />
+  <link rel="stylesheet" href="/css/patientdashboard.css"/>
   <!-- Web font: Inter -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
   <!-- Notification Styles -->
   <style>
     .notification {
@@ -128,7 +128,7 @@
         <div class="header-icons-container">
           <!-- Notifications -->
           <div class="notification-container">
-            <img th:src="@{/SharedLayoutImages/notificationIcon.svg}" alt="Notifications" class="notification-icon" id="notificationIcon" />
+            <img th:src="@{/SharedLayoutImages/notificationIcon.svg}" alt="Notifications" class="notification-icon" id="notificationIcon"/>
             <div class="notification-popup" id="notificationPopup">
               <div class="notification-header">
                 <h3>Notifications</h3>
@@ -157,24 +157,24 @@
           </div>
           <!-- Profile -->
           <div class="profile-container">
-            <img th:src="@{/PatientProfile-PatientSide/patientProfilePic.png}" alt="Patient Profile" class="patient-profile" id="patientProfileIcon" />
+            <img id="profileAvatarSmall" th:src="@{/PatientProfile-PatientSide/patientProfilePic.png}" alt="Patient Profile" class="patient-profile"/>
             <div class="profile-popup" id="profilePopup">
               <div class="profile-header">
-                <img th:src="@{/PatientProfile-PatientSide/patientProfilePic.png}" alt="Patient Profile" class="profile-avatar" />
+                <img id="profileAvatarLarge" th:src="@{/PatientProfile-PatientSide/patientProfilePic.png}" alt="Patient Profile" class="profile-avatar"/>
                 <div class="profile-info">
-                  <h3>Harry Potter</h3>
-                  <p>Patient ID: HAT17653D</p>
+                  <h3 id="profileName">Harry Potter</h3>
+                  <p id="profilePatientId">Patient ID: HAT17653D</p>
                 </div>
                 <button class="close-btn" id="closeProfile" aria-label="Close profile">&times;</button>
               </div>
               <div class="profile-menu">
                 <a th:href="@{/patientProfile-patientSide}" class="profile-menu-item" data-action="profile">
-                  <img th:src="@{/SharedLayoutImages/profileIcon.svg}" alt="Profile" class="menu-icon" />
+                  <img th:src="@{/SharedLayoutImages/profileIcon.svg}" alt="Profile" class="menu-icon"/>
                   <span>My Profile</span>
                 </a>
                 <div class="profile-divider"></div>
                 <div class="profile-menu-item logout" data-action="logout">
-                  <img th:src="@{/PatientProfile-PatientSide/logoutIcon.svg}" alt="Logout" class="menu-icon" />
+                  <img th:src="@{/PatientProfile-PatientSide/logoutIcon.svg}" alt="Logout" class="menu-icon"/>
                   <span>Log Out</span>
                 </div>
               </div>
@@ -230,7 +230,7 @@
                 <div class="form-row">
                   <div class="field">
                     <label class="label">Date</label>
-                    <input type="text" name="dateStr" class="date-like" placeholder="DD/MM/YYYY" inputmode="numeric" pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/[0-9]{4}$" required />
+                    <input type="text" name="dateStr" class="date-like" placeholder="DD/MM/YYYY" inputmode="numeric" pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/[0-9]{4}$" required/>
                   </div>
                   <div class="field">
                     <label class="label">Time</label>
@@ -272,7 +272,7 @@
                 <div class="form-row">
                   <div class="field">
                     <label class="label">Date</label>
-                    <input type="text" name="dateStr" class="date-like" placeholder="DD/MM/YYYY" inputmode="numeric" pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/[0-9]{4}$" required />
+                    <input type="text" name="dateStr" class="date-like" placeholder="DD/MM/YYYY" inputmode="numeric" pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/[0-9]{4}$" required/>
                   </div>
                   <div class="field">
                     <label class="label">Time</label>
@@ -296,6 +296,7 @@
   <!-- JavaScript -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      fetchPatientProfile();
       // Notifications popup
       const notificationIcon = document.getElementById('notificationIcon');
       const notificationPopup = document.getElementById('notificationPopup');
@@ -312,7 +313,7 @@
       }
 
       // Profile popup
-      const patientProfileIcon = document.getElementById('patientProfileIcon');
+      const patientProfileIcon = document.getElementById('profileAvatarSmall');
       const profilePopup = document.getElementById('profilePopup');
       const closeProfile = document.getElementById('closeProfile');
 
@@ -352,7 +353,20 @@
       logoutBtns.forEach(btn => {
         btn.addEventListener('click', () => {
           if (confirm('Are you sure you want to log out?')) {
-            window.location.href = '/patient-login';
+            fetch('/user/logout', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              }
+            })
+            .then(data => {
+              if (data.code == '0')
+                window.location.href = '/';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred during logout.');
+            });
           }
         });
       });
@@ -372,18 +386,61 @@
       });
     });
 
+    async function fetchPatientProfile() {
+      try {
+        const response = await fetch('/profile/me/patient', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        if (result.code === '0') {
+          updateProfileData(result.data);
+        } else {
+          console.error('Failed to fetch patient profile:', result.message);
+          showNotification('Failed to load profile data', 'error');
+        }
+      } catch (error) {
+        console.error('Error fetching patient profile:', error);
+        showNotification('Error loading profile data', 'error');
+      }
+    }
+
+    function updateProfileData(patientData) {
+      if (patientData.avatarBase64) {
+        document.getElementById('profileAvatarSmall').src = patientData.avatarBase64;
+        document.getElementById('profileAvatarLarge').src = patientData.avatarBase64;
+      }
+
+      const fullName = `${patientData.firstName || ''} ${patientData.lastName || ''}`.trim();
+      if (fullName) {
+        document.getElementById('profileName').textContent = fullName;
+      }
+
+      if (patientData.patientCode) {
+        document.getElementById('profilePatientId').textContent = `Patient ID: ${patientData.patientCode}`;
+      }
+    }
+
     // Form submission handler
     function handleFormSubmit(event, formId) {
         event.preventDefault();
-        
+
         const form = document.getElementById(formId);
         const formData = new FormData(form);
         const submitBtn = form.querySelector('button[type="submit"]');
-        
+
         // Show loading state
         submitBtn.classList.add('loading');
         submitBtn.disabled = true;
-        
+
         // Submit form
         fetch(form.action, {
             method: 'POST',
@@ -412,10 +469,10 @@
     function showNotification(message, type = 'success') {
         const notification = document.getElementById('notification');
         const messageElement = document.getElementById('notificationMessage');
-        
+
         messageElement.textContent = message;
         notification.className = `notification ${type} show`;
-        
+
         setTimeout(() => {
             hideNotification();
         }, 3000);
@@ -425,7 +482,7 @@
     function hideNotification() {
         const notification = document.getElementById('notification');
         notification.classList.add('hiding');
-        
+
         setTimeout(() => {
             notification.classList.remove('show', 'hiding');
         }, 300);
@@ -435,10 +492,10 @@
     function resetForm(formId) {
         const form = document.getElementById(formId);
         form.reset();
-        
+
         const doctorSelect = document.getElementById('doctor');
         const nurseSelect = document.getElementById('nurse');
-        
+
         if (doctorSelect) {
             doctorSelect.innerHTML = '<option value="">- Please select a department first -</option>';
         }
@@ -451,7 +508,7 @@
     function loadDoctors() {
       const department = document.getElementById('department').value;
       const doctorSelect = document.getElementById('doctor');
-      
+
       if (department) {
         fetch(`/patient/getDoctors?department=${encodeURIComponent(department)}`)
           .then(response => response.json())
@@ -474,7 +531,7 @@
     function loadNurse() {
       const department = document.getElementById('vitalDepartment').value;
       const nurseSelect = document.getElementById('nurse');
-      
+
       if (department) {
         fetch(`/patient/getNurse?department=${encodeURIComponent(department)}`)
           .then(response => response.text())

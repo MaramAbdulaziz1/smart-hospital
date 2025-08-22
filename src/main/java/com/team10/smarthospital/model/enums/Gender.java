@@ -4,9 +4,9 @@ import lombok.Getter;
 
 @Getter
 public enum Gender {
-    MALE(0, "MALE"),
-    FEMALE(1, "FEMALE"),
-    OTHER(2, "OTHER");
+    MALE(0, "Male"),
+    FEMALE(1, "FeMale"),
+    OTHER(2, "Other");
 
     private final Integer genderCode;
     private final String genderName;
@@ -14,5 +14,14 @@ public enum Gender {
     Gender(Integer genderCode, String genderName) {
         this.genderCode = genderCode;
         this.genderName = genderName;
+    }
+
+    public static String getGenderName(Integer genderCode) {
+        for (Gender gender : Gender.values()) {
+            if (gender.getGenderCode().equals(genderCode)) {
+                return gender.getGenderName();
+            }
+        }
+        return null;
     }
 }

@@ -21,4 +21,13 @@ public enum BloodType {
         this.bloodCode = bloodCode;
         this.bloodType = bloodType;
     }
+
+    public static String getBloodTypeName(Integer bloodTypeCode) {
+        for (BloodType bloodType : BloodType.values()) {
+            if (bloodType.getBloodCode().equals(bloodTypeCode)) {
+                return bloodType.getBloodType();
+            }
+        }
+        return null;
+    }
 }

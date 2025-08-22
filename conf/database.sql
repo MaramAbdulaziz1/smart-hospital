@@ -171,18 +171,19 @@ CREATE TABLE `Patient` (
   `blood_type` tinyint NOT NULL,
   `address` varchar(255) NOT NULL,
   `national_id` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `nearest_clinic` varchar(255) DEFAULT NULL COMMENT '最近的诊所',
-  `ec_first_name` varchar(50) DEFAULT NULL COMMENT '紧急联系人名字',
-  `ec_last_name` varchar(50) DEFAULT NULL COMMENT '紧急联系人姓氏',
-  `ec_relationship` tinyint DEFAULT NULL COMMENT '紧急联系人关系（如：1=配偶, 2=父母, 3=子女, 4=其他）',
-  `ec_mobile_number` varchar(15) DEFAULT NULL COMMENT '紧急联系人手机号',
-  `chief_complaint` text COMMENT '主诉',
-  `allergies` text COMMENT '过敏史',
-  `past_medical_conditions` text COMMENT '既往疾病史',
-  `current_medications` text COMMENT '当前用药',
-  `past_surgical_history` text COMMENT '手术史',
-  `family_history` text COMMENT '家族病史',
-  `social_history` text COMMENT '社会史（吸烟、饮酒等）',
+  `nearest_clinic` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `ec_first_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `ec_last_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `ec_relationship` tinyint DEFAULT NULL,
+  `ec_mobile_number` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `chief_complaint` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `allergies` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `past_medical_conditions` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `current_medications` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `past_surgical_history` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `past_medications` text,
+  `family_history` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `social_history` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`),
@@ -271,4 +272,4 @@ CREATE TABLE `User` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-20 16:24:38
+-- Dump completed on 2025-08-21 16:58:33

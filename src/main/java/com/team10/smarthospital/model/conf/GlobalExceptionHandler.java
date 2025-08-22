@@ -1,5 +1,6 @@
 package com.team10.smarthospital.model.conf;
 
+import com.team10.smarthospital.model.enums.ResponseCode;
 import com.team10.smarthospital.model.response.BaseResponse;
 
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -10,9 +11,6 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public BaseResponse<?> handleException(Exception e) {
-        BaseResponse<Object> response = new BaseResponse<>();
-        response.setCode("501");
-        response.setMessage("Operation failed: " + e.getMessage());
-        return response;
+        return BaseResponse.fail(ResponseCode.SERVER_ERROR, e.getMessage());
     }
 }
