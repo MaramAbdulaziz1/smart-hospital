@@ -126,8 +126,6 @@ function openLoginPopup() {
                   } else if (role === 2) {
                       redirectUrl = '/dashboard-patient';
                   }
-
-                  // 跳转到对应页面
                   window.location.href = redirectUrl;
               } else {
                   alert('Login failed: ' + data.message);
