@@ -2,6 +2,8 @@ package com.team10.smarthospital.service;
 
 import com.team10.smarthospital.mapper.UserMapper;
 import com.team10.smarthospital.model.entity.User;
+import com.team10.smarthospital.model.enums.ResponseCode;
+import com.team10.smarthospital.model.response.BaseResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,7 +22,14 @@ public class UserService implements IUserService<User> {
         userMapper.insertUser(user);
     }
 
-    public User getUserByEmail(String email) {
-        return userMapper.getUserByEmail(email);
+    public BaseResponse<User> getUserByEmail(String email) {
+        if (email == null || email.trim().isEmpty()) {
+            return BaseResponse.fail(ResponseCode.PARAMETER_EMPTY, null);
+        }
+        User user = userMapper.getUserByEmail(email);
+        if (user == null) {
+            return BaseResponse.fail(ResponseCode.USER_NOT_FOUND, null);
+        }
+        return BaseResponse.success(null, user);
     }
 }

@@ -28,6 +28,14 @@ public class BaseResponse<T> {
         return response;
     }
 
+    public static <T> BaseResponse<T> fail(ResponseCode responseCode, T data) {
+        BaseResponse<T> response = new BaseResponse<>();
+        response.setCode(responseCode.getCode());
+        response.setMessage(responseCode.getMessage());
+        response.setData(data);
+        return response;
+    }
+
     public static BaseResponse<Void> success(String message) {
         BaseResponse<Void> response = new BaseResponse<>();
         response.setCode(ResponseCode.SUCCESS.getCode());
