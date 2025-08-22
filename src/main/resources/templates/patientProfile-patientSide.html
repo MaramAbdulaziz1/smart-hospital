@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -448,9 +448,38 @@
 
     editBtn.addEventListener('click', () => setMode(true));
 
-    saveBtn.addEventListener('click', () => {
-      // TODO: persist to backend if needed
-      setMode(false);
+    saveBtn.addEventListener('click', async () => {
+      const updateData = {
+        chiefComplaint: document.getElementById('chiefComplaint').value,
+        allergies: document.getElementById('allergy').value,
+        pastMedicalConditions: document.getElementById('pmhx').value,
+        currentMedications: document.getElementById('currentMeds').value,
+        pastSurgicalHistory: document.getElementById('pshx').value,
+        pastMedications: document.getElementById('pastMeds').value,
+        familyHistory: document.getElementById('fhx').value,
+        socialHistory: document.getElementById('socialHx').value
+      };
+
+      try {
+        const response = await fetch('/profile/patient/update', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(updateData)
+        });
+
+        const result = await response.json();
+
+        if (result.code === "0") {
+          window.location.href = '/patientProfile-patientSide';
+        } else {
+          alert('Failed to update information: ' + (result.message || 'Unknown error'));
+        }
+      } catch (error) {
+        console.error('Error updating profile:', error);
+        alert('Failed to update information. Please try again.');
+      }
     });
   });
 </script>
