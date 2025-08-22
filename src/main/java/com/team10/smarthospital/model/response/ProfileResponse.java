@@ -15,11 +15,13 @@ public class ProfileResponse {
 
     private LocalDate birth;
 
-    private Integer gender;
+    private String genderName;
 
     private String email;
 
     private Integer role;
+
+    private String roleName;
 
     private String mobileNumber;
 

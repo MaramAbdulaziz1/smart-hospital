@@ -15,7 +15,7 @@ public class PatientProfileResponse extends ProfileResponse {
 
     private BigDecimal weight;
 
-    private Integer bloodType;
+    private String bloodTypeName;
 
     private String address;
 
@@ -27,7 +27,7 @@ public class PatientProfileResponse extends ProfileResponse {
 
     private String ecLastName;
 
-    private Integer ecRelationship;
+    private String ecRelationshipName;
 
     private String ecMobileNumber;
 

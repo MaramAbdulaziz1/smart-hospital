@@ -300,9 +300,9 @@
       document.getElementById('mobileNumber').textContent = data.mobileNumber || 'N/A';
 
       document.getElementById('ecName').textContent = `${data.ecFirstName} ${data.ecLastName}`;
-      document.getElementById('ecRelationship').textContent = `(${getRelationshipText(data.ecRelationship)})`;
+      document.getElementById('ecRelationship').textContent = data.ecRelationshipName;
       document.getElementById('ecMobileNumber').textContent = data.ecMobileNumber || 'N/A';
-      document.getElementById('gender').textContent = getGenderText(data.gender);
+      document.getElementById('gender').textContent = data.genderName;
 
       if (data.birth) {
         const birthDate = new Date(data.birth);
@@ -315,7 +315,7 @@
       }
       document.getElementById('weight').textContent = data.weight ? `${data.weight} kg` : 'N/A';
       document.getElementById('height').textContent = data.height ? `${data.height} cm` : 'N/A';
-      document.getElementById('bloodType').textContent = getBloodTypeText(data.bloodType);
+      document.getElementById('bloodType').textContent = data.bloodTypeName;
       document.getElementById('nationalId').textContent = data.nationalId || 'N/A';
       document.getElementById('address').innerHTML = data.address ? data.address.replace(/\n/g, '<br/>') : 'N/A';
       document.getElementById('nearestClinic').textContent = data.nearestClinic || 'N/A';
@@ -330,46 +330,6 @@
       document.getElementById('fhx').value = data.familyHistory || 'N/A';
       document.getElementById('socialHx').value = data.socialHistory || 'N/A';
       document.getElementById('pastMeds').value = data.pastMedications || 'N/A';
-    }
-
-    function getGenderText(genderCode) {
-      const genderMap = {
-        0: 'Unknown',
-        1: 'Male',
-        2: 'Female',
-        3: 'Other'
-      };
-      return genderMap[genderCode] || 'Unknown';
-    }
-
-    function getBloodTypeText(bloodTypeCode) {
-      const bloodTypeMap = {
-        0: 'Unknown',
-        1: 'A+',
-        2: 'A-',
-        3: 'B+',
-        4: 'B-',
-        5: 'AB+',
-        6: 'AB-',
-        7: 'O+',
-        8: 'O-'
-      };
-      return bloodTypeMap[bloodTypeCode] || 'Unknown';
-    }
-
-    function getRelationshipText(relationshipCode) {
-      const relationshipMap = {
-        0: 'Unknown',
-        1: 'Father',
-        2: 'Mother',
-        3: 'Spouse',
-        4: 'Child',
-        5: 'Sibling',
-        6: 'Other Relative',
-        7: 'Friend',
-        8: 'Other'
-      };
-      return relationshipMap[relationshipCode] || 'Unknown';
     }
 
     function calculateAge(birthDate) {
