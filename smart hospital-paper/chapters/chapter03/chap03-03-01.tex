@@ -8,6 +8,14 @@
 %     Implementation
 %
 
+\paragraph{Design}\mbox{}\\
+
+In our virtual hospital website, the API works as a bridge between the frontend and the backend database. When we designed it, we mainly consider two things. One is the database rules, for example, username must be unique, and inputs should be checked. The second is the frontend use, like doctor or patient register and login, booking appointments, or searching hospital information. Since the request style is quite simple and mostly CRUD, we choose REST style and use Spring MVC.
+
+For page rendering, we use Thymeleaf for server-side rendering. Something like GET /patient/manageAppointments will send back a HTML page with data already put inside. But when it is about actions that need fast response, like cancel appointment or refresh it, the frontend send AJAX to get JSON, for example POST /patient/appointments/cancel/{id} or GET /patient/appointments/refresh. Only part of the page will update, not reload the whole one. This mixed design, SSR for pages and JSON for small actions, makes first loading faster and user feeling smoother, and it is still not so complex.
+
+To keep the API easy to use, we try to follow same rules for endpoint names, HTTP verbs and status code. Like GET is for reading data, POST for create, 200/201 for success, and clear error when validation fails. The controller will check important fields, like if password match or ID card and phone format. In the future, when database and permission are added, authentication and authorization can also be put under same endpoints, so frontend work flow will not be broken.
+
 \paragraph{Implementation}\mbox{}\\
 
 During the implementation, we used Spring Boot 3.5.3 with MyBatis for the database operation, which follows the patterns of a layered architecture \cite{fowler2002}. We are writing the actual API requests based on the API specification instructions.
