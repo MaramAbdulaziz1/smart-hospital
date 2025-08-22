@@ -7,6 +7,8 @@ import lombok.Setter;
 @Setter
 public class PatientProfileRequest {
 
+    private String patientId;
+
     private String chiefComplaint;
 
     private String allergies;

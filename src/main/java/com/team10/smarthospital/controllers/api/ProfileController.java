@@ -1,5 +1,6 @@
 package com.team10.smarthospital.controllers.api;
 
+import com.team10.smarthospital.model.request.PatientProfileRequest;
 import com.team10.smarthospital.model.response.BaseResponse;
 import com.team10.smarthospital.model.response.DoctorProfileResponse;
 import com.team10.smarthospital.model.response.NurseProfileResponse;
@@ -56,5 +57,14 @@ public class ProfileController {
     public BaseResponse<NurseProfileResponse> getCurrentNurse(
             @AuthenticationPrincipal UserDetails userDetails) {
         return nurseProfileService.getUserProfile(userDetails.getUsername());
+    }
+
+    @PostMapping("/patient/update")
+    @PreAuthorize("hasRole('PATIENT')")
+    public BaseResponse<Void> updatePatientProfile(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @RequestBody PatientProfileRequest patientProfileRequest) {
+        return patientProfileService.updatePatientProfile(
+                userDetails.getUsername(), patientProfileRequest);
     }
 }

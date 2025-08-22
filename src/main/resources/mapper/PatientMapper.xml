@@ -14,6 +14,16 @@
       #{chiefComplaint}, #{allergies}, #{pastMedicalConditions}, #{currentMedications},
       #{pastSurgicalHistory}, #{pastMedications}, #{familyHistory}, #{socialHistory})
   </insert>
+  <update id="updatePatientProfile">
+    UPDATE
+      Patient
+    SET
+      chief_complaint=#{chiefComplaint}, allergies=#{allergies}, past_medical_conditions=#{pastMedicalConditions},
+      current_medications=#{currentMedications}, past_surgical_history=#{pastSurgicalHistory}, past_medications=#{pastMedications},
+      family_history=#{familyHistory}, social_history=#{socialHistory}
+    WHERE
+      user_id=#{patientId}
+  </update>
   <select id="getUserByUserId" resultType="com.team10.smarthospital.model.entity.Patient">
     SELECT
       user_id, patient_code, height, weight, blood_type, address, national_id,

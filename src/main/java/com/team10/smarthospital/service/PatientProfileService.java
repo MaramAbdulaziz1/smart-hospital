@@ -7,13 +7,18 @@ import com.team10.smarthospital.model.enums.BloodType;
 import com.team10.smarthospital.model.enums.Gender;
 import com.team10.smarthospital.model.enums.Relationship;
 import com.team10.smarthospital.model.enums.Role;
+import com.team10.smarthospital.model.request.PatientProfileRequest;
+import com.team10.smarthospital.model.response.BaseResponse;
 import com.team10.smarthospital.model.response.PatientProfileResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PatientProfileService
         extends AbstractProfileService<Patient, PatientProfileResponse, PatientMapper> {
+
+    @Autowired private PatientService patientService;
 
     @Override
     protected PatientProfileResponse buildProfileResponse(User user, Patient patient) {
@@ -48,5 +53,10 @@ public class PatientProfileService
         response.setFamilyHistory(patient.getFamilyHistory());
         response.setSocialHistory(patient.getSocialHistory());
         return response;
+    }
+
+    public BaseResponse<Void> updatePatientProfile(
+            String email, PatientProfileRequest patientProfileRequest) {
+        return patientService.updatePatientProfile(email, patientProfileRequest);
     }
 }
