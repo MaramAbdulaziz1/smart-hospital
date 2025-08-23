@@ -11,122 +11,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 
   <!-- Notification Styles -->
-  <style>
-    .notification {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: #4CAF50;
-        color: white;
-        padding: 12px 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        z-index: 1000;
-        display: none;
-        font-size: 14px;
-        font-weight: 500;
-        animation: slideInRight 0.3s ease-out;
-        min-width: 200px;
-        text-align: center;
-    }
-    .notification.show { display: block; }
-    .notification.success { background: #4CAF50; }
-    .notification.error { background: #f44336; }
-    .notification .close-btn {
-        position: absolute;
-        top: 8px;
-        right: 8px;
-        background: none;
-        border: none;
-        color: white;
-        font-size: 16px;
-        cursor: pointer;
-        width: 20px;
-        height: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        transition: background-color 0.2s;
-    }
-    .notification .close-btn:hover { background: rgba(255, 255, 255, 0.2); }
-    @keyframes slideInRight {
-        0% { transform: translateX(100%); opacity: 0; }
-        100% { transform: translateX(0); opacity: 1; }
-    }
-    .notification.hiding { animation: slideOutRight 0.3s ease-out forwards; }
-    @keyframes slideOutRight {
-        0% { transform: translateX(0); opacity: 1; }
-        100% { transform: translateX(100%); opacity: 0; }
-    }
-    .btn.loading {
-        position: relative;
-        opacity: 0.7;
-        pointer-events: none;
-    }
-    .btn.loading::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 16px;
-        height: 16px;
-        border: 2px solid transparent;
-        border-top: 2px solid white;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-    }
-    @keyframes spin {
-        0% { transform: translate(-50%, -50%) rotate(0deg); }
-        100% { transform: translate(-50%, -50%) rotate(360deg); }
-    }
-
-    /* Custom styles for the date picker */
-    input[type="date"] {
-      padding: 8px 12px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 14px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    /* Additional styles for the form elements */
-    .form-row {
-      margin-bottom: 15px;
-    }
-
-    .field {
-      margin-bottom: 15px;
-    }
-
-    .label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: 500;
-    }
-
-    select, input {
-      width: 100%;
-      padding: 8px 12px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 14px;
-      box-sizing: border-box;
-    }
-  </style>
 </head>
 <body>
 <div class="layout-container">
   <!-- Sidebar (Shared Component) -->
   <div th:replace="components/sidebar :: sidebar('home')"></div>
 
+  <!-- Top Navigation (Shared Component) -->
+  <header th:replace="components/top-nav :: top-nav('Smart Hospital')"></header>
+
   <!-- Main Content -->
   <main class="main-content">
-    <!-- Top Navigation (Shared Component) -->
-    <header th:replace="components/top-nav :: top-nav('Smart Hospital')"></header>
-
     <!-- Success Notification -->
     <div class="notification" id="notification">
       <span id="notificationMessage">Book Successfully!</span>

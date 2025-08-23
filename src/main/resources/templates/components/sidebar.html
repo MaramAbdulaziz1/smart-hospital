@@ -15,7 +15,7 @@
 
       <!-- Calendar -->
       <div th:class="${activePage == 'calendar'} ? 'tab  active-tab' : 'tab'" class="tab" data-page="calendar">
-        <a th:href="@{/comingSoon}">
+        <a th:href="@{/calendar}">
           <img th:src="@{/SharedLayoutImages/calendarIcon.svg}" alt="Calendar Icon" class="tab-icon">
           <span>Calendar</span>
         </a>
@@ -44,5 +44,6 @@
       <span>Log Out</span>
     </div>
   </aside>
+  <script src="/js/sidebar.js"></script>
 </div>
 </html>
