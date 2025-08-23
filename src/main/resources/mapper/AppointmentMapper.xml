@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team10.smarthospital.mapper.AppointmentMapper">
+
+  <insert id="insertAppointment">
+    INSERT INTO Appointment
+      (appointment_id, patient_id, provider_id, `date`, appoint_time,status)
+    VALUES
+      (uuid(), #{patientId}, #{providerId}, #{date}, #{appointTime}, #{status})
+  </insert>
+
+  <select id="getAppointmentsByPatientId" resultType="com.team10.smarthospital.model.entity.Appointment">
+    SELECT
+      appointment_id, patient_id, provider_id, `date`, appoint_time, status, create_time, update_time
+    FROM
+      Appointment
+    WHERE
+      patient_id = #{patientId}
+    ORDER BY start_time DESC
+  </select>
+
+  <select id="getAppointmentsByProviderId" resultType="com.team10.smarthospital.model.entity.Appointment">
+    SELECT
+      appointment_id, patient_id, provider_id, `date`, appoint_time, status, create_time, update_time
+    FROM
+      Appointment
+    WHERE
+      provider_id = #{doctorId}
+    ORDER BY start_time DESC
+  </select>
+
+  <select id="getAppointmentsById" resultType="com.team10.smarthospital.model.entity.Appointment">
+    SELECT
+      appointment_id, patient_id, provider_id, `date`, appoint_time, status, create_time, update_time
+    FROM
+      Appointment
+    WHERE
+      appointment_id = #{appointmentId}
+  </select>
+
+  <select id="getPatientYearMonth" resultType="com.team10.smarthospital.model.entity.Appointment">
+    SELECT
+      appointment_id, patient_id, provider_id, `date`, appoint_time, status, create_time, update_time
+    FROM
+      Appointment
+    WHERE
+      patient_id = #{patientId}
+      AND start_time &gt;= #{start}
+      AND start_time &lt;= #{end}
+  </select>
+
+  <select id="getYearMonth" resultType="com.team10.smarthospital.model.entity.Appointment">
+    SELECT
+      appointment_id, patient_id, provider_id, `date`, appoint_time, status, create_time, update_time
+    FROM
+      Appointment
+    WHERE
+      provider_id = #{providerId}
+      AND start_time &gt;= #{start}
+      AND start_time &lt;= #{end}
+  </select>
+
+  <select id="getAppointmentsByProviderIdAndSearch" resultType="com.team10.smarthospital.model.entity.Appointment">
+    SELECT
+      a.*
+    FROM
+      Appointment a
+    LEFT JOIN Patient p ON a.patient_id = p.user_id
+    LEFT JOIN User u ON a.patient_id = u.user_id
+    WHERE
+      a.provider_id = #{providerId}
+      AND (
+        u.first_name LIKE CONCAT('%', #{search}, '%')
+        OR u.last_name LIKE CONCAT('%', #{search}, '%')
+        OR p.patient_code LIKE CONCAT('%', #{search}, '%')
+      )
+  </select>
+  <select id="getAppointmentsByProviderIdDate" resultType="com.team10.smarthospital.model.entity.Appointment">
+    SELECT
+      appointment_id, patient_id, provider_id, `date`, appoint_time, status, create_time, update_time
+    FROM
+      Appointment
+    WHERE
+      provider_id = #{providerId}
+      AND `date` = #{date}
+  </select>
+
+</mapper>

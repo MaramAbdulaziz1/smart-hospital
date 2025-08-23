@@ -32,4 +32,15 @@ public class UserService implements IUserService<User> {
         }
         return BaseResponse.success(null, user);
     }
+
+    public BaseResponse<User> getUserByUserId(String userId) {
+        if (userId == null || userId.trim().isEmpty()) {
+            return BaseResponse.fail(ResponseCode.PARAMETER_EMPTY, null);
+        }
+        User user = userMapper.getUserByUserId(userId);
+        if (user == null) {
+            return BaseResponse.fail(ResponseCode.USER_NOT_FOUND, null);
+        }
+        return BaseResponse.success(null, user);
+    }
 }

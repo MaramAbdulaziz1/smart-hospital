@@ -33,7 +33,7 @@ public class User extends BaseEntity {
 
     public String getFullName() {
         if (Role.DOCTOR.getRoleCode().equals(this.role)) {
-            return "Dr." + this.firstName + " " + this.getLastName();
+            return "Dr. " + this.firstName + " " + this.getLastName();
         }
         return this.firstName + " " + this.getLastName();
     }
