@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="top-nav(pageTitle)">
+  <header class="top-nav">
+    <h1 class="page-title" th:text="${pageTitle}">Smart Hospital</h1>
+    <div class="header-icons-container">
+      <!-- Notifications -->
+      <div class="notification-container">
+        <img th:src="@{/SharedLayoutImages/notificationIcon.svg}" alt="Notifications" class="notification-icon" id="notificationIcon"/>
+        <div class="notification-popup" id="notificationPopup">
+          <div class="notification-header">
+            <h3>Notifications</h3>
+            <button class="close-btn" id="closeNotifications" aria-label="Close notifications">&times;</button>
+          </div>
+          <div class="notification-list">
+            <div class="notification-item unread">
+              <div class="notification-content">
+                <div class="notification-title">Your appointment is confirmed for tomorrow at 2:00 PM</div>
+                <div class="notification-time">5 minutes ago</div>
+              </div>
+              <div class="notification-dot"></div>
+            </div>
+            <div class="notification-item unread">
+              <div class="notification-content">
+                <div class="notification-title">New test results are available</div>
+                <div class="notification-time">1 hour ago</div>
+              </div>
+              <div class="notification-dot"></div>
+            </div>
+            <div class="notification-item">
+              <div class="notification-content">
+                <div class="notification-title">Prescription refill reminder</div>
+                <div class="notification-time">2 hours ago</div>
+              </div>
+            </div>
+          </div>
+          <div class="notification-item">
+            <div class="notification-content">
+              <div class="notification-title">Health tip: Stay hydrated during winter</div>
+              <div class="notification-time">1 day ago</div>
+            </div>
+          </div>
+          <div class="notification-footer">
+            <button class="mark-all-read" type="button">Mark all as read</button>
+            <button class="view-all" type="button">View all notifications</button>
+          </div>
+        </div>
+      </div>
+      <!-- Profile -->
+      <div class="profile-container">
+        <img id="profileAvatarSmall" th:src="@{/PatientProfile-PatientSide/patientProfilePic.png}" alt="Patient Profile" class="patient-profile"/>
+        <div class="profile-popup" id="profilePopup">
+          <div class="profile-header">
+            <img id="profileAvatarLarge" th:src="@{/PatientProfile-PatientSide/patientProfilePic.png}" alt="Patient Profile" class="profile-avatar"/>
+            <div class="profile-info">
+              <h3 id="profileName">Harry Potter</h3>
+              <p id="profilePatientId">Patient ID: HAT17653D</p>
+            </div>
+            <button class="close-btn" id="closeProfile" aria-label="Close profile">&times;</button>
+          </div>
+          <div class="profile-menu">
+            <a th:href="@{/patientProfile-patientSide}" class="profile-menu-item" data-action="profile">
+              <img th:src="@{/SharedLayoutImages/profileIcon.svg}" alt="Profile" class="menu-icon"/>
+              <span>My Profile</span>
+            </a>
+            <div class="profile-divider"></div>
+            <div class="profile-menu-item logout" data-action="logout">
+              <img th:src="@{/PatientProfile-PatientSide/logoutIcon.svg}" alt="Logout" class="menu-icon"/>
+              <span>Log Out</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
+</html>
