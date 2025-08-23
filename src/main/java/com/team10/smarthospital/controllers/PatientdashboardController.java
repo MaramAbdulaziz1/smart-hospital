@@ -1,6 +1,6 @@
 package com.team10.smarthospital.controllers;
 
-import com.team10.smarthospital.service.HospitalDataService;
+import com.team10.smarthospital.service.HospitalData1Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,13 +14,13 @@ import java.util.Map;
 public class PatientdashboardController {
 
     @Autowired
-    private HospitalDataService hospitalDataService;
+    private HospitalData1Service hospitalData1Service;
 
     @GetMapping("/patient/patientDashboard")
     public String showPatientDashboard(Model model) {
         // sent data to front-end
-        model.addAttribute("departments", hospitalDataService.getAllDepartments());
-        model.addAttribute("availableTimes", hospitalDataService.getAvailableTimes());
+        model.addAttribute("departments", hospitalData1Service.getAllDepartments());
+        model.addAttribute("availableTimes", hospitalData1Service.getAvailableTimes());
         // src/main/resources/templates/patientdashboard.html
         return "patientdashboard";
     }
@@ -29,14 +29,14 @@ public class PatientdashboardController {
     @GetMapping("/patient/getDoctors")
     @ResponseBody
     public List<String> getDoctorsByDepartment(@RequestParam String department) {
-        return hospitalDataService.getDoctorsByDepartment(department);
+        return hospitalData1Service.getDoctorsByDepartment(department);
     }
 
     // AJAX: choose department then loading nurse
     @GetMapping("/patient/getNurse")
     @ResponseBody
     public String getNurseByDepartment(@RequestParam String department) {
-        return hospitalDataService.getNurseByDepartment(department);
+        return hospitalData1Service.getNurseByDepartment(department);
     }
 
     // appointments

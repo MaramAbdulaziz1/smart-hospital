@@ -13,16 +13,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.team10.smarthospital.model.PatientProfileView;
 import com.team10.smarthospital.model.VisitRecord;
-import com.team10.smarthospital.service.HospitalDataService;
+import com.team10.smarthospital.service.HospitalData1Service;
 
   @Controller
   public class PatientReportController {
 
     @SuppressWarnings("unused")
-    private final HospitalDataService hospitalDataService;
+    private final HospitalData1Service hospitalData1Service;
 
-    public PatientReportController(HospitalDataService hospitalDataService) {
-        this.hospitalDataService = hospitalDataService;
+    public PatientReportController(HospitalData1Service hospitalData1Service) {
+        this.hospitalData1Service = hospitalData1Service;
     }
 
     /**
@@ -36,7 +36,7 @@ import com.team10.smarthospital.service.HospitalDataService;
 
 
 
-      List<String> visitDates = hospitalDataService.getVisitDatesByPatientId(patientId);
+      List<String> visitDates = hospitalData1Service.getVisitDatesByPatientId(patientId);
 
         model.addAttribute("patientId", patientId);
         model.addAttribute("visitDates", visitDates);
@@ -51,8 +51,8 @@ import com.team10.smarthospital.service.HospitalDataService;
     public String getVisitRecordsByDate(@PathVariable Long patientId,
                                         @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
                                         Model model) {
-        List<String> visitDates = hospitalDataService.getVisitDatesByPatientId(patientId);
-        List<VisitRecord> records = hospitalDataService.getRecordsByDate(patientId, date);
+        List<String> visitDates = hospitalData1Service.getVisitDatesByPatientId(patientId);
+        List<VisitRecord> records = hospitalData1Service.getRecordsByDate(patientId, date);
 
         model.addAttribute("patientId", patientId);
         model.addAttribute("visitDates", visitDates);
