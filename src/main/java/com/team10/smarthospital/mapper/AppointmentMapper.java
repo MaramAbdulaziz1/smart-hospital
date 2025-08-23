@@ -23,4 +23,10 @@ public interface AppointmentMapper {
 
     List<Appointment> getAppointmentsByProviderIdPatientIdDate(
             String providerId, String patientId, LocalDate date);
+
+    List<Appointment> getAppointmentsUpcomingByPatientId(String patientId);
+
+    void updateStatusByDate(LocalDate date, Integer status);
+
+    void updateStatusByPatientId(String patientId, String appointmentId, Integer status);
 }

@@ -31,7 +31,8 @@ public class AppointmentService {
             return BaseResponse.fail(userResp.getCode(), userResp.getMessage(), null);
         }
         List<Appointment> appointments =
-                appointmentMapper.getAppointmentsByPatientId(userResp.getData().getUserId());
+                appointmentMapper.getAppointmentsUpcomingByPatientId(
+                        userResp.getData().getUserId());
         List<AppointmentRecord> result = toAppointmentRecords(appointments);
         return BaseResponse.success("", result);
     }
@@ -73,7 +74,7 @@ public class AppointmentService {
         appointment.setProviderId(appointmentBook.getProviderId());
         appointment.setType(appointmentBook.getType());
         appointment.setAppointTime(appointmentBook.getTime());
-        appointment.setStatus(AppointmentStatus.PENDING.getStatusCode());
+        appointment.setStatus(AppointmentStatus.UPCOMING.getStatusCode());
         return appointment;
     }
 
@@ -98,6 +99,7 @@ public class AppointmentService {
         }
         for (Appointment appointment : appointments) {
             AppointmentRecord record = new AppointmentRecord();
+            record.setAppointmentId(appointment.getAppointmentId());
             record.setDate(appointment.getDate());
             record.setStartTime(AppointTime.getAppointTime(appointment.getAppointTime()));
             BaseResponse<User> providerBaseResponse =
@@ -122,11 +124,23 @@ public class AppointmentService {
     private BaseResponse<List<AppointmentRecord>> getAppointmentsByRole(
             String email, Integer roleCode, Function<String, List<Appointment>> fetcher) {
         BaseResponse<User> userResp = getUserByEmailAndRole(email, roleCode);
-        if (!"0".equals(userResp.getCode())) {
+        if (!ResponseCode.SUCCESS.getCode().equals(userResp.getCode())) {
             return BaseResponse.fail(userResp.getCode(), userResp.getMessage(), null);
         }
         List<Appointment> appointments = fetcher.apply(userResp.getData().getUserId());
         List<AppointmentRecord> result = toAppointmentRecords(appointments);
         return BaseResponse.success("", result);
+    }
+
+    public BaseResponse<Void> cancelAppointment(String email, String appointmentId) {
+        BaseResponse<User> userResp = userService.getUserByEmail(email);
+        if (!ResponseCode.SUCCESS.getCode().equals(userResp.getCode())) {
+            return BaseResponse.fail(userResp.getCode(), userResp.getMessage(), null);
+        }
+        appointmentMapper.updateStatusByPatientId(
+                userResp.getData().getUserId(),
+                appointmentId,
+                AppointmentStatus.CANCELLED.getStatusCode());
+        return BaseResponse.success(null);
     }
 }

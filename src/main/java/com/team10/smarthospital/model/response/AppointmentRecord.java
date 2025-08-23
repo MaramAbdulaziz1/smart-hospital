@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class AppointmentRecord {
+    private String appointmentId;
     private LocalDate date;
     private String providerName;
     private String patientName;

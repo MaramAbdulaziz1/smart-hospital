@@ -8,6 +8,21 @@
     VALUES
       (uuid(), #{patientId}, #{providerId}, #{date}, #{appointTime}, #{status})
   </insert>
+  <update id="updateStatusByDate">
+    UPDATE Appointment
+    SET status = #{status}
+    WHERE
+      `date` &lt; #{date}
+      AND status = 0
+  </update>
+  <update id="updateStatusByPatientId">
+    UPDATE Appointment
+    SET status = #{status}
+    WHERE
+      appointment_id = #{appointmentId}
+      AND patient_id = #{patientId}
+      AND status = 0
+  </update>
 
   <select id="getAppointmentsByPatientId" resultType="com.team10.smarthospital.model.entity.Appointment">
     SELECT
@@ -16,7 +31,7 @@
       Appointment
     WHERE
       patient_id = #{patientId}
-    ORDER BY start_time DESC
+    ORDER BY `date` ASC, appoint_time ASC
   </select>
 
   <select id="getAppointmentsByProviderId" resultType="com.team10.smarthospital.model.entity.Appointment">
@@ -26,7 +41,7 @@
       Appointment
     WHERE
       provider_id = #{doctorId}
-    ORDER BY start_time DESC
+    ORDER BY `date` ASC, appoint_time ASC
   </select>
 
   <select id="getAppointmentsById" resultType="com.team10.smarthospital.model.entity.Appointment">
@@ -83,6 +98,17 @@
     WHERE
       `date` = #{date}
       AND (provider_id = #{providerId} OR patient_id = #{patientId} )
+  </select>
+  <select id="getAppointmentsUpcomingByPatientId"
+          resultType="com.team10.smarthospital.model.entity.Appointment">
+    SELECT
+      appointment_id, patient_id, provider_id, `date`, appoint_time, status, create_time, update_time
+    FROM
+      Appointment
+    WHERE
+      patient_id = #{patientId}
+      AND status = 0
+    ORDER BY `date` ASC, appoint_time ASC
   </select>
 
 </mapper>

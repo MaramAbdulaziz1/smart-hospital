@@ -4,9 +4,10 @@ import lombok.Getter;
 
 @Getter
 public enum AppointmentStatus {
-    PENDING(0, "PENDING"),
-    COMPLETED(1, "COMPLETED"),
-    CANCELLED(2, "CANCELLED");
+    UPCOMING(0, "Upcoming"),
+    COMPLETED(1, "Completed"),
+    CANCELLED(2, "Cancelled"),
+    EXPIRED(3, "Expired");
 
     private final Integer statusCode;
     private final String statusName;
