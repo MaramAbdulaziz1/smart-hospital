@@ -10,7 +10,17 @@
   <select id="getUserByUserId" resultType="com.team10.smarthospital.model.entity.Doctor">
     SELECT
       user_id, department, employee_id, location, work_number, create_time, update_time
-    FROM Doctor
-      WHERE user_id=#{userId}
+    FROM
+      Doctor
+    WHERE
+      user_id=#{userId}
+  </select>
+  <select id="getDoctorByDepartment" resultType="com.team10.smarthospital.model.entity.Doctor">
+    SELECT
+      user_id, department, employee_id, location, work_number, create_time, update_time
+    FROM
+      Doctor
+    WHERE
+      department=#{department}
   </select>
 </mapper>

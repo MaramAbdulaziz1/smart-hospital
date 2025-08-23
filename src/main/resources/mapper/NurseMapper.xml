@@ -13,4 +13,12 @@
     FROM Nurse
       WHERE user_id=#{userId}
   </select>
+    <select id="getDoctorByDepartment" resultType="com.team10.smarthospital.model.entity.Nurse">
+      SELECT
+        user_id, department, employee_id, location, work_number, create_time, update_time
+      FROM
+        Nurse
+      WHERE
+        department=#{department}
+    </select>
 </mapper>
