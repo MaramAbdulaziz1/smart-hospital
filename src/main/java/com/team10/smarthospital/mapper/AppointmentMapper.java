@@ -21,5 +21,6 @@ public interface AppointmentMapper {
 
     List<Appointment> getAppointmentsByProviderIdAndSearch(String providerId, String search);
 
-    List<Appointment> getAppointmentsByProviderIdDate(String providerId, LocalDate date);
+    List<Appointment> getAppointmentsByProviderIdPatientIdDate(
+            String providerId, String patientId, LocalDate date);
 }

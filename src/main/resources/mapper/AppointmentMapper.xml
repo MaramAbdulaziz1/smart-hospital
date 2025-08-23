@@ -75,14 +75,14 @@
         OR p.patient_code LIKE CONCAT('%', #{search}, '%')
       )
   </select>
-  <select id="getAppointmentsByProviderIdDate" resultType="com.team10.smarthospital.model.entity.Appointment">
+  <select id="getAppointmentsByProviderIdPatientIdDate" resultType="com.team10.smarthospital.model.entity.Appointment">
     SELECT
       appointment_id, patient_id, provider_id, `date`, appoint_time, status, create_time, update_time
     FROM
       Appointment
     WHERE
-      provider_id = #{providerId}
-      AND `date` = #{date}
+      `date` = #{date}
+      AND (provider_id = #{providerId} OR patient_id = #{patientId} )
   </select>
 
 </mapper>

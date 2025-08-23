@@ -7,6 +7,8 @@ import com.team10.smarthospital.service.NurseService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,7 +33,9 @@ public class NurseController {
     @GetMapping("/appointment")
     @PreAuthorize("hasRole('PATIENT')")
     public BaseResponse<List<AppointmentRecord>> getAppointmentTime(
-            @RequestParam("nurseId") String nurseId, @RequestParam("date") LocalDate date) {
-        return nurseService.getAppointmentTime(nurseId, date);
+            @AuthenticationPrincipal UserDetails userDetails,
+            @RequestParam("nurseId") String nurseId,
+            @RequestParam("date") LocalDate date) {
+        return nurseService.getAppointmentTime(userDetails.getUsername(), nurseId, date);
     }
 }

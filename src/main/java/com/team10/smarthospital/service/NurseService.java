@@ -55,23 +55,31 @@ public class NurseService implements IUserService<Nurse> {
     }
 
     public BaseResponse<List<AppointmentRecord>> getAppointmentTime(
-            String nurseId, LocalDate date) {
-        List<Appointment> appointments =
-                appointmentMapper.getAppointmentsByProviderIdDate(nurseId, date);
-        Set<Integer> bookedTimeCodes =
-                appointments.stream().map(Appointment::getAppointTime).collect(Collectors.toSet());
-        List<AppointmentRecord> availableTimes =
-                AppointTime.AVAILABLE_TIMES.values().stream()
-                        .filter(time -> !bookedTimeCodes.contains(time.getCode()))
-                        .map(
-                                time -> {
-                                    AppointmentRecord record = new AppointmentRecord();
-                                    record.setTimeCode(time.getCode());
-                                    record.setStartTime(time.getStartTimeStr());
-                                    return record;
-                                })
-                        .sorted(Comparator.comparing(AppointmentRecord::getTimeCode))
-                        .collect(Collectors.toList());
-        return BaseResponse.success(null, availableTimes);
+            String email, String nurseId, LocalDate date) {
+        BaseResponse<User> userBaseResponse = userService.getUserByEmail(email);
+        if (ResponseCode.SUCCESS.getCode().equals(userBaseResponse.getCode())) {
+            String patientId = userBaseResponse.getData().getUserId();
+            List<Appointment> appointments =
+                    appointmentMapper.getAppointmentsByProviderIdPatientIdDate(
+                            nurseId, patientId, date);
+            Set<Integer> bookedTimeCodes =
+                    appointments.stream()
+                            .map(Appointment::getAppointTime)
+                            .collect(Collectors.toSet());
+            List<AppointmentRecord> availableTimes =
+                    AppointTime.AVAILABLE_TIMES.values().stream()
+                            .filter(time -> !bookedTimeCodes.contains(time.getCode()))
+                            .map(
+                                    time -> {
+                                        AppointmentRecord record = new AppointmentRecord();
+                                        record.setTimeCode(time.getCode());
+                                        record.setStartTime(time.getStartTimeStr());
+                                        return record;
+                                    })
+                            .sorted(Comparator.comparing(AppointmentRecord::getTimeCode))
+                            .collect(Collectors.toList());
+            return BaseResponse.success(null, availableTimes);
+        }
+        return BaseResponse.fail(userBaseResponse.getCode(), userBaseResponse.getMessage(), null);
     }
 }
