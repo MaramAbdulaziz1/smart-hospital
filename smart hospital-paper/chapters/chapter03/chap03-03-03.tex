@@ -16,6 +16,8 @@ For page rendering, we use Thymeleaf for server-side rendering. Something like G
 
 To keep the API easy to use, we try to follow same rules for endpoint names, HTTP verbs and status code. Like GET is for reading data, POST for create, 200/201 for success, and clear error when validation fails. The controller will check important fields, like if password match or ID card and phone format. In the future, when database and permission are added, authentication and authorization can also be put under same endpoints, so frontend work flow will not be broken.
 
+\clearpage
+
 \paragraph{Implementation}\mbox{}\\
 
 During the implementation, we used Spring Boot 3.5.3 with MyBatis for the database operation, which follows the patterns of a layered architecture \cite{fowler2002}. We are writing the actual API requests based on the API specification instructions.
@@ -31,7 +33,7 @@ Example code is shown below about the patient appointment information:
 \label{fig:appointment-controller}
 \end{figure}
 
-Using @PreAuthorize, this will check the user's permissions and account levels \cite{springsecurity2024}. Using @AuthenticationPrincipal will then extract from Spring Security user information context; this doesn't need to authorise a token through a manual process \cite{johnson2023}.
+Using @PreAuthorize, this will check the user's permissions and account roles \cite{springsecurity2024}. Using @AuthenticationPrincipal will then extract from Spring Security user information context; this doesn't need to authorise a token through a manual process \cite{johnson2023}.
 The appointmentService.getPatientUpcoming() method includes dealing with business logic requests.
 
 For the return type, we use \texttt{BaseResponse<T>}, replacing \texttt{ResponseEntity<ObjectNode>}, which offers the unified JSON structure. This type includes status code, message and data information, when dealing with different request errors, and the format makes it more consistent and clean.
