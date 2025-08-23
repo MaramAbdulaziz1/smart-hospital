@@ -33,41 +33,14 @@
             <th>Manage</th>
           </tr>
           </thead>
-          <tbody>
-          <tr th:each="appointment : ${upcomingAppointments}">
-            <td th:text="${appointment.formattedDate}">05 09 2025</td>
-            <td th:text="${appointment.formattedTime}">10:00</td>
-            <td th:text="${appointment.doctorName}">Oral Nurse</td>
-            <td>
-              <button class="cancel-btn"
-                      th:onclick="'cancelAppointment(' + ${appointment.id} + ', this)'">
-                Cancel
-              </button>
-            </td>
-          </tr>
-          <!-- Static data for demonstration if no appointments -->
-          <tr th:if="${#lists.isEmpty(upcomingAppointments)}">
-            <td>05 09 2025</td>
-            <td>10:00</td>
-            <td>Oral Nurse</td>
-            <td>
-              <button class="cancel-btn" onclick="cancelAppointment(1, this)">
-                Cancel
-              </button>
-            </td>
-          </tr>
-          <tr th:if="${#lists.isEmpty(upcomingAppointments)}">
-            <td>27 08 2025</td>
-            <td>10:00</td>
-            <td>Dr. Weasley</td>
-            <td>
-              <button class="cancel-btn" onclick="cancelAppointment(2, this)">
-                Cancel
-              </button>
-            </td>
-          </tr>
+          <tbody id="upcomingAppointmentsBody">
+          <!-- Dynamic content will be loaded here -->
           </tbody>
         </table>
+        <div id="upcomingEmptyState" class="empty-state" style="display: none;">
+          <h3>No upcoming appointments</h3>
+          <p>You don't have any upcoming appointments scheduled.</p>
+        </div>
       </div>
 
       <!-- Appointment History Section -->
@@ -82,40 +55,14 @@
             <th>Status</th>
           </tr>
           </thead>
-          <tbody>
-          <tr th:each="appointment : ${appointmentHistory}">
-            <td th:text="${appointment.formattedDate}">05 09 2025</td>
-            <td th:text="${appointment.formattedTime}">10:00</td>
-            <td th:text="${appointment.doctorName}">Oral Nurse</td>
-            <td>
-              <span class="status"
-                    th:classappend="${appointment.statusLowerCase}"
-                    th:text="${appointment.statusDisplayName}">
-                Upcoming
-              </span>
-            </td>
-          </tr>
-          <!-- Static data for demonstration if no history -->
-          <tr th:if="${#lists.isEmpty(appointmentHistory)}">
-            <td>05 09 2025</td>
-            <td>10:00</td>
-            <td>Oral Nurse</td>
-            <td><span class="status upcoming">Upcoming</span></td>
-          </tr>
-          <tr th:if="${#lists.isEmpty(appointmentHistory)}">
-            <td>27 08 2025</td>
-            <td>10:00</td>
-            <td>Dr. Weasley</td>
-            <td><span class="status upcoming">Upcoming</span></td>
-          </tr>
-          <tr th:if="${#lists.isEmpty(appointmentHistory)}">
-            <td>05 06 2025</td>
-            <td>09:00</td>
-            <td>Oral Nurse</td>
-            <td><span class="status completed">Completed</span></td>
-          </tr>
+          <tbody id="appointmentHistoryBody">
+          <!-- Dynamic content will be loaded here -->
           </tbody>
         </table>
+        <div id="historyEmptyState" class="empty-state" style="display: none;">
+          <h3>No appointment history</h3>
+          <p>You don't have any appointment history yet.</p>
+        </div>
       </div>
     </section>
   </main>
