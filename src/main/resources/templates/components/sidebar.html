@@ -1,34 +1,44 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<div th:fragment="sidebar">
+<div th:fragment="sidebar(activePage)">
   <aside class="sidebar">
     <img th:src="@{/SharedLayoutImages/LogoCircle.png}" alt="Logo" class="logo">
+
     <nav class="sidebar-nav">
-      <div class="tab active-tab" data-page="home">
+      <!-- Home -->
+      <div th:class="${activePage == 'home'} ? 'tab  active-tab' : 'tab'" class="tab" data-page="home">
         <a href="/patient/patientDashboard">
           <img th:src="@{/SharedLayoutImages/homeIcon.svg}" alt="Home Icon" class="tab-icon">
           <span>Home</span>
         </a>
       </div>
-      <div class="tab" data-page="calendar">
+
+      <!-- Calendar -->
+      <div th:class="${activePage == 'calendar'} ? 'tab  active-tab' : 'tab'" class="tab" data-page="calendar">
         <a th:href="@{/comingSoon}">
           <img th:src="@{/SharedLayoutImages/calendarIcon.svg}" alt="Calendar Icon" class="tab-icon">
           <span>Calendar</span>
         </a>
       </div>
-      <div class="tab" data-page="health-qa">
-        <a th:href="@{/comingSoon}">
+
+      <!-- Health Q&A -->
+      <div th:class="${activePage == 'health-qa'} ? 'tab  active-tab' : 'tab'" class="tab" data-page="health-qa">
+        <a th:href="@{/healthQAPatient}">
           <img th:src="@{/PatientSideImages/healthQA.svg}" alt="Health Q&A Icon" class="tab-icon">
           <span>Health Q&A</span>
         </a>
       </div>
-      <div class="tab" data-page="manage-appointments">
+
+      <!-- Manage Appointments -->
+      <div th:class="${activePage == 'manage-appointments'} ? 'tab  active-tab' : 'tab'" class="tab" data-page="manage-appointments">
         <a href="/patient/manageAppointments">
           <img th:src="@{/PatientSideImages/ManageAppointment.svg}" alt="Manage Appointments Icon" class="tab-icon">
           <span>Manage Appointments</span>
         </a>
       </div>
     </nav>
+
+    <!-- Logout -->
     <div class="tab logout-tab" data-action="logout">
       <img th:src="@{/SharedLayoutImages/logoutIcon.svg}" alt="Logout Icon" class="tab-icon">
       <span>Log Out</span>
