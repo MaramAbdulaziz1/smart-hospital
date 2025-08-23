@@ -1,4 +1,3 @@
-%
 % File: chap03-03-02.tex
 % Author:
 % Description:
@@ -25,6 +24,6 @@ The system’s full relationship structure is shown with crow’s-foot notation 
 \end{figure}
 \FloatBarrier
 
-From the figure, you can see an appointment-centred, single-visit data flow. \texttt{NurseVital} and \texttt{PatientIntake} (later renamed on the frontend to Clinical Note) correspond to nurse and doctor records. \texttt{Prescription} together with multiple \texttt{Medication} rows describes the treatment plan. For the HealthQA interaction, although we decided not to implement it due to time limits, we still designed the tables so it’s ready for future work. The column types and indexing plan (for example, a unique index on \texttt{User.email}, a composite index on \texttt{Appointment(patient\_id, provider\_id, start\_time)}, and indexes on all major foreign keys) are summarised in Appendix~Y.
+From the figure, you can see an appointment-centred, single-visit data flow. \texttt{NurseVital} and \texttt{PatientIntake} (renamed on the frontend as \textit{Clinical Note}) correspond to nurse and doctor records. \texttt{Prescription}, together with multiple \texttt{Medication} rows, describes the treatment plan. For the HealthQA interaction, although we did not implement it due to time limits, we designed the tables so the system is ready for future work. We use a unique index on \texttt{User.email}, a composite index on \texttt{Appointment(patient\_id, provider\_id, start\_time)}, and indexes on all major foreign keys. 
 
-Overall, this data model supports the core operations defined in our user flows (creating/cancelling appointments, recording vitals, filling consultation summaries, issuing prescriptions, and viewing medical history), while leaving space for extensions like report files and the Health Q\&A feature. It keeps the Smart Hospital system consistent and maintainable.
+Overall, this data model supports the core operations in our user flows (creating/cancelling appointments, recording vitals, filling consultation summaries, issuing prescriptions, and viewing medical history) while leaving space for extensions like report files and the Health Q\&A feature, keeping the Smart Hospital system consistent and maintainable.
