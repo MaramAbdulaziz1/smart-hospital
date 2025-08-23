@@ -2,7 +2,7 @@ package com.team10.smarthospital.controllers.api;
 
 import com.team10.smarthospital.model.response.AppointmentRecord;
 import com.team10.smarthospital.model.response.BaseResponse;
-import com.team10.smarthospital.model.response.DoctorDepartment;
+import com.team10.smarthospital.model.response.DepartmentResponse;
 import com.team10.smarthospital.service.NurseService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class NurseController {
 
     @GetMapping("/department")
     @PreAuthorize("hasRole('PATIENT')")
-    public BaseResponse<List<DoctorDepartment>> getNurseByDepartment(
+    public BaseResponse<List<DepartmentResponse>> getNurseByDepartment(
             @RequestParam("department") Integer department) {
         return nurseService.getNurseByDepartment(department);
     }

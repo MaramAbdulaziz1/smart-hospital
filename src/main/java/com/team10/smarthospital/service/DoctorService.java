@@ -9,7 +9,7 @@ import com.team10.smarthospital.model.enums.AppointTime;
 import com.team10.smarthospital.model.enums.ResponseCode;
 import com.team10.smarthospital.model.response.AppointmentRecord;
 import com.team10.smarthospital.model.response.BaseResponse;
-import com.team10.smarthospital.model.response.DoctorDepartment;
+import com.team10.smarthospital.model.response.DepartmentResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,22 +32,22 @@ public class DoctorService implements IUserService<Doctor> {
         doctorMapper.insertUser(user);
     }
 
-    public BaseResponse<List<DoctorDepartment>> getDoctorByDepartment(Integer department) {
-        List<DoctorDepartment> doctorDepartments = new ArrayList<>();
+    public BaseResponse<List<DepartmentResponse>> getDoctorByDepartment(Integer department) {
+        List<DepartmentResponse> departmentResponses = new ArrayList<>();
         List<Doctor> doctors = doctorMapper.getDoctorByDepartment(department);
         if (!doctors.isEmpty()) {
             for (Doctor doctor : doctors) {
                 BaseResponse<User> userBaseResponse =
                         userService.getUserByUserId(doctor.getUserId());
                 if (ResponseCode.SUCCESS.getCode().equals(userBaseResponse.getCode())) {
-                    DoctorDepartment doctorDepartment = new DoctorDepartment();
-                    doctorDepartment.setDoctorId(userBaseResponse.getData().getUserId());
-                    doctorDepartment.setFullName(userBaseResponse.getData().getFullName());
-                    doctorDepartments.add(doctorDepartment);
+                    DepartmentResponse departmentResponse = new DepartmentResponse();
+                    departmentResponse.setProviderId(userBaseResponse.getData().getUserId());
+                    departmentResponse.setFullName(userBaseResponse.getData().getFullName());
+                    departmentResponses.add(departmentResponse);
                 }
             }
         }
-        return BaseResponse.success(null, doctorDepartments);
+        return BaseResponse.success(null, departmentResponses);
     }
 
     public BaseResponse<List<AppointmentRecord>> getAppointmentTime(
