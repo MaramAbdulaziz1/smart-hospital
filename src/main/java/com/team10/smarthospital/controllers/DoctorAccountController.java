@@ -13,7 +13,7 @@ public class DoctorAccountController {
   public String accountPage(Model model) {
 
     model.addAttribute("pageTitle", "My Profile");
-    return "layouts/doctorAccount";  //stay layouts路径
+    return "doctorAccount";
   }
 
   @PostMapping("/account/update")

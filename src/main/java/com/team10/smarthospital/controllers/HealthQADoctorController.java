@@ -9,7 +9,7 @@ public class HealthQADoctorController {
 
   @GetMapping("/HealthQADoctor")
   public String healthQADoctor(Model model) {
-    model.addAttribute("pageTitle", "Coming Soon");
+    model.addAttribute("pageTitle", "Health Q&A");
     return "healthQADoctor";
   }
 }

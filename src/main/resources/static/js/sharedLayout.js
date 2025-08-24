@@ -3,7 +3,7 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     console.log('SharedLayout.js loaded');
-    
+
     // Notification functionality
     const notificationIcon = document.getElementById('notificationIcon');
     const notificationPopup = document.getElementById('notificationPopup');
@@ -90,12 +90,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Logout button actions (for all logout buttons except profile menu items)
     const logoutButtons = document.querySelectorAll('[data-action="logout"]:not(.profile-menu-item)');
-    logoutButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            const action = this.getAttribute('data-action');
-            handleProfileAction(action);
+    logoutButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (confirm('Are you sure you want to log out?')) {
+                fetch('/user/logout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.code == '0')
+                    window.location.href = '/';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred during logout.');
+                });
+            }
         });
     });
 
@@ -176,10 +189,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 dot.style.display = 'none';
             }
         });
-        
+
         // Update notification icon (remove badge if exists)
         updateNotificationBadge(0);
-        
+
         // Show success message
         showToast('All notifications marked as read');
     }
@@ -254,15 +267,15 @@ document.addEventListener('DOMContentLoaded', function() {
             transform: translateX(100%);
             transition: all 0.3s ease;
         `;
-        
+
         document.body.appendChild(toast);
-        
+
         // Animate in
         setTimeout(() => {
             toast.style.opacity = '1';
             toast.style.transform = 'translateX(0)';
         }, 10);
-        
+
         // Remove after 3 seconds
         setTimeout(() => {
             toast.style.opacity = '0';
@@ -297,10 +310,10 @@ document.addEventListener('DOMContentLoaded', function() {
             justify-content: center;
             border: 2px solid white;
         }
-        
+
         .notification-container {
             position: relative;
         }
     `;
     document.head.appendChild(style);
-}); 
+});

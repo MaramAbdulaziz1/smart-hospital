@@ -1,4 +1,40 @@
 /* Page-specific styles - Only retain styles that do not conflict with the shared layout */
+/* Dashboard Content */
+.dashboard-content {
+  padding: 20px;
+  margin-top: 20px; /* Add top margin to avoid being hidden by top-nav */
+  height: calc(100vh - 80px);
+  overflow-y: auto;
+  background-color: #f9f9f9;
+}
+
+/* Dashboard main content area - ensure it's not blocked by sidebar */
+.dashboard-page .main-content {
+  margin-left: 210px; /* Match sidebar width */
+  width: calc(100% - 210px);
+  min-height: 100vh;
+  background-color: #F5F5F5;
+}
+
+/* Dashboard top navigation - ensure correct positioning */
+.dashboard-page .top-nav {
+  position: fixed;
+  top: 0;
+  left: 210px;
+  width: calc(100% - 210px);
+  height: 80px;
+  background-color: #A5DFEF;
+  display: flex;
+  align-items: center;
+  padding-left: 26px;
+  z-index: 999;
+}
+
+/* Dashboard specific sidebar styling - activate Home tab */
+.layout-container .sidebar .tab[data-page="home"] {
+  background-color: #F5F5F5;
+  border-radius: 16px;
+}
 
 /* Profile Info - The first content block */
 .profile-info1 {

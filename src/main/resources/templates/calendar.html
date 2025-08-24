@@ -3,145 +3,59 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Coming Soon - Patient Portal</title>
-  <link rel="stylesheet" href="/css/comingSoon.css" />
-  <!-- Web font: Inter -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <title>Smart Hospital - Coming Soon</title>
+  <link rel="stylesheet" th:href="@{/css/sharedLayout.css}">
+  <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+  <link rel="stylesheet" th:href="@{/css/comingSoon.css}">
+  <style>
+    /* Force Home tab to not be active */
+    .tab-inactive {
+      background-color: transparent !important;
+      color: inherit !important;
+    }
+    .tab-inactive:hover {
+      background-color: #f5f5f5 !important;
+    }
+  </style>
 </head>
 <body>
 
-<div class="layout-container">
-  <!-- Patient Sidebar: Left vertical navigation -->
-  <div th:replace="components/sidebar :: sidebar('calendar')"></div>
+<div class="layout-container dashboard-page">
+  <!-- Dashboard Sidebar - Same as dashboard without Manage Appointments -->
+  <div th:replace="components/sidebarD :: sidebar('calendar')"></div>
 
-  <!-- Top Navigation (Shared Component) -->
-  <header th:replace="components/top-nav :: top-nav('Calendar')"></header>
+  <!-- Main Content Area -->
+  <div class="main-content">
+    <!-- Top Navigation -->
+    <header th:replace="layouts/sharedLayout :: topNav"></header>
 
-  <!-- Main Content -->
-  <main class="main-content">
     <!-- Coming Soon Content -->
-    <section class="coming-soon-content">
-      <div class="coming-soon-container">
-        <!-- Coming Soon Icon -->
+    <div class="coming-soon-container">
+      <div class="coming-soon-card">
         <div class="coming-soon-icon">
-          <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="60" cy="60" r="60" fill="#7C3AED"/>
-            <path d="M40 45L50 35L70 55L80 45" stroke="#FCD34D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M40 65L50 55L70 75L80 65" stroke="#FCD34D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M40 85L50 75L70 95L80 85" stroke="#FCD34D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="40" r="40" fill="#8B5CF6"/>
+            <path d="M30 35L40 45L50 35" stroke="#FFA500" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M30 45L40 55L50 45" stroke="#FFA500" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M30 25L40 35L50 25" stroke="#FFA500" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-
-        <!-- Coming Soon Text -->
         <h1 class="coming-soon-title">Coming Soon</h1>
         <p class="coming-soon-subtitle">This feature is currently under development.</p>
-        <p class="coming-soon-description">Looking forward to serving you soon!</p>
-
-        <!-- Optional: Back to Home Button -->
-        <div class="coming-soon-actions">
-          <a href="/patient/patientDashboard" class="back-to-home-btn">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M7.5 15L2.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M2.5 10H17.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            Back to Home
-          </a>
-        </div>
+        <p class="coming-soon-message">Looking forward to serving you soon!</p>
+        <a href="/dashboard" class="back-to-home-btn">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15.8333 10H4.16666M4.16666 10L10 15.8333M4.16666 10L10 4.16666" stroke="white" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Back to Home
+        </a>
       </div>
-    </section>
-  </main>
+    </div>
+  </div>
 </div>
 
 <!-- Scripts -->
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    /* Notifications */
-    const notificationIcon = document.getElementById('notificationIcon');
-    const notificationPopup = document.getElementById('notificationPopup');
-    const closeNotifications = document.getElementById('closeNotifications');
-
-    if (notificationIcon && notificationPopup) {
-      notificationIcon.addEventListener('click', (e) => {
-        e.stopPropagation();
-        notificationPopup.classList.toggle('show');
-        const profilePopup = document.getElementById('profilePopup');
-        if (profilePopup) profilePopup.classList.remove('show');
-      });
-      closeNotifications.addEventListener('click', () => notificationPopup.classList.remove('show'));
-    }
-
-    /* Profile popup */
-    const patientProfileIcon = document.getElementById('patientProfileIcon');
-    const profilePopup = document.getElementById('profilePopup');
-    const closeProfile = document.getElementById('closeProfile');
-
-    if (patientProfileIcon && profilePopup) {
-      patientProfileIcon.addEventListener('click', (e) => {
-        e.stopPropagation();
-        profilePopup.classList.toggle('show');
-        if (notificationPopup) notificationPopup.classList.remove('show');
-      });
-      closeProfile.addEventListener('click', () => profilePopup.classList.remove('show'));
-    }
-
-    /* Close popups when clicking outside */
-    document.addEventListener('click', (e) => {
-      if (notificationPopup && !notificationPopup.contains(e.target) && e.target !== notificationIcon) {
-        notificationPopup.classList.remove('show');
-      }
-      if (profilePopup && !profilePopup.contains(e.target) && e.target !== patientProfileIcon) {
-        profilePopup.classList.remove('show');
-      }
-    });
-
-    /* Mark all notifications as read */
-    const markAllReadBtn = document.querySelector('.mark-all-read');
-    if (markAllReadBtn) {
-      markAllReadBtn.addEventListener('click', () => {
-        document.querySelectorAll('.notification-item.unread').forEach(item => {
-          item.classList.remove('unread');
-          const dot = item.querySelector('.notification-dot');
-          if (dot) dot.remove();
-        });
-      });
-    }
-
-    /* Logout */
-    const logoutBtns = document.querySelectorAll('[data-action="logout"]');
-    logoutBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        if (confirm('Are you sure you want to log out?')) {
-          window.location.href = '/patient-login';
-        }
-      });
-    });
-
-    /* Active tab highlighting */
-    const tabs = document.querySelectorAll('.tab[data-page]');
-    const currentPage = window.location.pathname;
-
-    // Handle coming soon pages - highlight the appropriate tab
-    if (currentPage === '/comingSoon') {
-      // Get the referrer or determine which tab should be active
-      // For now, we'll make Calendar active for /comingSoon
-      tabs.forEach(tab => {
-        const tabPage = tab.getAttribute('data-page');
-        if (tabPage === 'calendar') {
-          tab.classList.add('active-tab');
-        } else {
-          tab.classList.remove('active-tab');
-        }
-      });
-    } else {
-      tabs.forEach(tab => {
-        const link = tab.querySelector('a');
-        if (link && link.getAttribute('href') === currentPage) {
-          tab.classList.add('active-tab');
-        }
-      });
-    }
-  });
-</script>
+<script th:src="@{/js/sharedLayout.js}"></script>
 
 </body>
 </html>

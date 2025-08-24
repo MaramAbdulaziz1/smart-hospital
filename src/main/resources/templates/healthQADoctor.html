@@ -22,47 +22,7 @@
 
 <div class="layout-container dashboard-page">
   <!-- Dashboard Sidebar - Same as dashboard without Manage Appointments -->
-  <aside class="sidebar">
-    <!-- Logo at the top of the sidebar -->
-    <img th:src="@{/SharedLayoutImages/LogoCircle.png}" alt="Logo" class="logo">
-
-    <!-- Navigation Tabs -->
-    <nav class="sidebar-nav">
-      <!-- Main navigation tabs -->
-      <div class="nav-main">
-        <!-- Home tab (explicitly not active) -->
-        <div class="tab tab-inactive" data-page="home">
-          <a href="/dashboard" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px; width: 100%; height: 100%;">
-            <img th:src="@{/SharedLayoutImages/homeIcon.svg}" alt="Home Icon" class="tab-icon">
-            <span>Home</span>
-          </a>
-        </div>
-
-        <!-- Calendar tab -->
-        <div class="tab" data-page="calendar">
-          <a th:href="@{/calendar}" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px; width: 100%; height: 100%;">
-            <img th:src="@{/SharedLayoutImages/calendarIcon.svg}" alt="Calendar Icon" class="tab-icon">
-            <span>Calendar</span>
-          </a>
-        </div>
-
-        <!-- Health Q&A tab (active) -->
-        <div class="tab active-tab" data-page="health-qa">
-          <a th:href="@{/HealthQADoctor}" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px; width: 100%; height: 100%;">
-            <img th:src="@{/PatientSideImages/healthQA.svg}" alt="Health Q&A Icon" class="tab-icon">
-            <span>Health Q&A</span>
-          </a>
-        </div>
-
-      </div>
-
-      <!-- Logout tab -->
-      <div class="tab logout-tab" data-action="logout">
-        <img th:src="@{/SharedLayoutImages/logoutIcon.svg}" alt="Logout Icon" class="tab-icon">
-        <span>Log Out</span>
-      </div>
-    </nav>
-  </aside>
+  <div th:replace="components/sidebarD :: sidebar('health-qa')"></div>
 
   <!-- Main Content Area -->
   <div class="main-content">
@@ -80,7 +40,7 @@
             <path d="M30 25L40 35L50 25" stroke="#FFA500" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <h1 class="coming-soon-title">Coming Soon</h1>
+        <h1 class="coming-soon-title">Health Q&A</h1>
         <p class="coming-soon-subtitle">This feature is currently under development.</p>
         <p class="coming-soon-message">Looking forward to serving you soon!</p>
         <a href="/dashboard" class="back-to-home-btn">
