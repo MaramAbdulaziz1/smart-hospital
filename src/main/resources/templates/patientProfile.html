@@ -9,23 +9,23 @@
 </head>
 <body>
 
-<div class="layout-container">
+<div class="layout-container dashboard-page">
   <!-- Sidebar -->
   <aside th:replace="~{layouts/sharedLayout :: sidebar (activePage='patientProfile')}"></aside>
 
   <!-- Main Content -->
   <main class="main-content">
     <!-- Top Navigation -->
-    <header th:replace="~{layouts/sharedLayout :: topNav}"></header>
+    <header th:replace="layouts/sharedLayout :: topNav"></header>
 
     <!-- Patient Info -->
     <section class="patient-info">
       <div class="wrapper">
         <div class="leftside">
-          <img class="avatar" src="/SharedLayoutImages/patientProfileImage.png" alt="Patient Photo" />
-          <h3 class="info" th:text="${patient.name}">Harry Potter</h3>
-          <p class="email" th:text="${patient.email}">harrypotter2000@gmail.com</p>
-          <p class="phone" th:text="${patient.phone}">+44 07458545663</p>
+          <img id="patientAvatar" class="avatar" src="/SharedLayoutImages/patientProfileImage.png" alt="Patient Photo" />
+          <h3 id="patientName" class="info">Loading...</h3>
+          <p id="patientEmail" class="email">Loading...</p>
+          <p id="patientPhone" class="phone">Loading...</p>
           <div class="buttons">
             <button class="contact-btn">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -46,36 +46,35 @@
           <div class="table">
             <div class="column">
               <div class="label">Sex</div>
-              <div class="value" th:text="${patient.sex}">Male</div>
+              <div id="patientSex" class="value">Loading...</div>
             </div>
             <div class="column">
               <div class="label">Age</div>
-              <div class="value" th:text="${patient.age}">30</div>
+              <div id="patientAge" class="value">Loading...</div>
             </div>
             <div class="column">
               <div class="label">Date of Birth</div>
-              <div class="value" th:text="${patient.dob}">23/08/1999</div>
+              <div id="patientDob" class="value">Loading...</div>
             </div>
             <div class="column">
               <div class="label">Weight</div>
-              <div class="value" th:text="${patient.weight}">75 kg</div>
+              <div id="patientWeight" class="value">Loading...</div>
             </div>
             <div class="column">
               <div class="label">Height</div>
-              <div class="value" th:text="${patient.height}">178 cm</div>
+              <div id="patientHeight" class="value">Loading...</div>
             </div>
             <div class="column">
               <div class="label">Blood Type</div>
-              <div class="value" th:text="${patient.bloodType}">A</div>
+              <div id="patientBloodType" class="value">Loading...</div>
             </div>
             <div class="column">
               <div class="label">Patient ID</div>
-              <!-- Fix: Use formatted Patient ID -->
-              <div class="value" th:text="${patient.formattedPatientId}">HAT17653D</div>
+              <div id="patientId" class="value">Loading...</div>
             </div>
             <div class="column">
               <div class="label">Address</div>
-              <div class="value" th:text="${patient.address}">Marlborough house, Bristol. BS1 3NX</div>
+              <div id="patientAddress" class="value">Loading...</div>
             </div>
           </div>
         </div>
@@ -85,66 +84,228 @@
     <!-- Patient History Section -->
     <section class="page-content">
       <h2 class="section-title">Patient History</h2>
-      <div class="patient-history-section">
-        <table class="patient-history-table">
-          <thead>
-          <tr>
-            <th>Date Of Visit</th>
-            <th>Department</th>
-            <th>Diagnosis</th>
-            <th>Doctor</th>
-            <th>Report</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr th:each="visit : ${history}">
-            <td th:text="${visit.DateOfVisit}">10 Jul 2025</td>
-            <td th:text="${visit.department}">General Medicine</td>
-            <td th:text="${visit.diagnosis}">Viral Flu</td>
-            <td th:text="${visit.doctorName}">Dr. Sarah Moyo</td>
-            <td>
-            <!--  <a href="@{/patient-report}" class="report-link">View</a> -->
-              <a th:href="@{/patient-report/{id}/{date}(id=${patient.id}, date=${visit.DateOfVisit})}" class="report-link">View</a>
-              <a href="#" class="report-link">Download</a>
-            </td>
-          </tr>
-          <!-- Sample data (shown when backend has no data) -->
-          <tr th:if="${#lists.isEmpty(history)}">
-            <td>18 Jun 2024</td>
-            <td>Dermatology</td>
-            <td>Eczema</td>
-            <td>Dr. Samuel Chen</td>
-            <td>
-              <a th:href="@{/patient-report(patientId=${patient.id}, DateOfVisit=${${visit.date}})}" class="btn btn-primary">View</a>
-              <a href="#" class="report-link">Download</a>
-            </td>
-          </tr>
-          <tr th:if="${#lists.isEmpty(history)}">
-            <td>02 May 2024</td>
-            <td>Cardiology</td>
-            <td>Hypertension</td>
-            <td>Dr. Linda Patel</td>
-            <td>
-              <a href="#" class="report-link">View</a>
-              <a href="#" class="report-link">Download</a>
-            </td>
-          </tr>
-          <tr th:if="${#lists.isEmpty(history)}">
-            <td>27 Apr 2023</td>
-            <td>Neurology</td>
-            <td>Migraine</td>
-            <td>Dr. Emily Zhou</td>
-            <td>
-              <a href="#" class="report-link">View</a>
-              <a href="#" class="report-link">Download</a>
-            </td>
-          </tr>
-          </tbody>
-        </table>
+      <div id="historyContainer">
+        <div class="loading-spinner">
+          <div class="spinner"></div>
+          <p>Loading patient history...</p>
+        </div>
       </div>
     </section>
   </main>
 </div>
-<script th:src="@{/js/sharedLayout.js}"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const patientEmail = urlParams.get('email');
+
+      if (!patientEmail) {
+          showError('No patient email provided');
+          return;
+      }
+
+      fetchPatientProfile(patientEmail);
+
+      fetchPatientHistory(patientEmail);
+  });
+
+  function fetchPatientProfile(email) {
+      showLoadingProfile();
+
+      fetch(`/profile/patient?email=${encodeURIComponent(email)}`)
+          .then(response => {
+              if (!response.ok) {
+                  throw new Error('Network response was not ok');
+              }
+              return response.json();
+          })
+          .then(data => {
+              if (data.code === "0") {
+                  renderPatientProfile(data.data);
+              } else {
+                  throw new Error(data.message || 'Failed to load patient profile');
+              }
+          })
+          .catch(error => {
+              console.error('Error fetching patient profile:', error);
+              showProfileError('Error loading patient profile. Please try again.');
+          });
+  }
+
+  function fetchPatientHistory(email) {
+      fetch(`/intake/history?email=${encodeURIComponent(email)}`)
+          .then(response => {
+              if (!response.ok) {
+                  throw new Error('Network response was not ok');
+              }
+              return response.json();
+          })
+          .then(data => {
+              if (data.code === "0") {
+                  renderPatientHistory(data.data);
+              } else {
+                  throw new Error(data.message || 'Failed to load patient history');
+              }
+          })
+          .catch(error => {
+              console.error('Error fetching patient history:', error);
+              showHistoryError('Error loading patient history. Please try again.');
+          });
+  }
+
+  function renderPatientProfile(patientData) {
+      if (patientData.avatarBase64) {
+          document.getElementById('patientAvatar').src = patientData.avatarBase64;
+      }
+
+      document.getElementById('patientName').textContent = `${patientData.firstName} ${patientData.lastName}`;
+
+      document.getElementById('patientEmail').textContent = patientData.email;
+
+      document.getElementById('patientPhone').textContent = patientData.mobileNumber;
+
+      document.getElementById('patientSex').textContent = patientData.genderName;
+
+      if (patientData.birth) {
+          const birthDate = new Date(patientData.birth);
+          const age = calculateAge(birthDate);
+          document.getElementById('patientAge').textContent = `${age} years`;
+          document.getElementById('patientDob').textContent = formatDate(birthDate);
+      }
+
+      document.getElementById('patientWeight').textContent = `${patientData.weight} kg`;
+
+      document.getElementById('patientHeight').textContent = `${patientData.height} cm`;
+
+      document.getElementById('patientBloodType').textContent = patientData.bloodTypeName;
+
+      document.getElementById('patientId').textContent = patientData.patientCode;
+
+      document.getElementById('patientAddress').textContent = patientData.address;
+  }
+
+  function renderPatientHistory(historyData) {
+      const historyContainer = document.getElementById('historyContainer');
+
+      if (!historyData || historyData.length === 0) {
+          historyContainer.innerHTML = `
+              <div class="no-results">
+                  <div style="text-align: center; padding: 40px; color: #666;">
+                      <div style="font-size: 18px; margin-bottom: 10px;">No history records found</div>
+                  </div>
+              </div>
+          `;
+          return;
+      }
+
+      let tableHTML = `
+          <table class="patient-history-table">
+              <thead>
+                  <tr>
+                      <th>Date Of Visit</th>
+                      <th>Department</th>
+                      <th>Diagnosis</th>
+                      <th>Doctor</th>
+                      <th>Report</th>
+                  </tr>
+              </thead>
+              <tbody>
+      `;
+
+      historyData.forEach(record => {
+          tableHTML += `
+              <tr>
+                  <td>${formatDate(new Date(record.date))}</td>
+                  <td>${record.departmentName || 'N/A'}</td>
+                  <td>${record.diagnosis || 'N/A'}</td>
+                  <td>${record.doctorName || 'N/A'}</td>
+                  <td>
+                      <a href="#" class="report-link view-report" data-intakeid="${record.intakeId}">View</a>
+                      <a href="/intake/download?intakeId=${record.intakeId}" class="report-link">Download</a>
+                  </td>
+              </tr>
+          `;
+      });
+
+      tableHTML += `
+              </tbody>
+          </table>
+      `;
+
+      historyContainer.innerHTML = tableHTML;
+
+      document.querySelectorAll('.view-report').forEach(link => {
+          link.addEventListener('click', function(e) {
+              e.preventDefault();
+              const intakeId = this.getAttribute('data-intakeid');
+              viewReport(intakeId);
+          });
+      });
+  }
+
+  function viewReport(intakeId) {
+      alert(`Viewing report with intakeId: ${intakeId}`);
+      // window.open(`/report/view?intakeId=${intakeId}`, '_blank');
+  }
+
+  function calculateAge(birthDate) {
+      const today = new Date();
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const monthDiff = today.getMonth() - birthDate.getMonth();
+
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+          age--;
+      }
+
+      return age;
+  }
+
+  function formatDate(date) {
+      return date.toLocaleDateString('en-GB', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric'
+      });
+  }
+
+  function showLoadingProfile() {
+      document.getElementById('patientName').textContent = 'Loading...';
+      document.getElementById('patientEmail').textContent = 'Loading...';
+      document.getElementById('patientPhone').textContent = 'Loading...';
+      document.getElementById('patientSex').textContent = 'Loading...';
+      document.getElementById('patientAge').textContent = 'Loading...';
+      document.getElementById('patientDob').textContent = 'Loading...';
+      document.getElementById('patientWeight').textContent = 'Loading...';
+      document.getElementById('patientHeight').textContent = 'Loading...';
+      document.getElementById('patientBloodType').textContent = 'Loading...';
+      document.getElementById('patientId').textContent = 'Loading...';
+      document.getElementById('patientAddress').textContent = 'Loading...';
+  }
+
+  function showProfileError(message) {
+      document.getElementById('patientName').textContent = 'Error';
+      document.getElementById('patientEmail').textContent = message;
+  }
+
+  function showHistoryError(message) {
+      document.getElementById('historyContainer').innerHTML = `
+          <div class="error-message">
+              <p>${message}</p>
+              <button class="btn-retry" onclick="location.reload()">Retry</button>
+          </div>
+      `;
+  }
+
+  function showError(message) {
+      const mainContent = document.querySelector('.main-content');
+      mainContent.innerHTML = `
+          <div class="error-message">
+              <p>${message}</p>
+              <button class="btn-retry" onclick="history.back()">Go Back</button>
+          </div>
+      `;
+  }
+</script>
+
 </body>
 </html>

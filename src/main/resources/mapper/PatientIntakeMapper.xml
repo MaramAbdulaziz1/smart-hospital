@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team10.smarthospital.mapper.PatientIntakeMapper">
+
+  <insert id="insert">
+    INSERT INTO PatientIntake
+    (intake_id, appointment_id, complaint, notes, diagnosis, follow_up_plan)
+    VALUES(uuid(), #{appointmentId}, #{complaint}, #{notes}, #{diagnosis}, #{followUpPlan});
+  </insert>
+  <select id="getByPatientId" resultType="com.team10.smarthospital.model.entity.PatientIntake">
+    SELECT
+      pi.intake_id, pi.appointment_id, pi.complaint, pi.notes, pi.diagnosis, pi.follow_up_plan
+    FROM PatientIntake pi
+    LEFT JOIN Appointment a ON pi.appointment_id = a.appointment_id
+    WHERE
+    a.patient_id = #{patientId}
+  </select>
+  <select id="getIntakeHistoryByPatientId"
+          resultType="com.team10.smarthospital.model.response.IntakeHistory">
+    SELECT
+      pi.intake_id, pi.appointment_id, pi.complaint, pi.notes, pi.diagnosis, pi.follow_up_plan
+    FROM PatientIntake pi
+    LEFT JOIN Appointment a ON pi.appointment_id = a.appointment_id
+    WHERE
+      a.patient_id = #{patientId}
+  </select>
+</mapper>
