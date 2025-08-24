@@ -26,15 +26,14 @@ CREATE TABLE `Appointment` (
   `appointment_id` char(36) NOT NULL DEFAULT (uuid()),
   `patient_id` char(36) NOT NULL,
   `provider_id` char(36) NOT NULL,
-  `start_time` datetime NOT NULL,
-  `end_time` datetime NOT NULL,
+  `date` date NOT NULL,
+  `appoint_time` tinyint NOT NULL,
   `status` tinyint NOT NULL DEFAULT '0',
-  `cancellation_reason` varchar(255) DEFAULT NULL,
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`appointment_id`),
-  UNIQUE KEY `uk_patient_time` (`patient_id`,`start_time`,`end_time`),
-  UNIQUE KEY `uk_provider_time` (`provider_id`,`start_time`,`end_time`),
+  UNIQUE KEY `uk_patient_time` (`patient_id`,`date`,`appoint_time`),
+  UNIQUE KEY `uk_provider_time` (`provider_id`,`date`,`appoint_time`),
   CONSTRAINT `Appointment_ibfk_1` FOREIGN KEY (`patient_id`) REFERENCES `User` (`user_id`),
   CONSTRAINT `Appointment_ibfk_2` FOREIGN KEY (`provider_id`) REFERENCES `User` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -272,4 +271,4 @@ CREATE TABLE `User` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-21 16:58:33
+-- Dump completed on 2025-08-24 17:15:47
