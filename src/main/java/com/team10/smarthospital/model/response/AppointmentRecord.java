@@ -12,6 +12,8 @@ public class AppointmentRecord {
     private LocalDate date;
     private String providerName;
     private String patientName;
+    private String patientCode;
+    private String patientEmail;
     private String status;
     private Integer timeCode;
     private String startTime;

@@ -1,7 +1,9 @@
 package com.team10.smarthospital.service;
 
 import com.team10.smarthospital.mapper.AppointmentMapper;
+import com.team10.smarthospital.mapper.PatientMapper;
 import com.team10.smarthospital.model.entity.Appointment;
+import com.team10.smarthospital.model.entity.Patient;
 import com.team10.smarthospital.model.entity.User;
 import com.team10.smarthospital.model.enums.AppointTime;
 import com.team10.smarthospital.model.enums.AppointmentStatus;
@@ -22,6 +24,8 @@ import java.util.function.Function;
 public class AppointmentService {
 
     @Autowired private UserService userService;
+
+    @Autowired private PatientMapper patientMapper;
 
     @Autowired private AppointmentMapper appointmentMapper;
 
@@ -113,6 +117,11 @@ public class AppointmentService {
             if (ResponseCode.SUCCESS.getCode().equals(patientBaseResponse.getCode())) {
                 User patient = patientBaseResponse.getData();
                 record.setPatientName(patient.getFullName());
+                record.setPatientEmail(patient.getEmail());
+                Patient p = patientMapper.getUserByUserId(patient.getUserId());
+                if (p != null) {
+                    record.setPatientCode(p.getPatientCode());
+                }
             }
             AppointmentStatus status = AppointmentStatus.getStatusByCode(appointment.getStatus());
             record.setStatus(status != null ? status.getStatusName() : null);
