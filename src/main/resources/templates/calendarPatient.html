@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coming Soon - Patient Portal</title>
+  <link rel="stylesheet" href="/css/comingSoon.css" />
+  <!-- Web font: Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<div class="layout-container">
+  <!-- Patient Sidebar: Left vertical navigation -->
+  <div th:replace="components/sidebar :: sidebar('calendar')"></div>
+
+  <!-- Top Navigation (Shared Component) -->
+  <header th:replace="components/top-nav :: top-nav('Calendar')"></header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Coming Soon Content -->
+    <section class="coming-soon-content">
+      <div class="coming-soon-container">
+        <!-- Coming Soon Icon -->
+        <div class="coming-soon-icon">
+          <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="60" fill="#7C3AED"/>
+            <path d="M40 45L50 35L70 55L80 45" stroke="#FCD34D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M40 65L50 55L70 75L80 65" stroke="#FCD34D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M40 85L50 75L70 95L80 85" stroke="#FCD34D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <!-- Coming Soon Text -->
+        <h1 class="coming-soon-title">Coming Soon</h1>
+        <p class="coming-soon-subtitle">This feature is currently under development.</p>
+        <p class="coming-soon-description">Looking forward to serving you soon!</p>
+
+        <!-- Optional: Back to Home Button -->
+        <div class="coming-soon-actions">
+          <a href="/patient/patientDashboard" class="back-to-home-btn">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.5 15L2.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2.5 10H17.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Back to Home
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+</body>
+</html>
