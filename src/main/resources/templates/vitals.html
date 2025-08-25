@@ -16,7 +16,7 @@
   <!-- Main Content Area -->
   <main class="main-content">
     <!-- Top Navigation -->
-    <header th:replace="layouts/sharedLayout :: topNav"></header>
+    <header th:replace="components/top-navD :: top-nav('Patient Vitals')"></header>
 
     <!-- Patient Info Card -->
     <section th:replace="layouts/sharedLayout :: patientCard"></section>
@@ -144,18 +144,18 @@
 document.addEventListener('DOMContentLoaded', function() {
     const vitalsForm = document.getElementById('vitalsForm');
     const saveBtn = document.querySelector('.save-btn');
-    
+
     // Form submission handler
     vitalsForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        
+
         // Show loading state
         saveBtn.textContent = 'Saving...';
         saveBtn.disabled = true;
-        
+
         // Get form data
         const formData = new FormData(vitalsForm);
-        
+
         // Send to server
         fetch('/vitals/save', {
             method: 'POST',
@@ -183,26 +183,26 @@ document.addEventListener('DOMContentLoaded', function() {
             saveBtn.disabled = false;
         });
     });
-    
+
     // Auto-calculate BMI when weight or height changes
     const weightInput = document.getElementById('weight');
     const heightInput = document.getElementById('height');
     const bmiInput = document.getElementById('bmi');
-    
+
     function calculateBMI() {
         const weight = parseFloat(weightInput.value);
         const height = parseFloat(heightInput.value);
-        
+
         if (weight && height && height > 0) {
             const heightInMeters = height / 100; // Convert cm to meters
             const bmi = weight / (heightInMeters * heightInMeters);
             bmiInput.value = bmi.toFixed(1);
         }
     }
-    
+
     weightInput.addEventListener('input', calculateBMI);
     heightInput.addEventListener('input', calculateBMI);
-    
+
     // Blood pressure validation
     const bloodPressureInput = document.getElementById('blood-pressure');
     bloodPressureInput.addEventListener('input', function() {
@@ -215,13 +215,13 @@ document.addEventListener('DOMContentLoaded', function() {
             this.setCustomValidity('');
         }
     });
-    
+
     // Update recorded time
     function updateRecordedTime() {
         const now = new Date();
-        const options = { 
-            day: 'numeric', 
-            month: 'long', 
+        const options = {
+            day: 'numeric',
+            month: 'long',
             year: 'numeric',
             hour: '2-digit',
             minute: '2-digit'
@@ -229,7 +229,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const timeString = now.toLocaleDateString('en-US', options);
         document.querySelector('.record-time span').textContent = timeString;
     }
-    
+
     // Show notification function
     function showNotification(message, type) {
         // Create notification element
@@ -250,15 +250,15 @@ document.addEventListener('DOMContentLoaded', function() {
             transform: translateX(100%);
             transition: all 0.3s ease;
         `;
-        
+
         document.body.appendChild(notification);
-        
+
         // Animate in
         setTimeout(() => {
             notification.style.opacity = '1';
             notification.style.transform = 'translateX(0)';
         }, 10);
-        
+
         // Remove after 3 seconds
         setTimeout(() => {
             notification.style.opacity = '0';

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="top-nav(pageTitle)">
+  <header th:fragment="topNav" class="top-nav">
+    <!-- Dynamic page title (defaults to "Page Title") -->
+    <h1 class="page-title" th:text="${pageTitle} ?: 'Page Title'">Page Title</h1>
+
+    <!-- Icons on the right: notifications + profile -->
+    <div class="header-icons-container">
+      <div class="notification-container">
+        <img th:src="@{/SharedLayoutImages/notificationIcon.svg}" alt="Notifications" class="notification-icon" id="notificationIcon">
+
+        <!-- Notification Popup -->
+        <div class="notification-popup" id="notificationPopup">
+          <div class="notification-header">
+            <h3>Notifications</h3>
+            <button class="close-btn" id="closeNotifications">&times;</button>
+          </div>
+          <div class="notification-list">
+            <div class="notification-item unread">
+              <div class="notification-content">
+                <div class="notification-title">Patient Harry Potter's vitals updated</div>
+                <div class="notification-time">2 minutes ago</div>
+              </div>
+              <div class="notification-dot"></div>
+            </div>
+            <div class="notification-item unread">
+              <div class="notification-content">
+                <div class="notification-title">New appointment scheduled for 3:00 PM</div>
+                <div class="notification-time">15 minutes ago</div>
+              </div>
+              <div class="notification-dot"></div>
+            </div>
+            <div class="notification-item">
+              <div class="notification-content">
+                <div class="notification-title">Patient Mary Johnson's prescription ready</div>
+                <div class="notification-time">1 hour ago</div>
+              </div>
+            </div>
+            <div class="notification-item">
+              <div class="notification-content">
+                <div class="notification-title">System maintenance completed</div>
+                <div class="notification-time">2 hours ago</div>
+              </div>
+            </div>
+          </div>
+          <div class="notification-footer">
+            <button class="mark-all-read">Mark all as read</button>
+            <button class="view-all">View all notifications</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-container">
+        <img alt="Doctor Profile" class="doctor-profile" id="doctorProfileIcon">
+
+        <!-- Doctor Profile Popup -->
+        <div class="profile-popup" id="profilePopup">
+          <div class="profile-header">
+            <img id="profile-avatar"  alt="Doctor Profile" class="profile-avatar">
+            <div class="profile-info">
+              <h3 id="profile-name">Dr. Sarah Johnson</h3>
+              <p id="profile-email">Cardiologist</p>
+            </div>
+            <button class="close-btn" id="closeProfile">&times;</button>
+          </div>
+          <div class="profile-menu">
+            <div class="profile-menu-item" data-action="profile">
+              <img th:src="@{/SharedLayoutImages/profileIcon.svg}" alt="Profile" class="menu-icon">
+              <span>My Profile</span>
+            </div>
+            <div class="profile-divider"></div>
+            <div class="profile-menu-item logout" data-action="logout">
+              <img th:src="@{/SharedLayoutImages/logoutIcon.svg}" alt="Logout" class="menu-icon">
+              <span>Log Out</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <script src="/js/top-navD.js"></script>
+</div>
+</html>
