@@ -1,0 +1,36 @@
+\subsection{System Overview}
+\label{subsec:reservation-overview}
+
+According to section 3.4.1, a medical platform can choose traditional and dynamic interactive systems. Traditional form-based technology usually leads to lower user participation and a relatively low completion rate of reservations. Therefore, we chose to implement a system based on RESTful APIs and an instant, dynamic, and interactive updates system at the end.
+
+The whole process of implementation includes three main phases: First, integrate spring-boot-starter-web and spring-boot-starter-security dependencies; Second, build RESTful API endpoints; Lastly, before operating the interface, add AJAX functionality on the frontend to support dynamic interactions with Thymeleaf templates.
+
+\subsection{Technical Implementation}
+\label{subsec:reservation-technical}
+
+Spring-boot-starter-web offers Spring MVC and embedded web server functionality~\cite{spring-mvc}, which must be added as a dependency in the project, in order to construct the Web ability of the Spring Boot application. Spring-boot-starter-security then provides authentication and check function~\cite{spring-security}. The whole reservation system operates with four core components: patient authentication, reservation API, run-time active calendar, and complete reserve life-cycle management. Based on safety considerations, Spring Security requires operators to implement the right management that is correctly based on role-based control and session management, not just based on basic authorisation. The following code demonstrates the implementation of role-based access control:
+
+\begin{lstlisting}[language=Java, caption=Role-based Access Control Implementation]
+@PreAuthorize("hasRole('PATIENT')")
+public BaseResponse<List<AppointmentRecord>> getPatientUpcoming(
+    @AuthenticationPrincipal UserDetails userDetails) {
+    return appointmentService.getPatientUpcoming(userDetails.getUsername());
+}
+\end{lstlisting}
+
+\subsection{Database Operations}
+\label{subsec:reservation-database}
+
+This reservation system includes multiple critical functions, including two appointment types (doctor consultations and vital signs checkups), dynamic department and doctor choice, real-time form validation, and complete observation history check. The system, through MyBatis, operates databases and uses optimised SQL queries based on UUID-based primary keys to support scalability~\cite{mybatis}. The database operations are implemented using MyBatis, as shown below:
+
+\begin{lstlisting}[language=SQL, caption=Appointment Insert Query]
+<insert id="insertAppointment">
+    INSERT INTO Appointment
+    (appointment\_id, patient\_id, provider\_id, `date`, appoint\_time, status)
+    VALUES
+    (uuid(), \#{patientId}, \#{providerId}, \#{date}, \#{appointTime}, \#{status})
+</insert>
+\end{lstlisting}
+
+The complete function was implemented in a GitHub repository, with comprehensive appointment booking, management, and calendar features.
+
