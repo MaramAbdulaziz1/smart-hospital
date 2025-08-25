@@ -1,0 +1,28 @@
+%
+% File: chap03-04.tex
+% Author: LEONA
+% Description:
+% 3.4 Authentication and Authorization Function
+%  3.4.1 Overview
+%  3.4.2 Implementation
+%  3.4.3 Password Protection
+%  3.4.5 Role-Based Authorization
+%  3.4.6 API Summary
+%  \clearpage \newpage
+
+\paragraph{3.4.1 Overview}\mbox{}\\
+
+When using this virtual hospital system, users are required to log in first, after which different functions will be displayed based on their roles. Patients can make or cancel appointments. Doctors can check schedules and contact patients. We use SpringSecurity to manage login status and permission control, while retaining a custom login API to match the page flow.
+
+\paragraph{3.4.2 Implementation}\mbox{}\\
+
+Login and logout are inside UserLoginController. For login, the controller use LoginService to check username and password from request. If correct, the service make an Authentication object and put into SecurityContextHolder of Spring Security. Then browser get a session cookie (like JSESSIONID) to keep the user login. For logout, we call SecurityContextLogoutHandler.logout(...) to clear the context and make the session not valid.
+
+\paragraph{3.4.3 Password Protection}\mbox{}\\
+
+We do not keep the real password in the database. Before saving, the password will be hashed, so even if someone see the database, they only find some random string. When user try to login, the system hash the input password again and check if it is same with the stored one. Because medical data is very sensitive, we add this function to protect user account. This way is also a common practice in security and can help to keep the information safe.
+
+\paragraph{3.4.5 Role-Based Authorization}\mbox{}\\
+
+We separate access by URL patterns and roles. Patient features are under /patient/**, and doctor features are under /doctor/**. Spring Security checks the role before the controller executes. If needed, we can add method-level rules such as @PreAuthorize("hasRole('DOCTOR')") for endpoints that are doctor-only. This design keeps the front-end workflow simple while the back-end enforces permissions.
+

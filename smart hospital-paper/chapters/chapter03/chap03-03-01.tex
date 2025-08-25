@@ -1,0 +1,18 @@
+%
+% File: chap03-03-01.tex
+% Author: LEONA
+% Description:
+% 3.4 Setup and Tools
+%  Authentication
+%  API
+
+\paragraph{Authentication}\mbox{}\\
+
+In this system, user need to pass authentication to make sure that people who try to access the medical information are really verified. The project use Spring Security to do the authentication inside the system. This way, the system has full control on login and session, and user data can be keep safe in the application. The password is saved in hashed form, and role based access is used so doctors and patients only can use the functions that are for them. By this, the system do not need to depend on other provider and it also give a safe base for more authorization functions in future.
+
+\paragraph{API}\mbox{}\\
+
+An API is mainly a tool that allows different parts of one system to talk with each other and share information. In this project, the API connect the website front side with the server. With this, users can log in, make appointment, or search hospital details. The design is based on REST style. That mean each request is quite simple and not depend on other requests. Because of this, the system become easier to manage and can be changed in the future when needed.
+
+The API was developed by Spring Boot, which is a very common Java framework for web application. It makes developer build endpoints more quickly and not need to write too much extra code. The project uses normal HTTP methods. For example, GET is to read some data and POST is to add new data. The response also returns status code to show if the action is success or error. In this way, the whole system keeps simple and not so difficult for maintain. Later, it also possible to add more functions, like login security and control of access.
+
