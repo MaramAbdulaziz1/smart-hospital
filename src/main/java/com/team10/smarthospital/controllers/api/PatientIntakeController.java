@@ -21,8 +21,8 @@ public class PatientIntakeController {
     @GetMapping("/history")
     public BaseResponse<List<IntakeHistory>> getPatientHistory(
             @AuthenticationPrincipal UserDetails userDetails,
-            @RequestParam("email") String email) {
-        return patientIntakeService.getPatientHistory(userDetails.getUsername(), email);
+            @RequestParam("appointmentId") String appointmentId) {
+        return patientIntakeService.getPatientHistory(userDetails.getUsername(), appointmentId);
     }
 
     @PostMapping("/add")

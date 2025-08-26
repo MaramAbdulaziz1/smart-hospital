@@ -93,7 +93,7 @@
     </section>
   </main>
 </div>
-
+<script th:src="@{/js/sharedLayout.js}"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
       const urlParams = new URLSearchParams(window.location.search);
@@ -104,15 +104,15 @@
           return;
       }
 
-      fetchPatientProfile(patientEmail);
+      fetchPatientProfile(patientAppointmentId);
 
-      fetchPatientHistory(patientEmail);
+      fetchPatientHistory(patientAppointmentId);
   });
 
-  function fetchPatientProfile(email) {
+  function fetchPatientProfile(patientAppointmentId) {
       showLoadingProfile();
 
-      fetch(`/profile/patient?email=${encodeURIComponent(email)}`)
+      fetch(`/profile/patient?appointmentId=${encodeURIComponent(patientAppointmentId)}`)
           .then(response => {
               if (!response.ok) {
                   throw new Error('Network response was not ok');
@@ -132,8 +132,8 @@
           });
   }
 
-  function fetchPatientHistory(email) {
-      fetch(`/intake/history?email=${encodeURIComponent(email)}`)
+  function fetchPatientHistory(patientAppointmentId) {
+      fetch(`/intake/history?appointmentId=${encodeURIComponent(patientAppointmentId)}`)
           .then(response => {
               if (!response.ok) {
                   throw new Error('Network response was not ok');

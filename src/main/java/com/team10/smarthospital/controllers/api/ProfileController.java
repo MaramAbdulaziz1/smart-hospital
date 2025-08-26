@@ -7,6 +7,7 @@ import com.team10.smarthospital.model.response.NurseProfileResponse;
 import com.team10.smarthospital.model.response.PatientProfileResponse;
 import com.team10.smarthospital.service.DoctorProfileService;
 import com.team10.smarthospital.service.NurseProfileService;
+import com.team10.smarthospital.service.PatientProfileDocService;
 import com.team10.smarthospital.service.PatientProfileService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +32,13 @@ public class ProfileController {
 
     @Autowired private NurseProfileService nurseProfileService;
 
+    @Autowired private PatientProfileDocService patientProfileDocService;
+
     @GetMapping("/patient")
     @PreAuthorize("hasAnyRole('DOCTOR', 'NURSE')")
     public BaseResponse<PatientProfileResponse> getPatientProfile(
-            @RequestParam("email") String email) {
-        return patientProfileService.getUserProfile(email);
+            @RequestParam("appointmentId") String appointmentId) {
+        return patientProfileDocService.getUserProfile(appointmentId);
     }
 
     @GetMapping("/me/patient")
