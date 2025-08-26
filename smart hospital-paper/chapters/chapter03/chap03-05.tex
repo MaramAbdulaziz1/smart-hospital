@@ -5,23 +5,52 @@ According to section 3.4.1, a medical platform can choose traditional and dynami
 
 The whole process of implementation includes three main phases: First, integrate spring-boot-starter-web and spring-boot-starter-security dependencies; Second, build RESTful API endpoints; Lastly, before operating the interface, add AJAX functionality on the frontend to support dynamic interactions with Thymeleaf templates.
 
-\subsection{Technical Implementation}
-\label{subsec:reservation-technical}
+\subsection{Appointment Lifecycle and Status Management}
+\label{subsec:appointment-lifecycle}
 
-Spring-boot-starter-web offers Spring MVC and embedded web server functionality~\cite{spring-mvc}, which must be added as a dependency in the project, in order to construct the Web ability of the Spring Boot application. Spring-boot-starter-security then provides authentication and check function~\cite{spring-security}. The whole reservation system operates with four core components: patient authentication, reservation API, run-time active calendar, and complete reserve life-cycle management. Based on safety considerations, Spring Security requires operators to implement the right management that is correctly based on role-based control and session management, not just based on basic authorisation. The following code demonstrates the implementation of role-based access control:
+The appointment system implements the whole life cycle, which includes four different statuses. The system supports two types of reservations: doctor clinic and nurse vitals check, and it focuses on different designs' appointment rules and authorisation.
 
-\begin{lstlisting}[language=Java, caption=Role-based Access Control Implementation]
+Appointment status cycle:
+\begin{itemize}
+    \item Upcoming (Initial Status): Patient creates an appointment $\rightarrow$ next step: cancelled
+    \item Complete (First Status): Appointment has been completed
+    \item Cancelled (Second Status): Appointment could be cancelled by the patients
+    \item Expired (Final Status): Appointment has expired due to a past date
+\end{itemize}
+
+Status transition rules:
+\begin{itemize}
+    \item Upcoming status can be transformed to cancelled
+    \item Cancelled is the final status, can't be transformed again
+    \item Doctors can view their appointments on the dashboard
+\end{itemize}
+
+\subsection{Booking Process and Conflict Prevention}
+\label{subsec:booking-process}
+
+To ensure appointment accessibility, this system designs a complete conflict prevention mechanism. Before reservation confirmation, the system will implement multiple authorisation checks:
+
+Appointment process:
+\begin{itemize}
+    \item Patient authorisation check: use @AuthenticationPrincipal to authorise the patient role and login status.
+    \item Database constraint validation: prevent double booking through unique key constraints.
+    \item uk\_patient\_time: prevents the same patient from booking multiple appointments at the same time
+    \item uk\_provider\_time: prevents the same provider from having multiple appointments at the same time
+\end{itemize}
+
+The code below showcases the conflict observation appointment flows:
+
+\begin{lstlisting}[language=Java, caption=Appointment Booking Implementation]
+@PostMapping("/book")
 @PreAuthorize("hasRole('PATIENT')")
-public BaseResponse<List<AppointmentRecord>> getPatientUpcoming(
-    @AuthenticationPrincipal UserDetails userDetails) {
-    return appointmentService.getPatientUpcoming(userDetails.getUsername());
+public BaseResponse<String> bookAppointment(
+    @AuthenticationPrincipal UserDetails userDetails,
+    @RequestBody AppointmentBook appointmentBook) {
+    return appointmentService.book(userDetails.getUsername(), appointmentBook);
 }
 \end{lstlisting}
 
-\subsection{Database Operations}
-\label{subsec:reservation-database}
-
-This reservation system includes multiple critical functions, including two appointment types (doctor consultations and vital signs checkups), dynamic department and doctor choice, real-time form validation, and complete observation history check. The system, through MyBatis, operates databases and uses optimised SQL queries based on UUID-based primary keys to support scalability~\cite{mybatis}. The database operations are implemented using MyBatis, as shown below:
+Mapping MyBatis SQL insert is below:
 
 \begin{lstlisting}[language=SQL, caption=Appointment Insert Query]
 <insert id="insertAppointment">
@@ -32,5 +61,30 @@ This reservation system includes multiple critical functions, including two appo
 </insert>
 \end{lstlisting}
 
-The complete function was implemented in a GitHub repository, with comprehensive appointment booking, management, and calendar features.
+\subsection{Cancellation Function}
+\label{subsec:cancellation-function}
+
+The cancellation system allows a patient to cancel an appointment after authorisation, and then the system updates the appointment status to cancelled.
+
+Cancellation flow:
+\begin{itemize}
+    \item Authorisation check: check that the user who has the right to cancel.
+    \item Status check: check that the appointment is in a cancellable state.
+    \item Status update: update appointment status to cancelled.
+\end{itemize}
+
+Database operations through MyBatis implementation, and use the optimised SQL queries and UUID primary key to support the system scalability:
+
+\begin{lstlisting}[language=SQL, caption=Appointment Status Update Query]
+<update id="updateStatusByPatientId">
+    UPDATE Appointment
+    SET status = \#{status}
+    WHERE
+        appointment\_id = \#{appointmentId}
+        AND patient\_id = \#{patientId}
+        AND status = 0
+</update>
+\end{lstlisting}
+
+This appointment system ensures a reliable appointment process through database restrictions and provides a seamless user experience while maintaining data integrity and system scalability.
 

@@ -3,7 +3,7 @@ There are three main programming languages we considered for the backend: Java, 
 
 We therefore chose Java with Spring Boot. Java's static typing and compile-time checks help us model clinical data more safely. Spring provides built-in support for REST endpoints and data access, and Maven keeps builds simple. This stack let us deliver features steadily within the course schedule.
 
-\subsection{Patient Appointment Management Functions}
+\subsection{Patient Appointment Management}
 \label{subsec:patient-appointment-management}
 
 A medical website can use different framework methods to implement the function of patient reservations. The traditional way is to use a static form-based booking system; therefore, a patient can complete predefined forms by a standard sent by HTTP request to the system, which is an HTML Form~\cite{mdn-html-forms}. These methods are relatively simpler in operation and development, only using less frontend complexity and having the server directly handle them~\cite{spring-boot-web}. The alternative way is to automatically use modern medical systems that could dynamically react to reservation management systems and obtain integrated methods that interactively renew and calendar. These advanced systems can immediately provide user feedback, check the available timeline, and support the full reservation life cycle management, like digital health guidelines~\cite{who-digital-health}. Although this needs a higher advanced frontend operation (JavaScript Framework) and support of backend API, this can still be really great in reducing the administrative workloads.
