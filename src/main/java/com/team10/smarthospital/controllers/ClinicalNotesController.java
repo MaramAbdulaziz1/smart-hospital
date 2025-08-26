@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class PatientProfileController {
+public class ClinicalNotesController {
 
-    @GetMapping("/patientProfile")
-    public String patientProfilePage(
+    @GetMapping("/clinicalNotes")
+    public String IntakePage(
             @RequestParam(name = "appointmentId", required = true) String appointmentId,
             Model model) {
         model.addAttribute("appointmentId", appointmentId);
-        model.addAttribute("pageTitle", "Patient Profile");
-        return "patientProfile";
+        model.addAttribute("pageTitle", "Clinical Notes");
+        return "clinicalNotes";
     }
 }

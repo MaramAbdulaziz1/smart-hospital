@@ -11,7 +11,7 @@
 
 <div class="layout-container dashboard-page">
   <!-- Sidebar -->
-  <aside th:replace="~{layouts/sharedLayout :: sidebar (activePage='patientProfile')}"></aside>
+  <aside th:replace="~{layouts/sharedLayout :: sidebar(activePage='patientProfile', appointmentId=${appointmentId})}"></aside>
 
   <!-- Main Content -->
   <main class="main-content">
@@ -97,10 +97,10 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
       const urlParams = new URLSearchParams(window.location.search);
-      const patientEmail = urlParams.get('email');
+      const patientAppointmentId = urlParams.get('appointmentId');
 
-      if (!patientEmail) {
-          showError('No patient email provided');
+      if (!patientAppointmentId) {
+          showError('No appointmentId provided');
           return;
       }
 

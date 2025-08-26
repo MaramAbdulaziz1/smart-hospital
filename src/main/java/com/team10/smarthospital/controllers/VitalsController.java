@@ -1,6 +1,7 @@
 package com.team10.smarthospital.controllers;
 
 import com.team10.smarthospital.model.Vitals;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,14 +21,16 @@ public class VitalsController {
     private static final List<Vitals> vitalsHistory = new ArrayList<>();
 
     @GetMapping("/vitals")
-    public String showVitalsPage(Model model) {
+    public String showVitalsPage(
+            @RequestParam(name = "appointmentId", required = true) String appointmentId,
+            Model model) {
+        model.addAttribute("appointmentId", appointmentId);
         model.addAttribute("pageTitle", "Patient Vitals");
-        
         // Add current time for display
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy, HH:mm");
         model.addAttribute("currentTime", now.format(formatter));
-        
+
         return "vitals";
     }
 
@@ -43,11 +46,11 @@ public class VitalsController {
             @RequestParam("bloodGlucose") String bloodGlucose,
             @RequestParam("oxygenSaturation") String oxygenSaturation,
             @RequestParam("respiratoryRate") String respiratoryRate) {
-        
+
         try {
             // Create new vitals record
             Vitals vitals = new Vitals("HAT17653D", "Harry Potter", "Dr. Sarah Moyo");
-            
+
             // Parse and set values (handle empty strings)
             vitals.setHeartRate(parseDoubleOrNull(heartRate));
             vitals.setBloodPressure(bloodPressure.isEmpty() ? null : bloodPressure);
@@ -58,10 +61,10 @@ public class VitalsController {
             vitals.setBloodGlucose(parseDoubleOrNull(bloodGlucose));
             vitals.setOxygenSaturation(parseDoubleOrNull(oxygenSaturation));
             vitals.setRespiratoryRate(parseDoubleOrNull(respiratoryRate));
-            
+
             // Add to history
             vitalsHistory.add(vitals);
-            
+
             return "success";
         } catch (Exception e) {
             return "error: " + e.getMessage();

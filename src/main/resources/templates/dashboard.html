@@ -115,7 +115,7 @@
                   <div class="default-text">${formatDate(appointment.date)}</div>
                   <div class="default-text">${appointment.startTime || 'N/A'}</div>
                   <div class="button-group">
-                      <a href="/patientProfile?email=${encodeURIComponent(appointment.patientEmail)}" class="btn filled">Profile</a>
+                      <a href="/patientProfile?appointmentId=${encodeURIComponent(appointment.appointmentId)}" class="btn filled">Profile</a>
                   </div>
               `;
 
