@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Smart Hospital - Account Settings</title>
+  <title th:text="${pageTitle}">Smart Hospital - Account Settings</title>
   <link rel="stylesheet" th:href="@{/css/sharedLayout.css}">
   <link rel="stylesheet" th:href="@{/css/doctorAccount.css}">
 </head>
@@ -17,107 +17,93 @@
   <div class="main-content">
     <!-- Top Navigation -->
     <header th:replace="components/top-navD :: top-nav('My Profile')"></header>
+
+    <!-- Success/Error Messages -->
+    <div id="successMessage" class="success-message"></div>
+    <div id="errorMessage" class="error-message"></div>
+
     <!--doctor information-->
     <!-- Profile Section -->
     <section class="profile-info1">
       <div class="profile-left1">
-        <div class="profile-avatar1">👤</div>
+        <img class="profile-avatar1" th:src="${doctor.avatarBase64}" alt="Avatar"/>
         <div class="profile-details1">
-          <h3 class="profile-name1">Ginny Weasley</h3>
-          <div class="profile-title1">Doctor</div>
-          <div class="profile-location1">Bristol, United Kingdom</div>
+          <h3 class="profile-name1" th:text="${doctor.firstName + ' ' + doctor.lastName}">Ginny Weasley</h3>
+          <div class="profile-title1" th:text="${doctor.email}">Doctor@doc.com</div>
+          <div class="profile-location1" th:text="${doctor.location}">Bristol, United Kingdom</div>
         </div>
-      </div>
-      <div class="profile-right1">
-        <button class="edit-photo-btn">Edit Photo</button>
       </div>
     </section>
 
     <!-- Personal Information Section -->
     <section class="info-section">
-      <div class="section-header">
-        <div class="section-title">Personal Information</div>
-        <button class="edit-btn" onclick="toggleEdit('personal')">Edit</button>
-      </div>
 
-      <form id="personalForm">
+      <form id="personalForm" onsubmit="return updatePersonalInfo(event)">
         <div class="info-grid">
           <div class="info-field">
             <div class="info-label">First Name</div>
-            <input type="text" name="firstName" value="Ginny" readonly>
+            <input type="text" name="firstName" th:value="${doctor.firstName}" class="readonly-field" readonly>
           </div>
           <div class="info-field">
             <div class="info-label">Last Name</div>
-            <input type="text" name="lastName" value="Weasley" readonly>
+            <input type="text" name="lastName" th:value="${doctor.lastName}" class="readonly-field" readonly>
           </div>
           <div class="info-field">
             <div class="info-label">Date of Birth</div>
-            <input type="text" value="23/08/1999" readonly>
+            <input type="text" th:value="${doctor.birth}" class="readonly-field" readonly>
           </div>
           <div class="info-field">
             <div class="info-label">Email Address</div>
-            <input type="email" name="email" value="weasley666@gmail.com" readonly>
+            <input type="email" name="email" th:value="${doctor.email}" class="readonly-field" readonly>
           </div>
           <div class="info-field">
             <div class="info-label">Phone Number</div>
-            <input type="tel" name="phoneNumber" value="+44 07411 234567" readonly>
+            <input type="tel" name="phoneNumber" th:value="${doctor.mobileNumber}" class="readonly-field" readonly>
           </div>
           <div class="info-field">
             <div class="info-label">Gender</div>
-            <select name="gender" disabled>
-              <option value="Female" selected>Female</option>
-              <option value="Male">Male</option>
-              <option value="Other">Other</option>
-            </select>
+            <input type="text" name="gender" th:value="${doctor.genderName}" class="readonly-field" readonly>
           </div>
         </div>
         <div class="form-actions" id="personalActions">
           <button type="button" onclick="cancelEdit('personal')" class="cancel-btn">Cancel</button>
-          <button type="submit" class="save-btn">Save</button>
+          <button type="submit" class="save-btn">Save Changes</button>
         </div>
       </form>
     </section>
 
     <!-- Hospital Information Section -->
     <section class="info-section">
-      <div class="section-header">
-        <div class="section-title">Hospital Information</div>
-        <button class="edit-btn" onclick="toggleEdit('hospital')">Edit</button>
-      </div>
 
-      <form id="hospitalForm">
+      <form id="hospitalForm" onsubmit="return updateHospitalInfo(event)">
         <div class="info-grid">
           <div class="info-field">
             <div class="info-label">Position</div>
-            <input type="text" value="Doctor" readonly>
+            <input type="text" th:value="Doctor" class="readonly-field" readonly>
           </div>
           <div class="info-field">
             <div class="info-label">Department</div>
-            <input type="text" value="General Medicine" readonly>
+            <input type="text" name="department" th:value="${doctor.departmentName}" class="readonly-field" readonly>
           </div>
           <div class="info-field">
             <div class="info-label">Employee ID</div>
-            <input type="text" value="GD68894300" readonly>
+            <input type="text" th:value="${doctor.employeeId}" class="readonly-field" readonly>
           </div>
           <div class="info-field">
             <div class="info-label">Work Location</div>
-            <input type="text" value="Bristol Hospital, UK" readonly>
-          </div>
-          <div class="info-field">
-            <div class="info-label">Date Joined</div>
-            <input type="text" value="01/06/2021" readonly>
+            <input type="text" th:value="${doctor.location}" class="readonly-field" readonly>
           </div>
         </div>
         <div class="form-actions" id="hospitalActions">
           <button type="button" onclick="cancelEdit('hospital')" class="cancel-btn">Cancel</button>
-          <button type="submit" class="save-btn">Save</button>
+          <button type="submit" class="save-btn">Save Changes</button>
         </div>
       </form>
     </section>
-</div>
+  </div>
 
-<!-- JavaScript Files -->
-<script th:src="@{/js/sharedLayout.js}"></script>
-<script th:src="@{/js/doctorAccount.js}"></script>
+  <!-- JavaScript Files -->
+  <script th:src="@{/js/sharedLayout.js}"></script>
+  <script th:src="@{/js/doctorAccount.js}"></script>
 </body>
 </html>

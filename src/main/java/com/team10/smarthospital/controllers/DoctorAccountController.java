@@ -1,38 +1,31 @@
 package com.team10.smarthospital.controllers;
 
+import com.team10.smarthospital.model.response.BaseResponse;
+import com.team10.smarthospital.model.response.DoctorProfileResponse;
+import com.team10.smarthospital.service.DoctorProfileService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class DoctorAccountController {
 
-  @GetMapping("/doctorAccount")
-  public String accountPage(Model model) {
+    @Autowired private DoctorProfileService doctorProfileService;
 
-    model.addAttribute("pageTitle", "My Profile");
-    return "doctorAccount";
-  }
-
-  @PostMapping("/account/update")
-  public String updateAccount(
-    @RequestParam String firstName,
-    @RequestParam String lastName,
-    @RequestParam String email,
-    @RequestParam String phoneNumber,
-    @RequestParam String gender,
-    Model model) {
-
-    // Add update logic in here
-    // for example：use service update database
-
-    // readd page title
-    model.addAttribute("pageTitle", "Account Settings");
-
-    // Add Success news
-    model.addAttribute("message", "Account updated successfully!");
-    return "redirect:/account";
-  }
+    @GetMapping("/doctorAccount")
+    public String accountPage(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+        BaseResponse<DoctorProfileResponse> doctorProfile =
+                doctorProfileService.getUserProfile(userDetails.getUsername());
+        DoctorProfileResponse doctorProfileData = doctorProfile.getData();
+        if (doctorProfileData == null) {
+            doctorProfileData = new DoctorProfileResponse();
+        }
+        model.addAttribute("doctor", doctorProfileData);
+        model.addAttribute("pageTitle", "My Profile");
+        return "doctorAccount";
+    }
 }
