@@ -16,8 +16,8 @@
     <main class="main-content">
         <!-- Top Navigation -->
       <header th:replace="components/top-navD :: top-nav('Clinical Notes')"></header>
-        <!-- Patient Info Card -->
-        <section th:replace="~{layouts/sharedLayout :: patientCard}"></section>
+      <!-- Patient Info Card -->
+      <section th:replace="components/patientCard :: patientCard(${appointmentId})"></section>
         <section class="page-content">
             <!--intake section-->
             <div class="form-column">

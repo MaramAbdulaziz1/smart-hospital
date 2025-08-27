@@ -490,6 +490,10 @@ html, body {
   width: 200px;
 }
 
+.phone-box{
+  width: 150px;
+}
+
 .vitals-content .patient-card .address-box,
 .content .patient-card .address-box {
   width: 200px;

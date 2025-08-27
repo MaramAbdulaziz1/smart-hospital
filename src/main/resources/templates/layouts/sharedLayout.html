@@ -36,7 +36,7 @@
     </div>
 
     <div class="tab" th:classappend="${activePage == 'vitals'} ? 'active'">
-      <a th:href="@{/vitals(appointmentId=${appointmentId})}">
+      <a th:href="@{/vitals-doctor(appointmentId=${appointmentId})}">
         <img th:src="@{/SharedLayoutImages/vitalsIcon.svg}" alt="Vitals Icon" class="tab-icon">
         <span>Vitals</span>
       </a>

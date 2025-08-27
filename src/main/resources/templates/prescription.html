@@ -17,7 +17,7 @@
     <!-- Top Navigation -->
     <header th:replace="components/top-navD :: top-nav('Patient Prescription')"></header>
     <!-- Patient Info Card -->
-    <section th:replace="~{layouts/sharedLayout :: patientCard}"></section>
+    <section th:replace="components/patientCard :: patientCard(${appointmentId})"></section>
 
     <!-- Page-specific content -->
     <section class="page-content">
