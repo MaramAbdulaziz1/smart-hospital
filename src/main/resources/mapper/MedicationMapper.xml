@@ -3,11 +3,11 @@
 <mapper namespace="com.team10.smarthospital.mapper.MedicationMapper">
   <insert id="batchInsert">
     INSERT INTO Medication
-    (uuid(), prescription_id, name, dosage, frequency, note, route, duration)
+    (medication_id, prescription_id, name, dosage, frequency, note, route, duration)
     VALUES
     <foreach collection="medications" item="med" separator=",">
       (
-      #{med.medicationId},
+      uuid(),
       #{prescriptionId},
       #{med.name},
       #{med.dosage},
