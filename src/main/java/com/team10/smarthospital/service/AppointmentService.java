@@ -76,7 +76,6 @@ public class AppointmentService {
         appointment.setDate(appointmentBook.getDate());
         appointment.setAppointTime(appointmentBook.getTime());
         appointment.setProviderId(appointmentBook.getProviderId());
-        appointment.setType(appointmentBook.getType());
         appointment.setAppointTime(appointmentBook.getTime());
         appointment.setStatus(AppointmentStatus.UPCOMING.getStatusCode());
         return appointment;

@@ -13,8 +13,6 @@ public class Appointment extends BaseEntity {
 
     private String patientId;
 
-    private Integer type;
-
     private String providerId;
 
     private LocalDate date;

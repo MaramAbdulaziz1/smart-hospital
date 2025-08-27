@@ -40,26 +40,16 @@
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>10 Jul 2025</td>
-            <td>120/78</td>
-            <td>82</td>
-            <td>37.1</td>
-            <td>Dr. Sarah Moyo</td>
+          <tr th:each="record : ${vitalsHistory}">
+            <td th:text="${#temporals.format(record.date, 'dd-MM-yyyy')}">10 Jul 2025</td>
+            <td th:text="${record.bp}">120/78</td>
+            <td th:text="${record.heartRate}">82</td>
+            <td th:text="${record.temperature}">37.1</td>
+            <td th:text="${record.nurseName}">Dr. Sarah Moyo</td>
           </tr>
-          <tr>
-            <td>18 Jun 2024</td>
-            <td>130/85</td>
-            <td>90</td>
-            <td>37.8</td>
-            <td>Dr. Samuel Chen</td>
-          </tr>
-          <tr>
-            <td>02 May 2024</td>
-            <td>118/75</td>
-            <td>76</td>
-            <td>36.9</td>
-            <td>Dr. Linda Patel</td>
+
+          <tr th:if="${#lists.isEmpty(vitalsHistory)}">
+            <td colspan="5" class="text-center">No vitals history available.</td>
           </tr>
           </tbody>
         </table>

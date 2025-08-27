@@ -11,6 +11,5 @@ import java.time.LocalDate;
 public class AppointmentBook {
     private LocalDate date;
     private Integer time;
-    private Integer type;
     private String providerId;
 }
