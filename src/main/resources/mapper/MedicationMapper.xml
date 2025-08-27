@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team10.smarthospital.mapper.MedicationMapper">
+  <insert id="batchInsert">
+    INSERT INTO Medication
+    (uuid(), prescription_id, name, dosage, frequency, note, route, duration)
+    VALUES
+    <foreach collection="medications" item="med" separator=",">
+      (
+      #{med.medicationId},
+      #{prescriptionId},
+      #{med.name},
+      #{med.dosage},
+      #{med.frequency},
+      #{med.note},
+      #{med.route},
+      #{med.duration}
+      )
+    </foreach>
+  </insert>
+</mapper>
