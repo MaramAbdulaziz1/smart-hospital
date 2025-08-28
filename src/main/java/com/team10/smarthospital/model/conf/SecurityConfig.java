@@ -44,6 +44,7 @@ public class SecurityConfig {
                                                 "/images/**",
                                                 "/HomePageImages/**",
                                                 "/RegisterPageImages/**",
+                                                "/SharedLayoutImages/**",
                                                 "/user/login",
                                                 "/user/logout",
                                                 "/user/register/**",
