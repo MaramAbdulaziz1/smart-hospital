@@ -201,13 +201,14 @@ DROP TABLE IF EXISTS `PatientIntake`;
 CREATE TABLE `PatientIntake` (
   `intake_id` char(36) NOT NULL DEFAULT (uuid()),
   `appointment_id` char(36) NOT NULL,
-  `complaint` text,
   `notes` text,
   `diagnosis` text,
+  `medicalHistory` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `follow_up_plan` text,
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`intake_id`),
+  UNIQUE KEY `PatientIntake_UNIQUE` (`appointment_id`),
   KEY `idx_appointment_id` (`appointment_id`),
   CONSTRAINT `PatientIntake_ibfk_1` FOREIGN KEY (`appointment_id`) REFERENCES `Appointment` (`appointment_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -228,6 +229,7 @@ CREATE TABLE `Prescription` (
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`prescription_id`),
+  UNIQUE KEY `Prescription_UNIQUE` (`appointment_id`),
   KEY `idx_appointment_id` (`appointment_id`),
   CONSTRAINT `Prescription_ibfk_1` FOREIGN KEY (`appointment_id`) REFERENCES `Appointment` (`appointment_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -270,5 +272,3 @@ CREATE TABLE `User` (
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2025-08-24 17:15:47
