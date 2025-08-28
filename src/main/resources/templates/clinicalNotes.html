@@ -1,209 +1,249 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Clinical Notes</title>
-    <link rel="stylesheet" th:href="@{/css/sharedLayout.css}">
-    <link rel="stylesheet" href="/css/clinicalNotes.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clinical Notes</title>
+  <link rel="stylesheet" th:href="@{/css/sharedLayout.css}">
+  <link rel="stylesheet" href="/css/clinicalNotes.css"/>
 </head>
 
 <body>
 <div class="layout-container">
-    <!-- Sidebar -->
-    <aside th:replace="~{layouts/sharedLayout :: sidebar (activePage='clinicalNotes', appointmentId=${appointmentId})}"></aside>
-    <!--main content-->
-    <main class="main-content">
-        <!-- Top Navigation -->
-      <header th:replace="components/top-navD :: top-nav('Clinical Notes')"></header>
-      <!-- Patient Info Card -->
-      <section th:replace="components/patientCard :: patientCard(${appointmentId})"></section>
-        <section class="page-content">
-            <!--intake section-->
-            <div class="form-column">
-                <div>
-                    <div class="tabs active">Patient Complaint</div>
-                    <textarea class="intake-card complaint" disabled></textarea>
-                </div>
-                <div class="form-row">
-                    <div>
-                        <div>
-                            <div class="tabs sub-tabs active">Note</div>
-                            <div class="tabs sub-tabs">Diagnosis</div>
-                            <div class="tabs sub-tabs">Medical History</div>
-                            <div class="tabs sub-tabs">Follow-up Plan</div>
-                        </div>
-                        <textarea class="intake-card diagnosis" disabled placeholder = 'Click "Edit" to enter note...'></textarea>
-                    </div>
-                    <div class="button-group">
-                        <button class="edit-btn" onclick="enableSection()">Edit</button>
-                        <button class="save-btn">Save</button>
-                        <button class="submit-btn">Submit</button>
-                    </div>
-                </div>
+  <!-- Sidebar -->
+  <aside
+    th:replace="~{layouts/sharedLayout :: sidebar (activePage='clinicalNotes', appointmentId=${appointmentId})}"></aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Top Navigation -->
+    <header th:replace="components/top-navD :: top-nav('Clinical Notes')"></header>
+
+    <!-- Patient Info Card -->
+    <section th:replace="components/patientCard :: patientCard(${appointmentId})"></section>
+
+    <section class="page-content">
+      <!-- Intake Section -->
+      <div class="form-column">
+        <!-- Patient Complaint -->
+        <div>
+          <div class="tabs active">Patient Complaint</div>
+          <textarea th:text="${patientComplaint}" class="intake-card complaint" disabled></textarea>
+        </div>
+
+        <!-- Notes Section -->
+        <div class="form-row">
+          <div>
+            <!-- Tabs -->
+            <div class="tab-container">
+              <div class="tabs sub-tabs active" data-field="notes">Note</div>
+              <div class="tabs sub-tabs" data-field="diagnosis">Diagnosis</div>
+              <div class="tabs sub-tabs" data-field="medicalHistory">Medical History</div>
+              <div class="tabs sub-tabs" data-field="followUpPlan">Follow-up Plan</div>
             </div>
-        </section>
-    </main>
+
+            <!-- Textarea -->
+            <textarea
+              id="intakeTextarea"
+              class="intake-card diagnosis"
+              disabled
+              placeholder='Click "Edit" to enter note...'>
+                        </textarea>
+          </div>
+
+          <!-- Buttons -->
+          <div class="button-group">
+            <button class="edit-btn" onclick="enableEditing()">Edit</button>
+            <button class="save-btn" onclick="saveCurrentField()">Save</button>
+            <button class="submit-btn" onclick="submitAll()">Submit</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 </div>
 
-<!--button function(should be refractor later)-->
+<!-- Hidden Fields to Hold Initial Data from Thymeleaf -->
+<div id="intakeData"
+     th:data-notes="${intake?.notes}"
+     th:data-diagnosis="${intake?.diagnosis}"
+     th:data-medical-history="${intake?.medicalHistory}"
+     th:data-follow-up-plan="${intake?.followUpPlan}"
+     th:data-appointment-id="${appointmentId}"
+     style="display:none;">
+</div>
+
 <script>
-    //edit button
-    function enableSection() {
-        const diagnosisTextarea = document.querySelector('.intake-card.diagnosis');
-        if (diagnosisTextarea) {
-            diagnosisTextarea.removeAttribute('disabled');
-            diagnosisTextarea.focus();
-        }
-    }
+  const clinicalNotes = {
+      notes: document.getElementById('intakeData').getAttribute('data-notes') || '',
+      diagnosis: document.getElementById('intakeData').getAttribute('data-diagnosis') || '',
+      medicalHistory: document.getElementById('intakeData').getAttribute('data-medical-history') || '',
+      followUpPlan: document.getElementById('intakeData').getAttribute('data-follow-up-plan') || '',
+      currentField: 'notes'
+  };
 
-    // find all .sub-tabs elements
-    document.querySelectorAll('.sub-tabs').forEach(tab => {
-        tab.addEventListener('click', () => {
-        // 1. delete all active from .tabs
-        document.querySelectorAll('.sub-tabs').forEach(t => t.classList.remove('active'));
+  const appointmentId = document.getElementById('intakeData').getAttribute('data-appointment-id');
 
-        // 2. activ current .tabs
-        tab.classList.add('active');
+  function initTextarea() {
+      const textarea = document.getElementById('intakeTextarea');
+      textarea.value = clinicalNotes[clinicalNotes.currentField];
+      updatePlaceholder();
+  }
 
-        // 3. adjust placeholder content based on the active tab
-        const textarea = document.querySelector('.intake-card.diagnosis');
-        const tabText = tab.textContent.trim();
+  document.querySelectorAll('.sub-tabs').forEach(tab => {
+      tab.addEventListener('click', () => {
+          document.querySelectorAll('.sub-tabs').forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
 
-        if (tabText === 'Note') {
-            textarea.placeholder = 'Click "Edit" to enter note...';
-        } else if (tabText === 'Diagnosis') {
-            textarea.placeholder = 'Click "Edit" to enter diagnosis...';
-        } else if (tabText === 'Medical History') {
-            textarea.placeholder = 'Click "Edit" to enter medical history...';
-        } else if (tabText === 'Follow-up Plan') {
-            textarea.placeholder = 'Click "Edit" to enter follow-up plan...';
-        }
-        });
-    });
+          const textarea = document.getElementById('intakeTextarea');
+          clinicalNotes[clinicalNotes.currentField] = textarea.value;
 
-    // Save and Submit button functionality
-    document.addEventListener('DOMContentLoaded', function() {
-        const saveBtn = document.querySelector('.save-btn');
-        const submitBtn = document.querySelector('.submit-btn');
-        const editBtn = document.querySelector('.edit-btn');
-        const textarea = document.querySelector('.intake-card.diagnosis');
+          clinicalNotes.currentField = tab.getAttribute('data-field');
+          textarea.value = clinicalNotes[clinicalNotes.currentField];
+          updatePlaceholder();
+      });
+  });
 
-        // Save button functionality
-        saveBtn.addEventListener('click', function() {
-            if (textarea.disabled) {
-                showNotification('Please click "Edit" first to enable editing', 'warning');
-                return;
-            }
+  function updatePlaceholder() {
+      const textarea = document.getElementById('intakeTextarea');
+      const field = clinicalNotes.currentField;
+      const placeholders = {
+          'notes': 'Click "Edit" to enter note...',
+          'diagnosis': 'Click "Edit" to enter diagnosis...',
+          'medicalHistory': 'Click "Edit" to enter medical history...',
+          'followUpPlan': 'Click "Edit" to enter follow-up plan...'
+      };
+      textarea.placeholder = placeholders[field];
+  }
 
-            const content = textarea.value.trim();
-            if (!content) {
-                showNotification('Please enter some content before saving', 'warning');
-                return;
-            }
+  function enableEditing() {
+      const textarea = document.getElementById('intakeTextarea');
+      textarea.removeAttribute('disabled');
+      textarea.focus();
+  }
 
-            // Show saving state
-            saveBtn.textContent = 'Saving...';
-            saveBtn.disabled = true;
+  function saveCurrentField() {
+      const textarea = document.getElementById('intakeTextarea');
+      if (textarea.disabled) {
+          showNotification('Please click "Edit" first to enable editing', 'warning');
+          return;
+      }
 
-            // Simulate save operation
-            setTimeout(() => {
-                showNotification('Clinical notes saved successfully!', 'success');
-                saveBtn.textContent = 'Save';
-                saveBtn.disabled = false;
-            }, 1000);
-        });
+      const value = textarea.value.trim();
+      if (!value) {
+          showNotification('Cannot save empty content', 'warning');
+          return;
+      }
 
-        // Submit button functionality
-        submitBtn.addEventListener('click', function() {
-            if (textarea.disabled) {
-                showNotification('Please click "Edit" first to enable editing', 'warning');
-                return;
-            }
+      clinicalNotes[clinicalNotes.currentField] = value;
+      showNotification('Saved successfully!', 'success');
+  }
 
-            const content = textarea.value.trim();
-            if (!content) {
-                showNotification('Please enter some content before submitting', 'warning');
-                return;
-            }
+  function submitAll() {
+      const textarea = document.getElementById('intakeTextarea');
+      if (textarea.disabled) {
+          showNotification('Please edit and save content first', 'warning');
+          return;
+      }
 
-            // Show submitting state
-            submitBtn.textContent = 'Submitting...';
-            submitBtn.disabled = true;
-            saveBtn.disabled = true;
-            editBtn.disabled = true;
+      const data = {
+          appointmentId: appointmentId,
+          notes: clinicalNotes.notes,
+          diagnosis: clinicalNotes.diagnosis,
+          medicalHistory: clinicalNotes.medicalHistory,
+          followUpPlan: clinicalNotes.followUpPlan
+      };
 
-            // Simulate submit operation
-            setTimeout(() => {
-                showNotification('Clinical notes submitted successfully!', 'success');
-                submitBtn.textContent = 'Submit';
-                submitBtn.disabled = false;
-                saveBtn.disabled = false;
-                editBtn.disabled = false;
+      disableButtons(true);
 
-                // Disable textarea after successful submit
-                textarea.disabled = true;
-                textarea.placeholder = 'Notes have been submitted. Click "Edit" to make changes...';
-            }, 1500);
-        });
+      fetch('/intake/add', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(result => {
+          if (result.code === "0") {
+              showNotification('Submitted successfully!', 'success');
+              setTimeout(() => {
+                  location.reload();
+              }, 1500);
+          } else {
+              throw new Error(result.message || 'Submission failed');
+          }
+      })
+      .catch(err => {
+          showNotification('Submit failed: ' + err.message, 'error');
+          disableButtons(false);
+      });
+  }
 
-        // Show notification function
-        function showNotification(message, type) {
-            // Create notification element
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.textContent = message;
+  function disableButtons(disabled) {
+      document.querySelectorAll('.save-btn, .submit-btn, .edit-btn').forEach(btn => {
+          btn.disabled = disabled;
+      });
+      if (disabled) {
+          document.querySelector('.submit-btn').textContent = 'Submitting...';
+      } else {
+          document.querySelector('.submit-btn').textContent = 'Submit';
+      }
+  }
 
-            // Set background color based on type
-            let bgColor = '#4CAF50'; // success
-            if (type === 'warning') bgColor = '#FF9800';
-            if (type === 'error') bgColor = '#f44336';
+  function showNotification(message, type) {
+      // Create notification element
+      const notification = document.createElement('div');
+      notification.className = `notification ${type}`;
+      notification.textContent = message;
 
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: ${bgColor};
-                color: white;
-                padding: 12px 20px;
-                border-radius: 6px;
-                z-index: 10000;
-                font-size: 14px;
-                opacity: 0;
-                transform: translateX(100%);
-                transition: all 0.3s ease;
-                max-width: 300px;
-                word-wrap: break-word;
-            `;
+      // Set background color based on type
+      let bgColor = '#4CAF50'; // success
+      if (type === 'warning') bgColor = '#FF9800';
+      if (type === 'error') bgColor = '#f44336';
 
-            document.body.appendChild(notification);
+      notification.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: ${bgColor};
+          color: white;
+          padding: 12px 20px;
+          border-radius: 6px;
+          z-index: 10000;
+          font-size: 14px;
+          opacity: 0;
+          transform: translateX(100%);
+          transition: all 0.3s ease;
+          max-width: 300px;
+          word-wrap: break-word;
+      `;
 
-            // Animate in
-            setTimeout(() => {
-                notification.style.opacity = '1';
-                notification.style.transform = 'translateX(0)';
-            }, 10);
+      document.body.appendChild(notification);
 
-            // Remove after 3 seconds
-            setTimeout(() => {
-                notification.style.opacity = '0';
-                notification.style.transform = 'translateX(100%)';
-                setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.parentNode.removeChild(notification);
-                    }
-                }, 300);
-            }, 3000);
-        }
-    });
+      // Animate in
+      setTimeout(() => {
+          notification.style.opacity = '1';
+          notification.style.transform = 'translateX(0)';
+      }, 10);
 
+      // Remove after 3 seconds
+      setTimeout(() => {
+          notification.style.opacity = '0';
+          notification.style.transform = 'translateX(100%)';
+          setTimeout(() => {
+              if (notification.parentNode) {
+                  notification.parentNode.removeChild(notification);
+              }
+          }, 300);
+      }, 3000);
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+      initTextarea();
+  });
 </script>
 
 <!-- Scripts -->
 <script th:src="@{/js/sharedLayout.js}"></script>
 </body>
 </html>
-
-
-
-

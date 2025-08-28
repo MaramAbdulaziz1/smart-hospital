@@ -10,12 +10,20 @@ import java.time.LocalDate;
 public class IntakeHistory {
 
     private String intakeId;
+
     private String appointmentId;
-    private String complaint;
+
     private String notes;
+
     private String diagnosis;
+
+    private String medicalHistory;
+
     private String followUpPlan;
+
     private String doctorName;
+
     private String departmentName;
+
     private LocalDate date;
 }

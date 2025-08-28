@@ -11,11 +11,11 @@ public class PatientIntake extends BaseEntity {
 
     private String appointmentId;
 
-    private String complaint;
-
     private String notes;
 
     private String diagnosis;
+
+    private String medicalHistory;
 
     private String followUpPlan;
 }

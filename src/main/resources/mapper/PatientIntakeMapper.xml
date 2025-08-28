@@ -4,24 +4,40 @@
 
   <insert id="insert">
     INSERT INTO PatientIntake
-    (intake_id, appointment_id, complaint, notes, diagnosis, follow_up_plan)
-    VALUES(uuid(), #{appointmentId}, #{complaint}, #{notes}, #{diagnosis}, #{followUpPlan});
+    (intake_id, appointment_id, notes, diagnosis, medicalHistory, follow_up_plan)
+    VALUES(uuid(), #{appointmentId}, #{notes}, #{diagnosis}, #{medicalHistory}, #{followUpPlan});
   </insert>
+  <update id="update">
+    UPDATE
+      PatientIntake
+    SET
+      appointment_id=#{appointmentId}, notes=#{notes}, diagnosis=#{diagnosis},
+      medicalHistory=#{medicalHistory}, follow_up_plan=#{followUpPlan}
+    WHERE
+      intake_id=#{intakeId}
+  </update>
   <select id="getByPatientId" resultType="com.team10.smarthospital.model.entity.PatientIntake">
     SELECT
-      pi.intake_id, pi.appointment_id, pi.complaint, pi.notes, pi.diagnosis, pi.follow_up_plan
-    FROM PatientIntake pi
-    LEFT JOIN Appointment a ON pi.appointment_id = a.appointment_id
-    WHERE
-    a.patient_id = #{patientId}
-  </select>
-  <select id="getIntakeHistoryByPatientId"
-          resultType="com.team10.smarthospital.model.response.IntakeHistory">
-    SELECT
-      pi.intake_id, pi.appointment_id, pi.complaint, pi.notes, pi.diagnosis, pi.follow_up_plan
+      pi.*
     FROM PatientIntake pi
     LEFT JOIN Appointment a ON pi.appointment_id = a.appointment_id
     WHERE
       a.patient_id = #{patientId}
+  </select>
+  <select id="getIntakeHistoryByPatientId"
+          resultType="com.team10.smarthospital.model.response.IntakeHistory">
+    SELECT
+      pi.*
+    FROM PatientIntake pi
+    LEFT JOIN Appointment a ON pi.appointment_id = a.appointment_id
+    WHERE
+      a.patient_id = #{patientId}
+  </select>
+  <select id="getByAppointmentId" resultType="com.team10.smarthospital.model.entity.PatientIntake">
+    SELECT
+      pi.*
+    FROM PatientIntake pi
+    WHERE
+      pi.appointment_id = #{appointmentId}
   </select>
 </mapper>

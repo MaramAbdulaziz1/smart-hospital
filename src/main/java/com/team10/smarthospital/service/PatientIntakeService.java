@@ -62,28 +62,53 @@ public class PatientIntakeService {
         if (doctor == null || !Role.DOCTOR.getRoleCode().equals(doctor.getRole())) {
             return BaseResponse.fail("", "User not found or invalid role", null);
         }
-        Appointment appointment = appointmentMapper.getAppointmentsById(intake.getAppointmentId());
+        String appointmentId = intake.getAppointmentId();
+        Appointment appointment = appointmentMapper.getAppointmentsById(appointmentId);
         if (appointment != null && appointment.getProviderId().equals(doctor.getUserId())) {
-            patientIntakeMapper.insert(intake);
+            PatientIntake historyIntake = patientIntakeMapper.getByAppointmentId(appointmentId);
+            if (historyIntake == null) {
+                patientIntakeMapper.insert(intake);
+            } else {
+                intake.setIntakeId(historyIntake.getIntakeId());
+                patientIntakeMapper.update(intake);
+            }
             return BaseResponse.success("", null);
         } else {
             return BaseResponse.fail("", "", null);
         }
     }
 
-    private List<IntakeHistory> toHistory(List<PatientIntake> intakes, Doctor doctor, User doctorUser) {
+    public BaseResponse<IntakeHistory> getPatientIntake(String appointmentId) {
+        PatientIntake intake = patientIntakeMapper.getByAppointmentId(appointmentId);
+        return BaseResponse.success("", toHistory(intake));
+    }
+
+    private IntakeHistory toHistory(PatientIntake intake) {
+        IntakeHistory intakeHistory = new IntakeHistory();
+        if (intake != null) {
+            intakeHistory.setNotes(intake.getNotes());
+            intakeHistory.setDiagnosis(intake.getDiagnosis());
+            intakeHistory.setMedicalHistory(intake.getMedicalHistory());
+            intakeHistory.setFollowUpPlan(intake.getFollowUpPlan());
+        }
+        return intakeHistory;
+    }
+
+    private List<IntakeHistory> toHistory(
+            List<PatientIntake> intakes, Doctor doctor, User doctorUser) {
         List<IntakeHistory> histories = new ArrayList<>();
         if (!intakes.isEmpty()) {
             for (PatientIntake intake : intakes) {
                 IntakeHistory history = new IntakeHistory();
+                history.setDate(intake.getUpdateTime().toLocalDate());
                 history.setIntakeId(intake.getIntakeId());
                 history.setAppointmentId(intake.getAppointmentId());
-                history.setComplaint(intake.getComplaint());
                 history.setNotes(intake.getNotes());
                 history.setDiagnosis(intake.getDiagnosis());
                 history.setFollowUpPlan(intake.getFollowUpPlan());
                 history.setDoctorName(doctorUser.getFullName());
-                history.setDepartmentName(EmployeeDepartment.getEmployeeDepartmentName(doctor.getDepartment()));
+                history.setDepartmentName(
+                        EmployeeDepartment.getEmployeeDepartmentName(doctor.getDepartment()));
                 histories.add(history);
             }
         }

@@ -11,4 +11,8 @@ public interface PatientIntakeMapper {
     List<PatientIntake> getByPatientId(String patientId);
 
     List<IntakeHistory> getIntakeHistoryByPatientId(String patientId);
+
+    PatientIntake getByAppointmentId(String appointmentId);
+
+    void update(PatientIntake intake);
 }

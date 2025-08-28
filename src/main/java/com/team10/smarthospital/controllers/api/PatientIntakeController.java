@@ -18,6 +18,12 @@ public class PatientIntakeController {
 
     @Autowired private PatientIntakeService patientIntakeService;
 
+    @GetMapping("/")
+    public BaseResponse<IntakeHistory> getPatientIntake(
+            @RequestParam("appointmentId") String appointmentId) {
+        return patientIntakeService.getPatientIntake(appointmentId);
+    }
+
     @GetMapping("/history")
     public BaseResponse<List<IntakeHistory>> getPatientHistory(
             @AuthenticationPrincipal UserDetails userDetails,
@@ -26,7 +32,7 @@ public class PatientIntakeController {
     }
 
     @PostMapping("/add")
-    public BaseResponse<String> add(
+    public BaseResponse<String> addOrUpdate(
             @AuthenticationPrincipal UserDetails userDetails, @RequestBody PatientIntake intake) {
         return patientIntakeService.add(userDetails.getUsername(), intake);
     }
