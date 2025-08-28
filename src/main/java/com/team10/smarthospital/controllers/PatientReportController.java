@@ -1,158 +1,108 @@
 package com.team10.smarthospital.controllers;
 
-import com.team10.smarthospital.model.PatientProfileView;
-import com.team10.smarthospital.model.VisitRecord;
-import com.team10.smarthospital.service.HospitalData1Service;
+import com.lowagie.text.DocumentException;
+import com.team10.smarthospital.mapper.*;
+import com.team10.smarthospital.model.entity.*;
+import com.team10.smarthospital.model.enums.EmployeeDepartment;
+import com.team10.smarthospital.model.response.VisitRecord;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.thymeleaf.TemplateEngine;
+import org.xhtmlrenderer.pdf.ITextRenderer;
 
-import java.time.LocalDate;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class PatientReportController {
 
+    @Autowired private TemplateEngine templateEngine;
 
-    @SuppressWarnings("unused")
-    private final HospitalData1Service hospitalData1Service;
-
-    public PatientReportController(HospitalData1Service hospitalData1Service) {
-        this.hospitalData1Service = hospitalData1Service;
-    }
-
-    /**
-     * Handles the request to display the patient report by date.
-     *
-     * @param model The model to hold attributes for the view.
-     * @return The name of the view to render.
-     */
-    @GetMapping("/{patientId}/visits")
-    public String showVisitRecordsPage(@PathVariable Long patientId, Model model) {
-
-        List<String> visitDates = hospitalData1Service.getVisitDatesByPatientId(patientId);
-
-        model.addAttribute("patientId", patientId);
-        model.addAttribute("visitDates", visitDates);
-        model.addAttribute("selectedDate", null);
-        model.addAttribute("records", List.of());
-
-        return "patient-report"; // loads patient-report.html
-    }
-
-    // After selecting a date
-    @GetMapping("/{patientId}/visits/records")
-    public String getVisitRecordsByDate(
-            @PathVariable Long patientId,
-            @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
-            Model model) {
-        List<String> visitDates = hospitalData1Service.getVisitDatesByPatientId(patientId);
-        List<VisitRecord> records = hospitalData1Service.getRecordsByDate(patientId, date);
-
-        model.addAttribute("patientId", patientId);
-        model.addAttribute("visitDates", visitDates);
-        model.addAttribute("selectedDate", date);
-        model.addAttribute("records", records);
-
-        return "patient-report";
-    }
+    @Autowired private PatientIntakeMapper patientIntakeMapper;
+    @Autowired private AppointmentMapper appointmentMapper;
+    @Autowired private PatientMapper patientMapper;
+    @Autowired private DoctorMapper doctorMapper;
+    @Autowired private PrescriptionMapper prescriptionMapper;
+    @Autowired private MedicationMapper medicationMapper;
+    @Autowired private UserMapper userMapper;
 
     @GetMapping("/patientReport")
     public String getPatientReport(
-            Model model, @RequestParam(name = "intakeId", required = false) String intakeId) {
+            Model model,
+            @RequestParam(name = "intakeId") String intakeId,
+            @RequestParam(name = "appointmentId") String appointmentId) {
+        model.addAttribute("appointmentId", appointmentId);
         model.addAttribute("intakeId", intakeId);
-        long patientId = 123456789L;
-      List<VisitRecord> visitRecords = new ArrayList<>();
-      // get the visit record  for the given patientId along with visit dates from database ,
-      // filter by requested data and popuate visitRecord object
-      VisitRecord visitRecord = new VisitRecord();
-      visitRecord.setPatientId(patientId); // Mock patient ID, in a real application this would be dynamic
-      visitRecord.setPatientName("Harry Potter");
-      visitRecord.setDateOfVisit("2025-08-22"); // Mock date, in a real application this would be dynamic
-      visitRecord.setDepartment("Cardiology");
-      visitRecord.setDiagnosis("Hypertension");
-      visitRecord.setDoctorName("Dr. John Smith");
-      visitRecord.setDoctorsNotes(
-        "Patient is recovering well. Continue with prescribed medication.");
-      visitRecord.setTreatmentPlan(null);
-      visitRecord.setAllergies(null);
-      List<String> prescriptions = new ArrayList<>();
-      prescriptions.add("Aspirin 100mg");
-      prescriptions.add("Lisinopril 10mg");
-      visitRecord.setCurrentMedications(prescriptions);
-      visitRecord.setFamilyHistory(null);
-      visitRecord.setSocialHistory(null);
-      visitRecord.setPastSurgicalHistory(null);
-      visitRecord.setPastMedications(null);
-      visitRecord.setPastMedicalConditions(null);
+        PatientIntake patientIntake = patientIntakeMapper.getByAppointmentId(appointmentId);
+        Appointment appointment = appointmentMapper.getAppointmentsById(appointmentId);
+        Patient patient = patientMapper.getUserByUserId(appointment.getPatientId());
+        User patientUser = userMapper.getUserByUserId(appointment.getPatientId());
+        User doctorUser = userMapper.getUserByUserId(appointment.getProviderId());
+        Doctor doctor = doctorMapper.getUserByUserId(appointment.getProviderId());
+        Prescription prescription = prescriptionMapper.getByAppointmentId(appointmentId);
+        List<Medication> medications =
+                medicationMapper.getByPrescriptionId(prescription.getPrescriptionId());
+        VisitRecord visitRecord = new VisitRecord();
+        visitRecord.setPatientCode(patient.getPatientCode());
+        visitRecord.setPatientName(patientUser.getFullName());
+        visitRecord.setDateOfVisit(appointment.getDate());
+        visitRecord.setDepartment(
+                EmployeeDepartment.getEmployeeDepartmentName(doctor.getDepartment()));
+        visitRecord.setDiagnosis(patientIntake.getDiagnosis());
+        visitRecord.setDoctorName(doctorUser.getFullName());
+        visitRecord.setDoctorsNotes(patientIntake.getNotes());
+        visitRecord.setTreatmentPlan(patientIntake.getFollowUpPlan());
+        visitRecord.setAllergies(patient.getAllergies());
+        List<String> prescriptions = new ArrayList<>();
+        if (!medications.isEmpty()) {
+            for (Medication m : medications) {
+                prescriptions.add(m.getName() + " " + m.getDosage());
+            }
+        }
+        visitRecord.setCurrentMedications(prescriptions);
+        visitRecord.setFamilyHistory(patient.getFamilyHistory());
+        visitRecord.setSocialHistory(patient.getSocialHistory());
+        visitRecord.setPastSurgicalHistory(patient.getPastSurgicalHistory());
+        visitRecord.setPastMedications(patient.getPastMedications());
+        visitRecord.setPastMedicalConditions(patient.getPastMedicalConditions());
 
-      // PatientProfile object to be used in the template
-      PatientProfileView patientProfile = new PatientProfileView();
-      patientProfile.setId(patientId); // Mock ID, in a real application this would be dynamic
-      patientProfile.setName("Harry Potter");
-      visitRecords.add(visitRecord);
-      // In a real application, you would fetch the visit record from the database using patientId
-      // and date
-
-      model.addAttribute("visitRecord", visitRecord);
-      model.addAttribute("patientProfile", patientProfile);
+        model.addAttribute("visitRecord", visitRecord);
         model.addAttribute("pageTitle", "Patient Report");
         return "patient-report";
     }
 
-    /**
-     * Handles the request to display the patient report.
-     *
-     * @param patientId The ID of the patient.
-     * @param date The date of the visit.
-     * @param model The model to hold attributes for the view.
-     * @return The name of the view to render.
-     */
-    @GetMapping("/patient-report/{id}/{date}")
-    public String getPatientReport(
-            @PathVariable("id") Long patientId, @PathVariable("date") String date, Model model) {
+    @GetMapping("/downloadPatientReport")
+    public void downloadPatientReportAsPdf(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            @RequestParam(name = "intakeId") String intakeId,
+            @RequestParam(name = "appointmentId") String appointmentId)
+            throws IOException, DocumentException {
 
-        List<VisitRecord> visitRecords = new ArrayList<>();
-        // get the visit record  for the given patientId along with visit dates from database ,
-        // filter by requested data and popuate visitRecord object
-        VisitRecord visitRecord = new VisitRecord();
-        visitRecord.setPatientId(
-                patientId); // Mock patient ID, in a real application this would be dynamic
-        visitRecord.setPatientName("Harry Potter");
-        visitRecord.setDateOfVisit(date); // Mock date, in a real application this would be dynamic
-        visitRecord.setDepartment("Cardiology");
-        visitRecord.setDiagnosis("Hypertension");
-        visitRecord.setDoctorName("Dr. John Smith");
-        visitRecord.setDoctorsNotes(
-                "Patient is recovering well. Continue with prescribed medication.");
-        visitRecord.setTreatmentPlan(null);
-        visitRecord.setAllergies(null);
-        List<String> prescriptions = new ArrayList<>();
-        prescriptions.add("Aspirin 100mg");
-        prescriptions.add("Lisinopril 10mg");
-        visitRecord.setCurrentMedications(prescriptions);
-        visitRecord.setFamilyHistory(null);
-        visitRecord.setSocialHistory(null);
-        visitRecord.setPastSurgicalHistory(null);
-        visitRecord.setPastMedications(null);
-        visitRecord.setPastMedicalConditions(null);
+        response.setContentType("application/pdf");
+        String fileName = "patient-report-" + intakeId + "-" + appointmentId + ".pdf";
+        response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
 
-        // PatientProfile object to be used in the template
-        PatientProfileView patientProfile = new PatientProfileView();
-        patientProfile.setId(patientId); // Mock ID, in a real application this would be dynamic
-        patientProfile.setName("Harry Potter");
-        visitRecords.add(visitRecord);
-        // In a real application, you would fetch the visit record from the database using patientId
-        // and date
+        ModelAndView modelAndView = new ModelAndView("patient-report");
+        modelAndView.addObject("appointmentId", appointmentId);
+        modelAndView.addObject("intakeId", intakeId);
+        modelAndView.addObject("pageTitle", "Patient Report");
 
-        model.addAttribute("visitRecord", visitRecord);
-        model.addAttribute("patientProfile", patientProfile);
+        String htmlContent = "upcoming";
 
-        return "patient-report"; // loads patient-report.html
+        ITextRenderer renderer = new ITextRenderer();
+        renderer.setDocumentFromString(htmlContent);
+        renderer.layout();
+
+        renderer.createPDF(response.getOutputStream());
     }
 }

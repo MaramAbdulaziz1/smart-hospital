@@ -10,7 +10,7 @@ public class PatientProfileController {
 
     @GetMapping("/patientProfile")
     public String patientProfilePage(
-            @RequestParam(name = "appointmentId", required = true) String appointmentId,
+            @RequestParam(name = "appointmentId") String appointmentId,
             Model model) {
         model.addAttribute("appointmentId", appointmentId);
         model.addAttribute("pageTitle", "Patient Profile");

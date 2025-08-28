@@ -1,228 +1,176 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
   <link rel="stylesheet" th:href="@{/css/sharedLayout.css}">
-  <link rel="stylesheet" href="/css/patientreport.css" />
-<title>Patient Profile</title>
+  <link rel="stylesheet" href="/css/patientreport.css"/>
+  <title>Patient Profile</title>
 </head>
 <body>
 
-<div class="layout-container">
+<div class="layout-container dashboard-page">
+  <!-- Sidebar -->
+  <aside th:replace="~{layouts/sharedLayout :: sidebar(activePage='patientProfile', appointmentId=${appointmentId})}"></aside>
 
-
-  <aside th:replace="~{layouts/sharedLayout :: sidebar (activePage='patientProfile')}"></aside>
-
-
+  <!-- Main Content -->
   <main class="main-content">
-    <!-- Top Navigation-->
-    <div th:replace="~{layouts/sharedLayout :: topNav}"></div>
-
-    <div class="patient-header">
-      <h3 th:text="'Patient Reports - ' + ${patientProfile.Name} + '  ' + ${patientProfile.Id}"></h3>
-     <!-- <div class="patient-id" th:text="'#' + ${visitRecord.patientId}">#HAT17653D</div> -->
-    </div>
-
+    <!-- Top Navigation -->
+    <header th:replace="components/top-navD :: top-nav('Patient Profile')"></header>
 
     <!-- Patient Report -->
-
-
-
-    <!--<form  th:action="@{/patient-reports/{id}(id=${patientId})}"  method="get"> -->
-      <form>
+    <form>
+      <!-- Patient Info & Visit Details -->
       <div class="form-grid">
         <div class="form-group">
-
-          <div class="form-group">
-            <label class="dateOfVisit" for="visitDate">Date of Visit</label>
-            <div class="dropdown-container">
-              <!-- <select name="dropdown" id="dropdown" onchange="submitForm()">
-                    <option value="" disabled selected>Select a date</option>
-                    <th:block th:each="item : ${items}">
-                        <option th:value="${item.id}" th:text="${item.name}"></option>
-                    </th:block>
-                </select>-->
-
-                <select id="dateSelect" onchange="populateForm()">
-                  <option th:each="v : ${visitRecord}" th:value="${v.dateOfVisit}" th:text="${v.dateOfVisit}"></option>
-              </select>
-
-            </div>
-          </div>
-
+          <label>Patient Name</label>
+          <p th:text="${visitRecord.patientName}">John Doe</p>
         </div>
-      <div class="form-group">
-          <label class="doctorName" for="doctor">Doctor</label>
-          <p th:text="${visitRecord.doctorName}" class="form-control-static">Dr Sarah Johnson</p>
-      </div>
         <div class="form-group">
-            <label class="department" for="department">Department</label>
-            <p th:text="${visitRecord.department}">Neurology</p>
+          <label>Patient Code</label>
+          <p th:text="${visitRecord.patientCode}">P-12345</p>
         </div>
-
-     </div>
-
-        <!-- Diagnosis -->
-        <div class="card">
-            <h3 class="card-title">Diagnosis</h3>
-            <div th:if="${visitRecord.diagnosis != null and not #lists.isEmpty(visitRecord.diagnosis)}">
-                <ul class="diagnosis-list">
-                    <li th:each="diagnosis : ${visitRecord.diagnosis}" th:text="${diagnosis ?: 'Unknown Diagnosis'}">Viral Flu</li>
-                </ul>
-            </div>
-            <div th:if="${visitRecord.diagnosis == null or #lists.isEmpty(visitRecord.diagnosis)}">
-                <span class="diagnosis-tag">No diagnosis recorded</span>
-            </div>
+        <div class="form-group">
+          <label>Date of Visit</label>
+          <p th:text="${#temporals.format(visitRecord.dateOfVisit, 'dd MMM yyyy')}">10 Jul 2025</p>
         </div>
-
-        <!-- Doctor's Notes -->
-        <div class="card">
-            <h3 class="card-title">Clinical Notes</h3>
-            <p th:text="${visitRecord.doctorsNotes}">Clinical Notes</p>
-
-            <div th:if="${visitRecord.doctorsNotes == null or visitRecord.doctorsNotes.isEmpty()}">
-                <p class="no-data">No clinical notes available</p>
-            </div>
-
-        <!-- Treatment and Follow-up Plan -->
-        <div class="card">
-          <h3 class="card-title">Treatment and Follow-up Plan</h3>
-          <div class="treatment-content">
-              <!-- Treatment Plan -->
-             <!-- <div class="treatment-item">
-                  <strong>Treatment Plan:</strong>
-                  <p th:text="${visitRecord.treatmentPlan ?: 'No treatment plan specified'}">Paracetmol</p>
-              </div> -->
-
-              <div class="treatment-item">
-                <strong>Treatment Plan:</strong>
-                <div th:if="${visitRecord.treatmentPlan != null and not #lists.isEmpty(visitRecord.treatmentPlan)}">
-                    <ul class="medical-list">
-                        <li th:each="treatment : ${visitRecord.medicationsPrescribed}" th:text="${treatment}">
-                        </li>
-                    </ul>
-                </div>
-                <p th:if="${visitRecord.treatmentPlan == null or #lists.isEmpty(visitRecord.treatmentPlan)}">
-                    No  Treatment Plan
-                </p>
-            </div>
-
-              <!-- Medications Prescribed -->
-              <div class="treatment-item">
-                  <strong>Medications Prescribed:</strong>
-                  <div th:if="${visitRecord.medicationsPrescribed != null and not #lists.isEmpty(visitRecord.medicationsPrescribed)}">
-                      <ul class="medical-list">
-                          <li th:each="prescription : ${visitRecord.medicationsPrescribed}" th:text="${prescription}">
-                          </li>
-                      </ul>
-                  </div>
-                  <p th:if="${visitRecord.medicationsPrescribed == null or #lists.isEmpty(visitRecord.medicationsPrescribed)}">
-                      No medications prescribed
-                  </p>
-              </div>
-          </div>
+        <div class="form-group">
+          <label>Doctor</label>
+          <p th:text="${visitRecord.doctorName}">Dr Sarah Johnson</p>
+        </div>
+        <div class="form-group">
+          <label>Department</label>
+          <p th:text="${visitRecord.department}">Neurology</p>
+        </div>
       </div>
 
-       <!-- Medical History -->
-       <div class="card">
+      <!-- Diagnosis -->
+      <div class="card">
+        <h3 class="card-title">Diagnosis</h3>
+        <p th:if="${visitRecord.diagnosis != null and !visitRecord.diagnosis.trim().isEmpty()}"
+           th:text="${visitRecord.diagnosis}">Diagnosis details</p>
+        <p th:if="${visitRecord.diagnosis == null or visitRecord.diagnosis.trim().isEmpty()}"
+           class="no-data">No diagnosis recorded</p>
+      </div>
+
+      <!-- Doctor's Notes -->
+      <div class="card">
+        <h3 class="card-title">Clinical Notes</h3>
+        <p th:if="${visitRecord.doctorsNotes != null and !visitRecord.doctorsNotes.trim().isEmpty()}"
+           th:text="${visitRecord.doctorsNotes}">Clinical notes</p>
+        <p th:if="${visitRecord.doctorsNotes == null or visitRecord.doctorsNotes.trim().isEmpty()}"
+           class="no-data">No clinical notes available</p>
+      </div>
+
+      <!-- Treatment and Follow-up Plan -->
+      <div class="card">
+        <h3 class="card-title">Treatment and Follow-up Plan</h3>
+        <div class="treatment-content">
+
+          <!-- Treatment Plan -->
+          <div class="treatment-item">
+            <strong>Treatment Plan:</strong>
+            <p th:if="${visitRecord.treatmentPlan != null and !visitRecord.treatmentPlan.trim().isEmpty()}"
+               th:text="${visitRecord.treatmentPlan}">Treatment details</p>
+            <p th:if="${visitRecord.treatmentPlan == null or visitRecord.treatmentPlan.trim().isEmpty()}"
+               class="no-data">No treatment plan specified</p>
+          </div>
+
+          <!-- Medications Prescribed -->
+          <div class="treatment-item">
+            <strong>Medications Prescribed:</strong>
+            <div th:if="${visitRecord.medicationsPrescribed != null and !visitRecord.medicationsPrescribed.isEmpty()}">
+              <ul class="medical-list">
+                <li th:each="med : ${visitRecord.medicationsPrescribed}" th:text="${med}">Medication</li>
+              </ul>
+            </div>
+            <p th:if="${visitRecord.medicationsPrescribed == null or visitRecord.medicationsPrescribed.isEmpty()}"
+               class="no-data">No medications prescribed</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Medical History -->
+      <div class="card">
         <h3 class="card-title">Medical History</h3>
         <div class="medical-grid">
-            <!-- Past Medical Conditions -->
-            <div class="medical-grid-item">
-                <label>Past Medical Conditions: <span class="small-label">including chronic conditions</span></label>
-                <div th:if="${visitRecord.pastMedicalConditions != null and not #lists.isEmpty(visitRecord.pastMedicalConditions)}">
-                    <ul class="medical-list">
-                        <li th:each="condition : ${visitRecord.pastMedicalConditions}" th:text="${condition}"></li>
-                    </ul>
-                </div>
-                <p class="no-data" th:if="${visitRecord.pastMedicalConditions == null or #lists.isEmpty(visitRecord.pastMedicalConditions)}">
-                    None
-                </p>
-            </div>
 
-            <!-- Past Medications -->
-            <div class="medical-grid-item">
-                <label>Past Medications:</label>
-                <div th:if="${visitRecord.pastMedications != null and not #lists.isEmpty(visitRecord.pastMedications)}">
-                    <ul class="medical-list">
-                        <li th:each="medication : ${visitRecord.pastMedications}" th:text="${medication}"></li>
-                    </ul>
-                </div>
-                <p class="no-data" th:if="${visitRecord.pastMedications == null or #lists.isEmpty(visitRecord.pastMedications)}">
-                    None
-                </p>
-            </div>
+          <!-- Past Medical Conditions -->
+          <div class="medical-grid-item">
+            <label>Past Medical Conditions:</label>
+            <p th:if="${visitRecord.pastMedicalConditions != null and !visitRecord.pastMedicalConditions.trim().isEmpty()}"
+               th:text="${visitRecord.pastMedicalConditions}">Hypertension, Diabetes</p>
+            <p th:if="${visitRecord.pastMedicalConditions == null or visitRecord.pastMedicalConditions.trim().isEmpty()}"
+               class="no-data">None</p>
+          </div>
 
-            <!-- Current Medications -->
-            <div class="medical-grid-item">
-                <label>Current Medications:</label>
-                <div th:if="${visitRecord.currentMedications != null and not #lists.isEmpty(visitRecord.currentMedications)}">
-                    <ul class="medical-list">
-                      <!--  <li th:each="medication : ${visitRecord.currentMedications}" th:text="${medication.name + ' - ' + medication.dosage}"></li>-->
-                      <li th:each="medication : ${visitRecord.currentMedications}" th:text="${medication}"></li>
-                    </ul>
-                </div>
-                <p class="no-data" th:if="${visitRecord.currentMedications == null or #lists.isEmpty(visitRecord.currentMedications)}">
-                    None
-                </p>
-            </div>
+          <!-- Past Medications -->
+          <div class="medical-grid-item">
+            <label>Past Medications:</label>
+            <p th:if="${visitRecord.pastMedications != null and !visitRecord.pastMedications.trim().isEmpty()}"
+               th:text="${visitRecord.pastMedications}">Lisinopril, Metformin</p>
+            <p th:if="${visitRecord.pastMedications == null or visitRecord.pastMedications.trim().isEmpty()}"
+               class="no-data">None</p>
+          </div>
 
-            <!-- Past Surgical History -->
-            <div class="medical-grid-item">
-                <label>Past Surgical History:</label>
-                <div th:if="${visitRecord.surgicalHistory != null and not #lists.isEmpty(visitRecord.surgicalHistory)}">
-                    <ul class="medical-list">
-                        <li th:each="surgery : ${visitRecord.surgicalHistory}" th:text="${surgery.procedure + ' (' + surgery.date + ')'}"></li>
-                    </ul>
-                </div>
-                <p class="no-data" th:if="${visitRecord.surgicalHistory == null or #lists.isEmpty(visitRecord.surgicalHistory)}">
-                    None
-                </p>
+          <!-- Current Medications -->
+          <div class="medical-grid-item">
+            <label>Current Medications:</label>
+            <div th:if="${visitRecord.currentMedications != null and !visitRecord.currentMedications.isEmpty()}">
+              <ul class="medical-list">
+                <li th:each="med : ${visitRecord.currentMedications}" th:text="${med}">Medication</li>
+              </ul>
             </div>
+            <p th:if="${visitRecord.currentMedications == null or visitRecord.currentMedications.isEmpty()}"
+               class="no-data">None</p>
+          </div>
 
-            <!-- Allergies -->
-            <div class="medical-grid-item">
-                <label>Allergies:</label>
-                <div th:if="${visitRecord.allergies != null and not #lists.isEmpty(visitRecord.allergies)}">
-                    <ul class="medical-list">
-                        <li th:each="allergy : ${visitRecord.allergies}" th:text="${allergy.allergen + ' (' + allergy.severity + ')'}"></li>
-                    </ul>
-                </div>
-                <p class="no-data" th:if="${visitRecord.allergies == null or #lists.isEmpty(visitRecord.allergies)}">
-                    None
-                </p>
-            </div>
+          <!-- Past Surgical History -->
+          <div class="medical-grid-item">
+            <label>Past Surgical History:</label>
+            <p th:if="${visitRecord.pastSurgicalHistory != null and !visitRecord.pastSurgicalHistory.trim().isEmpty()}"
+               th:text="${visitRecord.pastSurgicalHistory}">Appendectomy (2010)</p>
+            <p th:if="${visitRecord.pastSurgicalHistory == null or visitRecord.pastSurgicalHistory.trim().isEmpty()}"
+               class="no-data">None</p>
+          </div>
 
-            <!-- Family History -->
-            <div class="medical-grid-item">
-                <label>Family History:</label>
-                <div th:if="${visitRecord.familyHistory != null and not #lists.isEmpty(visitRecord.familyHistory)}">
-                    <ul class="medical-list">
-                        <li th:each="history : ${visitRecord.familyHistory}"
-                            th:text="${history.relation ?: 'Unknown'} + ' with ' + ${history.condition ?: 'Unknown'}">
-                          </li>
-                    </ul>
-                </div>
-                <p class="no-data" th:if="${visitRecord.familyHistory == null or #lists.isEmpty(visitRecord.familyHistory)}">
-                    No family history recorded
-                </p>
-            </div>
+          <!-- Allergies -->
+          <div class="medical-grid-item">
+            <label>Allergies:</label>
+            <p th:if="${visitRecord.allergies != null and !visitRecord.allergies.trim().isEmpty()}"
+               th:text="${visitRecord.allergies}">Penicillin</p>
+            <p th:if="${visitRecord.allergies == null or visitRecord.allergies.trim().isEmpty()}"
+               class="no-data">None</p>
+          </div>
 
-            <!-- Social History -->
-            <div class="medical-grid-item full-width">
-                <label>Social History:</label>
-                <p  th:text="${visitRecord.socialHistory ?: 'No social history recorded'}"></p>
-            </div>
+          <!-- Family History -->
+          <div class="medical-grid-item">
+            <label>Family History:</label>
+            <p th:if="${visitRecord.familyHistory != null and !visitRecord.familyHistory.trim().isEmpty()}"
+               th:text="${visitRecord.familyHistory}">Father: Heart disease</p>
+            <p th:if="${visitRecord.familyHistory == null or visitRecord.familyHistory.trim().isEmpty()}"
+               class="no-data">No family history recorded</p>
+          </div>
+
+          <!-- Social History -->
+          <div class="medical-grid-item full-width">
+            <label>Social History:</label>
+            <p th:if="${visitRecord.socialHistory != null and !visitRecord.socialHistory.trim().isEmpty()}"
+               th:text="${visitRecord.socialHistory}">Non-smoker, occasional alcohol</p>
+            <p th:if="${visitRecord.socialHistory == null or visitRecord.socialHistory.trim().isEmpty()}"
+               class="no-data">No social history recorded</p>
+          </div>
         </div>
+      </div>
 
-        <!-- Vitals -->
-        <div class="card">
-            <h3 class="card-title">Vitals</h3>
-            <!-- <a th:href="@{/patients/{id}/vitals(id=${patientid})}" class="btn btn-primary vitals-btn">View Vitals History</a>-->
-            <a th:href="@{/vitals}" class="btn btn-primary vitals-btn">View Vitals History</a>
-        </div>
+      <!-- Vitals -->
+      <div class="card">
+        <h3 class="card-title">Vitals</h3>
+        <a th:href="@{/vitals-doctor(appointmentId=${appointmentId})}" class="btn btn-primary vitals-btn">
+          View Vitals History
+        </a>
+      </div>
+
     </form>
   </main>
 </div>
@@ -273,77 +221,9 @@
   });
 
 </script>
-
-<script th:inline="javascript">
-  let visits = /*[[${visits}]]*/ [];
-
-  function populateVisit() {
-      const selectedDate = document.getElementById("visitSelect").value;
-      const selected = visits.find(v => v.visitDate === selectedDate);
-
-      if (selected) {
-          document.querySelector('[name="visitDate"]').value = selected.visitDate;
-          document.querySelector('[name="doctorName"]').value = selected.doctorName;
-          document.querySelector('[name="notes"]').value = selected.notes;
-      } else {
-          document.querySelector('[name="visitDate"]').value = '';
-          document.querySelector('[name="doctorName"]').value = '';
-          document.querySelector('[name="notes"]').value = '';
-      }
-  }
-</script>
-
-
 <!-- Fragment: no-data.html -->
 <p th:if="${data == null or #lists.isEmpty(data)}" class="no-data">No data available</p>
 
 </body>
-</html><select id="dateSelect" onchange="fetchVisitRecords()">
-    <option value="">-- Select a date --</option>
-    <option th:each="v : ${visitRecords}" th:value="${v.dateOfVisit}" th:text="${v.dateOfVisit}"></option>
-</select>
+</html>
 
-<div id="visitDetails">
-    <!-- This section will be dynamically updated -->
-    <div class="form-group">
-        <label for="doctor">Doctor</label>
-        <p id="doctor" class="form-control-static"></p>
-    </div>
-    <div class="form-group">
-        <label for="department">Department</label>
-        <p id="department"></p>
-    </div>
-    <div class="form-group">
-        <label for="diagnosis">Diagnosis</label>
-        <p id="diagnosis"></p>
-    </div>
-</div>
-
-<script>
-    async function fetchVisitRecords() {
-        const date = document.getElementById("dateSelect").value;
-        if (!date) {
-            document.getElementById("visitDetails").style.display = "none";
-            return;
-        }
-
-        try {
-            const response = await fetch(`/api/visit-records?date=${date}`);
-            const records = await response.json();
-
-            if (records.length > 0) {
-                const record = records[0]; // Assuming one record per date
-                document.getElementById("doctor").textContent = record.doctor;
-                document.getElementById("department").textContent = record.department;
-                document.getElementById("diagnosis").textContent = record.diagnosis;
-                document.getElementById("visitDetails").style.display = "block";
-            } else {
-                document.getElementById("visitDetails").style.display = "none";
-                alert("No records found for the selected date.");
-            }
-        } catch (error) {
-            console.error("Error fetching visit records:", error);
-            alert("Failed to fetch visit records.");
-        }
-    }
-</script>

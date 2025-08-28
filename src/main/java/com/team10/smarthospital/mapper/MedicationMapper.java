@@ -11,4 +11,6 @@ public interface MedicationMapper {
     void batchInsert(
             @Param("prescriptionId") String prescriptionId,
             @Param("medications") List<Medication> medications);
+
+    List<Medication> getByPrescriptionId(String prescriptionId);
 }
