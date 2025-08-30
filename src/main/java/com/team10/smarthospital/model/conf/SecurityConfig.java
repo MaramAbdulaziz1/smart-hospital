@@ -45,9 +45,7 @@ public class SecurityConfig {
                                                 "/HomePageImages/**",
                                                 "/RegisterPageImages/**",
                                                 "/SharedLayoutImages/**",
-                                                "/user/login",
-                                                "/user/logout",
-                                                "/user/register/**",
+                                                "/user/**",
                                                 "/patient/registration",
                                                 "/homepage")
                                         .permitAll()
