@@ -1,9 +1,11 @@
 package com.team10.smarthospital.service;
 
+import com.team10.smarthospital.mapper.AppointmentMapper;
 import com.team10.smarthospital.mapper.MedicationMapper;
 import com.team10.smarthospital.mapper.PrescriptionMapper;
 import com.team10.smarthospital.model.entity.Medication;
 import com.team10.smarthospital.model.entity.Prescription;
+import com.team10.smarthospital.model.enums.AppointmentStatus;
 import com.team10.smarthospital.model.request.PrescriptionAdd;
 import com.team10.smarthospital.model.response.BaseResponse;
 
@@ -21,6 +23,8 @@ public class PrescriptionService {
 
     @Autowired private MedicationMapper medicationMapper;
 
+    @Autowired private AppointmentMapper appointmentMapper;
+
     @Transactional
     public BaseResponse<Void> addPrescription(PrescriptionAdd prescriptionAdd) {
         String appointmentId = prescriptionAdd.getAppointmentId();
@@ -28,11 +32,22 @@ public class PrescriptionService {
         prescription.setAppointmentId(appointmentId);
         prescription.setDiagnosis(prescriptionAdd.getDiagnosis());
         prescription.setDrugAllergy(prescriptionAdd.getDrugAllergy());
-        String prescriptionId = UUID.randomUUID().toString();
-        prescription.setPrescriptionId(prescriptionId);
-        prescriptionMapper.insert(prescription);
         List<Medication> medications = prescriptionAdd.getMedications();
-        medicationMapper.batchInsert(prescriptionId, medications);
+        Prescription prescriptionHistory = prescriptionMapper.getByAppointmentId(appointmentId);
+        if (prescriptionHistory == null) {
+            String prescriptionId = UUID.randomUUID().toString();
+
+            prescriptionMapper.insert(prescription);
+            medicationMapper.batchInsert(prescriptionId, medications);
+            appointmentMapper.updateStatus(
+                    appointmentId, AppointmentStatus.COMPLETED.getStatusCode());
+        } else {
+            String prescriptionId = prescriptionHistory.getPrescriptionId();
+            prescription.setPrescriptionId(prescriptionId);
+            prescriptionMapper.update(prescription);
+            medicationMapper.deleteByPrescriptionId(prescriptionId);
+            medicationMapper.batchInsert(prescriptionId, medications);
+        }
         return BaseResponse.success(null);
     }
 }

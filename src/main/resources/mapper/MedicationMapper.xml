@@ -18,10 +18,14 @@
       )
     </foreach>
   </insert>
-    <select id="getByPrescriptionId" resultType="com.team10.smarthospital.model.entity.Medication">
-      SELECT *
-      FROM Medication
-      WHERE
-      prescription_id=#{prescriptionId}
-    </select>
+  <delete id="deleteByPrescriptionId">
+    DELETE FROM Medication
+    WHERE prescription_id=#{prescriptionId}
+  </delete>
+  <select id="getByPrescriptionId" resultType="com.team10.smarthospital.model.entity.Medication">
+    SELECT *
+    FROM Medication
+    WHERE
+    prescription_id=#{prescriptionId}
+  </select>
 </mapper>

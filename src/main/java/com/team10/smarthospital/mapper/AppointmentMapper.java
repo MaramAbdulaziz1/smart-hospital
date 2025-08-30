@@ -29,4 +29,6 @@ public interface AppointmentMapper {
     void updateStatusByDate(LocalDate date, Integer status);
 
     void updateStatusByPatientId(String patientId, String appointmentId, Integer status);
+
+    void updateStatus(String appointmentId, Integer status);
 }

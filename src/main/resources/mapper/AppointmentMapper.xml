@@ -23,6 +23,13 @@
       AND patient_id = #{patientId}
       AND status = 0
   </update>
+  <update id="updateStatus">
+    UPDATE Appointment
+      SET status = #{status}
+    WHERE
+      appointment_id = #{appointmentId}
+      AND status = 0
+  </update>
 
   <select id="getAppointmentsByPatientId" resultType="com.team10.smarthospital.model.entity.Appointment">
     SELECT

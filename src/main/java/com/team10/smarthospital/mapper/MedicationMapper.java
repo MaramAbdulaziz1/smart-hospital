@@ -13,4 +13,6 @@ public interface MedicationMapper {
             @Param("medications") List<Medication> medications);
 
     List<Medication> getByPrescriptionId(String prescriptionId);
+
+    void deleteByPrescriptionId(String prescriptionId);
 }

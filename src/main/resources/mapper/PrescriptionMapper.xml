@@ -6,6 +6,14 @@
     (prescription_id, appointment_id, diagnosis, drug_allergy)
     VALUES(#{prescriptionId}, #{appointmentId}, #{diagnosis}, #{drugAllergy});
   </insert>
+    <update id="update">
+      UPDATE
+        Prescription
+      SET
+        diagnosis=#{diagnosis}, drug_allergy=#{drugAllergy}
+      WHERE
+        prescription_id=#{prescriptionId};
+    </update>
     <select id="getByAppointmentId" resultType="com.team10.smarthospital.model.entity.Prescription">
       SELECT *
       FROM Prescription
