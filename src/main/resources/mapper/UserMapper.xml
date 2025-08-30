@@ -33,4 +33,12 @@
     WHERE
       user_id=#{userId};
   </update>
+    <update id="resetPassword">
+      UPDATE
+        `User`
+      SET
+        password=#{password}
+      WHERE
+        user_id=#{userId};
+    </update>
 </mapper>

@@ -36,4 +36,14 @@ public class UserLoginController {
         }
         return BaseResponse.success("Logout successful");
     }
+
+    @PostMapping("/resetPassword")
+    public BaseResponse<Void> resetPassword(@RequestBody LoginRequest loginRequest) {
+        return loginService.resetPassword(loginRequest);
+    }
+
+    @GetMapping("/checkEmail")
+    public BaseResponse<Void> checkEmail(@RequestParam("email") String email) {
+        return loginService.checkEmail(email);
+    }
 }

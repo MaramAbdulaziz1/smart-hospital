@@ -12,6 +12,13 @@ public class BaseResponse<T> {
     private String message;
     private T data;
 
+    private BaseResponse() {}
+
+    public BaseResponse(String code, String message) {
+        this.code = code;
+        this.message = message;
+    }
+
     public static <T> BaseResponse<T> success(String message, T data) {
         BaseResponse<T> response = new BaseResponse<>();
         response.setCode(ResponseCode.SUCCESS.getCode());

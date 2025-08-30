@@ -1,13 +1,15 @@
 package com.team10.smarthospital.service;
 
 import com.team10.smarthospital.model.conf.CustomUserDetails;
+import com.team10.smarthospital.model.entity.User;
+import com.team10.smarthospital.model.enums.ResponseCode;
 import com.team10.smarthospital.model.request.LoginRequest;
 import com.team10.smarthospital.model.response.BaseResponse;
 import com.team10.smarthospital.model.response.UserResponse;
 
 import jakarta.servlet.http.HttpServletRequest;
-
 import jakarta.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
@@ -22,6 +24,8 @@ public class LoginService {
     @Autowired private AuthenticationManager authenticationManager;
 
     @Autowired private SecurityContextRepository securityContextRepository;
+
+    @Autowired private UserService userService;
 
     public BaseResponse<UserResponse> login(
             LoginRequest request,
@@ -68,5 +72,30 @@ public class LoginService {
         } catch (Exception e) {
             return BaseResponse.fail("500", "Login failed due to server error", null);
         }
+    }
+
+    public BaseResponse<Void> resetPassword(LoginRequest loginRequest) {
+        String email = loginRequest.getUsername();
+        if (email == null || email.isEmpty()) {
+            return BaseResponse.fail("", "email is null or empty");
+        }
+        String password = loginRequest.getPassword();
+        if (password == null || password.isEmpty()) {
+            return BaseResponse.fail("", "password is null or empty");
+        }
+        BaseResponse<User> response = userService.getUserByEmail(email);
+        if (!ResponseCode.SUCCESS.getCode().equals(response.getCode())) {
+            return BaseResponse.fail(response.getCode(), response.getMessage());
+        }
+        userService.resetPassword(response.getData().getUserId(), password);
+        return BaseResponse.success(null);
+    }
+
+    public BaseResponse<Void> checkEmail(String email) {
+        if (email == null || email.isEmpty()) {
+            return BaseResponse.fail("", "email is null or empty");
+        }
+        BaseResponse<User> response = userService.getUserByEmail(email);
+        return new BaseResponse<>(response.getCode(), response.getMessage());
     }
 }

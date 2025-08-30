@@ -4,4 +4,6 @@ import com.team10.smarthospital.model.entity.User;
 
 public interface UserMapper extends BaseUserMapper<User> {
     User getUserByEmail(String email);
+
+    void resetPassword(String userId, String password);
 }

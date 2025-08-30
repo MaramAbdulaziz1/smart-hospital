@@ -43,4 +43,8 @@ public class UserService implements IUserService<User> {
         }
         return BaseResponse.success(null, user);
     }
+
+    public void resetPassword(String userId, String password) {
+        userMapper.resetPassword(userId, passwordEncoder.encode(password));
+    }
 }
