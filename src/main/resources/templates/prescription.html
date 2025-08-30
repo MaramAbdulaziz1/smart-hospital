@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -218,8 +218,7 @@
 <body>
 <div class="layout-container">
   <!-- Sidebar -->
-  <aside
-    th:replace="~{layouts/sharedLayout :: sidebar (activePage='prescription', appointmentId=${appointmentId})}"></aside>
+  <aside th:replace="~{layouts/sharedLayout :: sidebar (activePage='prescription', appointmentId=${appointmentId})}"></aside>
 
   <!-- Main Content -->
   <main class="main-content">
@@ -340,6 +339,7 @@
     </section>
   </main>
 </div>
+<script th:src="@{/js/sharedLayout.js}"></script>
 <script th:inline="javascript">
   class PrescriptionManager {
       constructor(appointmentId) {
