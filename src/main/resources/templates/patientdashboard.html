@@ -33,15 +33,15 @@
       <!-- Upcoming Appointments -->
       <div class="page-heading">Upcoming Appointments</div>
       <section class="upcoming-wrap">
-        <div class="upcoming-card">
-          <div class="line-1">05 07 2025</div>
-          <div class="line-2">10:00</div>
-          <div class="line-3">Vital</div>
+        <div th:each="appointment : ${appointmentRecords}" class="upcoming-card">
+          <div class="line-1" th:text="${#temporals.format(appointment.date, 'dd MM yyyy')}">05 07 2025</div>
+          <div class="line-2" th:text="${appointment.startTime}">10:00</div>
+          <div class="line-3" th:text="${appointment.providerName}">Dr. Weasley</div>
         </div>
-        <div class="upcoming-card">
-          <div class="line-1">07 07 2025</div>
-          <div class="line-2">13:00</div>
-          <div class="line-3">Dr. Weasley</div>
+
+        <!-- Optional: Show message if no appointments -->
+        <div th:if="${appointmentRecords.empty}" class="no-appointments">
+          No upcoming appointments.
         </div>
       </section>
 
