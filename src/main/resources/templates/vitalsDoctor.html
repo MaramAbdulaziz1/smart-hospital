@@ -8,7 +8,6 @@
   <link rel="stylesheet" th:href="@{/css/vitals.css}">
 </head>
 <body>
-
 <div class="layout-container">
   <!-- Sidebar -->
   <aside th:replace="~{layouts/sharedLayout :: sidebar (activePage='vitals', appointmentId=${appointmentId})}"></aside>
@@ -17,7 +16,6 @@
   <main class="main-content">
     <!-- Top Navigation -->
     <header th:replace="components/top-navD :: top-nav('Patient Vitals History')"></header>
-
     <!-- Patient Info Card -->
     <section th:replace="components/patientCard :: patientCard(${appointmentId})"></section>
 
