@@ -167,7 +167,7 @@
           if (searchTerm) {
               fetchPatientData('/appointment/search', 'GET', searchTerm);
           } else {
-              fetchPatientData('/appointment/doctor/me', 'POST');
+              fetchPatientData('/appointment/doctor/me', 'GET');
           }
       }
 
@@ -184,7 +184,7 @@
       // Clear search when input is cleared
       searchInput.addEventListener('input', function() {
           if (this.value.trim() === '') {
-              fetchPatientData('/appointment/doctor/me', 'POST');
+              fetchPatientData('/appointment/doctor/me', 'GET');
           }
       });
   });

@@ -55,6 +55,7 @@ public class AppointmentSearchService {
         }
         for (Appointment appointment : appointments) {
             AppointmentRecord record = new AppointmentRecord();
+            record.setAppointmentId(appointment.getAppointmentId());
             record.setDate(appointment.getDate());
             record.setStartTime(AppointTime.getAppointTime(appointment.getAppointTime()));
             BaseResponse<User> providerBaseResponse =
@@ -71,7 +72,7 @@ public class AppointmentSearchService {
                 record.setPatientEmail(patient.getEmail());
                 Patient p = patientMapper.getUserByUserId(patient.getUserId());
                 if (p != null) {
-                  record.setPatientCode(p.getPatientCode());
+                    record.setPatientCode(p.getPatientCode());
                 }
             }
             AppointmentStatus status = AppointmentStatus.getStatusByCode(appointment.getStatus());
