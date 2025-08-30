@@ -1,15 +1,51 @@
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('profilePictureInput').addEventListener('change', handleProfilePictureUpload);
-  document.getElementById('cameraInput').addEventListener('change', handleProfilePictureUpload);
+  document.getElementById('openCameraBtn').addEventListener('click', async () => {
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({video: true});
+      const video = document.getElementById('cameraVideo');
+      video.srcObject = stream;
+      video.style.display = 'block';
 
-  const form = document.getElementById('registrationForm');
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    handleRegistrationSubmit();
+      document.getElementById('openCameraBtn').style.display = 'none';
+      document.getElementById('takePhotoBtn').style.display = 'inline-block';
+    } catch (err) {
+      alert('Unable to access the camera. Please grant permission.');
+      console.error('Error accessing camera:', err);
+    }
   });
 
-  setupRealTimeValidation();
+  document.getElementById('takePhotoBtn').addEventListener('click', () => {
+    const video = document.getElementById('cameraVideo');
+    const preview = document.getElementById('profilePreview');
+    const canvas = document.createElement('canvas');
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    const dataURL = canvas.toDataURL('image/jpeg');
+    preview.src = dataURL;
+    preview.style.display = 'block';
+
+    video.style.display = 'none';
+
+    document.getElementById('avatarBase64').value = dataURL;
+
+    if (stream) {
+      stream.getTracks().forEach(track => track.stop());
+    }
+
+    document.getElementById('takePhotoBtn').style.display = 'none';
+    document.getElementById('retakeBtn').style.display = 'inline-block';
+  });
 });
+
+function resetCamera() {
+  document.getElementById('cameraVideo').style.display = 'none';
+  document.getElementById('openCameraBtn').style.display = 'inline-block';
+  document.getElementById('retakeBtn').style.display = 'none';
+  document.getElementById('profilePreview').style.display = 'none';
+}
 
 function setupRealTimeValidation() {
   const inputs = document.querySelectorAll('input, select');

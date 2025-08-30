@@ -158,15 +158,19 @@
                accept="image/*" style="display: none;">
         <input type="file" id="cameraInput" name="cameraInput"
                accept="image/*" capture="user" style="display: none;">
+        <video id="cameraVideo" autoplay playsinline style="display:none; max-width: 100%;"></video>
         <div class="upload-buttons">
-          <button type="button" class="upload-btn" onclick="document.getElementById('cameraInput').click()">
-            Take a picture
-          </button>
+          <button type="button" class="upload-btn" id="openCameraBtn">Take a picture</button>
+          <button type="button" class="upload-btn" id="takePhotoBtn" style="display:none;">Capture Photo</button>
           <button type="button" class="upload-btn secondary" onclick="document.getElementById('profilePictureInput').click()">
             Upload a photo
           </button>
+          <button type="button" class="upload-btn" id="retakeBtn" style="display:none;" onclick="resetCamera()">Retake</button>
         </div>
       </div>
+
+      <!-- Hidden field for avatar URL -->
+      <input type="hidden" id="avatarBase64" name="avatarBase64">
     </div>
     <!-- Submit & Cancel Buttons -->
     <div class="button-wrapper">
