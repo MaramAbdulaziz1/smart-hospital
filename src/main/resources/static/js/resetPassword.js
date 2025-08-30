@@ -72,23 +72,23 @@ document.addEventListener('DOMContentLoaded', function() {
       if (email && emailRegex.test(email)) {
         try {
           // 🔗 Call backend API to check if email exists
-          const response = await fetch('/api/user/checkEmail', {
-            method: 'POST',
+          const url = new URL('/user/checkEmail', window.location.origin);
+          url.searchParams.append('email', email);
+
+          const response = await fetch(url, {
+            method: 'GET',
             headers: {
               'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email: email })
+            }
           });
 
           const result = await response.json();
 
-          if (result.code === '0' && result.data === true) {
-            // Email exists - green border
+          if (result.code === '0') {
             this.style.borderColor = '#27ae60';
             this.style.background = '#d5f4e6';
             clearEmailError();
           } else {
-            // Email not found - red border
             this.style.borderColor = '#e74c3c';
             this.style.background = '#ffeaa7';
             showEmailError('Email address not found in our system');
@@ -150,15 +150,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
       try {
         // 🔗 Call backend API to reset password
-        const response = await fetch('/api/user/resetPassword', {
+        const response = await fetch('/user/resetPassword', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            email: email,
-            newPassword: newPassword,
-            confirmPassword: confirmPassword
+            username: email,
+            password: newPassword
           })
         });
 
@@ -169,8 +168,9 @@ document.addEventListener('DOMContentLoaded', function() {
           showSuccess('Password reset successfully! Redirecting to login page...');
 
           setTimeout(() => {
-            window.location.href = '/login?message=Password+reset+successfully';
-          }, 2000);
+            alert('Password reset successfully');
+            window.location.href = '/';
+          }, 1000);
 
         } else {
           // Error from backend
