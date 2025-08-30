@@ -58,7 +58,7 @@ public class AppointmentSearchService {
             record.setDate(appointment.getDate());
             record.setStartTime(AppointTime.getAppointTime(appointment.getAppointTime()));
             BaseResponse<User> providerBaseResponse =
-                    userService.getUserByUserId(appointment.getPatientId());
+                    userService.getUserByUserId(appointment.getProviderId());
             if (ResponseCode.SUCCESS.getCode().equals(providerBaseResponse.getCode())) {
                 User provider = providerBaseResponse.getData();
                 record.setProviderName(provider.getFullName());
