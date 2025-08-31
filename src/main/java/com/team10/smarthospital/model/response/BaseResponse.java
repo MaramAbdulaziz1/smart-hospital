@@ -12,7 +12,7 @@ public class BaseResponse<T> {
     private String message;
     private T data;
 
-    private BaseResponse() {}
+    public BaseResponse() {}
 
     public BaseResponse(String code, String message) {
         this.code = code;
