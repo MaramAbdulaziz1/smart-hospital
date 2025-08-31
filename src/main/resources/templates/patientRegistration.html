@@ -321,13 +321,16 @@
         </div>
       </div>
 
-      <!-- Hidden field for avatar URL -->
       <input type="hidden" id="avatarBase64" name="avatarBase64">
-    </div>
-    <!-- Form Buttons moved inside Profile Picture section -->
-    <div class="form-buttons-integrated">
-      <button type="button" class="btn-back" onclick="cancelRegistration()">CANCEL</button>
-      <button type="submit" class="btn-register" id="registerButton">REGISTER</button>
+
+      <!-- Form Buttons moved inside Profile Picture section -->
+      <div class="form-buttons-integrated">
+        <button type="button" class="btn-back" onclick="cancelRegistration()">Back</button>
+        <button type="submit" class="btn-register" id="registerButton">
+          <span class="button-text">Register</span>
+          <span class="spinner" style="display: none;"></span>
+        </button>
+      </div>
     </div>
   </form>
 </div>

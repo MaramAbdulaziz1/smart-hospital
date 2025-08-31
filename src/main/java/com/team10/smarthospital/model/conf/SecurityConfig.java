@@ -15,7 +15,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
-import org.thymeleaf.web.servlet.JavaxServletWebApplication;
 
 @Configuration
 @EnableWebSecurity
@@ -47,7 +46,8 @@ public class SecurityConfig {
                                                 "/SharedLayoutImages/**",
                                                 "/user/**",
                                                 "/patient/registration",
-                                                "/homepage")
+                                                "/homepage",
+                                                "/favicon.ico")
                                         .permitAll()
                                         .anyRequest()
                                         .authenticated())
