@@ -36,7 +36,7 @@ public class PrescriptionService {
         Prescription prescriptionHistory = prescriptionMapper.getByAppointmentId(appointmentId);
         if (prescriptionHistory == null) {
             String prescriptionId = UUID.randomUUID().toString();
-
+            prescription.setPrescriptionId(prescriptionId);
             prescriptionMapper.insert(prescription);
             medicationMapper.batchInsert(prescriptionId, medications);
             appointmentMapper.updateStatus(
