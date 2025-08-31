@@ -8,11 +8,13 @@ import java.util.List;
 public interface PatientIntakeMapper {
     void insert(PatientIntake intake);
 
-    List<PatientIntake> getByPatientId(String patientId);
+    List<PatientIntake> getByPatientIdAndAppointmentStatus(String patientId, Integer status);
 
     List<IntakeHistory> getIntakeHistoryByPatientId(String patientId);
 
     PatientIntake getByAppointmentId(String appointmentId);
 
     void update(PatientIntake intake);
+
+    PatientIntake getByIntakeId(String intakeId);
 }

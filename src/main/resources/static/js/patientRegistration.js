@@ -38,6 +38,11 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('takePhotoBtn').style.display = 'none';
     document.getElementById('retakeBtn').style.display = 'inline-block';
   });
+  // Form validation
+  setupFormValidation();
+
+  // Setup email validation
+  setupEmailValidation();
 });
 
 function resetCamera() {

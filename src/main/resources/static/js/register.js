@@ -38,6 +38,13 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('takePhotoBtn').style.display = 'none';
     document.getElementById('retakeBtn').style.display = 'inline-block';
   });
+  const form = document.getElementById('registrationForm');
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    handleRegistrationSubmit();
+  });
+
+  setupRealTimeValidation();
 });
 
 function resetCamera() {
@@ -133,9 +140,15 @@ function validateField(field) {
       break;
 
     case 'mobileNumber':
-    case 'workNumber':
       if (value && !isValidPhoneNumber(value)) {
         showError(field.id, 'Please enter a valid phone number');
+        return false;
+      }
+      break;
+
+    case 'workNumber':
+      if (value && !isValidWorkNumber(value)) {
+        showError(field.id, 'The workNumber must be exactly 9 digits.');
         return false;
       }
       break;
@@ -189,6 +202,11 @@ function isValidEmail(email) {
 function isValidPhoneNumber(phone) {
   const re = /^[+]?[(]?[0-9]{1,4}[)]?[-\s./0-9]*$/;
   return re.test(phone);
+}
+
+function isValidWorkNumber(workNumber) {
+  const re = /^\d{9}$/;
+  return re.test(workNumber);
 }
 
 function handleProfilePictureUpload(event) {
