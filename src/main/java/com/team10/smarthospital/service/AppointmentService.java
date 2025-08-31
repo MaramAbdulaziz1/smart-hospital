@@ -30,15 +30,8 @@ public class AppointmentService {
     @Autowired private AppointmentMapper appointmentMapper;
 
     public BaseResponse<List<AppointmentRecord>> getPatientUpcoming(String email) {
-        BaseResponse<User> userResp = getUserByEmailAndRole(email, Role.PATIENT.getRoleCode());
-        if (!ResponseCode.SUCCESS.getCode().equals(userResp.getCode())) {
-            return BaseResponse.fail(userResp.getCode(), userResp.getMessage(), null);
-        }
-        List<Appointment> appointments =
-                appointmentMapper.getAppointmentsUpcomingByPatientId(
-                        userResp.getData().getUserId());
-        List<AppointmentRecord> result = toAppointmentRecords(appointments);
-        return BaseResponse.success("", result);
+        return getAppointmentsByRole(
+                email, Role.PATIENT.getRoleCode(), appointmentMapper::getAppointmentsUpcomingByPatientId);
     }
 
     public BaseResponse<List<AppointmentRecord>> getAppointmentPatient(String email) {
@@ -48,12 +41,16 @@ public class AppointmentService {
 
     public BaseResponse<List<AppointmentRecord>> getAppointmentDoctor(String email) {
         return getAppointmentsByRole(
-                email, Role.DOCTOR.getRoleCode(), appointmentMapper::getAppointmentsByProviderId);
+                email,
+                Role.DOCTOR.getRoleCode(),
+                appointmentMapper::getAppointmentsUpcomingByProviderId);
     }
 
     public BaseResponse<List<AppointmentRecord>> getAppointmentNurse(String email) {
         return getAppointmentsByRole(
-                email, Role.NURSE.getRoleCode(), appointmentMapper::getAppointmentsByProviderId);
+                email,
+                Role.NURSE.getRoleCode(),
+                appointmentMapper::getAppointmentsUpcomingByProviderId);
     }
 
     public BaseResponse<String> book(String email, AppointmentBook appointmentBook) {

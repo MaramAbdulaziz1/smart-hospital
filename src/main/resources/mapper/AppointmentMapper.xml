@@ -117,5 +117,16 @@
       AND status = 0
     ORDER BY `date` ASC, appoint_time ASC
   </select>
+  <select id="getAppointmentsUpcomingByProviderId"
+          resultType="com.team10.smarthospital.model.entity.Appointment">
+    SELECT
+      appointment_id, patient_id, provider_id, `date`, appoint_time, status, create_time, update_time
+    FROM
+      Appointment
+    WHERE
+      provider_id = #{doctorId}
+      AND status = 0
+    ORDER BY `date` ASC, appoint_time ASC
+  </select>
 
 </mapper>

@@ -39,7 +39,7 @@ public class AppointmentSearchService {
         }
         List<Appointment> appointments;
         if (search == null || search.isEmpty()) {
-            appointments = appointmentMapper.getAppointmentsByProviderId(user.getUserId());
+            appointments = appointmentMapper.getAppointmentsUpcomingByProviderId(user.getUserId());
         } else {
             appointments =
                     appointmentMapper.getAppointmentsByProviderIdAndSearch(

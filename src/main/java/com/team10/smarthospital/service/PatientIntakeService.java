@@ -8,6 +8,7 @@ import com.team10.smarthospital.model.entity.Appointment;
 import com.team10.smarthospital.model.entity.Doctor;
 import com.team10.smarthospital.model.entity.PatientIntake;
 import com.team10.smarthospital.model.entity.User;
+import com.team10.smarthospital.model.enums.AppointmentStatus;
 import com.team10.smarthospital.model.enums.EmployeeDepartment;
 import com.team10.smarthospital.model.enums.Role;
 import com.team10.smarthospital.model.response.BaseResponse;
@@ -50,7 +51,9 @@ public class PatientIntakeService {
         if (patient == null || !Role.PATIENT.getRoleCode().equals(patient.getRole())) {
             return BaseResponse.fail("", "User not found or invalid role", null);
         }
-        List<PatientIntake> intakes = patientIntakeMapper.getByPatientId(patient.getUserId());
+        List<PatientIntake> intakes =
+                patientIntakeMapper.getByPatientIdAndAppointmentStatus(
+                        patient.getUserId(), AppointmentStatus.COMPLETED.getStatusCode());
         return BaseResponse.success("", toHistory(intakes, doctor, doctorUser));
     }
 

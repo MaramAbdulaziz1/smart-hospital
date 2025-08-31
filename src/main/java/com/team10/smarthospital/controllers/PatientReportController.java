@@ -42,13 +42,14 @@ public class PatientReportController {
             @RequestParam(name = "appointmentId") String appointmentId) {
         model.addAttribute("appointmentId", appointmentId);
         model.addAttribute("intakeId", intakeId);
-        PatientIntake patientIntake = patientIntakeMapper.getByAppointmentId(appointmentId);
-        Appointment appointment = appointmentMapper.getAppointmentsById(appointmentId);
+        PatientIntake patientIntake = patientIntakeMapper.getByIntakeId(intakeId);
+        String thisAppointmentsById = patientIntake.getAppointmentId();
+        Appointment appointment = appointmentMapper.getAppointmentsById(thisAppointmentsById);
         Patient patient = patientMapper.getUserByUserId(appointment.getPatientId());
         User patientUser = userMapper.getUserByUserId(appointment.getPatientId());
         User doctorUser = userMapper.getUserByUserId(appointment.getProviderId());
         Doctor doctor = doctorMapper.getUserByUserId(appointment.getProviderId());
-        Prescription prescription = prescriptionMapper.getByAppointmentId(appointmentId);
+        Prescription prescription = prescriptionMapper.getByAppointmentId(thisAppointmentsById);
         List<Medication> medications =
                 medicationMapper.getByPrescriptionId(prescription.getPrescriptionId());
         VisitRecord visitRecord = new VisitRecord();
