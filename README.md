@@ -1,35 +1,103 @@
-# ⚠️ Project Guidelines
+# Smart Hospital Management System
 
-To ensure consistent development practices across the team, please follow the rules below:
+> **Summer Project by Team 10**  
+> A modern hospital management system built with Spring Boot, providing comprehensive patient management, doctor workspace, appointment system, and more.
 
-### 📁 Structure and File Separation
+## Project Features
 
-- **Separate HTML and CSS**: Do not write CSS inside `<style>` tags or directly in HTML files. All styling should be placed in `.css` files (e.g. `style.css`) and linked via the `<link>` tag.
+### Core Functionality
+- **Patient Management** - Patient registration, profile management, health records
+- **Doctor Workspace** - Patient diagnosis, prescription management, clinical notes
+- **Appointment System** - Smart appointment scheduling, calendar view
+- **Health Monitoring** - Vital signs recording, history tracking
+- **Report System** - Patient report generation, PDF export
+- **Health Q&A** - Doctor-patient interaction platform
+
+### Security Features
+- Spring Security authentication
+- Role-based access control
+- Password reset functionality
+
+## Technology Stack
+
+### Backend Technologies
+- **Java 17** - Core programming language
+- **Spring Boot 3.5.3** - Application framework
+- **Spring Security** - Security framework
+- **MyBatis 3.0.5** - Data persistence layer
+- **MySQL** - Primary database
+- **Lombok** - Code simplification
+
+### Frontend Technologies
+- **Thymeleaf** - Server-side template engine
+- **HTML/CSS/JavaScript** - Frontend basics
+- **Bootstrap** - UI component library
+
+### Development Tools
+- **Maven** - Project build tool
+- **Spring Boot DevTools** - Hot reload
+- **OpenPDF** - PDF generation
+- **Flying Saucer** - HTML to PDF conversion
+
+## Getting Started
+
+### Prerequisites
+- Java 17+
+- Maven 3.6+
+- MySQL 8.0+
+
+## Project Structure
+
+```
+src/
+├── main/
+│   ├── java/com/team10/smarthospital/
+│   │   ├── controllers/     # Controller layer
+│   │   ├── service/         # Business logic layer
+│   │   ├── mapper/          # Data access layer
+│   │   ├── model/           # Data models
+│   │   ├── dto/             # Data transfer objects
+│   │   ├── repository/      # Data repositories
+│   │   └── api/             # API interfaces
+│   └── resources/
+│       ├── templates/       # Thymeleaf templates
+│       ├── static/          # Static resources
+│       ├── mapper/          # MyBatis mapping files
+│       └── application.yml  # Configuration file
+└── test/                    # Test code
+```
+
+## API Documentation
+
+### Main Endpoints
+- `GET /` - Homepage
+- `GET /patient/registration` - Patient registration page
+- `GET /dashboard` - Dashboard
+- `GET /appointments` - Appointment management
+- `GET /vitals` - Vital signs management
+
+## Team Members
+
+**Team 10** - Summer Project 2024
 
 ---
 
-### 🧹 Code Formatting and Consistency
+## What We Learned
 
-- **Install and enable the following VS Code extensions:**
-  - [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
-  - [Prettier - Code formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) (Recommended for frontend development)
+This project helped us understand:
+- Spring Boot application development
+- Database design and management
+- Web application security
+- Team collaboration and version control
+- Real-world software development practices
 
-- **Enable auto-format on save**
-  - Set `"editor.formatOnSave": true` in settings
-  - Set Prettier as the default formatter
+## Academic Context
 
----
+This project was developed as part of our summer course requirements, demonstrating our understanding of:
+- Object-oriented programming principles
+- Web application architecture
+- Database management systems
+- Software engineering best practices
 
-### 🧾 Coding Standards
-
-- Use **2 spaces for indentation**
-- Use **LF** as the line ending (cross-platform consistency)
-- Use **UTF-8** encoding for all files
-- Ensure there is **a newline at the end of every file** (handled by EditorConfig)
-
----
-
-### 🔄 Git Commit Guidelines
-
-- Write **clear commit messages** that explain the changes made
+*Note: This is a learning project and may not be suitable for production use without additional security and performance considerations.*
 
